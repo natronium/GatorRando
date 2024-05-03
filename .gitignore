@@ -3,6 +3,9 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+# Personal additions (not from dotnet new gitignore)
+lib/*.dll
+
 # dotenv files
 .env
 
