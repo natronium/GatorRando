@@ -64,7 +64,7 @@ namespace GatorRando
             testreward.resource = popresource;
             testreward.amount = 5;
             testreward.GiveReward();
-            
+
         }
         [HarmonyPatch(typeof(ItemManager))]
         private static class ItemManagerPatch
@@ -113,5 +113,21 @@ namespace GatorRando
                 // LogCall("ItemObject", "set_IsUnlocked");
             }
         }
+        String item = "Sword_Net";
+        ItemObject[] itemObjects = Resources.FindObjectsOfTypeAll<ItemObject>();
+        ItemObject io;
+        foreach (ItemObject itemObject in itemObjects)
+                    {
+                        if (itemObject.name == item)
+                        {
+                            io = itemObject;
+                        }
+        }
+
+        if (io != null)
+        {
+            ItemManager.i.UnlockItem(io.id);
+        }
+
     }
 }
