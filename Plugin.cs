@@ -57,9 +57,9 @@ namespace GatorRando
                 QuestStates boar_quest_qs = boar_quest.GetComponent<QuestStates>();
 
                 // Jada: Grass Clippings Section
-                //Need to remove OnProgress() delegate...
-                //boar_quest_qs.states[2].onProgress.RemoveAllListeners();
-                //UnityEventTools.RemovePersistentListener(boar_quest_qs.states[2].onProgress,0);
+                // Need to remove OnProgress() delegate...
+                // boar_quest_qs.states[2].onProgress.RemoveAllListeners();
+                // UnityEventTools.RemovePersistentListener(boar_quest_qs.states[2].onProgress,0);
                 if (ArchipelagoManager.ItemIsUnlocked("Grass Clippings"))
                 {
                     LogicStateCollectGrass ls_grass = boar_quest_qs.GetComponent<LogicStateCollectGrass>();
@@ -79,6 +79,47 @@ namespace GatorRando
                 GameObject water_seq = sprout.Find("Water Sequence").gameObject;
                 //Need to remove give bucket delegate from water_seq.Dialogue.onStart() (how to find the right dialogue object?)
 
+                //Edits to Prep Quest
+                GameObject prep_quest = GameObject.Find("Cool Kids Quest");
+                Transform prep_subquests = prep_quest.transform.Find("Subquests");
+
+                //Edits to Gene's Quest
+                GameObject economist_quest = prep_subquests.Find("Economist").gameObject;
+                QuestStates economist_quest_qs = economist_quest.GetComponent<QuestStates>();
+                // Need to remove Loot Get Sequence from economist_quest_qs.states[2].onProgress()
+                if (ArchipelagoManager.ItemIsUnlocked("Cheese Sandwich"))
+                {
+                    LSDestroy ls_destroy = economist_quest_qs.GetComponent<LSDestroy>();
+                    if (economist_quest_qs.StateID == 1 && !ls_destroy.enabled)
+                    {
+                        economist_quest_qs.JustProgressState();
+                    }
+                    else
+                    {
+                        GameObject loot_seq = GameObject.Find("Loot Sequence");
+                        DialogueSequencer loot_sequencer = loot_seq.GetComponent<DialogueSequencer>();
+                        loot_sequencer.afterSequence.AddListener(economist_quest_qs.JustProgressState);
+                    }
+                }
+
+                //Edits to Susanne's Quest
+                GameObject engineer_quest = prep_subquests.Find("Economist").gameObject;
+                QuestStates engineer_quest_qs = engineer_quest.GetComponent<QuestStates>();
+                // Need to remove QuestState.JustProgressState from Rock Get Sequence
+                if (ArchipelagoManager.ItemIsUnlocked("Magic Ore"))
+                {
+                    GameObject special_rocks = engineer_quest.transform.Find("Special Rocks").gameObject;
+                    if (engineer_quest_qs.StateID == 1 && !special_rocks.activeSelf)
+                    {
+                        engineer_quest_qs.JustProgressState();
+                    }
+                    else
+                    {
+                        GameObject rock_seq = GameObject.Find("Rock Get Sequence");
+                        DialogueSequencer rock_sequencer = rock_seq.GetComponent<DialogueSequencer>();
+                        rock_sequencer.beforeSequence.AddListener(engineer_quest_qs.JustProgressState);
+                    }
+                }
             }
         }
 
@@ -145,6 +186,18 @@ namespace GatorRando
             {
                 LogCheck("QuestRewardNPCs", "GiveReward", __instance.rewardCount.ToString());
                 ArchipelagoManager.CollectLocationForConfetti(__instance.name);          //This line is potentially redundant with Particle Pickup patch       
+            }
+        }
+
+        [HarmonyPatch(typeof(DSItem))]
+        private static class DSItemPatch
+        {
+            [HarmonyPrefix]
+            [HarmonyPatch("RunItemSequence")]
+            static bool PreRunItemSequence(DSItem __instance)
+            {
+                LogCheck("DSItem", "RunItemSequence", __instance.itemName);
+                return false;
             }
         }
 
@@ -268,6 +321,7 @@ namespace GatorRando
             [HarmonyPatch("FixedUpdate")]
             static bool PreFixedUpdate(LogicStateSubmerge __instance)
             {
+                //Only collect water if have the bucket
                 if (ArchipelagoManager.ItemIsUnlocked("Bucket"))
                 {
                     Traverse traverse = Traverse.Create(__instance).Field("swimmingCounter");
@@ -290,15 +344,54 @@ namespace GatorRando
             }
         }
 
-        [HarmonyPatch(typeof(DSItem))]
-        private static class DSItemPatch
+        [HarmonyPatch(typeof(LSDestroy))]
+        private static class LSDestroyPatch
         {
             [HarmonyPrefix]
-            [HarmonyPatch("RunItemSequence")]
-            static bool PreRunItemSequence(DSItem __instance)
+            [HarmonyPatch("CheckLogic")]
+            static bool PreCheckLogic(LSDestroy __instance)
             {
-                LogCheck("DSItem", "RunItemSequence", __instance.itemName);
-                return false;
+                //Only modify behavior if Gene's Quest 
+                if (__instance.stateName == "Defeat the slimes")
+                {
+                    if (!__instance.enabled)
+                    {
+                        return false;
+                    }
+                    int num = 0;
+                    for (int i = 0; i < __instance.targets.Length; i++)
+                    {
+                        if (!__instance.targets[i].IsBroken)
+                        {
+                            num++;
+                        }
+                    }
+                    Traverse traverse = Traverse.Create(__instance).Field("lastAliveTargets");
+                    int lastAliveTargets = traverse.GetValue<int>();
+                    if (lastAliveTargets != num)
+                    {
+                        foreach (LSDestroy.DestroyEvent destroyEvent in __instance.events)
+                        {
+                            if ((!destroyEvent.disableOnAwake || lastAliveTargets != -1) && destroyEvent.aliveTargetCount == num)
+                            {
+                                destroyEvent.onReachCount.Invoke();
+                            }
+                        }
+                    }
+                    if (num <= __instance.desiredUnbrokenTargets)
+                    {
+                        GameObject loot_seq = GameObject.Find("Loot Sequence");
+                        DialogueSequencer loot_sequencer = loot_seq.GetComponent<DialogueSequencer>();
+                        loot_sequencer.JustStartSequence();
+                        __instance.enabled = false;
+                    }
+                    traverse.SetValue(num);
+                    return false;
+                }
+                else {
+                    return true;
+                }
+                
             }
         }
 
