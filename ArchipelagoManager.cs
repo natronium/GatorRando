@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BepInEx;
 using HarmonyLib;
 using UnityEngine;
@@ -84,6 +85,15 @@ namespace GatorRando
             }
             return null;
         }
+
+        public static bool ItemIsUnlocked(string item)
+        {
+            return items_unlocked.Contains(item);
+        }
+
+        private static List<string> items_unlocked;
+
+         
     }
 
 

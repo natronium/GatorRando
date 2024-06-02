@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using BepInEx;
 using HarmonyLib;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace GatorRando
     public class Plugin : BaseUnityPlugin
     {
         public static Plugin Instance;
+
+        //fix to be options from Archipelago
+        readonly bool freeplay_from_start = true;
 
         private void Awake()
         {
@@ -33,18 +37,53 @@ namespace GatorRando
             Debug.Log(mode);
             if (scene.name == "Island")
             {
-                ReenableTutorialQuests();
-                GameObject act1 = GameObject.Find("Act 1");
-                QuestStates act1qs = act1.GetComponent<QuestStates>();
-                act1qs.states[0].onDeactivate.AddListener(AdvanceToEndOfTutorial);
-                act1qs.states[3].onActivate.AddListener(ReenableTutorialQuests);
-                GameObject manager = GameObject.Find("Managers");
-                Game game = manager.GetComponent<Game>();
-                game.SetToStory();
+                //Allow Freeplay
+                if (freeplay_from_start)
+                {
+                    ReenableTutorialQuests();
+                    GameObject act1 = GameObject.Find("Act 1");
+                    QuestStates act1_qs = act1.GetComponent<QuestStates>();
+                    act1_qs.states[0].onDeactivate.AddListener(AdvanceToEndOfTutorial);
+                    act1_qs.states[3].onActivate.AddListener(ReenableTutorialQuests);
+                    GameObject manager = GameObject.Find("Managers");
+                    Game game = manager.GetComponent<Game>();
+                    game.SetToStory();
+                }
+
+                //Edits to Jada's Quest
+                GameObject cool_kids_quest = GameObject.Find("Cool Kids Quest");
+                Transform cool_kids_subquests = cool_kids_quest.transform.Find("Subquests");
+                GameObject boar_quest = cool_kids_subquests.Find("Boar Quest").gameObject;
+                QuestStates boar_quest_qs = boar_quest.GetComponent<QuestStates>();
+
+                // Jada: Grass Clippings Section
+                //Need to remove OnProgress() delegate...
+                //boar_quest_qs.states[2].onProgress.RemoveAllListeners();
+                //UnityEventTools.RemovePersistentListener(boar_quest_qs.states[2].onProgress,0);
+                if (ArchipelagoManager.ItemIsUnlocked("Grass Clippings"))
+                {
+                    LogicStateCollectGrass ls_grass = boar_quest_qs.GetComponent<LogicStateCollectGrass>();
+                    if (boar_quest_qs.StateID == 1 && !ls_grass.enabled)
+                    {
+                        boar_quest_qs.JustProgressState();
+                    }
+                    else
+                    {
+                        GameObject grass_seq = GameObject.Find("Got Enough Grass Sequence");
+                        DialogueSequencer grass_sequencer = grass_seq.GetComponent<DialogueSequencer>();
+                        grass_sequencer.afterSequence.AddListener(boar_quest_qs.JustProgressState);
+                    }
+                }
+                // Jada: Water Bucket Section
+                Transform sprout = boar_quest.transform.Find("Sprout");
+                GameObject water_seq = sprout.Find("Water Sequence").gameObject;
+                //Need to remove give bucket delegate from water_seq.Dialogue.onStart() (how to find the right dialogue object?)
+
             }
         }
 
-        public static void LogDebug(String s) {
+        public static void LogDebug(String s)
+        {
             Instance.Logger.LogDebug(s);
         }
 
@@ -54,7 +93,8 @@ namespace GatorRando
             Instance.Logger.LogDebug(new System.Diagnostics.StackTrace().ToString());
         }
 
-        static void LogCheck(String typeName, String methodName, String checkName) {
+        static void LogCheck(String typeName, String methodName, String checkName)
+        {
             Instance.Logger.LogDebug($"{typeName}.{methodName} gave {checkName}");
         }
 
@@ -65,8 +105,8 @@ namespace GatorRando
             [HarmonyPatch("GiveReward")]
             static bool PreGiveReward(QuestRewardCrafts __instance)
             {
-                LogCheck("QuestRewardCrafts","GiveReward",__instance.rewards[0].Name);
-                ArchipelagoManager.CollectLocationForItem(__instance.rewards[0].Name);                
+                LogCheck("QuestRewardCrafts", "GiveReward", __instance.rewards[0].Name);
+                ArchipelagoManager.CollectLocationForItem(__instance.rewards[0].Name);
                 return false;
             }
         }
@@ -78,23 +118,23 @@ namespace GatorRando
             [HarmonyPatch("GiveReward")]
             static bool PreGiveReward(QuestRewardItem __instance)
             {
-                LogCheck("QuestRewardItem","GiveReward",__instance.item);
-                ArchipelagoManager.CollectLocationForItem(__instance.item);                
+                LogCheck("QuestRewardItem", "GiveReward", __instance.item);
+                ArchipelagoManager.CollectLocationForItem(__instance.item);
                 return false;
             }
         }
 
-        [HarmonyPatch(typeof(QuestRewardConfetti))]
-        private static class QuestRewardConfettiPatch
-        {
-            [HarmonyPrefix]
-            [HarmonyPatch("GiveReward",[typeof(int)])]
-            static void PreGiveReward(int amount, QuestRewardConfetti __instance)
-            {
-                LogCheck("QuestRewardConfetti","GiveReward",__instance.amount.ToString());
-                ArchipelagoManager.CollectLocationForConfetti(__instance.name);          //This line is potentially redundant with Particle Pickup patch       
-            }
-        }
+        // [HarmonyPatch(typeof(QuestRewardConfetti))]
+        // private static class QuestRewardConfettiPatch
+        // {
+        //     [HarmonyPrefix]
+        //     [HarmonyPatch("GiveReward",[typeof(int)])]
+        //     static void PreGiveReward(int amount, QuestRewardConfetti __instance)
+        //     {
+        //         LogCheck("QuestRewardConfetti","GiveReward",__instance.amount.ToString());
+        //         ArchipelagoManager.CollectLocationForConfetti(__instance.name);          //This line is potentially redundant with Particle Pickup patch       
+        //     }
+        // }
 
         [HarmonyPatch(typeof(QuestRewardNPCs))]
         private static class QuestRewardNPCsPatch
@@ -103,7 +143,7 @@ namespace GatorRando
             [HarmonyPatch("GiveReward")]
             static void PreGiveReward(QuestRewardNPCs __instance)
             {
-                LogCheck("QuestRewardNPCs","GiveReward",__instance.rewardCount.ToString());
+                LogCheck("QuestRewardNPCs", "GiveReward", __instance.rewardCount.ToString());
                 ArchipelagoManager.CollectLocationForConfetti(__instance.name);          //This line is potentially redundant with Particle Pickup patch       
             }
         }
@@ -115,11 +155,11 @@ namespace GatorRando
             [HarmonyPatch("FinishChallenge")]
             static void PreFinishChallenge(PositionChallenge __instance)
             {
-                LogCheck("PositionChallenge","FinishChallenge",__instance.rewardAmount.ToString());
-                ArchipelagoManager.CollectLocationForConfetti(__instance.name);                
+                LogCheck("PositionChallenge", "FinishChallenge", __instance.rewardAmount.ToString());
+                ArchipelagoManager.CollectLocationForConfetti(__instance.name);
             }
         }
-        
+
 
         [HarmonyPatch(typeof(TownNPCManager))]
         private static class TownNPCManagerPatch
@@ -195,5 +235,72 @@ namespace GatorRando
             GameObject act1quests = act1questsTransform.gameObject;
             act1quests.SetActive(true);
         }
+
+        [HarmonyPatch(typeof(LogicStateCollectGrass))]
+        private static class LogicStateCollectGrassPatch
+        {
+            [HarmonyPrefix]
+            [HarmonyPatch("OnDetailsCut")]
+            static bool PreOnDetailsCut(LogicStateCollectGrass __instance, int cutAmount)
+            {
+                LogCall("LogicStateCollectGrass", "OnDetailsCut");
+                Traverse traverse = Traverse.Create(__instance).Field("currentCutAmount");
+                int currentCutAmount = traverse.GetValue<int>();
+
+                currentCutAmount += cutAmount;
+                if (currentCutAmount > __instance.cutAmountNeeded)
+                {
+                    GameObject grass_seq = GameObject.Find("Got Enough Grass Sequence");
+                    DialogueSequencer grass_sequencer = grass_seq.GetComponent<DialogueSequencer>();
+                    grass_sequencer.JustStartSequence();
+                    __instance.enabled = false;
+                }
+
+                traverse.SetValue(currentCutAmount);
+                return false;
+            }
+        }
+
+        [HarmonyPatch(typeof(LogicStateSubmerge))]
+        private static class LogicStateSubmergePatch
+        {
+            [HarmonyPrefix]
+            [HarmonyPatch("FixedUpdate")]
+            static bool PreFixedUpdate(LogicStateSubmerge __instance)
+            {
+                if (ArchipelagoManager.ItemIsUnlocked("Bucket"))
+                {
+                    Traverse traverse = Traverse.Create(__instance).Field("swimmingCounter");
+                    int swimmingCounter = traverse.GetValue<int>();
+                    if (Player.movement.IsSwimming)
+                    {
+                        swimmingCounter++;
+                    }
+                    else
+                    {
+                        swimmingCounter = 0;
+                    }
+                    if (swimmingCounter > 10)
+                    {
+                        __instance.LogicCompleted();
+                    }
+                    traverse.SetValue(swimmingCounter);
+                }
+                return false;
+            }
+        }
+
+        [HarmonyPatch(typeof(DSItem))]
+        private static class DSItemPatch
+        {
+            [HarmonyPrefix]
+            [HarmonyPatch("RunItemSequence")]
+            static bool PreRunItemSequence(DSItem __instance)
+            {
+                LogCheck("DSItem", "RunItemSequence", __instance.itemName);
+                return false;
+            }
+        }
+
     }
 }
