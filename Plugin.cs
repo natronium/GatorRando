@@ -92,17 +92,7 @@ namespace GatorRando
 
             if (ArchipelagoManager.ItemIsUnlocked("Grass Clippings"))
             {
-                LogicStateCollectGrass ls_grass = boar_quest_qs.GetComponent<LogicStateCollectGrass>();
-                if (boar_quest_qs.StateID == 1 && !ls_grass.enabled)
-                {
-                    boar_quest_qs.JustProgressState();
-                }
-                else
-                {
-                    GameObject grass_seq = GameObject.Find("Got Enough Grass Sequence");
-                    DialogueSequencer grass_sequencer = grass_seq.GetComponent<DialogueSequencer>();
-                    grass_sequencer.afterSequence.AddListener(boar_quest_qs.JustProgressState);
-                }
+                UnlockedGrassClippings();
             }
             // Jada: Water Bucket Section
             Transform sprout = boar_quest.transform.Find("Sprout");
@@ -110,6 +100,26 @@ namespace GatorRando
             DSDialogue water_dia = water_seq.GetComponents<DSDialogue>()[1];
             //Need to remove give bucket delegate from water_seq.Dialogue.onStart()
             water_dia.onStart.ObliteratePersistentListenerByIndex(2);
+        }
+
+        private static void UnlockedGrassClippings()
+        {
+            GameObject cool_kids_quest = GameObject.Find("Cool Kids Quest");
+            Transform cool_kids_subquests = cool_kids_quest.transform.Find("Subquests");
+            GameObject boar_quest = cool_kids_subquests.Find("Boar Quest").gameObject;
+            QuestStates boar_quest_qs = boar_quest.GetComponent<QuestStates>();
+
+            LogicStateCollectGrass ls_grass = boar_quest_qs.GetComponent<LogicStateCollectGrass>();
+            if (boar_quest_qs.StateID == 1 && !ls_grass.enabled)
+            {
+                boar_quest_qs.JustProgressState();
+            }
+            else
+            {
+                GameObject grass_seq = GameObject.Find("Got Enough Grass Sequence");
+                DialogueSequencer grass_sequencer = grass_seq.GetComponent<DialogueSequencer>();
+                grass_sequencer.afterSequence.AddListener(boar_quest_qs.JustProgressState);
+            }
         }
 
         private static void GeneEdits()
@@ -124,44 +134,60 @@ namespace GatorRando
 
             if (ArchipelagoManager.ItemIsUnlocked("Cheese Sandwich"))
             {
-                LSDestroy ls_destroy = economist_quest_qs.GetComponent<LSDestroy>();
-                if (economist_quest_qs.StateID == 1 && !ls_destroy.enabled)
-                {
-                    economist_quest_qs.JustProgressState();
-                }
-                else
-                {
-                    GameObject loot_seq = GameObject.Find("Loot Sequence");
-                    DialogueSequencer loot_sequencer = loot_seq.GetComponent<DialogueSequencer>();
-                    loot_sequencer.afterSequence.AddListener(economist_quest_qs.JustProgressState);
-                }
+                UnlockedCheeseSandwich();
+            }
+        }
+
+        private static void UnlockedCheeseSandwich()
+        {
+            GameObject prep_quest = GameObject.Find("Prep Quest");
+            Transform prep_subquests = prep_quest.transform.Find("Subquests");
+            GameObject economist_quest = prep_subquests.Find("Economist").gameObject;
+            QuestStates economist_quest_qs = economist_quest.GetComponent<QuestStates>();
+
+            LSDestroy ls_destroy = economist_quest_qs.GetComponent<LSDestroy>();
+            if (economist_quest_qs.StateID == 1 && !ls_destroy.enabled)
+            {
+                economist_quest_qs.JustProgressState();
+            }
+            else
+            {
+                GameObject loot_seq = GameObject.Find("Loot Sequence");
+                DialogueSequencer loot_sequencer = loot_seq.GetComponent<DialogueSequencer>();
+                loot_sequencer.afterSequence.AddListener(economist_quest_qs.JustProgressState);
             }
         }
 
         private static void SusanneEdits()
         {
-            GameObject prep_quest = GameObject.Find("Prep Quest");
-            Transform prep_subquests = prep_quest.transform.Find("Subquests");
-
             //Edits to Susanne's Quest
-            GameObject engineer_quest = prep_subquests.Find("Engineer").gameObject;
-            QuestStates engineer_quest_qs = engineer_quest.GetComponent<QuestStates>();
             // Need to remove QuestState.JustProgressState from Rock Get Sequence
             GameObject rock_seq = GameObject.Find("Rock Get Sequence");
             DialogueSequencer rock_sequencer = rock_seq.GetComponent<DialogueSequencer>();
             rock_sequencer.beforeSequence.ObliteratePersistentListenerByIndex(0);
-            
+
             if (ArchipelagoManager.ItemIsUnlocked("Magic Ore"))
             {
-                GameObject special_rocks = engineer_quest.transform.Find("Special Rocks").gameObject;
-                if (engineer_quest_qs.StateID == 1 && !special_rocks.activeSelf)
-                {
-                    engineer_quest_qs.JustProgressState();
-                }
-                else
-                {
-                    rock_sequencer.beforeSequence.AddListener(engineer_quest_qs.JustProgressState);
-                }
+                UnlockedMagicOre();
+            }
+        }
+
+        private static void UnlockedMagicOre()
+        {
+            GameObject prep_quest = GameObject.Find("Prep Quest");
+            Transform prep_subquests = prep_quest.transform.Find("Subquests");
+            GameObject engineer_quest = prep_subquests.Find("Engineer").gameObject;
+            QuestStates engineer_quest_qs = engineer_quest.GetComponent<QuestStates>();
+            GameObject special_rocks = engineer_quest.transform.Find("Special Rocks").gameObject;
+            if (engineer_quest_qs.StateID == 1 && !special_rocks.activeSelf)
+            {
+                engineer_quest_qs.JustProgressState();
+            }
+            else
+            {
+                GameObject rock_seq = GameObject.Find("Rock Get Sequence");
+                DialogueSequencer rock_sequencer = rock_seq.GetComponent<DialogueSequencer>();
+                rock_sequencer.beforeSequence.AddListener(engineer_quest_qs.JustProgressState);
             }
         }
 
