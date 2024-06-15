@@ -62,8 +62,8 @@ namespace GatorRando
                 Debug.Log("J");
                 // Jada: Grass Clippings Section
                 // Need to remove OnProgress() delegate...
-                // boar_quest_qs.states[2].onProgress.RemoveAllListeners();
-                // UnityEventTools.RemovePersistentListener(boar_quest_qs.states[2].onProgress,0);
+                boar_quest_qs.states[2].onProgress.ObliteratePersistentListenerByIndex(0);
+
                 if (ArchipelagoManager.ItemIsUnlocked("Grass Clippings"))
                 {
                     LogicStateCollectGrass ls_grass = boar_quest_qs.GetComponent<LogicStateCollectGrass>();
