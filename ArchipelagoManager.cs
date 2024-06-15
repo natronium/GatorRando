@@ -24,9 +24,9 @@ namespace GatorRando
             Plugin.LogDebug($"Confetti {name} collected!");
         }
 
-        public static void CollectLocationForParticlePickup(ParticlePickup particlePickup)
+        public static void CollectLocationForBreakableObject(int breakable_id)
         {
-            Plugin.LogDebug($"Particle Pickup {particlePickup.name} collected!");
+            Plugin.LogDebug($"Breakable Object {breakable_id} collected!");
         }
 
         public static void CollectLocationForBracelet(int shop_id)

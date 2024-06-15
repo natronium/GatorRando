@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Linq.Expressions;
+using System.Linq;
 using BepInEx;
 using HarmonyLib;
 using UnityEngine;
@@ -85,6 +85,27 @@ namespace GatorRando
             Instance.Logger.LogDebug($"{typeName}.{methodName} gave {checkName}");
         }
 
+        // Not yet working
+        // public static GameObject GetGameObjectByPath(string path)
+        // {
+        //     var elements = path.Split('/');
+        //     var root = SceneManager.GetActiveScene().GetRootGameObjects().First((go) => go.name == elements[0]);
+        //     GameObject current = root;
+        //     foreach (var element in elements.Skip(1))
+        //     {
+        //         foreach (var transform in current.GetComponentsInChildren<Transform>(true))
+        //         {
+        //             if (transform.name == element)
+        //             {
+        //                 current = transform.gameObject;
+        //                 break;
+        //             }
+        //         }
+        //     }
+        //     return current;
+
+        // }
+
         private static void MartinEdits()
         {
             GameObject get_pot_lid = GameObject.Find("Get Pot Lid");
@@ -103,6 +124,7 @@ namespace GatorRando
 
         private static void UnlockedPot()
         {
+            // GameObject pot_pickup = GetGameObjectByPath("Act 1/Quests/Martin Quest/Pickup");
             GameObject act1 = GameObject.Find("Act 1");
             Transform act1_quests = act1.transform.Find("Quests");
             GameObject martin_quest = act1_quests.Find("Martin Quest").gameObject;
@@ -204,7 +226,7 @@ namespace GatorRando
             }
             else
             {
-                GameObject loot_seq = GameObject.Find("Loot Sequence");
+                GameObject loot_seq = economist_quest.transform.Find("Loot Sequence").gameObject;
                 DialogueSequencer loot_sequencer = loot_seq.GetComponent<DialogueSequencer>();
                 loot_sequencer.afterSequence.AddListener(economist_quest_qs.JustProgressState);
             }
@@ -214,10 +236,12 @@ namespace GatorRando
         {
             //Edits to Susanne's Quest
             // Need to remove QuestState.JustProgressState from Rock Get Sequence
-            GameObject rock_seq = GameObject.Find("Rock Get Sequence");
+            GameObject prep_quest = GameObject.Find("Prep Quest");
+            Transform prep_subquests = prep_quest.transform.Find("Subquests");
+            GameObject engineer_quest = prep_subquests.Find("Engineer").gameObject;
+            GameObject rock_seq = engineer_quest.transform.Find("Rock Get Sequence").gameObject;
             DialogueSequencer rock_sequencer = rock_seq.GetComponent<DialogueSequencer>();
             rock_sequencer.beforeSequence.ObliteratePersistentListenerByIndex(0);
-
             if (ArchipelagoManager.ItemIsUnlocked("Magic Ore"))
             {
                 UnlockedMagicOre();
@@ -237,7 +261,7 @@ namespace GatorRando
             }
             else
             {
-                GameObject rock_seq = GameObject.Find("Rock Get Sequence");
+                GameObject rock_seq = engineer_quest.transform.Find("Rock Get Sequence").gameObject;
                 DialogueSequencer rock_sequencer = rock_seq.GetComponent<DialogueSequencer>();
                 rock_sequencer.beforeSequence.AddListener(engineer_quest_qs.JustProgressState);
             }
@@ -245,7 +269,10 @@ namespace GatorRando
 
         private static void EsmeEdits()
         {
-            GameObject get_ice_cream = GameObject.Find("Get Ice Cream");
+            GameObject theatre_quest = GameObject.Find("Theatre Quest");
+            Transform theatre_subquests = theatre_quest.transform.Find("Subquests");
+            GameObject vampire_quest = theatre_subquests.Find("Vampire").gameObject;
+            GameObject get_ice_cream = vampire_quest.transform.Find("Get Ice Cream").gameObject;
             DialogueSequencer get_ice_cream_seq = get_ice_cream.GetComponent<DialogueSequencer>();
             get_ice_cream_seq.afterSequence.ObliteratePersistentListenerByIndex(0);
             if (ArchipelagoManager.LocationIsCollected("Ice Cream"))
@@ -260,7 +287,10 @@ namespace GatorRando
 
         private static void CollectedSorbet()
         {
-            GameObject ice_cream = GameObject.Find("IceCream");
+            GameObject theatre_quest = GameObject.Find("Theatre Quest");
+            Transform theatre_subquests = theatre_quest.transform.Find("Subquests");
+            GameObject vampire_quest = theatre_subquests.Find("Vampire").gameObject;
+            GameObject ice_cream = vampire_quest.transform.Find("IceCream").gameObject;
             ice_cream.SetActive(false);
         }
 
@@ -268,9 +298,9 @@ namespace GatorRando
         {
             GameObject theatre_quest = GameObject.Find("Theatre Quest");
             Transform theatre_subquests = theatre_quest.transform.Find("Subquests");
-            GameObject vampire_quest = theatre_subquests.Find("Engineer").gameObject;
+            GameObject vampire_quest = theatre_subquests.Find("Vampire").gameObject;
             QuestStates vampire_quest_qs = vampire_quest.GetComponent<QuestStates>();
-            GameObject ice_cream = GameObject.Find("IceCream");
+            GameObject ice_cream = vampire_quest.transform.Find("IceCream").gameObject;
 
             if (vampire_quest_qs.StateID == 1 && !ice_cream.activeSelf)
             {
@@ -371,6 +401,7 @@ namespace GatorRando
             [HarmonyPatch("RunItemSequence")]
             static bool PreRunItemSequence(DSItem __instance)
             {
+                //TODO: Don't intercept Craft Stuff, Pot Lid?, LITTER
                 LogCheck("DSItem", "RunItemSequence", __instance.itemName);
                 __instance.document = null;
                 __instance.dialogue = "Collected an AP Item!"; // Need to replace this with a valid dialogue?
@@ -379,7 +410,7 @@ namespace GatorRando
                 // Eventually replace itemSprite too
                 return true;
             }
-        } //TODO: Collecting first Craft Stuff Fails!
+        }
 
         [HarmonyPatch(typeof(InteractItemUnlock))]
         private static class InteractItemUnlockPatch
@@ -445,7 +476,17 @@ namespace GatorRando
                     onAmountChanged = new UnityEvent<int>()
                 };
                 __instance.resource = dummyResource;
-                ArchipelagoManager.CollectLocationForParticlePickup(__instance);
+            }
+        }
+
+        [HarmonyPatch(typeof(BreakableObject))]
+        private static class BreakableObjectPatch
+        {
+            [HarmonyPrefix]
+            [HarmonyPatch("Break", [typeof(bool), typeof(Vector3), typeof(bool)])]
+            static void PreBreak (BreakableObject __instance, bool fromAttachment, Vector3 velocity, bool isHeavy)
+            {
+                ArchipelagoManager.CollectLocationForBreakableObject(__instance.id);
             }
         }
 
@@ -621,8 +662,8 @@ namespace GatorRando
                         Player.movement.Stamina = 0f;
                         ArchipelagoManager.CollectLocationForBracelet(bsd.id);
                         yield return null;
-                        Player.itemManager.Refresh();
-                        yield return bsd.DoBraceletGet(); //TODO: OVERWRITE with appropriate UI for archipelago item
+                        // Player.itemManager.Refresh();
+                        // yield return bsd.DoBraceletGet(); //TODO: OVERWRITE with appropriate UI for archipelago item
                         bsd.state++;
                         GameData.g.Write(bsd.SaveID, bsd.state);
                         if (bsd.state >= bsd.braceletsInStock)
@@ -727,6 +768,7 @@ namespace GatorRando
                         js.itemResource.ForceShow = false;
                         js.itemResource.Amount -= shopItem.cost;
                         ArchipelagoManager.CollectLocationForJunkShop(shopItem.item.name);
+                        shopItem.isHidden = true;
                         js.UpdateInventory();
                         yield return CoroutineUtil.Start(js.itemGet.RunSequence(shopItem.item.sprite, shopItem.item.DisplayName, js.document.FetchChunk(shopItem.unlockChunk), js.actors));
                     }
