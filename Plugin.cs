@@ -60,6 +60,10 @@ namespace GatorRando
                 GeneEdits();
                 SusanneEdits();
 
+                //Edits to Esme's Quest
+                EsmeEdits();
+
+                KasenEdits();
 
             }
         }
@@ -235,6 +239,76 @@ namespace GatorRando
                 GameObject rock_seq = GameObject.Find("Rock Get Sequence");
                 DialogueSequencer rock_sequencer = rock_seq.GetComponent<DialogueSequencer>();
                 rock_sequencer.beforeSequence.AddListener(engineer_quest_qs.JustProgressState);
+            }
+        }
+
+        private static void EsmeEdits()
+        {
+            GameObject get_ice_cream = GameObject.Find("Get Ice Cream");
+            DialogueSequencer get_ice_cream_seq = get_ice_cream.GetComponent<DialogueSequencer>();
+            get_ice_cream_seq.afterSequence.ObliteratePersistentListenerByIndex(0);
+            if (ArchipelagoManager.LocationIsCollected("Ice Cream"))
+            {
+                CollectedSorbet();
+            }
+            if (ArchipelagoManager.ItemIsUnlocked("Sorbet"))
+            {
+                UnlockedSorbet();
+            }
+        }
+
+        private static void CollectedSorbet()
+        {
+            GameObject ice_cream = GameObject.Find("IceCream");
+            ice_cream.SetActive(false);
+        }
+
+        private static void UnlockedSorbet()
+        {
+            GameObject theatre_quest = GameObject.Find("Theatre Quest");
+            Transform theatre_subquests = theatre_quest.transform.Find("Subquests");
+            GameObject vampire_quest = theatre_subquests.Find("Engineer").gameObject;
+            QuestStates vampire_quest_qs = vampire_quest.GetComponent<QuestStates>();
+            GameObject ice_cream = GameObject.Find("IceCream");
+
+            if (vampire_quest_qs.StateID == 1 && !ice_cream.activeSelf)
+            {
+                vampire_quest_qs.JustProgressState();
+            }
+            else
+            {
+                GameObject get_ice_cream = GameObject.Find("Get Ice Cream");
+                DialogueSequencer get_ice_cream_seq = get_ice_cream.GetComponent<DialogueSequencer>();
+                get_ice_cream_seq.afterSequence.AddListener(vampire_quest_qs.JustProgressState);
+            }
+        }
+
+        private static void KasenEdits()
+        {
+            GameObject kasen_quest = GameObject.Find("FetchVulture");
+            QuestStates kasen_quest_qs = kasen_quest.GetComponent<QuestStates>();
+            GameObject scooter_pickup = kasen_quest_qs.states[0].stateObjects[0];
+            kasen_quest_qs.states[0].stateObjects.Remove(scooter_pickup);
+            if (ArchipelagoManager.LocationIsCollected("Scooter Pickup"))
+            {
+                scooter_pickup.SetActive(false);
+            }
+            else
+            {
+                scooter_pickup.SetActive(true);
+            }
+            if (ArchipelagoManager.ItemIsUnlocked("Broken Scooter"))
+            {
+                UnlockedScooter();
+            }
+        }
+
+        private static void UnlockedScooter()
+        {
+            GameObject kasen_quest = GameObject.Find("FetchVulture");
+            QuestStates kasen_quest_qs = kasen_quest.GetComponent<QuestStates>();
+            if (kasen_quest_qs.StateID == 0) {
+                kasen_quest_qs.JustProgressState();
             }
         }
 
