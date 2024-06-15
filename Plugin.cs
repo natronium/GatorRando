@@ -87,7 +87,7 @@ namespace GatorRando
             GameObject boar_quest = cool_kids_subquests.Find("Boar Quest").gameObject;
             QuestStates boar_quest_qs = boar_quest.GetComponent<QuestStates>();
             // Jada: Grass Clippings Section
-            // Need to remove OnProgress() delegate...
+            // Need to remove OnProgress() delegate
             boar_quest_qs.states[2].onProgress.ObliteratePersistentListenerByIndex(0);
 
             if (ArchipelagoManager.ItemIsUnlocked("Grass Clippings"))
@@ -107,8 +107,9 @@ namespace GatorRando
             // Jada: Water Bucket Section
             Transform sprout = boar_quest.transform.Find("Sprout");
             GameObject water_seq = sprout.Find("Water Sequence").gameObject;
-            //Need to remove give bucket delegate from water_seq.Dialogue.onStart() (how to find the right dialogue object?)
-
+            DSDialogue water_dia = water_seq.GetComponents<DSDialogue>()[1];
+            //Need to remove give bucket delegate from water_seq.Dialogue.onStart()
+            water_dia.onStart.ObliteratePersistentListenerByIndex(2);
         }
 
         private static void GeneEdits()
@@ -119,6 +120,8 @@ namespace GatorRando
             GameObject economist_quest = prep_subquests.Find("Economist").gameObject;
             QuestStates economist_quest_qs = economist_quest.GetComponent<QuestStates>();
             // Need to remove Loot Get Sequence from economist_quest_qs.states[2].onProgress()
+            economist_quest_qs.states[2].onProgress.ObliteratePersistentListenerByIndex(0);
+
             if (ArchipelagoManager.ItemIsUnlocked("Cheese Sandwich"))
             {
                 LSDestroy ls_destroy = economist_quest_qs.GetComponent<LSDestroy>();
@@ -144,6 +147,10 @@ namespace GatorRando
             GameObject engineer_quest = prep_subquests.Find("Engineer").gameObject;
             QuestStates engineer_quest_qs = engineer_quest.GetComponent<QuestStates>();
             // Need to remove QuestState.JustProgressState from Rock Get Sequence
+            GameObject rock_seq = GameObject.Find("Rock Get Sequence");
+            DialogueSequencer rock_sequencer = rock_seq.GetComponent<DialogueSequencer>();
+            rock_sequencer.beforeSequence.ObliteratePersistentListenerByIndex(0);
+            
             if (ArchipelagoManager.ItemIsUnlocked("Magic Ore"))
             {
                 GameObject special_rocks = engineer_quest.transform.Find("Special Rocks").gameObject;
@@ -153,8 +160,6 @@ namespace GatorRando
                 }
                 else
                 {
-                    GameObject rock_seq = GameObject.Find("Rock Get Sequence");
-                    DialogueSequencer rock_sequencer = rock_seq.GetComponent<DialogueSequencer>();
                     rock_sequencer.beforeSequence.AddListener(engineer_quest_qs.JustProgressState);
                 }
             }
