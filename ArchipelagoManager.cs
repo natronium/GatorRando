@@ -91,7 +91,7 @@ namespace GatorRando
             return items_unlocked.Contains(item);
         }
 
-        private static List<string> items_unlocked;
+        private static List<string> items_unlocked = [];
 
          
     }

@@ -49,13 +49,17 @@ namespace GatorRando
                     Game game = manager.GetComponent<Game>();
                     game.SetToStory();
                 }
+                //Edits on Tutorial Island
+                
+                //Edits to Martin's Quest
 
+                Debug.Log("J");
                 //Edits to Jada's Quest
                 GameObject cool_kids_quest = GameObject.Find("Cool Kids Quest");
                 Transform cool_kids_subquests = cool_kids_quest.transform.Find("Subquests");
                 GameObject boar_quest = cool_kids_subquests.Find("Boar Quest").gameObject;
                 QuestStates boar_quest_qs = boar_quest.GetComponent<QuestStates>();
-
+                Debug.Log("J");
                 // Jada: Grass Clippings Section
                 // Need to remove OnProgress() delegate...
                 // boar_quest_qs.states[2].onProgress.RemoveAllListeners();
@@ -79,10 +83,11 @@ namespace GatorRando
                 GameObject water_seq = sprout.Find("Water Sequence").gameObject;
                 //Need to remove give bucket delegate from water_seq.Dialogue.onStart() (how to find the right dialogue object?)
 
+                Debug.Log("J");
                 //Edits to Prep Quest
-                GameObject prep_quest = GameObject.Find("Cool Kids Quest");
+                GameObject prep_quest = GameObject.Find("Prep Quest");
                 Transform prep_subquests = prep_quest.transform.Find("Subquests");
-
+                Debug.Log("G");
                 //Edits to Gene's Quest
                 GameObject economist_quest = prep_subquests.Find("Economist").gameObject;
                 QuestStates economist_quest_qs = economist_quest.GetComponent<QuestStates>();
@@ -101,9 +106,9 @@ namespace GatorRando
                         loot_sequencer.afterSequence.AddListener(economist_quest_qs.JustProgressState);
                     }
                 }
-
+                Debug.Log("S");
                 //Edits to Susanne's Quest
-                GameObject engineer_quest = prep_subquests.Find("Economist").gameObject;
+                GameObject engineer_quest = prep_subquests.Find("Engineer").gameObject;
                 QuestStates engineer_quest_qs = engineer_quest.GetComponent<QuestStates>();
                 // Need to remove QuestState.JustProgressState from Rock Get Sequence
                 if (ArchipelagoManager.ItemIsUnlocked("Magic Ore"))
@@ -120,6 +125,8 @@ namespace GatorRando
                         rock_sequencer.beforeSequence.AddListener(engineer_quest_qs.JustProgressState);
                     }
                 }
+
+                
             }
         }
 
@@ -197,6 +204,25 @@ namespace GatorRando
             static bool PreRunItemSequence(DSItem __instance)
             {
                 LogCheck("DSItem", "RunItemSequence", __instance.itemName);
+                __instance.document = null;
+                __instance.dialogue = "Collected an AP Item!"; // Need to replace this with a valid dialogue?
+                __instance.isRealItem = false;
+                __instance.itemName = "AP Item Here!";
+                // Eventually replace itemSprite too
+                return true;
+            }
+        } //TODO: Collecting first Craft Stuff Fails!
+
+        [HarmonyPatch(typeof(InteractItemUnlock))]
+        private static class InteractItemUnlockPatch
+        {
+            [HarmonyPrefix]
+            [HarmonyPatch("Interact")]
+            static bool PreInteract(InteractItemUnlock __instance)
+            {
+                LogCheck("InteractItemUnlock", "Interact", __instance.itemName);
+                __instance.gameObject.SetActive(false);
+                __instance.SaveTrue();
                 return false;
             }
         }

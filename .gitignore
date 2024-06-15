@@ -5,6 +5,7 @@
 
 # Personal additions (not from dotnet new gitignore)
 lib/*.dll
+.vscode
 
 # dotenv files
 .env
