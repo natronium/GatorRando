@@ -769,6 +769,7 @@ namespace GatorRando
                         js.itemResource.Amount -= shopItem.cost;
                         ArchipelagoManager.CollectLocationForJunkShop(shopItem.item.name);
                         shopItem.isHidden = true;
+                        js.shopItems[js.displayedItems[num]] = shopItem;
                         js.UpdateInventory();
                         yield return CoroutineUtil.Start(js.itemGet.RunSequence(shopItem.item.sprite, shopItem.item.DisplayName, js.document.FetchChunk(shopItem.unlockChunk), js.actors));
                     }
