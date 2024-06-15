@@ -91,8 +91,13 @@ namespace GatorRando
             return items_unlocked.Contains(item);
         }
 
-        private static List<string> items_unlocked = [];
+        public static bool LocationIsCollected(string location)
+        {
+            return locations_collected.Contains(location);
+        }
 
+        private static List<string> items_unlocked = [];
+        private static List<string> locations_collected = []; //Need ways to add to these fields
          
     }
 

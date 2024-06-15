@@ -49,9 +49,9 @@ namespace GatorRando
                     Game game = manager.GetComponent<Game>();
                     game.SetToStory();
                 }
-                //Edits on Tutorial Island
 
                 //Edits to Martin's Quest
+                MartinEdits();
 
                 //Edits to Jada's Quest
                 JadaEdits();
@@ -78,6 +78,53 @@ namespace GatorRando
         static void LogCheck(String typeName, String methodName, String checkName)
         {
             Instance.Logger.LogDebug($"{typeName}.{methodName} gave {checkName}");
+        }
+
+        private static void MartinEdits()
+        {
+            GameObject get_pot_lid = GameObject.Find("Get Pot Lid");
+            DialogueSequencer get_pot_sequence = get_pot_lid.GetComponent<DialogueSequencer>();
+            get_pot_sequence.beforeSequence.ObliteratePersistentListenerByIndex(0);
+
+            if (ArchipelagoManager.LocationIsCollected("Pot? Pickup"))
+            {
+                CollectedPot();
+            }
+            if (ArchipelagoManager.ItemIsUnlocked("Pot?"))
+            {
+                UnlockedPot();
+            }
+        }
+
+        private static void UnlockedPot()
+        {
+            GameObject act1 = GameObject.Find("Act 1");
+            Transform act1_quests = act1.transform.Find("Quests");
+            GameObject martin_quest = act1_quests.Find("Martin Quest").gameObject;
+            QuestStates martin_quest_qs = martin_quest.GetComponent<QuestStates>();
+            GameObject pot_pickup = martin_quest.transform.Find("Pickup").gameObject;
+
+            if (martin_quest_qs.StateID == 1 && !pot_pickup.activeSelf)
+            {
+                martin_quest_qs.JustProgressState();
+            }
+            else
+            {
+                GameObject get_pot_lid = GameObject.Find("Get Pot Lid");
+                DialogueSequencer get_pot_sequence = get_pot_lid.GetComponent<DialogueSequencer>();
+                get_pot_sequence.beforeSequence.AddListener(martin_quest_qs.JustProgressState);
+            }
+        }
+
+        private static void CollectedPot()
+        {
+            GameObject act1 = GameObject.Find("Act 1");
+            Transform act1_quests = act1.transform.Find("Quests");
+            GameObject martin_quest = act1_quests.Find("Martin Quest").gameObject;
+            QuestStates martin_quest_qs = martin_quest.GetComponent<QuestStates>();
+            GameObject pot_pickup = martin_quest.transform.Find("Pickup").gameObject;
+            martin_quest_qs.states[2].stateObjects.Remove(pot_pickup);
+            pot_pickup.SetActive(false);
         }
 
         private static void JadaEdits()
