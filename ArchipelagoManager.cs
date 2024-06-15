@@ -29,6 +29,16 @@ namespace GatorRando
             Plugin.LogDebug($"Particle Pickup {particlePickup.name} collected!");
         }
 
+        public static void CollectLocationForBracelet(int shop_id)
+        {
+            Plugin.LogDebug($"Bracelet {shop_id} collected!");
+        }
+
+        public static void CollectLocationForJunkShop(string name)
+        {
+            Plugin.LogDebug($"Junk Shop item {name} collected!");
+        }
+
         public static void GiveFriends(int amount)
         {
             ItemResource popresource = FindItemResourceByName("Population");

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq.Expressions;
 using BepInEx;
 using HarmonyLib;
@@ -307,7 +308,8 @@ namespace GatorRando
         {
             GameObject kasen_quest = GameObject.Find("FetchVulture");
             QuestStates kasen_quest_qs = kasen_quest.GetComponent<QuestStates>();
-            if (kasen_quest_qs.StateID == 0) {
+            if (kasen_quest_qs.StateID == 0)
+            {
                 kasen_quest_qs.JustProgressState();
             }
         }
@@ -358,7 +360,7 @@ namespace GatorRando
             static void PreGiveReward(QuestRewardNPCs __instance)
             {
                 LogCheck("QuestRewardNPCs", "GiveReward", __instance.rewardCount.ToString());
-                ArchipelagoManager.CollectLocationForConfetti(__instance.name);          //This line is potentially redundant with Particle Pickup patch       
+                ArchipelagoManager.CollectLocationForNPC(__instance.name); //BUG: This line fails with ???                
             }
         }
 
@@ -585,6 +587,168 @@ namespace GatorRando
                     return true;
                 }
 
+            }
+        }
+
+        [HarmonyPatch(typeof(BraceletShopDialogue))]
+        private static class BraceletShopDialoguePatch
+        {
+            [HarmonyPrefix]
+            [HarmonyPatch("Interact")]
+            static bool PreInteract(BraceletShopDialogue __instance)
+            {
+                CoroutineUtil.Start(RunShopModified(__instance));
+                return false;
+            }
+
+            private static IEnumerator RunShopModified(BraceletShopDialogue bsd)
+            {
+                //TODO: Revise to remove duplicated code
+                Game.DialogueDepth++;
+                bsd.state = GameData.g.ReadInt(bsd.SaveID, 0);
+                bsd.itemResource.ForceShow = true;
+                int price = bsd.price;
+                MultilingualTextDocument.SetPlaceholder(0, price.ToString("0"));
+                yield return bsd.LoadDialogue(bsd.promptDialogue);
+                bsd.itemResource.ForceShow = false;
+                if (DialogueManager.optionChosen == 1)
+                {
+                    if (bsd.itemResource.Amount >= price)
+                    {
+                        bsd.itemResource.Amount -= price;
+                        yield return bsd.LoadDialogue(bsd.purchaseDialogue);
+                        bsd.itemResource.ForceShow = false;
+                        Player.movement.Stamina = 0f;
+                        ArchipelagoManager.CollectLocationForBracelet(bsd.id);
+                        yield return null;
+                        Player.itemManager.Refresh();
+                        yield return bsd.DoBraceletGet(); //TODO: OVERWRITE with appropriate UI for archipelago item
+                        bsd.state++;
+                        GameData.g.Write(bsd.SaveID, bsd.state);
+                        if (bsd.state >= bsd.braceletsInStock)
+                        {
+                            bsd.actors[0].showNpcMarker = false;
+                            if (bsd.CheckIfAllBraceletShops())
+                            {
+                                Game.DialogueDepth++;
+                                yield return bsd.LoadDialogue(bsd.allPurchased);
+                                yield return bsd.StartCoroutine(bsd.Poof());
+                                yield return new WaitForSeconds(1.5f);
+                                yield return CoroutineUtil.Start(DialogueManager.d.LoadChunk(bsd.document.FetchChunk(bsd.afterAllPurchased), null, DialogueManager.DialogueBoxBackground.Standard, true, true, false, false));
+                                bsd.rewardNPC.GiveReward();
+                                Game.DialogueDepth--;
+                            }
+                            else
+                            {
+                                yield return bsd.LoadDialogue(bsd.leaveDialogue);
+                                yield return bsd.StartCoroutine(bsd.Poof());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        yield return bsd.LoadDialogue(bsd.notEnoughDialogue);
+                    }
+                }
+                else
+                {
+                    yield return bsd.LoadDialogue(bsd.noPurchaseDialogue);
+                }
+                bsd.itemResource.ForceShow = false;
+                GameData.g.Write(bsd.SaveID, bsd.state);
+                Game.DialogueDepth--;
+                yield break;
+            }
+        }
+
+        [HarmonyPatch(typeof(JunkShop))]
+        private static class JunkShopPatch
+        {
+            [HarmonyPrefix]
+            [HarmonyPatch("RunShopDialogue")]
+            static bool PreRunShopDialogue(JunkShop __instance)
+            {
+                CoroutineUtil.Start(RunShopDialogueSequenceModified(__instance));
+                return false;
+            }
+
+            private static IEnumerator RunShopDialogueSequenceModified(JunkShop js)
+            {
+                //TODO: Revise to remove duplicated code
+                Game.DialogueDepth++;
+                js.itemResource.ForceShow = true;
+                GameObject[] array = js.shopStateObjects;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    array[i].SetActive(true);
+                }
+                yield return CoroutineUtil.Start(DialogueManager.d.LoadChunk(js.document.FetchChunk(js.shopIntro), js.actors, DialogueManager.DialogueBoxBackground.Standard, true, true, false, false));
+                DialogueManager.optionChosen = -1;
+                CoroutineUtil.Start(DialogueManager.d.RunDialogueOptions(js.GetChoiceList()));
+                int selectedOption = 0;
+                while (DialogueManager.optionChosen == -1)
+                {
+                    int currentlySelectedIndex = DialogueOptions.CurrentlySelectedIndex;
+                    for (int j = 0; j < js.cameras.Length; j++)
+                    {
+                        js.cameras[j].SetActive(j == currentlySelectedIndex - 1);
+                    }
+                    if (currentlySelectedIndex != selectedOption)
+                    {
+                        if (currentlySelectedIndex == 0)
+                        {
+                            js.uiItemResource.ClearPrice();
+                        }
+                        else
+                        {
+                            js.uiItemResource.SetPrice(js.shopItems[js.displayedItems[currentlySelectedIndex - 1]].cost);
+                        }
+                    }
+                    yield return null;
+                }
+                array = js.cameras;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    array[i].SetActive(false);
+                }
+                if (DialogueManager.optionChosen == 0)
+                {
+                    js.uiItemResource.ClearPrice();
+                    js.itemResource.ForceShow = false;
+                    yield return CoroutineUtil.Start(DialogueManager.d.LoadChunk(js.document.FetchChunk(js.cancelDialogue), js.actors, DialogueManager.DialogueBoxBackground.Standard, true, true, false, false));
+                }
+                else
+                {
+                    int num = DialogueManager.optionChosen - 1;
+                    JunkShop.ShopItem shopItem = js.shopItems[js.displayedItems[num]];
+                    if (js.itemResource.Amount >= shopItem.cost)
+                    {
+                        js.uiItemResource.ClearPrice();
+                        js.itemResource.ForceShow = false;
+                        js.itemResource.Amount -= shopItem.cost;
+                        ArchipelagoManager.CollectLocationForJunkShop(shopItem.item.name);
+                        js.UpdateInventory();
+                        yield return CoroutineUtil.Start(js.itemGet.RunSequence(shopItem.item.sprite, shopItem.item.DisplayName, js.document.FetchChunk(shopItem.unlockChunk), js.actors));
+                    }
+                    else
+                    {
+                        yield return CoroutineUtil.Start(DialogueManager.d.LoadChunk(js.document.FetchChunk(js.notEnoughDialogue), js.actors, DialogueManager.DialogueBoxBackground.Standard, true, true, false, false));
+                        js.uiItemResource.ClearPrice();
+                        js.itemResource.ForceShow = false;
+                    }
+                }
+                array = js.shopStateObjects;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    array[i].SetActive(false);
+                }
+                if (js.displayedItemCount == 0)
+                {
+                    yield return DialogueManager.d.LoadChunk(js.document.FetchChunk(js.soldOutDialogue), js.actors, DialogueManager.DialogueBoxBackground.Standard, true, true, false, false);
+                    yield return js.stateMachine.ProgressState(-1);
+                }
+                Game.DialogueDepth--;
+                yield break;
             }
         }
 
