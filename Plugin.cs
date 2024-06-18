@@ -357,18 +357,18 @@ namespace GatorRando
             }
         }
 
-        [HarmonyPatch(typeof(QuestRewardItem))]
-        private static class QuestRewardItemPatch
-        {
-            [HarmonyPrefix]
-            [HarmonyPatch("GiveReward")]
-            static bool PreGiveReward(QuestRewardItem __instance)
-            {
-                LogCheck("QuestRewardItem", "GiveReward", __instance.item);
-                ArchipelagoManager.CollectLocationForItem(__instance.item);
-                return false;
-            }
-        }
+        // [HarmonyPatch(typeof(QuestRewardItem))]
+        // private static class QuestRewardItemPatch
+        // {
+        //     [HarmonyPrefix]
+        //     [HarmonyPatch("GiveReward")]
+        //     static bool PreGiveReward(QuestRewardItem __instance)
+        //     {
+        //         LogCheck("QuestRewardItem", "GiveReward", __instance.item);
+        //         ArchipelagoManager.CollectLocationForItem(__instance.item);
+        //         return false;
+        //     }
+        // }
 
         // [HarmonyPatch(typeof(QuestRewardConfetti))]
         // private static class QuestRewardConfettiPatch
@@ -402,6 +402,7 @@ namespace GatorRando
             static bool PreRunItemSequence(DSItem __instance)
             {
                 //TODO: Don't intercept Craft Stuff, Pot Lid?, LITTER
+                // TODO: decide how to handle Sword_Pencil
                 LogCheck("DSItem", "RunItemSequence", __instance.itemName);
                 __instance.document = null;
                 __instance.dialogue = "Collected an AP Item!"; // Need to replace this with a valid dialogue?
@@ -426,17 +427,17 @@ namespace GatorRando
             }
         }
 
-        [HarmonyPatch(typeof(PositionChallenge))]
-        private static class PositionChallengePatch
-        {
-            [HarmonyPrefix]
-            [HarmonyPatch("FinishChallenge")]
-            static void PreFinishChallenge(PositionChallenge __instance)
-            {
-                LogCheck("PositionChallenge", "FinishChallenge", __instance.rewardAmount.ToString());
-                ArchipelagoManager.CollectLocationForConfetti(__instance.name);
-            }
-        }
+        // [HarmonyPatch(typeof(PositionChallenge))]
+        // private static class PositionChallengePatch
+        // {
+        //     [HarmonyPrefix]
+        //     [HarmonyPatch("FinishChallenge")]
+        //     static void PreFinishChallenge(PositionChallenge __instance)
+        //     {
+        //         LogCheck("PositionChallenge", "FinishChallenge", __instance.rewardAmount.ToString());
+        //         ArchipelagoManager.CollectLocationForConfetti(__instance.name);
+        //     }
+        // }
 
 
         [HarmonyPatch(typeof(TownNPCManager))]
@@ -486,7 +487,7 @@ namespace GatorRando
             [HarmonyPatch("Break", [typeof(bool), typeof(Vector3), typeof(bool)])]
             static void PreBreak (BreakableObject __instance, bool fromAttachment, Vector3 velocity, bool isHeavy)
             {
-                ArchipelagoManager.CollectLocationForBreakableObject(__instance.id);
+                ArchipelagoManager.CollectLocationForBreakableObject(__instance.id,__instance.name);
             }
         }
 
