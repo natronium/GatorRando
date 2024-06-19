@@ -709,7 +709,7 @@ namespace GatorRando
                         yield return bsd.LoadDialogue(bsd.purchaseDialogue);
                         bsd.itemResource.ForceShow = false;
                         Player.movement.Stamina = 0f;
-                        ArchipelagoManager.CollectLocationForBracelet(bsd.id);
+                        ArchipelagoManager.CollectLocationForBracelet(bsd.SaveID);
                         yield return null;
                         // Player.itemManager.Refresh();
                         // yield return bsd.DoBraceletGet(); //TODO: OVERWRITE with appropriate UI for archipelago item

@@ -53,9 +53,9 @@ namespace GatorRando
             Plugin.LogDebug($"Race {breakable_id} collected!");
         }
 
-        public static void CollectLocationForBracelet(int shop_id)
+        public static void CollectLocationForBracelet(string shop_save_id)
         {
-            Plugin.LogDebug($"Bracelet {shop_id} collected!");
+            Plugin.LogDebug($"{shop_save_id} collected!");
         }
 
         public static void CollectLocationForJunkShop(string name)
