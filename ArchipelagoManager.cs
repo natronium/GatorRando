@@ -28,6 +28,7 @@ namespace GatorRando
 
         public static void CollectLocationForBreakableObject(int breakable_id, string name)
         {
+            //lookup table to filter only the ones we care about
             Plugin.LogDebug($"Breakable Object {name} {breakable_id} collected!");
         }
 
@@ -71,6 +72,7 @@ namespace GatorRando
 
         public static void GiveCraft(string item)
         {
+            // Gives a recipe instead of the item
             ItemObject itemObject = FindItemObjectByName(item);
             ItemObject[] itemObjects = [itemObject];
             UIMenus.craftNotification.LoadItems(itemObjects);
