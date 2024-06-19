@@ -405,7 +405,7 @@ namespace GatorRando
                 //TODO: Don't intercept Craft Stuff, Pot Lid?, LITTER
                 // TODO: decide how to handle Sword_Pencil
                 string name = "";
-                if (__instance.item == null && __instance.name != "POT?")
+                if (__instance.item == null && __instance.name != "POT?" && __instance.name != "POT LID?")
                 {
                     name = __instance.itemName;
                 }
