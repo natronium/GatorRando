@@ -81,6 +81,7 @@ namespace GatorRando
             if (itemObject != null)
             {
                 ItemManager.i.UnlockItem(itemObject.id);
+                UIMenus.craftNotification.LoadItems([itemObject]);
                 return;
             }
             ItemManager.i.UnlockItem(item);
@@ -90,8 +91,7 @@ namespace GatorRando
         {
             // Gives a recipe instead of the item
             ItemObject itemObject = FindItemObjectByName(item);
-            ItemObject[] itemObjects = [itemObject];
-            UIMenus.craftNotification.LoadItems(itemObjects);
+            UIMenus.craftNotification.LoadItems([itemObject]);
             itemObject.hasShopEntry = true;
             itemObject.IsShopUnlocked = true;
         }

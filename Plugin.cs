@@ -60,6 +60,7 @@ namespace GatorRando
                 //Edits to Prep Quest
                 GeneEdits();
                 SusanneEdits();
+                // TODO: Check if Antone's quest requires bug net already
 
                 //Edits to Esme's Quest
                 EsmeEdits();
