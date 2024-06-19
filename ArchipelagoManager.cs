@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Archipelago.MultiClient.Net;
+using Archipelago.MultiClient.Net.Enums;
+using Archipelago.MultiClient.Net.Packets;
 using BepInEx;
 using HarmonyLib;
 using UnityEngine;
@@ -7,8 +10,19 @@ using UnityEngine.SceneManagement;
 
 namespace GatorRando
 {
-    public class ArchipelagoManager
+    public static class ArchipelagoManager
     {
+        public static ArchipelagoSession session;
+        public static RoomInfoPacket roomInfo;
+        public static LoginResult loginResult; 
+        public static async void thingy() {
+            //TODO: load these values from somewhere. config file to start? eventually UI
+            session = ArchipelagoSessionFactory.CreateSession("localhost", 38281);
+            //session.TryConnectAndLogin("Lil Gator Game", "TestGator", ItemsHandlingFlags.AllItems);
+            roomInfo = await session.ConnectAsync();
+            loginResult = await session.LoginAsync("Clique", "TestGator", ItemsHandlingFlags.AllItems);            
+        }
+        
         public static bool CollectLocationForItem(string itemName)
         {
             Plugin.LogDebug($"Item {itemName} collected!");
