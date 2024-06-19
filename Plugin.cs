@@ -283,6 +283,11 @@ namespace GatorRando
             {
                 UnlockedSorbet();
             }
+
+            GameObject become_vampire = vampire_quest.transform.Find("Become Vampire").gameObject;
+            DSDialogue vampire_hat = become_vampire.GetComponents<DSDialogue>()[1];
+            vampire_hat.onStart.ObliteratePersistentListenerByIndex(0);
+            vampire_hat.onStart.AddListener(() => { ArchipelagoManager.CollectLocationForItem("Hat_Vampire"); });
         }
 
         private static void CollectedSorbet()
@@ -527,7 +532,8 @@ namespace GatorRando
             [HarmonyPatch("FinishRace")]
             static void PreFinishRace(TimedChallenge __instance)
             {
-                if (__instance is Racetrack) {
+                if (__instance is Racetrack)
+                {
                     ArchipelagoManager.CollectLocationForRace(__instance.id);
                 }
             }
