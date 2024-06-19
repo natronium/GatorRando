@@ -4,7 +4,7 @@
 ## Get latest from `dotnet new gitignore`
 
 # Personal additions (not from dotnet new gitignore)
-lib/*.dll
+*/lib/*.dll
 .vscode
 
 # dotenv files
