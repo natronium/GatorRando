@@ -403,12 +403,24 @@ namespace GatorRando
             {
                 //TODO: Don't intercept Craft Stuff, Pot Lid?, LITTER
                 // TODO: decide how to handle Sword_Pencil
-                LogCheck("DSItem", "RunItemSequence", __instance.itemName);
-                __instance.document = null;
-                __instance.dialogue = "Collected an AP Item!"; // Need to replace this with a valid dialogue?
-                __instance.isRealItem = false;
-                __instance.itemName = "AP Item Here!";
-                // Eventually replace itemSprite too
+                string name = "";
+                if (__instance.item == null && __instance.name != "POT?")
+                {
+                    name = __instance.itemName;
+                }
+                else
+                {
+                    name = __instance.item.name;
+                }
+                LogCheck("DSItem", "RunItemSequence", name);
+                if (ArchipelagoManager.CollectLocationForItem(name))
+                {
+                    __instance.document = null;
+                    __instance.dialogue = "Collected an AP Item!"; // Need to replace this with a valid dialogue?
+                    __instance.isRealItem = false;
+                    __instance.itemName = "AP Item Here!";
+                    // Eventually replace itemSprite too
+                }
                 return true;
             }
         }
@@ -423,6 +435,7 @@ namespace GatorRando
                 LogCheck("InteractItemUnlock", "Interact", __instance.itemName);
                 __instance.gameObject.SetActive(false);
                 __instance.SaveTrue();
+                ArchipelagoManager.CollectLocationForItem(__instance.itemName);
                 return false;
             }
         }
@@ -467,16 +480,20 @@ namespace GatorRando
             [HarmonyPatch("Start")]
             static void PreStart(ParticlePickup __instance)
             {
-                Instance.Logger.LogDebug($"ParticlePickup.Start!");
-                ItemResource dummyResource = new()
+                // Check if Pot Confetti for Pots, Confetti for Chests and Racetracks
+                Instance.Logger.LogDebug($"ParticlePickup.Start for {__instance.particleSystem.name}");
+                if (__instance.particleSystem.name == "Pot Confetti" || __instance.particleSystem.name == "Confetti")
                 {
-                    id = "Dummy_Resource_particle",
-                    name = "Dummy Resource Particles",
-                    itemGetID = "Dummy_Part",
-                    showItemGet = false,
-                    onAmountChanged = new UnityEvent<int>()
-                };
-                __instance.resource = dummyResource;
+                    ItemResource dummyResource = new()
+                    {
+                        id = "Dummy_Resource_particle",
+                        name = "Dummy Resource Particles",
+                        itemGetID = "Dummy_Part",
+                        showItemGet = false,
+                        onAmountChanged = new UnityEvent<int>()
+                    };
+                    __instance.resource = dummyResource;
+                }
             }
         }
 
@@ -485,9 +502,31 @@ namespace GatorRando
         {
             [HarmonyPrefix]
             [HarmonyPatch("Break", [typeof(bool), typeof(Vector3), typeof(bool)])]
-            static void PreBreak (BreakableObject __instance, bool fromAttachment, Vector3 velocity, bool isHeavy)
+            static void PreBreak(BreakableObject __instance, bool fromAttachment, Vector3 velocity, bool isHeavy)
             {
-                ArchipelagoManager.CollectLocationForBreakableObject(__instance.id,__instance.name);
+                ArchipelagoManager.CollectLocationForBreakableObject(__instance.id, __instance.name);
+            }
+        }
+
+        [HarmonyPatch(typeof(BreakableObjectMulti))]
+        private static class BreakableObjectMultiPatch
+        {
+            [HarmonyPrefix]
+            [HarmonyPatch("Break", [typeof(bool), typeof(Vector3), typeof(bool)])]
+            static void PreBreak(BreakableObjectMulti __instance, bool fromAttachment, Vector3 velocity, bool isHeavy)
+            {
+                ArchipelagoManager.CollectLocationForBreakableObject(__instance.id, __instance.name);
+            }
+        }
+
+        [HarmonyPatch(typeof(Racetrack))]
+        private static class RacetrackPatch
+        {
+            [HarmonyPrefix]
+            [HarmonyPatch("FinishRace()")]
+            static void PreFinishRace(Racetrack __instance)
+            {
+                ArchipelagoManager.CollectLocationForRace(__instance.id);
             }
         }
 

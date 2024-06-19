@@ -9,9 +9,11 @@ namespace GatorRando
 {
     public class ArchipelagoManager
     {
-        public static void CollectLocationForItem(string itemName)
+        public static bool CollectLocationForItem(string itemName)
         {
             Plugin.LogDebug($"Item {itemName} collected!");
+            // Lookup table here
+            return true;
         }
 
         public static void CollectLocationForNPC(string NPCname)
@@ -19,14 +21,19 @@ namespace GatorRando
             Plugin.LogDebug($"NPC {NPCname} collected!");
         }
 
-        public static void CollectLocationForConfetti(string name)
-        {
-            Plugin.LogDebug($"Confetti {name} collected!");
-        }
+        // public static void CollectLocationForConfetti(string name)
+        // {
+        //     Plugin.LogDebug($"Confetti {name} collected!");
+        // }
 
         public static void CollectLocationForBreakableObject(int breakable_id, string name)
         {
             Plugin.LogDebug($"Breakable Object {name} {breakable_id} collected!");
+        }
+
+        public static void CollectLocationForRace(int breakable_id)
+        {
+            Plugin.LogDebug($"Race {breakable_id} collected!");
         }
 
         public static void CollectLocationForBracelet(int shop_id)
