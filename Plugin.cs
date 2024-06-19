@@ -354,6 +354,7 @@ namespace GatorRando
                 LogCheck("QuestRewardCrafts", "GiveReward", __instance.rewards[0].Name);
                 ArchipelagoManager.CollectLocationForItem(__instance.rewards[0].Name);
                 return false;
+                // TODO: UI for what item you picked up
             }
         }
 
@@ -513,20 +514,22 @@ namespace GatorRando
         {
             [HarmonyPrefix]
             [HarmonyPatch("Break", [typeof(bool), typeof(Vector3), typeof(bool)])]
-            static void PreBreak(BreakableObjectMulti __instance, bool fromAttachment, Vector3 velocity, bool isHeavy)
+            static void PreBreak(BreakableObjectMulti __instance, bool fromAttachment, Vector3 velocity, bool isSturdy)
             {
                 ArchipelagoManager.CollectLocationForBreakableObject(__instance.id, __instance.name);
             }
         }
 
-        [HarmonyPatch(typeof(Racetrack))]
-        private static class RacetrackPatch
+        [HarmonyPatch(typeof(TimedChallenge))]
+        private static class TimedChallengePatch
         {
             [HarmonyPrefix]
-            [HarmonyPatch("FinishRace()")]
-            static void PreFinishRace(Racetrack __instance)
+            [HarmonyPatch("FinishRace")]
+            static void PreFinishRace(TimedChallenge __instance)
             {
-                ArchipelagoManager.CollectLocationForRace(__instance.id);
+                if (__instance is Racetrack) {
+                    ArchipelagoManager.CollectLocationForRace(__instance.id);
+                }
             }
         }
 
