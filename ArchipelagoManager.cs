@@ -22,7 +22,7 @@ namespace GatorRando
             roomInfo = await session.ConnectAsync();
             loginResult = await session.LoginAsync("Clique", "TestGator", ItemsHandlingFlags.AllItems);            
         }
-        
+
         public static bool CollectLocationForItem(string itemName)
         {
             Plugin.LogDebug($"Item {itemName} collected!");
@@ -30,9 +30,11 @@ namespace GatorRando
             return true;
         }
 
-        public static void CollectLocationForNPC(string NPCname)
+        public static void CollectLocationForNPCs(CharacterProfile[] NPCs)
         {
-            Plugin.LogDebug($"NPC {NPCname} collected!");
+            foreach (var NPC in NPCs){
+                Plugin.LogDebug($"NPC {NPC.id} collected!");
+            }
         }
 
         // public static void CollectLocationForConfetti(string name)

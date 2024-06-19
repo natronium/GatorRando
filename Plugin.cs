@@ -391,7 +391,7 @@ namespace GatorRando
             static void PreGiveReward(QuestRewardNPCs __instance)
             {
                 LogCheck("QuestRewardNPCs", "GiveReward", __instance.rewardCount.ToString());
-                ArchipelagoManager.CollectLocationForNPC(__instance.name); //BUG: This line fails with ???                
+                ArchipelagoManager.CollectLocationForNPCs(__instance.rewards); //BUG: This line fails with ???                
             }
         }
 
