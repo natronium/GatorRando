@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Packets;
-using BepInEx;
-using HarmonyLib;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Data;
 
 namespace GatorRando
 {
@@ -22,6 +19,9 @@ namespace GatorRando
             roomInfo = await session.ConnectAsync();
             loginResult = await session.LoginAsync("Clique", "TestGator", ItemsHandlingFlags.AllItems);            
         }
+
+        static int KnownLocationCount => Items.Entries.Length;
+        static int KnownItemTypeCount => Locations.Entries.Length;
 
         public static bool CollectLocationForItem(string itemName)
         {

@@ -8,6 +8,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <ItemGroup>
@@ -41,5 +42,15 @@
 
     <!-- Publicize by assembly name -->
     <Publicize Include="Assembly-CSharp" />
+  </ItemGroup>
+
+  <!-- Embed Item & Location data from CSV -->
+  <ItemGroup>
+    <ProjectReference Include="../CSVSourceGenerator/CSVSourceGenerator.csproj"
+      OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="data/Items.csv" CsvLoadType="Startup" />
+    <AdditionalFiles Include="data/Locations.csv" CsvLoadType="Startup" />
   </ItemGroup>
 </Project>
