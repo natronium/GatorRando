@@ -51,7 +51,7 @@ namespace GatorRando
                     game.SetToStory();
                 }
 
-                //Edits to Martin's Quest
+                //Edits to Martin's Tutorial Quest
                 MartinEdits();
 
                 //Edits to Jada's Quest
@@ -60,11 +60,12 @@ namespace GatorRando
                 //Edits to Prep Quest
                 GeneEdits();
                 SusanneEdits();
-                // TODO: Check if Antone's quest requires bug net already
+                AntoneEdits();
 
                 //Edits to Esme's Quest
                 EsmeEdits();
 
+                //Edits to sidequests
                 KasenEdits();
 
             }
@@ -267,6 +268,42 @@ namespace GatorRando
                 rock_sequencer.beforeSequence.AddListener(engineer_quest_qs.JustProgressState);
             }
         }
+
+        private static void AntoneEdits()
+        {
+            //Edits to Antone's Quest
+            // Need to remove QuestState.JustProgressState from Rock Get Sequence
+            GameObject prep_quest = GameObject.Find("Prep Quest");
+            Transform prep_subquests = prep_quest.transform.Find("Subquests");
+            GameObject entomologist_quest = prep_subquests.Find("Entomologist").gameObject;
+            QuestStates entomologist_quest_qs = entomologist_quest.GetComponent<QuestStates>();
+            GameObject chill_bug = entomologist_quest.transform.Find("Chill bug").gameObject;
+            GameObject sneak_seq = entomologist_quest.transform.Find("Sneak up sequence").gameObject;
+            entomologist_quest_qs.states[1].stateObjects.Remove(chill_bug);
+            entomologist_quest_qs.states[1].stateObjects.Remove(sneak_seq);
+            if (ArchipelagoManager.ItemIsUnlocked("Bug Net (Sword)"))
+            {
+                UnlockedBugNet();
+            }
+        }
+
+        private static void UnlockedBugNet()
+        {
+            GameObject prep_quest = GameObject.Find("Prep Quest");
+            Transform prep_subquests = prep_quest.transform.Find("Subquests");
+            GameObject entomologist_quest = prep_subquests.Find("Entomologist").gameObject;
+            QuestStates entomologist_quest_qs = entomologist_quest.GetComponent<QuestStates>();
+            GameObject chill_bug = entomologist_quest.transform.Find("Chill bug").gameObject;
+            GameObject sneak_seq = entomologist_quest.transform.Find("Sneak up sequence").gameObject;
+            entomologist_quest_qs.states[1].stateObjects.Add(chill_bug);
+            entomologist_quest_qs.states[1].stateObjects.Add(sneak_seq);
+            if (entomologist_quest_qs.StateID == 1)
+            {
+                chill_bug.SetActive(true);
+                sneak_seq.SetActive(true);
+            }
+        }
+
 
         private static void EsmeEdits()
         {
