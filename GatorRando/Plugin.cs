@@ -795,6 +795,8 @@ namespace GatorRando
             }
         }
 
+        // TODO: JunkShop likely doesn't save Hidden to save file so hidden will need to be reapplied on Scene load
+        // TODO: Test if Roy is successfully obtainable given modifications to Junk Shop
         [HarmonyPatch(typeof(JunkShop))]
         private static class JunkShopPatch
         {
