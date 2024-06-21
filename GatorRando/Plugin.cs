@@ -244,6 +244,7 @@ namespace GatorRando
             GameObject rock_seq = engineer_quest.transform.Find("Rock Get Sequence").gameObject;
             DialogueSequencer rock_sequencer = rock_seq.GetComponent<DialogueSequencer>();
             rock_sequencer.beforeSequence.ObliteratePersistentListenerByIndex(0);
+            //TODO: Rocks need to disable
             if (ArchipelagoManager.ItemIsUnlocked("Magic Ore"))
             {
                 UnlockedMagicOre();
@@ -272,7 +273,6 @@ namespace GatorRando
         private static void AntoneEdits()
         {
             //Edits to Antone's Quest
-            // Need to remove QuestState.JustProgressState from Rock Get Sequence
             GameObject prep_quest = GameObject.Find("Prep Quest");
             Transform prep_subquests = prep_quest.transform.Find("Subquests");
             GameObject entomologist_quest = prep_subquests.Find("Entomologist").gameObject;
@@ -322,6 +322,7 @@ namespace GatorRando
                 UnlockedSorbet();
             }
 
+            //TODO: Hat Vampire overwrite not working
             GameObject become_vampire = vampire_quest.transform.Find("Become Vampire").gameObject;
             DSDialogue vampire_hat = become_vampire.GetComponents<DSDialogue>()[1];
             vampire_hat.onStart.ObliteratePersistentListenerByIndex(0);
@@ -363,6 +364,11 @@ namespace GatorRando
             QuestStates kasen_quest_qs = kasen_quest.GetComponent<QuestStates>();
             GameObject scooter_pickup = kasen_quest_qs.states[0].stateObjects[0];
             kasen_quest_qs.states[0].stateObjects.Remove(scooter_pickup);
+            GameObject find = kasen_quest.transform.Find("find scooter").Find("find").gameObject;
+            DialogueSequencer find_ds = find.GetComponent<DialogueSequencer>();
+            find_ds.afterSequence.ObliteratePersistentListenerByIndex(1);
+            find_ds.afterSequence.ObliteratePersistentListenerByIndex(0);
+            
             if (ArchipelagoManager.LocationIsCollected("Scooter Pickup"))
             {
                 scooter_pickup.SetActive(false);
@@ -433,7 +439,6 @@ namespace GatorRando
             [HarmonyPatch("GiveReward")]
             static void PreGiveReward(QuestRewardNPCs __instance)
             {
-                LogCheck("QuestRewardNPCs", "GiveReward", __instance.rewardCount.ToString());
                 ArchipelagoManager.CollectLocationForNPCs(__instance.rewards); //BUG: This line fails with ???                
             }
         }
@@ -673,6 +678,7 @@ namespace GatorRando
             [HarmonyPatch("CheckLogic")]
             static bool PreCheckLogic(LSDestroy __instance)
             {
+                //TODO: Revise to remove duplicated code
                 //Only modify behavior if Gene's Quest 
                 if (__instance.stateName == "Defeat the slimes")
                 {
@@ -696,7 +702,7 @@ namespace GatorRando
                         {
                             if ((!destroyEvent.disableOnAwake || lastAliveTargets != -1) && destroyEvent.aliveTargetCount == num)
                             {
-                                destroyEvent.onReachCount.Invoke();
+                                destroyEvent.onReachCount.Invoke(); // Error here
                             }
                         }
                     }
