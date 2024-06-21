@@ -32,10 +32,20 @@ namespace GatorRando
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
+
+        static IEnumerator WaitThenConnect(float duration) {
+            yield return new WaitForSeconds(duration);
+            ArchipelagoManager.Connect();
+            yield break;
+        }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             Debug.Log("OnSceneLoaded: " + scene.name);
             Debug.Log(mode);
+            if (scene.name == "Prologue")
+            {
+                StartCoroutine(WaitThenConnect(0.5f));
+            }
             if (scene.name == "Island")
             {
                 //Allow Freeplay
@@ -74,6 +84,12 @@ namespace GatorRando
         {
             Instance.Logger.LogDebug(s);
         }
+
+        public static void LogError(string errorMessage)
+        {
+            Instance.Logger.LogError(errorMessage);
+        }
+
 
         static void LogCall(String typeName, String methodName)
         {

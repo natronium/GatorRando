@@ -4,20 +4,55 @@ using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Packets;
 using UnityEngine;
 using Data;
+using System;
 
 namespace GatorRando
 {
     public static class ArchipelagoManager
     {
         public static ArchipelagoSession session;
-        public static RoomInfoPacket roomInfo;
-        public static LoginResult loginResult; 
-        public static async void thingy() {
-            //TODO: load these values from somewhere. config file to start? eventually UI
-            session = ArchipelagoSessionFactory.CreateSession("localhost", 38281);
-            //session.TryConnectAndLogin("Lil Gator Game", "TestGator", ItemsHandlingFlags.AllItems);
-            roomInfo = await session.ConnectAsync();
-            loginResult = await session.LoginAsync("Clique", "TestGator", ItemsHandlingFlags.AllItems);            
+        public static LoginSuccessful loginInfo;
+
+        public static void Connect()
+        {
+            if (session is not null && session.Socket.Connected)
+            {
+                return;
+            }
+            var server = "localhost";
+            var user = "TestGator";
+
+            session = ArchipelagoSessionFactory.CreateSession(server, 53072);
+            LoginResult result;
+            try
+            {
+                result = session.TryConnectAndLogin("Lil Gator Game", user, ItemsHandlingFlags.AllItems);
+            }
+            catch (Exception e)
+            {
+                result = new LoginFailure(e.GetBaseException().Message);
+            }
+
+            if (!result.Successful)
+            {
+                var failure = (LoginFailure)result;
+                string errorMessage = $"Failed to Connect to {server} as {user}:";
+                foreach (string error in failure.Errors)
+                {
+                    errorMessage += $"\n    {error}";
+                }
+                foreach (ConnectionRefusedError error in failure.ErrorCodes)
+                {
+                    errorMessage += $"\n    {error}";
+                }
+
+                Plugin.LogError(errorMessage);
+                return;
+
+            }
+
+            loginInfo = (LoginSuccessful)result;
+
         }
 
         static int KnownLocationCount => Items.Entries.Length;
@@ -32,7 +67,8 @@ namespace GatorRando
 
         public static void CollectLocationForNPCs(CharacterProfile[] NPCs)
         {
-            foreach (var NPC in NPCs){
+            foreach (var NPC in NPCs)
+            {
                 Plugin.LogDebug($"NPC {NPC.id} collected!");
             }
         }
@@ -133,7 +169,7 @@ namespace GatorRando
 
         private static List<string> items_unlocked = [];
         private static List<string> locations_collected = []; //Need ways to add to these fields
-         
+
     }
 
 
