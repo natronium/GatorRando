@@ -32,7 +32,7 @@ namespace GatorRando
 
         public static void CollectLocationForNPCs(CharacterProfile[] NPCs)
         {
-            foreach (var NPC in NPCs){
+            foreach (CharacterProfile NPC in NPCs){
                 Plugin.LogDebug($"NPC {NPC.id} collected!");
             }
         }
