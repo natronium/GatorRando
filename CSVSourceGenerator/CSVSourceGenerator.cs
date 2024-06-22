@@ -44,7 +44,7 @@ namespace CsvGenerator
                 foreach (var (name, type) in headerInfo)
                 {
                     structArgStrings.Add($"{type}? {name}");
-                    structFieldStrings.Add($"readonly {type}? {name} = {name};");
+                    structFieldStrings.Add($"public readonly {type}? {name} = {name};");
                 }
 
 
