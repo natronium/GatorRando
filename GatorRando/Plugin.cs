@@ -12,7 +12,7 @@ namespace GatorRando
     {
         public static Plugin Instance;
 
-        //fix to be options from Archipelago
+        //TODO: fix to be options from Archipelago
         readonly bool freeplay_from_start = true;
 
         private void Awake()
