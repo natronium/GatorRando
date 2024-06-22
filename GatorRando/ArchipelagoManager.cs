@@ -93,7 +93,6 @@ public class ArchipelagoManager : MonoBehaviour
 
     public static void OnSceneLoad()
     {
-        Plugin.LogDebug("ArchipelagoManager.OnSceneLoad!");
         var lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
         Plugin.LogDebug($"saved lastindex is {lastIndex}, AP's last index is {Session.Items.Index}");
         if (lastIndex < Session.Items.Index)
@@ -156,7 +155,10 @@ public class ArchipelagoManager : MonoBehaviour
         }
         catch (InvalidOperationException)
         {
-            Plugin.LogWarn($"Tried to collect location with numeric ID {id}, which does not have an entry in the locations table!");
+            //NB: This logs at Info level because it gets hit for *allll* the breakables we don't currently track
+            //      perhaps in the future if we're tracking *everything* it might make sense for this to be a warning
+            //      but not right now.
+            Plugin.LogInfo($"Tried to collect location with numeric ID {id}, which does not have an entry in the locations table!");
             return false;
         }
 

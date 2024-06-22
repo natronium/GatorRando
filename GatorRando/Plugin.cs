@@ -77,6 +77,11 @@ public class Plugin : BaseUnityPlugin
         }
     }
 
+    public static void LogInfo(string infoMessage)
+    {
+        Instance.Logger.LogInfo(infoMessage);
+    }
+    
     public static void LogDebug(string debugMessage)
     {
         Instance.Logger.LogDebug(debugMessage);

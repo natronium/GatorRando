@@ -10,7 +10,6 @@ static class TownNPCManagerPatch
     [HarmonyPatch("Awake")]
     static void PreAwake(TownNPCManager __instance)
     {
-        Plugin.LogDebug($"TownNPCManager.Awake!");
         ItemResource dummyResource = new()
         {
             id = "Dummy_Resource_Population",
