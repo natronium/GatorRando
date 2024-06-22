@@ -92,12 +92,6 @@ public class Plugin : BaseUnityPlugin
         Instance.Logger.LogError(errorMessage);
     }
 
-    public static void LogCall(String typeName, String methodName)
-    {
-        Instance.Logger.LogDebug($"{typeName}.{methodName}!");
-        Instance.Logger.LogDebug(new System.Diagnostics.StackTrace().ToString());
-    }
-
     public static void LogCheck(String typeName, String methodName, String checkName)
     {
         Instance.Logger.LogDebug($"{typeName}.{methodName} gave {checkName}");

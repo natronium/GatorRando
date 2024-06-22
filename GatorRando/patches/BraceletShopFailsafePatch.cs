@@ -9,7 +9,7 @@ static class BraceletShopFailsafePatch
     [HarmonyPatch("CheckFailsafe")]
     static bool PreCheckFailsafe()
     {
-        Plugin.LogCall("BraceletShopFailsafe", "CheckFailsafe");
+        Plugin.LogDebug("Skipping Bracelet Failsafe!");
         return false;
     }
 }
