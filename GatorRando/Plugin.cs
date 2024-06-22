@@ -33,7 +33,8 @@ namespace GatorRando
         }
 
 
-        static IEnumerator WaitThenConnect(float duration) {
+        static IEnumerator WaitThenConnect(float duration)
+        {
             yield return new WaitForSeconds(duration);
             ArchipelagoManager.Connect();
             yield break;
@@ -80,9 +81,13 @@ namespace GatorRando
             }
         }
 
-        public static void LogDebug(String s)
+        public static void LogDebug(String debugMessage)
         {
-            Instance.Logger.LogDebug(s);
+            Instance.Logger.LogDebug(debugMessage);
+        }
+        public static void LogWarn(string warningMessage)
+        {
+            Instance.Logger.LogWarning(warningMessage);
         }
 
         public static void LogError(string errorMessage)

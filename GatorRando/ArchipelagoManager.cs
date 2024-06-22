@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
-using Archipelago.MultiClient.Net.Packets;
 using UnityEngine;
 using Data;
 using System;
+using System.Linq;
 
 namespace GatorRando
 {
@@ -55,48 +55,89 @@ namespace GatorRando
 
         }
 
-        static int KnownLocationCount => Items.Entries.Length;
-        static int KnownItemTypeCount => Locations.Entries.Length;
+        private static void CollectLocationByAPID(int id)
+        {
+            session.Locations.CompleteLocationChecks(id);
+        }
+
+
+        public static bool CollectLocationByID(int id)
+        {
+            Locations.Entry location;
+            try
+            {
+                location = Locations.Entries.First((entry) => entry.client_id == id);
+            }
+            catch (InvalidOperationException)
+            {
+                Plugin.LogWarn($"Tried to collect location with numeric ID {id}, which does not have an entry in the locations table!");
+                return false;
+            }
+
+            CollectLocationByAPID((int)location.ap_location_id);
+            return true;
+        }
+
+        public static bool CollectLocationByName(string name)
+        {
+            Locations.Entry location;
+            try
+            {
+                location = Locations.Entries.First((entry) => entry.client_name_id == name);
+            }
+            catch (InvalidOperationException)
+            {
+                Plugin.LogWarn($"Tried to collect location with string ID {name}, which does not have an entry in the locations table!");
+                return false;
+            }
+
+            CollectLocationByAPID((int)location.ap_location_id);
+            return true;
+        }
 
         public static bool CollectLocationForItem(string itemName)
         {
             Plugin.LogDebug($"Item {itemName} collected!");
-            // Lookup table here
-            return true;
+            return CollectLocationByName(itemName);
         }
 
-        public static void CollectLocationForNPCs(CharacterProfile[] NPCs)
+        public static bool CollectLocationForNPCs(CharacterProfile[] NPCs)
         {
             foreach (var NPC in NPCs)
             {
                 Plugin.LogDebug($"NPC {NPC.id} collected!");
+                if (CollectLocationByName(NPC.id)){
+                    Plugin.LogDebug($"{NPC.id} recognized as valid location");
+                    return true;
+                }
             }
+            Plugin.LogWarn("No NPCs in the collected location recognized as a valid AP location. Is the spreadsheet missing stuff??");
+            return false;
         }
 
-        // public static void CollectLocationForConfetti(string name)
-        // {
-        //     Plugin.LogDebug($"Confetti {name} collected!");
-        // }
-
-        public static void CollectLocationForBreakableObject(int breakable_id, string name)
+        public static bool CollectLocationForBreakableObject(int breakable_id, string name)
         {
             //lookup table to filter only the ones we care about
             Plugin.LogDebug($"Breakable Object {name} {breakable_id} collected!");
+            return CollectLocationByID(breakable_id);
         }
 
-        public static void CollectLocationForRace(int breakable_id)
+        public static bool CollectLocationForRace(int breakable_id)
         {
             Plugin.LogDebug($"Race {breakable_id} collected!");
+            return CollectLocationByID(breakable_id);
         }
 
-        public static void CollectLocationForBracelet(string shop_save_id)
+        public static bool CollectLocationForBracelet(string shop_save_id)
         {
             Plugin.LogDebug($"{shop_save_id} collected!");
+            return CollectLocationByName(shop_save_id);
         }
 
-        public static void CollectLocationForJunkShop(string name)
+        public static bool CollectLocationForJunkShop(string name)
         {
             Plugin.LogDebug($"Junk Shop item {name} collected!");
+            return CollectLocationByName(name);
         }
 
         public static void GiveFriends(int amount)
