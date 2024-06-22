@@ -583,7 +583,10 @@ namespace GatorRando
             [HarmonyPatch("Break", [typeof(bool), typeof(Vector3), typeof(bool)])]
             static void PreBreak(BreakableObjectMulti __instance, bool fromAttachment, Vector3 velocity, bool isSturdy)
             {
-                ArchipelagoManager.CollectLocationForBreakableObject(__instance.id, __instance.name);
+                if (__instance.breakingStage >= __instance.breakingStages.Length)
+                {
+                    ArchipelagoManager.CollectLocationForBreakableObject(__instance.id, __instance.name);
+                }
             }
         }
 
