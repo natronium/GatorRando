@@ -77,7 +77,7 @@ public class Plugin : BaseUnityPlugin
         }
     }
 
-    public static void LogDebug(String debugMessage)
+    public static void LogDebug(string debugMessage)
     {
         Instance.Logger.LogDebug(debugMessage);
     }
@@ -92,7 +92,7 @@ public class Plugin : BaseUnityPlugin
         Instance.Logger.LogError(errorMessage);
     }
 
-    public static void LogCheck(String typeName, String methodName, String checkName)
+    public static void LogCheck(string typeName, string methodName, string checkName)
     {
         Instance.Logger.LogDebug($"{typeName}.{methodName} gave {checkName}");
     }
