@@ -6,7 +6,7 @@ static class MartinQuestMods
 {
     public static void Edits()
     {
-        GameObject get_pot_lid = GameObject.Find("Get Pot Lid");
+        GameObject get_pot_lid = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest/Get Pot Lid");
         DialogueSequencer get_pot_sequence = get_pot_lid.GetComponent<DialogueSequencer>();
         get_pot_sequence.beforeSequence.ObliteratePersistentListenerByIndex(0);
         get_pot_sequence.beforeSequence.AddListener(CollectedPot);
@@ -23,12 +23,9 @@ static class MartinQuestMods
 
     public static void UnlockedPot()
     {
-        // GameObject pot_pickup = GetGameObjectByPath("Act 1/Quests/Martin Quest/Pickup");
-        GameObject act1 = GameObject.Find("Act 1");
-        Transform act1_quests = act1.transform.Find("Quests");
-        GameObject martin_quest = act1_quests.Find("Martin Quest").gameObject;
+        GameObject pot_pickup = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest/Pickup");
+        GameObject martin_quest = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest");
         QuestStates martin_quest_qs = martin_quest.GetComponent<QuestStates>();
-        GameObject pot_pickup = martin_quest.transform.Find("Pickup").gameObject;
 
         if (martin_quest_qs.StateID == 1 && !pot_pickup.activeSelf)
         {
@@ -36,7 +33,7 @@ static class MartinQuestMods
         }
         else
         {
-            GameObject get_pot_lid = GameObject.Find("Get Pot Lid");
+            GameObject get_pot_lid = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest/Get Pot Lid");
             DialogueSequencer get_pot_sequence = get_pot_lid.GetComponent<DialogueSequencer>();
             get_pot_sequence.beforeSequence.AddListener(martin_quest_qs.JustProgressState);
         }
@@ -44,11 +41,9 @@ static class MartinQuestMods
 
     public static void CollectedPot()
     {
-        GameObject act1 = GameObject.Find("Act 1");
-        Transform act1_quests = act1.transform.Find("Quests");
-        GameObject martin_quest = act1_quests.Find("Martin Quest").gameObject;
+        GameObject martin_quest = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest");
         QuestStates martin_quest_qs = martin_quest.GetComponent<QuestStates>();
-        GameObject pot_pickup = martin_quest.transform.Find("Pickup").gameObject;
+        GameObject pot_pickup = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest/Pickup");
         martin_quest_qs.states[2].stateObjects = martin_quest_qs.states[2].stateObjects.Remove(pot_pickup);
         pot_pickup.SetActive(false);
     }
