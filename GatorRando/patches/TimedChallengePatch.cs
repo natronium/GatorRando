@@ -11,7 +11,7 @@ static class TimedChallengePatch
     {
         if (__instance is Racetrack)
         {
-            ArchipelagoManager.CollectLocationForRace(__instance.id);
+            ArchipelagoManager.CollectLocationByID(__instance.id);
         }
     }
 }

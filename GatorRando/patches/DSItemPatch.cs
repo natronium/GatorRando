@@ -21,7 +21,7 @@ static class DSItemPatch
             name = __instance.item.name;
         }
         Plugin.LogCheck("DSItem", "RunItemSequence", name);
-        if (ArchipelagoManager.CollectLocationForItem(name))
+        if (ArchipelagoManager.CollectLocationByName(name))
         {
             __instance.document = null;
             __instance.dialogue = "Collected an AP Item!"; // Need to replace this with a valid dialogue?

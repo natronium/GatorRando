@@ -22,7 +22,7 @@ static class EsmeQuestMods
         GameObject become_vampire = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/Become Vampire");
         DSDialogue vampire_hat = become_vampire.GetComponents<DSDialogue>()[1];
         vampire_hat.onStart.ObliteratePersistentListenerByIndex(0);
-        vampire_hat.onStart.AddListener(() => { ArchipelagoManager.CollectLocationForItem("Hat_Vampire"); });
+        vampire_hat.onStart.AddListener(() => { ArchipelagoManager.CollectLocationByName("Hat_Vampire"); });
     }
 
     public static void CollectedSorbet()

@@ -15,6 +15,14 @@ namespace GatorRando
         public static LoginSuccessful LoginInfo;
         public static ArchipelagoManager Instance;
         private static readonly ConcurrentQueue<Items.Entry> ItemQueue = new();
+        private static readonly Dictionary<string, Action> SpecialItemFunctions = [];
+        public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
+
+        public static bool ItemIsUnlocked(string item) =>
+            Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApId(item));
+
+        public static bool LocationIsCollected(string location) =>
+            Session.Locations.AllLocationsChecked.Contains(GetLocationApId(location));
 
         public void Awake()
         {
@@ -82,9 +90,6 @@ namespace GatorRando
 
         }
 
-        private static readonly Dictionary<string, Action> SpecialItemFunctions = [];
-        public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
-
         public static void OnSceneLoad()
         {
             Plugin.LogDebug("ArchipelagoManager.OnSceneLoad!");
@@ -115,10 +120,10 @@ namespace GatorRando
             Plugin.LogDebug($"ReceiveItem for {entry.shortname} (\"{entry.longname}\"). ClientId:{entry.client_name_id}, Type:{entry.client_item_type}, AP:{entry.ap_item_id}");
             switch (entry.client_item_type)
             {
-                case "Item": GiveItem(entry.client_name_id); break;
-                case "Craft": GiveCraft(entry.client_name_id); break;
-                case "Friends": GiveFriends((int)entry.client_resource_amount); break;
-                case "Craft Stuff": GiveCraftStuff((int)entry.client_resource_amount); break;
+                case "Item": ItemUtil.GiveItem(entry.client_name_id); break;
+                case "Craft": ItemUtil.GiveCraft(entry.client_name_id); break;
+                case "Friends": ItemUtil.GiveFriends((int)entry.client_resource_amount); break;
+                case "Craft Stuff": ItemUtil.GiveCraftStuff((int)entry.client_resource_amount); break;
                 default:
                     throw new Exception($"Item {entry.client_name_id} in the item data CSV with an unknown client_item type of {entry.client_item_type}");
             };
@@ -175,15 +180,10 @@ namespace GatorRando
             return true;
         }
 
-        public static bool CollectLocationForItem(string itemName)
-        {
-            Plugin.LogDebug($"Item {itemName} collected!");
-            return CollectLocationByName(itemName);
-        }
-
         public static bool CollectLocationForNPCs(CharacterProfile[] NPCs)
         {
-            foreach (CharacterProfile NPC in NPCs){
+            foreach (CharacterProfile NPC in NPCs)
+            {
                 Plugin.LogDebug($"NPC {NPC.id} collected!");
                 if (CollectLocationByName(NPC.id))
                 {
@@ -195,93 +195,5 @@ namespace GatorRando
             return false;
         }
 
-        public static bool CollectLocationForBreakableObject(int breakable_id, string name)
-        {
-            //lookup table to filter only the ones we care about
-            Plugin.LogDebug($"Breakable Object {name} {breakable_id} collected!");
-            return CollectLocationByID(breakable_id);
-        }
-
-        public static bool CollectLocationForRace(int breakable_id)
-        {
-            Plugin.LogDebug($"Race {breakable_id} collected!");
-            return CollectLocationByID(breakable_id);
-        }
-
-        public static bool CollectLocationForBracelet(string shop_save_id)
-        {
-            Plugin.LogDebug($"{shop_save_id} collected!");
-            return CollectLocationByName(shop_save_id);
-        }
-
-        public static bool CollectLocationForJunkShop(string name)
-        {
-            Plugin.LogDebug($"Junk Shop item {name} collected!");
-            return CollectLocationByName(name);
-        }
-
-        public static void GiveFriends(int amount)
-        {
-            ItemResource popresource = FindItemResourceByName("Population");
-            popresource.Amount += amount;
-        }
-
-        public static void GiveCraftStuff(int amount)
-        {
-            ItemResource matresource = FindItemResourceByName("CraftingMaterial");
-            matresource.Amount += amount;
-        }
-
-        public static void GiveItem(string item)
-        {
-            ItemObject itemObject = FindItemObjectByName(item);
-            if (itemObject != null)
-            {
-                ItemManager.i.UnlockItem(itemObject.id);
-                UIMenus.craftNotification.LoadItems([itemObject]);
-                return;
-            }
-            ItemManager.i.UnlockItem(item);
-        }
-
-        public static void GiveCraft(string item)
-        {
-            // Gives a recipe instead of the item
-            ItemObject itemObject = FindItemObjectByName(item);
-            UIMenus.craftNotification.LoadItems([itemObject]);
-            itemObject.hasShopEntry = true;
-            itemObject.IsShopUnlocked = true;
-        }
-
-        private static ItemResource FindItemResourceByName(string name)
-        {
-            ItemResource[] resources = Resources.FindObjectsOfTypeAll<ItemResource>();
-            foreach (ItemResource resource in resources)
-            {
-                if (resource.name == name)
-                {
-                    return resource;
-                }
-            }
-            return null;
-        }
-        private static ItemObject FindItemObjectByName(string item)
-        {
-            ItemObject[] itemObjects = Resources.FindObjectsOfTypeAll<ItemObject>();
-            foreach (ItemObject itemObject in itemObjects)
-            {
-                if (itemObject.name == item)
-                {
-                    return itemObject;
-                }
-            }
-            return null;
-        }
-
-        public static bool ItemIsUnlocked(string item) =>
-            Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApId(item));
-
-        public static bool LocationIsCollected(string location) =>
-            Session.Locations.AllLocationsChecked.Contains(GetLocationApId(location));
     }
 }

@@ -69,7 +69,7 @@ static class JunkShopPatch
                 js.uiItemResource.ClearPrice();
                 js.itemResource.ForceShow = false;
                 js.itemResource.Amount -= shopItem.cost;
-                ArchipelagoManager.CollectLocationForJunkShop(shopItem.item.name);
+                ArchipelagoManager.CollectLocationByName(shopItem.item.name);
                 shopItem.isHidden = true;
                 js.shopItems[js.displayedItems[num]] = shopItem;
                 js.UpdateInventory();

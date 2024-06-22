@@ -12,7 +12,7 @@ static class BreakableObjectMultiPatch
     {
         if (__instance.IsBroken)
         {
-            ArchipelagoManager.CollectLocationForBreakableObject(__instance.id, __instance.name);
+            ArchipelagoManager.CollectLocationByID(__instance.id);
         }
     }
 }

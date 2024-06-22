@@ -27,5 +27,30 @@ namespace GatorRando
             }
             return current;
         }
+
+        public static ItemResource FindItemResourceByName(string name)
+        {
+            ItemResource[] resources = Resources.FindObjectsOfTypeAll<ItemResource>();
+            foreach (ItemResource resource in resources)
+            {
+                if (resource.name == name)
+                {
+                    return resource;
+                }
+            }
+            return null;
+        }
+        public static ItemObject FindItemObjectByName(string item)
+        {
+            ItemObject[] itemObjects = Resources.FindObjectsOfTypeAll<ItemObject>();
+            foreach (ItemObject itemObject in itemObjects)
+            {
+                if (itemObject.name == item)
+                {
+                    return itemObject;
+                }
+            }
+            return null;
+        }
     }
 }

@@ -12,7 +12,7 @@ static class InteractItemUnlockPatch
         Plugin.LogCheck("InteractItemUnlock", "Interact", __instance.itemName);
         __instance.gameObject.SetActive(false);
         __instance.SaveTrue();
-        ArchipelagoManager.CollectLocationForItem(__instance.itemName);
+        ArchipelagoManager.CollectLocationByName(__instance.itemName);
         return false;
     }
 }
