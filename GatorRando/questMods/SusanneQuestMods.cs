@@ -13,11 +13,11 @@ static class SusanneQuestMods
         rock_sequencer.beforeSequence.ObliteratePersistentListenerByIndex(0);
         rock_sequencer.beforeSequence.AddListener(CollectedMagicOre);
 
-        if (ArchipelagoManager.LocationIsCollected("Magic Ore Pickup"))
+        if (ArchipelagoManager.LocationIsCollected("BEACH ROCK"))
         {
             CollectedMagicOre();
         }
-        if (ArchipelagoManager.ItemIsUnlocked("Magic Ore"))
+        if (ArchipelagoManager.ItemIsUnlocked("BEACH ROCK"))
         {
             UnlockedMagicOre();
         }
