@@ -21,7 +21,7 @@ namespace GatorRando
             var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
             harmony.PatchAll(); // automatically patch based on harmony attributes
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
-            Logger.LogDebug("THIS IS A DEBUG LOG! LOOK AT ME! @@@@@@@@@@@");
+            gameObject.AddComponent<ArchipelagoManager>();
         }
 
         void OnEnable()
@@ -30,10 +30,21 @@ namespace GatorRando
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
+
+        static IEnumerator WaitThenRun(float duration, Action action)
+        {
+            yield return new WaitForSeconds(duration);
+            action();
+            yield break;
+        }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             Debug.Log("OnSceneLoaded: " + scene.name);
             Debug.Log(mode);
+            if (scene.name == "Prologue")
+            {
+                StartCoroutine(WaitThenRun(0.5f, ArchipelagoManager.Connect));
+            }
             if (scene.name == "Island")
             {
                 //Allow Freeplay
@@ -41,6 +52,8 @@ namespace GatorRando
                 {
                     TutorialQuestMods.HandleFreeplay();
                 }
+
+                ArchipelagoManager.OnSceneLoad();
 
                 //Edits to Martin's Tutorial Quest
                 MartinQuestMods.Edits();
@@ -63,9 +76,19 @@ namespace GatorRando
             }
         }
 
-        public static void LogDebug(String s)
+        public static void LogDebug(String debugMessage)
         {
-            Instance.Logger.LogDebug(s);
+            Instance.Logger.LogDebug(debugMessage);
+        }
+
+        public static void LogWarn(string warningMessage)
+        {
+            Instance.Logger.LogWarning(warningMessage);
+        }
+
+        public static void LogError(string errorMessage)
+        {
+            Instance.Logger.LogError(errorMessage);
         }
 
         public static void LogCall(String typeName, String methodName)
