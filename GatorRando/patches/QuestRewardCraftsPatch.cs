@@ -9,8 +9,8 @@ static class QuestRewardCraftsPatch
     [HarmonyPatch("GiveReward")]
     static bool PreGiveReward(QuestRewardCrafts __instance)
     {
-        Plugin.LogCheck("QuestRewardCrafts", "GiveReward", __instance.rewards[0].Name);
-        ArchipelagoManager.CollectLocationForItem(__instance.rewards[0].Name);
+        Plugin.LogCheck("QuestRewardCrafts", "GiveReward", __instance.rewards[0].name);
+        ArchipelagoManager.CollectLocationForItem(__instance.rewards[0].name);
         return false;
         // TODO: UI for what item you picked up
     }
