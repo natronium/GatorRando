@@ -6,23 +6,20 @@ static class EsmeQuestMods
 {
     public static void Edits()
     {
-        GameObject theatre_quest = GameObject.Find("Theatre Quest");
-        Transform theatre_subquests = theatre_quest.transform.Find("Subquests");
-        GameObject vampire_quest = theatre_subquests.Find("Vampire").gameObject;
-        GameObject get_ice_cream = vampire_quest.transform.Find("Get Ice Cream").gameObject;
+        GameObject get_ice_cream = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/Get Ice Cream");
         DialogueSequencer get_ice_cream_seq = get_ice_cream.GetComponent<DialogueSequencer>();
         get_ice_cream_seq.afterSequence.ObliteratePersistentListenerByIndex(0);
         get_ice_cream_seq.afterSequence.AddListener(CollectedSorbet);
-        if (ArchipelagoManager.LocationIsCollected("Ice Cream"))
+        if (ArchipelagoManager.LocationIsCollected("ICE CREAM"))
         {
             CollectedSorbet();
         }
-        if (ArchipelagoManager.ItemIsUnlocked("Sorbet"))
+        if (ArchipelagoManager.ItemIsUnlocked("ICE CREAM"))
         {
             UnlockedSorbet();
         }
 
-        GameObject become_vampire = vampire_quest.transform.Find("Become Vampire").gameObject;
+        GameObject become_vampire = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/Become Vampire");
         DSDialogue vampire_hat = become_vampire.GetComponents<DSDialogue>()[1];
         vampire_hat.onStart.ObliteratePersistentListenerByIndex(0);
         vampire_hat.onStart.AddListener(() => { ArchipelagoManager.CollectLocationForItem("Hat_Vampire"); });
@@ -30,20 +27,15 @@ static class EsmeQuestMods
 
     public static void CollectedSorbet()
     {
-        GameObject theatre_quest = GameObject.Find("Theatre Quest");
-        Transform theatre_subquests = theatre_quest.transform.Find("Subquests");
-        GameObject vampire_quest = theatre_subquests.Find("Vampire").gameObject;
-        GameObject ice_cream = vampire_quest.transform.Find("IceCream").gameObject;
+        GameObject ice_cream = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/IceCream");
         ice_cream.SetActive(false);
     }
 
     public static void UnlockedSorbet()
     {
-        GameObject theatre_quest = GameObject.Find("Theatre Quest");
-        Transform theatre_subquests = theatre_quest.transform.Find("Subquests");
-        GameObject vampire_quest = theatre_subquests.Find("Vampire").gameObject;
+        GameObject vampire_quest = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire");
         QuestStates vampire_quest_qs = vampire_quest.GetComponent<QuestStates>();
-        GameObject ice_cream = vampire_quest.transform.Find("IceCream").gameObject;
+        GameObject ice_cream = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/IceCream");
 
         if (vampire_quest_qs.StateID == 1 && !ice_cream.activeSelf)
         {
@@ -51,7 +43,7 @@ static class EsmeQuestMods
         }
         else
         {
-            GameObject get_ice_cream = GameObject.Find("Get Ice Cream");
+            GameObject get_ice_cream = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/Get Ice Cream");
             DialogueSequencer get_ice_cream_seq = get_ice_cream.GetComponent<DialogueSequencer>();
             get_ice_cream_seq.afterSequence.AddListener(vampire_quest_qs.JustProgressState);
         }
