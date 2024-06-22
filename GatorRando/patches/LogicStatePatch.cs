@@ -2,7 +2,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace GatorRando.patches;
+namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(LogicState))]
 static class LogicStatePatch

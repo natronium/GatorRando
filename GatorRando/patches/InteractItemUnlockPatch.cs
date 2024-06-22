@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace GatorRando.patches;
+namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(InteractItemUnlock))]
 static class InteractItemUnlockPatch

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using BepInEx;
-using GatorRando.questMods;
+using GatorRando.QuestMods;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.SceneManagement;

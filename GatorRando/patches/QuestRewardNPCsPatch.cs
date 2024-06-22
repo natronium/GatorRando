@@ -2,7 +2,7 @@
 
 using HarmonyLib;
 
-namespace GatorRando.patches;
+namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(QuestRewardNPCs))]
 static class QuestRewardNPCsPatch

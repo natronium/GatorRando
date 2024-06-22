@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace GatorRando.patches;
+namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(LogicStateSubmerge))]
 static class LogicStateSubmergePatch

@@ -1,7 +1,7 @@
 using HarmonyLib;
 using UnityEngine.Events;
 
-namespace GatorRando.patches;
+namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(TownNPCManager))]
 static class TownNPCManagerPatch

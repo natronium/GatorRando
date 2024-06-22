@@ -1,6 +1,6 @@
 using HarmonyLib;
 
-namespace GatorRando.patches;
+namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(DSItem))]
 static class DSItemPatch

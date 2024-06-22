@@ -1,7 +1,7 @@
 using HarmonyLib;
 using UnityEngine;
 
-namespace GatorRando.patches;
+namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(LogicStateCollectGrass))]
 static class LogicStateCollectGrassPatch

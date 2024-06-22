@@ -2,7 +2,7 @@ using System.Collections;
 using HarmonyLib;
 using UnityEngine;
 
-namespace GatorRando.patches;
+namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(JunkShop))]
 static class JunkShopPatch

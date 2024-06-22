@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace GatorRando.questMods;
+namespace GatorRando.QuestMods;
 
 static class Junk4TrashQuestMods
 {

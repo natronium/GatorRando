@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GatorRando.questMods;
+namespace GatorRando.QuestMods;
 
 static class SusanneQuestMods
 {
