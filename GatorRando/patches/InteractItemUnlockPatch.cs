@@ -9,7 +9,6 @@ static class InteractItemUnlockPatch
     [HarmonyPatch("Interact")]
     static bool PreInteract(InteractItemUnlock __instance)
     {
-        Plugin.LogCheck("InteractItemUnlock", "Interact", __instance.itemName);
         __instance.gameObject.SetActive(false);
         __instance.SaveTrue();
         ArchipelagoManager.CollectLocationByName(__instance.itemName);

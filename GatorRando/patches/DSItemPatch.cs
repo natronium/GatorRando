@@ -20,7 +20,6 @@ static class DSItemPatch
         {
             name = __instance.item.name;
         }
-        Plugin.LogCheck("DSItem", "RunItemSequence", name);
         if (ArchipelagoManager.CollectLocationByName(name))
         {
             __instance.document = null;
