@@ -113,6 +113,7 @@ namespace GatorRando
             GameObject get_pot_lid = GameObject.Find("Get Pot Lid");
             DialogueSequencer get_pot_sequence = get_pot_lid.GetComponent<DialogueSequencer>();
             get_pot_sequence.beforeSequence.ObliteratePersistentListenerByIndex(0);
+            get_pot_sequence.beforeSequence.AddListener(CollectedPot);
 
             if (ArchipelagoManager.LocationIsCollected("Pot? Pickup"))
             {
@@ -228,7 +229,7 @@ namespace GatorRando
             }
             else
             {
-                GameObject loot_seq = economist_quest.transform.Find("Loot Sequence").gameObject;
+                GameObject loot_seq = economist_quest.transform.Find("Loot Get Sequence").gameObject;
                 DialogueSequencer loot_sequencer = loot_seq.GetComponent<DialogueSequencer>();
                 loot_sequencer.afterSequence.AddListener(economist_quest_qs.JustProgressState);
             }
@@ -244,11 +245,27 @@ namespace GatorRando
             GameObject rock_seq = engineer_quest.transform.Find("Rock Get Sequence").gameObject;
             DialogueSequencer rock_sequencer = rock_seq.GetComponent<DialogueSequencer>();
             rock_sequencer.beforeSequence.ObliteratePersistentListenerByIndex(0);
-            //TODO: Rocks need to disable
+            rock_sequencer.beforeSequence.AddListener(CollectedMagicOre);
+
+            if (ArchipelagoManager.LocationIsCollected("Magic Ore Pickup"))
+            {
+                CollectedMagicOre();
+            }
             if (ArchipelagoManager.ItemIsUnlocked("Magic Ore"))
             {
                 UnlockedMagicOre();
             }
+        }
+
+        private static void CollectedMagicOre()
+        {
+            GameObject prep_quest = GameObject.Find("Prep Quest");
+            Transform prep_subquests = prep_quest.transform.Find("Subquests");
+            GameObject engineer_quest = prep_subquests.Find("Engineer").gameObject;
+            GameObject rocks = engineer_quest.transform.Find("Special Rocks").gameObject;
+            QuestStates engineer_quest_qs = engineer_quest.GetComponent<QuestStates>();
+            engineer_quest_qs.states[1].stateObjects.Remove(rocks);
+            rocks.SetActive(false);
         }
 
         private static void UnlockedMagicOre()
@@ -272,6 +289,7 @@ namespace GatorRando
 
         private static void AntoneEdits()
         {
+            //TODO: these edits are not yet working: position for chill bug -95.9112 13.713 -43.595
             //Edits to Antone's Quest
             GameObject prep_quest = GameObject.Find("Prep Quest");
             Transform prep_subquests = prep_quest.transform.Find("Subquests");
@@ -279,7 +297,7 @@ namespace GatorRando
             QuestStates entomologist_quest_qs = entomologist_quest.GetComponent<QuestStates>();
             GameObject chill_bug = entomologist_quest.transform.Find("Chill bug").gameObject;
             GameObject sneak_seq = entomologist_quest.transform.Find("Sneak up sequence").gameObject;
-            entomologist_quest_qs.states[1].stateObjects.Remove(chill_bug);
+            entomologist_quest_qs.states[1].stateObjects.Remove(chill_bug); //these two lines did not work
             entomologist_quest_qs.states[1].stateObjects.Remove(sneak_seq);
             if (ArchipelagoManager.ItemIsUnlocked("Bug Net (Sword)"))
             {
@@ -313,6 +331,7 @@ namespace GatorRando
             GameObject get_ice_cream = vampire_quest.transform.Find("Get Ice Cream").gameObject;
             DialogueSequencer get_ice_cream_seq = get_ice_cream.GetComponent<DialogueSequencer>();
             get_ice_cream_seq.afterSequence.ObliteratePersistentListenerByIndex(0);
+            get_ice_cream_seq.afterSequence.AddListener(CollectedSorbet);
             if (ArchipelagoManager.LocationIsCollected("Ice Cream"))
             {
                 CollectedSorbet();
@@ -322,7 +341,6 @@ namespace GatorRando
                 UnlockedSorbet();
             }
 
-            //TODO: Hat Vampire overwrite not working
             GameObject become_vampire = vampire_quest.transform.Find("Become Vampire").gameObject;
             DSDialogue vampire_hat = become_vampire.GetComponents<DSDialogue>()[1];
             vampire_hat.onStart.ObliteratePersistentListenerByIndex(0);
@@ -368,7 +386,7 @@ namespace GatorRando
             DialogueSequencer find_ds = find.GetComponent<DialogueSequencer>();
             find_ds.afterSequence.ObliteratePersistentListenerByIndex(1);
             find_ds.afterSequence.ObliteratePersistentListenerByIndex(0);
-            
+
             if (ArchipelagoManager.LocationIsCollected("Scooter Pickup"))
             {
                 scooter_pickup.SetActive(false);
@@ -385,7 +403,8 @@ namespace GatorRando
 
         private static void UnlockedScooter()
         {
-            GameObject kasen_quest = GameObject.Find("FetchVulture");
+            GameObject northeast = GameObject.Find("NorthEast (Canyoney)");
+            GameObject kasen_quest = northeast.transform.Find("SideQuests").Find("FetchVulture").gameObject;
             QuestStates kasen_quest_qs = kasen_quest.GetComponent<QuestStates>();
             if (kasen_quest_qs.StateID == 0)
             {
@@ -453,7 +472,7 @@ namespace GatorRando
                 //TODO: Don't intercept Craft Stuff, Pot Lid?, LITTER
                 // TODO: decide how to handle Sword_Pencil
                 string name = "";
-                if (__instance.item == null && __instance.name != "POT?" && __instance.name != "POT LID?")
+                if (__instance.item == null || __instance.itemName == "POT?" || __instance.itemName == "POT LID?")
                 {
                     name = __instance.itemName;
                 }
@@ -671,56 +690,77 @@ namespace GatorRando
             }
         }
 
-        [HarmonyPatch(typeof(LSDestroy))]
-        private static class LSDestroyPatch
+        // [HarmonyPatch(typeof(LSDestroy))]
+        // private static class LSDestroyPatch
+        // {
+        //     [HarmonyPrefix]
+        //     [HarmonyPatch("CheckLogic")]
+        //     static bool PreCheckLogic(LSDestroy __instance)
+        //     {
+        //         //TODO: Revise to remove duplicated code
+        //         //Only modify behavior if Gene's Quest 
+        //         if (__instance.stateName == "Defeat the slimes")
+        //         {
+        //             if (!__instance.enabled)
+        //             {
+        //                 return false;
+        //             }
+        //             int num = 0;
+        //             for (int i = 0; i < __instance.targets.Length; i++)
+        //             {
+        //                 if (!__instance.targets[i].IsBroken)
+        //                 {
+        //                     num++;
+        //                 }
+        //             }
+        //             Traverse traverse = Traverse.Create(__instance).Field("lastAliveTargets");
+        //             int lastAliveTargets = traverse.GetValue<int>();
+        //             if (lastAliveTargets != num)
+        //             {
+        //                 foreach (LSDestroy.DestroyEvent destroyEvent in __instance.events)
+        //                 {
+        //                     if ((!destroyEvent.disableOnAwake || lastAliveTargets != -1) && destroyEvent.aliveTargetCount == num)
+        //                     {
+        //                         destroyEvent.onReachCount.Invoke(); // Error here
+        //                     }
+        //                 }
+        //             }
+        //             if (num <= __instance.desiredUnbrokenTargets)
+        //             {
+        //                 GameObject loot_seq = GameObject.Find("Loot Sequence");
+        //                 DialogueSequencer loot_sequencer = loot_seq.GetComponent<DialogueSequencer>();
+        //                 loot_sequencer.JustStartSequence();
+        //                 __instance.enabled = false;
+        //             }
+        //             traverse.SetValue(num);
+        //             return false;
+        //         }
+        //         else
+        //         {
+        //             return true;
+        //         }
+
+        //     }
+        // }
+        [HarmonyPatch(typeof(LogicState))]
+        private static class LogicStatePatch
         {
             [HarmonyPrefix]
-            [HarmonyPatch("CheckLogic")]
-            static bool PreCheckLogic(LSDestroy __instance)
+            [HarmonyPatch("LogicCompleted")]
+            static bool PreLogicCompleted(LogicState __instance)
             {
-                //TODO: Revise to remove duplicated code
-                //Only modify behavior if Gene's Quest 
-                if (__instance.stateName == "Defeat the slimes")
-                {
-                    if (!__instance.enabled)
-                    {
-                        return false;
-                    }
-                    int num = 0;
-                    for (int i = 0; i < __instance.targets.Length; i++)
-                    {
-                        if (!__instance.targets[i].IsBroken)
-                        {
-                            num++;
-                        }
-                    }
-                    Traverse traverse = Traverse.Create(__instance).Field("lastAliveTargets");
-                    int lastAliveTargets = traverse.GetValue<int>();
-                    if (lastAliveTargets != num)
-                    {
-                        foreach (LSDestroy.DestroyEvent destroyEvent in __instance.events)
-                        {
-                            if ((!destroyEvent.disableOnAwake || lastAliveTargets != -1) && destroyEvent.aliveTargetCount == num)
-                            {
-                                destroyEvent.onReachCount.Invoke(); // Error here
-                            }
-                        }
-                    }
-                    if (num <= __instance.desiredUnbrokenTargets)
-                    {
-                        GameObject loot_seq = GameObject.Find("Loot Sequence");
-                        DialogueSequencer loot_sequencer = loot_seq.GetComponent<DialogueSequencer>();
-                        loot_sequencer.JustStartSequence();
-                        __instance.enabled = false;
-                    }
-                    traverse.SetValue(num);
-                    return false;
-                }
-                else
+                if (__instance.stateName != "Defeat the slimes")
                 {
                     return true;
                 }
-
+                else
+                {
+                    GameObject loot_seq = GameObject.Find("Loot Get Sequence");
+                    DialogueSequencer loot_sequencer = loot_seq.GetComponent<DialogueSequencer>();
+                    loot_sequencer.JustStartSequence();
+                    __instance.enabled = false;
+                    return false;
+                }
             }
         }
 
