@@ -57,5 +57,5 @@ shuriken,Shuriken (Item),56,Item_Shuriken,,Item,progression,"Ranged,Item",1
 bowling_bomb,Bowling Bomb (Item),57,Item_Bomb,,Item,useful,"Cardboard_Destroyer,Item",1
 bubblegum,Bubble Gum (Item),58,Item_Gum,,Item,useful,"Traversal,Item",1
 sticky_hand,Sticky Hand (Item),59,Item_StickyHand,,Item,filler,Item,1
-paint_gun,Paint Blaster (Craft),60,Item_Paint Gun,,Craft,progression,"Ranged,Craft",1
+paint_gun,Paint Blaster (Craft),60,Item_PaintGun,,Craft,progression,"Ranged,Craft",1
 camera,An Actual Digital Camera (Craft),61,Item_Camera,,Craft,filler,Craft,1

@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using BepInEx;
 using HarmonyLib;
@@ -68,6 +69,7 @@ namespace GatorRando
                 //Edits to sidequests
                 KasenEdits();
 
+                Junk4ShopCollect();
             }
         }
 
@@ -383,6 +385,33 @@ namespace GatorRando
             if (kasen_quest_qs.StateID == 0)
             {
                 kasen_quest_qs.JustProgressState();
+            }
+        }
+
+        private static void Junk4ShopCollect()
+        {
+            GameObject junk_shop_object = Util.GetByPath("East (Creeklands)/Junk Shop/Cool Shop");
+            JunkShop junk_shop = junk_shop_object.GetComponent<JunkShop>();
+            List<string> junk4trash_items = ["Shield_Stretch", "Shield_TrashCanLid", "Item_StickyHand", "Item_PaintGun", "Sword_Wrench", "Sword_Grabby"];
+            foreach (string item in junk4trash_items)
+            {
+                print(item);
+                if (ArchipelagoManager.LocationIsCollected(item))
+                {
+                    foreach (int i in Enumerable.Range(0, junk_shop.shopItems.Length))
+                    {
+                        JunkShop.ShopItem shop_item = junk_shop.shopItems[i];
+                        print(shop_item.item.name);
+                        if (shop_item.item.name == item)
+                        {
+                            shop_item.isHidden = true;
+                            junk_shop.shopItems[i] = shop_item;
+                            // junk_shop.UpdateInventory();
+                            print("hidden!");
+                            break;
+                        }
+                    }
+                }
             }
         }
 
@@ -787,8 +816,6 @@ namespace GatorRando
             }
         }
 
-        // TODO: JunkShop likely doesn't save Hidden to save file so hidden will need to be reapplied on Scene load
-        // TODO: Test if Roy is successfully obtainable given modifications to Junk Shop
         [HarmonyPatch(typeof(JunkShop))]
         private static class JunkShopPatch
         {
