@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Linq;
 using BepInEx;
@@ -153,7 +153,7 @@ namespace GatorRando
             GameObject martin_quest = act1_quests.Find("Martin Quest").gameObject;
             QuestStates martin_quest_qs = martin_quest.GetComponent<QuestStates>();
             GameObject pot_pickup = martin_quest.transform.Find("Pickup").gameObject;
-            martin_quest_qs.states[2].stateObjects.Remove(pot_pickup);
+            martin_quest_qs.states[2].stateObjects = martin_quest_qs.states[2].stateObjects.Remove(pot_pickup);
             pot_pickup.SetActive(false);
         }
 
@@ -264,7 +264,7 @@ namespace GatorRando
             GameObject engineer_quest = prep_subquests.Find("Engineer").gameObject;
             GameObject rocks = engineer_quest.transform.Find("Special Rocks").gameObject;
             QuestStates engineer_quest_qs = engineer_quest.GetComponent<QuestStates>();
-            engineer_quest_qs.states[1].stateObjects.Remove(rocks);
+            engineer_quest_qs.states[1].stateObjects = engineer_quest_qs.states[1].stateObjects.Remove(rocks);
             rocks.SetActive(false);
         }
 
@@ -295,10 +295,9 @@ namespace GatorRando
             Transform prep_subquests = prep_quest.transform.Find("Subquests");
             GameObject entomologist_quest = prep_subquests.Find("Entomologist").gameObject;
             QuestStates entomologist_quest_qs = entomologist_quest.GetComponent<QuestStates>();
-            GameObject chill_bug = entomologist_quest.transform.Find("Chill bug").gameObject;
             GameObject sneak_seq = entomologist_quest.transform.Find("Sneak up sequence").gameObject;
-            entomologist_quest_qs.states[1].stateObjects.Remove(chill_bug); //these two lines did not work
-            entomologist_quest_qs.states[1].stateObjects.Remove(sneak_seq);
+            entomologist_quest_qs.states[1].stateObjects = entomologist_quest_qs.states[1].stateObjects.Remove(sneak_seq);
+            sneak_seq.SetActive(false);
             if (ArchipelagoManager.ItemIsUnlocked("Bug Net (Sword)"))
             {
                 UnlockedBugNet();
@@ -311,17 +310,13 @@ namespace GatorRando
             Transform prep_subquests = prep_quest.transform.Find("Subquests");
             GameObject entomologist_quest = prep_subquests.Find("Entomologist").gameObject;
             QuestStates entomologist_quest_qs = entomologist_quest.GetComponent<QuestStates>();
-            GameObject chill_bug = entomologist_quest.transform.Find("Chill bug").gameObject;
             GameObject sneak_seq = entomologist_quest.transform.Find("Sneak up sequence").gameObject;
-            entomologist_quest_qs.states[1].stateObjects.Add(chill_bug);
             entomologist_quest_qs.states[1].stateObjects.Add(sneak_seq);
             if (entomologist_quest_qs.StateID == 1)
             {
-                chill_bug.SetActive(true);
                 sneak_seq.SetActive(true);
             }
         }
-
 
         private static void EsmeEdits()
         {
@@ -381,7 +376,7 @@ namespace GatorRando
             GameObject kasen_quest = GameObject.Find("FetchVulture");
             QuestStates kasen_quest_qs = kasen_quest.GetComponent<QuestStates>();
             GameObject scooter_pickup = kasen_quest_qs.states[0].stateObjects[0];
-            kasen_quest_qs.states[0].stateObjects.Remove(scooter_pickup);
+            kasen_quest_qs.states[0].stateObjects = kasen_quest_qs.states[0].stateObjects.Remove(scooter_pickup);
             GameObject find = kasen_quest.transform.Find("find scooter").Find("find").gameObject;
             DialogueSequencer find_ds = find.GetComponent<DialogueSequencer>();
             find_ds.afterSequence.ObliteratePersistentListenerByIndex(1);
