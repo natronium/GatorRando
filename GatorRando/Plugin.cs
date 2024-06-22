@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Linq;
 using BepInEx;
@@ -579,11 +579,11 @@ namespace GatorRando
         [HarmonyPatch(typeof(BreakableObjectMulti))]
         private static class BreakableObjectMultiPatch
         {
-            [HarmonyPrefix]
+            [HarmonyPostfix]
             [HarmonyPatch("Break", [typeof(bool), typeof(Vector3), typeof(bool)])]
-            static void PreBreak(BreakableObjectMulti __instance, bool fromAttachment, Vector3 velocity, bool isSturdy)
+            static void PostBreak(BreakableObjectMulti __instance, bool fromAttachment, Vector3 velocity, bool isSturdy)
             {
-                if (__instance.breakingStage >= __instance.breakingStages.Length)
+                if (__instance.IsBroken)
                 {
                     ArchipelagoManager.CollectLocationForBreakableObject(__instance.id, __instance.name);
                 }
