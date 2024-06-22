@@ -10,7 +10,6 @@ static class LogicStateCollectGrassPatch
     [HarmonyPatch("OnDetailsCut")]
     static bool PreOnDetailsCut(LogicStateCollectGrass __instance, int cutAmount)
     {
-        Plugin.LogCall("LogicStateCollectGrass", "OnDetailsCut");
         Traverse traverse = Traverse.Create(__instance).Field("currentCutAmount");
         int currentCutAmount = traverse.GetValue<int>();
 

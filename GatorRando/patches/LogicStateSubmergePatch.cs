@@ -11,7 +11,7 @@ static class LogicStateSubmergePatch
     {
         //TODO: Revise to remove duplicated code--> just move functionality over to the LogicStatePatch instead?
         //Only collect water if have the bucket
-        if (ArchipelagoManager.ItemIsUnlocked("Bucket"))
+        if (ArchipelagoManager.ItemIsUnlocked("BUCKET"))
         {
             Traverse traverse = Traverse.Create(__instance).Field("swimmingCounter");
             int swimmingCounter = traverse.GetValue<int>();

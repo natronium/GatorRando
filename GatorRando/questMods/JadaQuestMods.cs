@@ -4,14 +4,13 @@ namespace GatorRando.questMods;
 
 static class JadaQuestMods
 {
+    //Reference LogicStateCollectGrassPatch and LogicStateSubmergePatch for additional changes to Jada's Quest
     public static void Edits()
     {
-        GameObject cool_kids_quest = GameObject.Find("Cool Kids Quest");
-        Transform cool_kids_subquests = cool_kids_quest.transform.Find("Subquests");
-        GameObject boar_quest = cool_kids_subquests.Find("Boar Quest").gameObject;
+        GameObject boar_quest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
         QuestStates boar_quest_qs = boar_quest.GetComponent<QuestStates>();
         // Jada: Grass Clippings Section
-        // Need to remove OnProgress() delegate
+        // Removing OnProgress() delegate
         boar_quest_qs.states[2].onProgress.ObliteratePersistentListenerByIndex(0);
 
         if (ArchipelagoManager.ItemIsUnlocked("CLIPPINGS"))
@@ -19,18 +18,15 @@ static class JadaQuestMods
             UnlockedGrassClippings();
         }
         // Jada: Water Bucket Section
-        Transform sprout = boar_quest.transform.Find("Sprout");
-        GameObject water_seq = sprout.Find("Water Sequence").gameObject;
+        GameObject water_seq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Sprout/Water Sequence");
         DSDialogue water_dia = water_seq.GetComponents<DSDialogue>()[1];
-        //Need to remove give bucket delegate from water_seq.Dialogue.onStart()
+        //Removings give bucket delegate from water_seq.Dialogue.onStart()
         water_dia.onStart.ObliteratePersistentListenerByIndex(2);
     }
 
     public static void UnlockedGrassClippings()
     {
-        GameObject cool_kids_quest = GameObject.Find("Cool Kids Quest");
-        Transform cool_kids_subquests = cool_kids_quest.transform.Find("Subquests");
-        GameObject boar_quest = cool_kids_subquests.Find("Boar Quest").gameObject;
+        GameObject boar_quest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
         QuestStates boar_quest_qs = boar_quest.GetComponent<QuestStates>();
 
         LogicStateCollectGrass ls_grass = boar_quest_qs.GetComponent<LogicStateCollectGrass>();
@@ -40,7 +36,7 @@ static class JadaQuestMods
         }
         else
         {
-            GameObject grass_seq = GameObject.Find("Got Enough Grass Sequence");
+            GameObject grass_seq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Got Enough Grass Sequence");
             DialogueSequencer grass_sequencer = grass_seq.GetComponent<DialogueSequencer>();
             grass_sequencer.afterSequence.AddListener(boar_quest_qs.JustProgressState);
         }
