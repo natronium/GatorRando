@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Linq;
 using BepInEx;
@@ -86,27 +86,6 @@ namespace GatorRando
         {
             Instance.Logger.LogDebug($"{typeName}.{methodName} gave {checkName}");
         }
-
-        // Not yet working
-        // public static GameObject GetGameObjectByPath(string path)
-        // {
-        //     var elements = path.Split('/');
-        //     var root = SceneManager.GetActiveScene().GetRootGameObjects().First((go) => go.name == elements[0]);
-        //     GameObject current = root;
-        //     foreach (var element in elements.Skip(1))
-        //     {
-        //         foreach (var transform in current.GetComponentsInChildren<Transform>(true))
-        //         {
-        //             if (transform.name == element)
-        //             {
-        //                 current = transform.gameObject;
-        //                 break;
-        //             }
-        //         }
-        //     }
-        //     return current;
-
-        // }
 
         private static void MartinEdits()
         {
@@ -420,31 +399,6 @@ namespace GatorRando
                 // TODO: UI for what item you picked up
             }
         }
-
-        // [HarmonyPatch(typeof(QuestRewardItem))]
-        // private static class QuestRewardItemPatch
-        // {
-        //     [HarmonyPrefix]
-        //     [HarmonyPatch("GiveReward")]
-        //     static bool PreGiveReward(QuestRewardItem __instance)
-        //     {
-        //         LogCheck("QuestRewardItem", "GiveReward", __instance.item);
-        //         ArchipelagoManager.CollectLocationForItem(__instance.item);
-        //         return false;
-        //     }
-        // }
-
-        // [HarmonyPatch(typeof(QuestRewardConfetti))]
-        // private static class QuestRewardConfettiPatch
-        // {
-        //     [HarmonyPrefix]
-        //     [HarmonyPatch("GiveReward",[typeof(int)])]
-        //     static void PreGiveReward(int amount, QuestRewardConfetti __instance)
-        //     {
-        //         LogCheck("QuestRewardConfetti","GiveReward",__instance.amount.ToString());
-        //         ArchipelagoManager.CollectLocationForConfetti(__instance.name);          //This line is potentially redundant with Particle Pickup patch       
-        //     }
-        // }
 
         [HarmonyPatch(typeof(QuestRewardNPCs))]
         private static class QuestRewardNPCsPatch
