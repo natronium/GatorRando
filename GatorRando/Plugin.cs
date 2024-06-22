@@ -23,7 +23,7 @@ namespace GatorRando
             var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
             harmony.PatchAll(); // automatically patch based on harmony attributes
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
-            Logger.LogDebug("THIS IS A DEBUG LOG! LOOK AT ME! @@@@@@@@@@@");
+            gameObject.AddComponent<ArchipelagoManager>();
         }
 
         void OnEnable()
@@ -33,10 +33,10 @@ namespace GatorRando
         }
 
 
-        static IEnumerator WaitThenConnect(float duration)
+        static IEnumerator WaitThenRun(float duration, Action action)
         {
             yield return new WaitForSeconds(duration);
-            ArchipelagoManager.Connect();
+            action();
             yield break;
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -45,7 +45,7 @@ namespace GatorRando
             Debug.Log(mode);
             if (scene.name == "Prologue")
             {
-                StartCoroutine(WaitThenConnect(0.5f));
+                StartCoroutine(WaitThenRun(0.5f,ArchipelagoManager.Connect));
             }
             if (scene.name == "Island")
             {
@@ -61,6 +61,8 @@ namespace GatorRando
                     Game game = manager.GetComponent<Game>();
                     game.SetToStory();
                 }
+
+                ArchipelagoManager.OnSceneLoad();
 
                 //Edits to Martin's Quest
                 MartinEdits();
