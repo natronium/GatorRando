@@ -53,6 +53,7 @@ public class ArchipelagoManager : MonoBehaviour
         {
             return;
         }
+        //TODO: Get settings via config, eventually in-game UI
         var server = "localhost";
         var user = "TestGator";
         var port = 62761;
