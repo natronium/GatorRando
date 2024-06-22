@@ -11,6 +11,8 @@ static class MartinQuestMods
         get_pot_sequence.beforeSequence.ObliteratePersistentListenerByIndex(0);
         get_pot_sequence.beforeSequence.AddListener(CollectedPot);
 
+        ArchipelagoManager.RegisterItemListener("POT?", UnlockedPot);
+
         if (ArchipelagoManager.LocationIsCollected("POT?"))
         {
             CollectedPot();
@@ -21,7 +23,7 @@ static class MartinQuestMods
         }
     }
 
-    public static void UnlockedPot()
+    private static void UnlockedPot()
     {
         GameObject pot_pickup = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest/Pickup");
         GameObject martin_quest = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest");
@@ -39,7 +41,7 @@ static class MartinQuestMods
         }
     }
 
-    public static void CollectedPot()
+    private static void CollectedPot()
     {
         GameObject martin_quest = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest");
         QuestStates martin_quest_qs = martin_quest.GetComponent<QuestStates>();

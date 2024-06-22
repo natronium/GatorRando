@@ -13,6 +13,8 @@ static class JadaQuestMods
         // Removing OnProgress() delegate
         boar_quest_qs.states[2].onProgress.ObliteratePersistentListenerByIndex(0);
 
+        ArchipelagoManager.RegisterItemListener("CLIPPINGS", UnlockedGrassClippings);
+
         if (ArchipelagoManager.ItemIsUnlocked("CLIPPINGS"))
         {
             UnlockedGrassClippings();
@@ -24,7 +26,7 @@ static class JadaQuestMods
         water_dia.onStart.ObliteratePersistentListenerByIndex(2);
     }
 
-    public static void UnlockedGrassClippings()
+    private static void UnlockedGrassClippings()
     {
         GameObject boar_quest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
         QuestStates boar_quest_qs = boar_quest.GetComponent<QuestStates>();

@@ -13,6 +13,8 @@ static class SusanneQuestMods
         rock_sequencer.beforeSequence.ObliteratePersistentListenerByIndex(0);
         rock_sequencer.beforeSequence.AddListener(CollectedMagicOre);
 
+        ArchipelagoManager.RegisterItemListener("BEACH ROCK", UnlockedMagicOre);
+
         if (ArchipelagoManager.LocationIsCollected("BEACH ROCK"))
         {
             CollectedMagicOre();
@@ -23,7 +25,7 @@ static class SusanneQuestMods
         }
     }
 
-    public static void CollectedMagicOre()
+    private static void CollectedMagicOre()
     {
         GameObject engineer_quest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer");
         GameObject special_rocks = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Special Rocks");
@@ -32,7 +34,7 @@ static class SusanneQuestMods
         special_rocks.SetActive(false);
     }
 
-    public static void UnlockedMagicOre()
+    private static void UnlockedMagicOre()
     {
         GameObject engineer_quest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer");
         QuestStates engineer_quest_qs = engineer_quest.GetComponent<QuestStates>();

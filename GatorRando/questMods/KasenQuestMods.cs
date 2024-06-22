@@ -15,6 +15,8 @@ static class KasenQuestMods
         find_ds.afterSequence.ObliteratePersistentListenerByIndex(1);
         find_ds.afterSequence.ObliteratePersistentListenerByIndex(0);
 
+        ArchipelagoManager.RegisterItemListener("BROKEN WHEELIE THINGY", UnlockedScooter);
+
         if (ArchipelagoManager.LocationIsCollected("BROKEN WHEELIE THINGY"))
         {
             scooter_pickup.SetActive(false);
@@ -29,7 +31,7 @@ static class KasenQuestMods
         }
     }
 
-    public static void UnlockedScooter()
+    private static void UnlockedScooter()
     {
         GameObject kasen_quest = Util.GetByPath("NorthEast (Canyoney)/SideQuests/FetchVulture");
         QuestStates kasen_quest_qs = kasen_quest.GetComponent<QuestStates>();

@@ -10,6 +10,9 @@ static class EsmeQuestMods
         DialogueSequencer get_ice_cream_seq = get_ice_cream.GetComponent<DialogueSequencer>();
         get_ice_cream_seq.afterSequence.ObliteratePersistentListenerByIndex(0);
         get_ice_cream_seq.afterSequence.AddListener(CollectedSorbet);
+
+        ArchipelagoManager.RegisterItemListener("ICE CREAM", UnlockedSorbet);
+
         if (ArchipelagoManager.LocationIsCollected("ICE CREAM"))
         {
             CollectedSorbet();
@@ -25,13 +28,13 @@ static class EsmeQuestMods
         vampire_hat.onStart.AddListener(() => { ArchipelagoManager.CollectLocationByName("Hat_Vampire"); });
     }
 
-    public static void CollectedSorbet()
+    private static void CollectedSorbet()
     {
         GameObject ice_cream = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/IceCream");
         ice_cream.SetActive(false);
     }
 
-    public static void UnlockedSorbet()
+    private static void UnlockedSorbet()
     {
         GameObject vampire_quest = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire");
         QuestStates vampire_quest_qs = vampire_quest.GetComponent<QuestStates>();

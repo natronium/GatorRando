@@ -12,13 +12,15 @@ static class GeneQuestMods
         // Removing Loot Get Sequence from economist_quest_qs.states[2].onProgress()
         economist_quest_qs.states[2].onProgress.ObliteratePersistentListenerByIndex(0);
 
+        ArchipelagoManager.RegisterItemListener("HALF A CHEESE SANDWICH", UnlockedCheeseSandwich);
+
         if (ArchipelagoManager.ItemIsUnlocked("HALF A CHEESE SANDWICH"))
         {
             UnlockedCheeseSandwich();
         }
     }
 
-    public static void UnlockedCheeseSandwich()
+    private static void UnlockedCheeseSandwich()
     {
         GameObject economist_quest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist");
         QuestStates economist_quest_qs = economist_quest.GetComponent<QuestStates>();
