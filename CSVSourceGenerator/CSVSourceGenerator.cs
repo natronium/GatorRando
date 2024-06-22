@@ -6,9 +6,9 @@ using Sylvan.Data.Csv;
 
 #nullable enable
 
-namespace CsvGenerator;
+namespace CsvSourceGenerator;
 [Generator]
-public class CSVGenerator : ISourceGenerator
+public class CSVSourceGenerator : ISourceGenerator
 {
 #pragma warning disable RS2008 // Enable analyzer release tracking
     private static readonly DiagnosticDescriptor failedToReadDiag = new DiagnosticDescriptor("FailedToRead", "Errors Reading AdditionalFile",
