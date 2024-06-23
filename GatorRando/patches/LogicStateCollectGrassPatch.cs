@@ -10,8 +10,7 @@ static class LogicStateCollectGrassPatch
     [HarmonyPatch("OnDetailsCut")]
     static bool PreOnDetailsCut(LogicStateCollectGrass __instance, int cutAmount)
     {
-        Traverse traverse = Traverse.Create(__instance).Field("currentCutAmount");
-        int currentCutAmount = traverse.GetValue<int>();
+        int currentCutAmount = __instance.currentCutAmount;
 
         currentCutAmount += cutAmount;
         if (currentCutAmount > __instance.cutAmountNeeded)
@@ -22,7 +21,7 @@ static class LogicStateCollectGrassPatch
             __instance.enabled = false;
         }
 
-        traverse.SetValue(currentCutAmount);
+        __instance.currentCutAmount = currentCutAmount;
         return false;
     }
 }
