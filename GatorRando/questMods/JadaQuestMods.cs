@@ -30,9 +30,7 @@ static class JadaQuestMods
     {
         GameObject boar_quest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
         QuestStates boar_quest_qs = boar_quest.GetComponent<QuestStates>();
-
-        LogicStateCollectGrass ls_grass = boar_quest_qs.GetComponent<LogicStateCollectGrass>();
-        if (boar_quest_qs.StateID == 1 && !ls_grass.enabled)
+        if (boar_quest_qs.StateID == 1 && ArchipelagoManager.LocationIsCollected("CLIPPINGS"))
         {
             boar_quest_qs.JustProgressState();
         }
@@ -43,4 +41,6 @@ static class JadaQuestMods
             grass_sequencer.afterSequence.AddListener(boar_quest_qs.JustProgressState);
         }
     }
+
+    //TODO: Water collect check
 }

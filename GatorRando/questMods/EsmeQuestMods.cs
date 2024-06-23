@@ -38,9 +38,7 @@ static class EsmeQuestMods
     {
         GameObject vampire_quest = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire");
         QuestStates vampire_quest_qs = vampire_quest.GetComponent<QuestStates>();
-        GameObject ice_cream = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/IceCream");
-
-        if (vampire_quest_qs.StateID == 1 && !ice_cream.activeSelf)
+        if (vampire_quest_qs.StateID == 1 && ArchipelagoManager.LocationIsCollected("ICE CREAM"))
         {
             vampire_quest_qs.JustProgressState();
         }

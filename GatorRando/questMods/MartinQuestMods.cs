@@ -25,11 +25,9 @@ static class MartinQuestMods
 
     private static void UnlockedPot()
     {
-        GameObject pot_pickup = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest/Pickup");
         GameObject martin_quest = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest");
         QuestStates martin_quest_qs = martin_quest.GetComponent<QuestStates>();
-
-        if (martin_quest_qs.StateID == 1 && !pot_pickup.activeSelf)
+        if (martin_quest_qs.StateID == 1 && ArchipelagoManager.LocationIsCollected("POT?"))
         {
             martin_quest_qs.JustProgressState();
         }

@@ -24,9 +24,7 @@ static class GeneQuestMods
     {
         GameObject economist_quest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist");
         QuestStates economist_quest_qs = economist_quest.GetComponent<QuestStates>();
-
-        LSDestroy ls_destroy = economist_quest_qs.GetComponent<LSDestroy>();
-        if (economist_quest_qs.StateID == 1 && !ls_destroy.enabled)
+        if (economist_quest_qs.StateID == 1 && ArchipelagoManager.LocationIsCollected("HALF A CHEESE SANDWICH"))
         {
             economist_quest_qs.JustProgressState();
         }
