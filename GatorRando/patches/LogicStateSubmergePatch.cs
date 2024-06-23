@@ -10,11 +10,11 @@ static class LogicStateSubmergePatch
     static bool PreFixedUpdate(LogicStateSubmerge __instance)
     {
         //TODO: Revise to remove duplicated code--> just move functionality over to the LogicStatePatch instead?
+        //TODO: Revise to not run every frame
         //Only collect water if have the bucket
-        if (ArchipelagoManager.ItemIsUnlocked("BUCKET"))
+        if (ArchipelagoManager.ItemIsUnlocked("Hat_Bucket"))
         {
-            Traverse traverse = Traverse.Create(__instance).Field("swimmingCounter");
-            int swimmingCounter = traverse.GetValue<int>();
+            int swimmingCounter = __instance.swimmingCounter;
             if (Player.movement.IsSwimming)
             {
                 swimmingCounter++;
@@ -27,7 +27,7 @@ static class LogicStateSubmergePatch
             {
                 __instance.LogicCompleted();
             }
-            traverse.SetValue(swimmingCounter);
+            __instance.swimmingCounter = swimmingCounter;
         }
         return false;
     }

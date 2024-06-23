@@ -15,7 +15,7 @@ static class KasenQuestMods
         find_ds.afterSequence.ObliteratePersistentListenerByIndex(1);
         find_ds.afterSequence.ObliteratePersistentListenerByIndex(0);
 
-        ArchipelagoManager.RegisterItemListener("BROKEN WHEELIE THINGY", UnlockedScooter);
+        ArchipelagoManager.RegisterItemListener("Shield_ScooterBoardGreen", UnlockedScooter);
 
         if (ArchipelagoManager.LocationIsCollected("BROKEN WHEELIE THINGY"))
         {
@@ -25,7 +25,7 @@ static class KasenQuestMods
         {
             scooter_pickup.SetActive(true);
         }
-        if (ArchipelagoManager.ItemIsUnlocked("BROKEN WHEELIE THINGY"))
+        if (ArchipelagoManager.ItemIsUnlocked("Shield_ScooterBoardGreen"))
         {
             UnlockedScooter();
         }
