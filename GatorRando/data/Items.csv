@@ -4,7 +4,7 @@ friend_2,Friend x2,3,,2,Friends,progression_skip_balancing,Friends,3
 friend_3,Friend x3,4,,3,Friends,progression_skip_balancing,Friends,1
 friend_4,Friend x4,5,,4,Friends,progression_skip_balancing,Friends,1
 craft_15,Craft Stuff x15,6,,15,Craft Stuff,filler,Crafting_Materials,53
-craft_30,Craft Stuff x30,7,,30,Craft Stuff,filler,Crafting_Materials,52
+craft_30,Craft Stuff x30,7,,30,Craft Stuff,filler,Crafting_Materials,53
 bracelet,Bracelet,8,Bracelet,,Item,progression,Traversal,4
 glider,Glider,9,Shirt,,Item,progression,Traversal,1
 retainer,Retainer,10,QuestItem_Retainer,,Item,progression,Quest_Item,1
