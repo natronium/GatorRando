@@ -10,7 +10,7 @@ static class JadaQuestMods
         GameObject boar_quest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
         QuestStates boar_quest_qs = boar_quest.GetComponent<QuestStates>();
         // Jada: Grass Clippings Section
-        // Removing OnProgress() delegate
+        // Removing OnProgress() delegate (don't run Got Enough Grass Sequence)
         boar_quest_qs.states[2].onProgress.ObliteratePersistentListenerByIndex(0);
 
         ArchipelagoManager.RegisterItemListener("CLIPPINGS", UnlockedGrassClippings);
@@ -19,11 +19,21 @@ static class JadaQuestMods
         {
             UnlockedGrassClippings();
         }
+        
         // Jada: Water Bucket Section
         GameObject water_seq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Sprout/Water Sequence");
         DSDialogue water_dia = water_seq.GetComponents<DSDialogue>()[1];
-        //Removings give bucket delegate from water_seq.Dialogue.onStart()
+        //Removing give bucket delegate from water_seq.Dialogue.onStart()
         water_dia.onStart.ObliteratePersistentListenerByIndex(2);
+        // Removing OnProgress() delegate (don't run Got Enough Water Sequence)
+        boar_quest_qs.states[4].onProgress.ObliteratePersistentListenerByIndex(0);
+
+        ArchipelagoManager.RegisterItemListener("WATER", UnlockedWater);
+
+        if (ArchipelagoManager.ItemIsUnlocked("WATER"))
+        {
+            UnlockedWater();
+        }
     }
 
     private static void UnlockedGrassClippings()
@@ -42,5 +52,19 @@ static class JadaQuestMods
         }
     }
 
-    //TODO: Water collect check
+    private static void UnlockedWater()
+    {
+        GameObject boar_quest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
+        QuestStates boar_quest_qs = boar_quest.GetComponent<QuestStates>();
+        if (boar_quest_qs.StateID == 3 && ArchipelagoManager.LocationIsCollected("WATER"))
+        {
+            boar_quest_qs.JustProgressState();
+        }
+        else
+        {
+            GameObject water_seq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Got Enough Water Sequence");
+            DialogueSequencer water_sequencer = water_seq.GetComponent<DialogueSequencer>();
+            water_sequencer.afterSequence.AddListener(boar_quest_qs.JustProgressState);
+        }
+    }
 }
