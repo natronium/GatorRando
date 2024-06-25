@@ -9,7 +9,7 @@ bracelet,Bracelet,8,Bracelet,,Item,progression,Traversal,4
 glider,Glider,9,Shirt,,Item,progression,Traversal,1
 retainer,Retainer,10,QuestItem_Retainer,,Item,progression,Quest_Item,1
 ore,Magic Ore,11,BEACH ROCK,,Item,progression,Quest_Item,1
-broken_scooter,Broken Scooter Board,12,Shield_ScooterBoardGreen,,Item,progression,Quest_Item,1
+broken_scooter,Broken Scooter Board,12,Shield_ScooterBoardGreen,,Craft,progression,"Craft,Quest_Item",1
 cheese_sandwich,Cheese Sandwich,13,HALF A CHEESE SANDWICH,,Item,progression,Quest_Item,1
 pot_q,Pot?,14,POT?,,Item,progression,Quest_Item,1
 sorbet,Sorbet,15,ICE CREAM,,Item,progression,Quest_Item,1
