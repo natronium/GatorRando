@@ -3,8 +3,8 @@ friend_1,Friend,2,,1,Friends,progression_skip_balancing,Friends,47
 friend_2,Friend x2,3,,2,Friends,progression_skip_balancing,Friends,3
 friend_3,Friend x3,4,,3,Friends,progression_skip_balancing,Friends,1
 friend_4,Friend x4,5,,4,Friends,progression_skip_balancing,Friends,1
-craft_15,Craft Stuff x15,6,,15,Craft Stuff,filler,Crafting_Materials,40
-craft_30,Craft Stuff x30,7,,30,Craft Stuff,filler,Crafting_Materials,46
+craft_15,Craft Stuff x15,6,,15,Craft Stuff,filler,Crafting_Materials,53
+craft_30,Craft Stuff x30,7,,30,Craft Stuff,filler,Crafting_Materials,52
 bracelet,Bracelet,8,Bracelet,,Item,progression,Traversal,4
 glider,Glider,9,Shirt,,Item,progression,Traversal,1
 retainer,Retainer,10,QuestItem_Retainer,,Item,progression,Quest_Item,1
@@ -14,48 +14,49 @@ cheese_sandwich,Cheese Sandwich,13,HALF A CHEESE SANDWICH,,Item,progression,Ques
 pot_q,Pot?,14,POT?,,Item,progression,Quest_Item,1
 sorbet,Sorbet,15,ICE CREAM,,Item,progression,Quest_Item,1
 clippings,Grass Clippings,16,CLIPPINGS,,Item,progression,Quest_Item,1
-starter_hat,Pointy Floppy Thing (Craft),17,Hat_Basic,,Craft,progression,"Hat,Craft",1
-slime_hat,Slime Hat (Craft),18,Hat_Slime,,Craft,filler,"Hat,Craft",1
-beret_hat,Artsy Beret (Craft),19,Hat_Beret,,Craft,filler,"Hat,Craft",1
-dome_hat,Space Dome (Item),20,Hat_Space,,Item,filler,"Hat,Item",1
-fangs_hat,Plastic Fangs (Item),21,Hat_Vampire,,Item,filler,"Hat,Item",1
-western_hat,Western Wide Brim (Item),22,Hat_Western,,Item,filler,"Hat,Item",1
-bucket,Bucket (Item),23,Hat_Bucket,,Item,progression,"Hat,Item",1
-cowl_hat,Detective Cowl (Craft),24,Hat_DetectiveCowl,,Craft,filler,"Hat,Craft",1
-skater_hat,Skater Helmet (Craft),25,Hat_SkateHelmet,,Craft,filler,"Hat,Craft",1
-tiara_hat,Princess Tiara (Craft),26,Hat_Princess,,Craft,filler,"Hat,Craft",1
-headband,Ninja Headband (Craft),27,Hat_Ninja,,Craft,useful,"Traversal,Hat,Craft",1
-stick,Stick (Item),28,Sword_Stick,,Item,progression,"Sword,Item",1
-sword,Sword (Item),29,Sword_Wood,,Item,progression,"Sword,Item",1
-paintbrush,Paintbrush (Craft),30,Sword_Paintbrush,,Craft,progression,"Sword,Craft",1
-spear,Cardboard Spear (Craft),31,Sword_CBSpear,,Craft,progression,"Sword,Craft",1
-grabby_hand,Grabby Hand (Item),32,Sword_Grabby,,Item,progression,"Sword,Item",1
-laser_sword,Laser Sword (Craft),33,Sword_Laser,,Craft,progression,"Sword,Craft",1
-bug_net,Bug Net (Item),34,Sword_Net,,Item,progression,"Sword,Item",1
-nunchucks,Nunchaku (Item),35,Sword_Nunchucks,,Item,progression,"Sword,Item",1
-pencil,Oversized Pencil (Craft),36,Sword_Pencil,,Craft,progression,"Sword,Craft",1
-wrench,Wrench (Item),37,Sword_Wrench,,Item,progression,"Sword,Item",1
-paleolithic,Paleolithic Tool (Item),38,Sword_RockHammer,,Item,progression,"Sword,Item",1
-wand,Princess Wand (Craft),39,Sword_Wand,,Craft,progression,"Sword,Craft",1
-pot_lid,Pot Lid (Item),40,Shield_PotLid,,Item,progression,"Shield,Item",1
-palette,Art Palette (Craft),41,Shield_Palette,,Craft,progression,"Shield,Craft",1
-tube,Inner Tube (Craft),42,Shield_Tube,,Craft,progression,"Shield,Craft",1
-platter,Platter (Item),43,Shield_Platter,,Item,progression,"Shield,Item",1
-skateboard,Skateboard (Craft),44,Shield_Skateboard,,Craft,progression,"Shield,Craft",1
-martin_shield,Martin (Item),45,Shield_Martin,,Item,progression,"Shield,Item",1
-chessboard,Chessboard (Craft),46,Shield_Chessboard,,Craft,progression,"Shield,Craft",1
-big_leaf,Big Leaf (Item),47,Shield_Leaf,,Item,progression,"Shield,Item",1
-trampoline,Trampoline (Item),48,Shield_Stretch,,Item,progression,"Traversal,Item,Cardboard_Destroyer",1
-tower_shield,Tower Shield (Craft),49,Shield_TowerShield,,Craft,progression,"Shield,Craft",1
-trash_can,Trash Can Lid (Item),50,Shield_TrashCanLid,,Item,progression,"Shield,Item",1
-blue_scooter,Blue Scooter Board (Craft),51,Shield_ScooterBoardBlue,,Craft,progression,"Shield,Craft",1
-ragdoll,Ragdoll (Craft),52,Item_Ragdoll,,Craft,filler,Craft,1
-balloon,Balloon (Item),53,Item_Balloon,,Item,useful,"Traversal,Item",1
-rock,Skipping Rock (Item),54,Rock,,Item,progression,"Ranged,Item",1
-blaster,Space Blaster (Item),55,Item_SpaceGun,,Item,progression,"Ranged,Item",1
-shuriken,Shuriken (Item),56,Item_Shuriken,,Item,progression,"Ranged,Item",1
-bowling_bomb,Bowling Bomb (Item),57,Item_Bomb,,Item,useful,"Cardboard_Destroyer,Item",1
-bubblegum,Bubble Gum (Item),58,Item_Gum,,Item,useful,"Traversal,Item",1
-sticky_hand,Sticky Hand (Item),59,Item_StickyHand,,Item,filler,Item,1
-paint_gun,Paint Blaster (Item),60,Item_PaintGun,,Item,progression,"Ranged,Item",1
-camera,An Actual Digital Camera (Craft),61,Item_Camera,,Craft,filler,Craft,1
+water,Water,17,WATER,,Item,progression,Quest_Item,1
+starter_hat,Pointy Floppy Thing (Craft),18,Hat_Basic,,Craft,progression,"Hat,Craft",1
+slime_hat,Slime Hat (Craft),19,Hat_Slime,,Craft,filler,"Hat,Craft",1
+beret_hat,Artsy Beret (Craft),20,Hat_Beret,,Craft,filler,"Hat,Craft",1
+dome_hat,Space Dome (Item),21,Hat_Space,,Item,filler,"Hat,Item",1
+fangs_hat,Plastic Fangs (Item),22,Hat_Vampire,,Item,filler,"Hat,Item",1
+western_hat,Western Wide Brim (Item),23,Hat_Western,,Item,filler,"Hat,Item",1
+bucket,Bucket (Item),24,Hat_Bucket,,Item,progression,"Hat,Item",1
+cowl_hat,Detective Cowl (Craft),25,Hat_DetectiveCowl,,Craft,filler,"Hat,Craft",1
+skater_hat,Skater Helmet (Craft),26,Hat_SkateHelmet,,Craft,filler,"Hat,Craft",1
+tiara_hat,Princess Tiara (Craft),27,Hat_Princess,,Craft,filler,"Hat,Craft",1
+headband,Ninja Headband (Craft),28,Hat_Ninja,,Craft,useful,"Traversal,Hat,Craft",1
+stick,Stick (Item),29,Sword_Stick,,Item,progression,"Sword,Item",1
+sword,Sword (Item),30,Sword_Wood,,Item,progression,"Sword,Item",1
+paintbrush,Paintbrush (Craft),31,Sword_Paintbrush,,Craft,progression,"Sword,Craft",1
+spear,Cardboard Spear (Craft),32,Sword_CBSpear,,Craft,progression,"Sword,Craft",1
+grabby_hand,Grabby Hand (Item),33,Sword_Grabby,,Item,progression,"Sword,Item",1
+laser_sword,Laser Sword (Craft),34,Sword_Laser,,Craft,progression,"Sword,Craft",1
+bug_net,Bug Net (Item),35,Sword_Net,,Item,progression,"Sword,Item",1
+nunchucks,Nunchaku (Item),36,Sword_Nunchucks,,Item,progression,"Sword,Item",1
+pencil,Oversized Pencil (Craft),37,Sword_Pencil,,Craft,progression,"Sword,Craft",1
+wrench,Wrench (Item),38,Sword_Wrench,,Item,progression,"Sword,Item",1
+paleolithic,Paleolithic Tool (Item),39,Sword_RockHammer,,Item,progression,"Sword,Item",1
+wand,Princess Wand (Craft),40,Sword_Wand,,Craft,progression,"Sword,Craft",1
+pot_lid,Pot Lid (Item),41,Shield_PotLid,,Item,progression,"Shield,Item",1
+palette,Art Palette (Craft),42,Shield_Palette,,Craft,progression,"Shield,Craft",1
+tube,Inner Tube (Craft),43,Shield_Tube,,Craft,progression,"Shield,Craft",1
+platter,Platter (Item),44,Shield_Platter,,Item,progression,"Shield,Item",1
+skateboard,Skateboard (Craft),45,Shield_Skateboard,,Craft,progression,"Shield,Craft",1
+martin_shield,Martin (Item),46,Shield_Martin,,Item,progression,"Shield,Item",1
+chessboard,Chessboard (Craft),47,Shield_Chessboard,,Craft,progression,"Shield,Craft",1
+big_leaf,Big Leaf (Item),48,Shield_Leaf,,Item,progression,"Shield,Item",1
+trampoline,Trampoline (Item),49,Shield_Stretch,,Item,progression,"Traversal,Item,Cardboard_Destroyer",1
+tower_shield,Tower Shield (Craft),50,Shield_TowerShield,,Craft,progression,"Shield,Craft",1
+trash_can,Trash Can Lid (Item),51,Shield_TrashCanLid,,Item,progression,"Shield,Item",1
+blue_scooter,Blue Scooter Board (Craft),52,Shield_ScooterBoardBlue,,Craft,progression,"Shield,Craft",1
+ragdoll,Ragdoll (Craft),53,Item_Ragdoll,,Craft,filler,Craft,1
+balloon,Balloon (Item),54,Item_Balloon,,Item,useful,"Traversal,Item",1
+rock,Skipping Rock (Item),55,Rock,,Item,progression,"Ranged,Item",1
+blaster,Space Blaster (Item),56,Item_SpaceGun,,Item,progression,"Ranged,Item",1
+shuriken,Shuriken (Item),57,Item_Shuriken,,Item,progression,"Ranged,Item",1
+bowling_bomb,Bowling Bomb (Item),58,Item_Bomb,,Item,useful,"Cardboard_Destroyer,Item",1
+bubblegum,Bubble Gum (Item),59,Item_Gum,,Item,useful,"Traversal,Item",1
+sticky_hand,Sticky Hand (Item),60,Item_StickyHand,,Item,filler,Item,1
+paint_gun,Paint Blaster (Item),61,Item_PaintGun,,Item,progression,"Ranged,Item",1
+camera,An Actual Digital Camera (Craft),62,Item_Camera,,Craft,filler,Craft,1
