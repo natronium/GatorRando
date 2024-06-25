@@ -81,7 +81,7 @@ ec_pot_E7_3,ec_pot_E7_3_1432,1432,1432,,Main Island Breakables,Pot
 ec_pot_E7_4,ec_pot_E7_4_1445,1445,1445,,Main Island Breakables,Pot
 cr_pot_F4_1,cr_pot_F4_1_2074,2074,2074,,Main Island Breakables,Pot
 wf_race_F4_1,wf_race_F4_1_1410,1410,1410,,Main Island Races,Race
-wf_race_F4G4_1,wf_race_F4G4_1_26,26,26,,Main Island Races,Race
+wf_pot_F4G4_1,wf_pot_F4G4_1_26,26,26,,Main Island Breakables,Pot
 ec_pot_F7_1,ec_pot_F7_1_118,118,118,,Main Island Breakables,Pot
 ec_pot_F8_1,ec_pot_F8_1_652,652,652,,Main Island Breakables,Pot
 wf_race_G0_1,wf_race_G0_1_73,73,73,,Main Island Races,Race
@@ -167,7 +167,7 @@ sj_leeland_quest_npc,South (Jetty) - Leeland (Painting Rabbit) Quest Completion 
 sj_leeland_quest_item,South (Jetty) - Leeland (Painting Rabbit) Quest Completion Item,2243,,Sword_Paintbrush,Main Island,
 wf_sierra_quest_npc,West (Forest) - Sierra (Origami Crane) Quest Completion NPC,2244,,NPC_Ninja_Crane,Main Island,
 wf_sierra_quest_item,West (Forest) - Sierra (Origami Crane) Quest Completion Item,2245,,Item_Shuriken,Main Island,
-wf_romeo_Item,West (Forest) - Romeo (Ninja Rat) Nunchucks,2246,,Sword_Nunchucks,Main Island,
+wf_romeo_item,West (Forest) - Romeo (Ninja Rat) Nunchucks,2246,,Sword_Nunchucks,Main Island,
 wf_ninjaclan_quest_npc,West (Forest) - Ninja Clan Quest Completion NPCs,2247,,NPC_Ninja_Anteater,Main Island,
 wf_ninjaclan_quest_item,West (Forest) - Ninja Clan Quest Completion Item,2248,,Hat_Ninja,Main Island,
 wf_pepperoni_quest_npc,West (Forest) - Pepperoni (Obstacle Ostrich) Quest Completion NPCs,2249,,NPC_Obstacle_Ostrich,Main Island,
@@ -199,18 +199,19 @@ nm_scooter_quest_npc,North (Mountain) - Scooter (Ceramic-Allergy Cougar) Quest C
 nm_luisa_quest_npc,North (Mountain) - Luisa (Tripping Lizard) Quest Completion NPC,2275,,NPC_TripLizard,Main Island,
 nm_luisa_quest_item,North (Mountain) - Luisa (Tripping Lizard) Quest Completion Item,2276,,Sword_CBSpear,Main Island,
 amq_andromeda_blaster,Avery!'s Main Quest - Nerf Blaster (Andromeda's Quest),2277,,Item_SpaceGun,Main Island,
-amq_andromeda_quest,Avery!'s Main Quest - Andromeda (Space Hawk) Quest Completion Item,2278,,Sword_Laser,Main Island,
+amq_andromeda_quest_item,Avery!'s Main Quest - Andromeda (Space Hawk) Quest Completion Item,2278,,Sword_Laser,Main Island,
 amq_velma_quest_item,Avery!'s Main Quest - Velma (Western Cow) Quest Completion Item,2279,,Hat_Western,Main Island,
 amq_esme_sorbet,Avery!'s Main Quest - Sorbet (Esme's Quest),2280,,ICE CREAM,Main Island,
 amq_esme_fangs,Avery!'s Main Quest - Plastic Fangs (Esme's Quest),2281,,Hat_Vampire,Main Island,
-amq_avery_quest_npc,Avery!'s Main Quest - Avery!'s Main Quest Quest Completion NPC,2282,,NPC_Tut_Frog,Main Island,
-cr_esther_quest_npc,Central (Ravine) - Esther (Directions Deer) Quest Completion NPC,2283,,NPC_Directions_Deer,Main Island,
-mi_billy_quest_npc,Main Island - Billy (Whale) Quest Completion NPC,2284,,NPC_BigWhale,Main Island,
-mi_billy_quest_item,Main Island - Billy (Whale) Quest Completion Item,2285,,Hat_Space,Main Island,
-mi_zhu_rock,Main Island - Rock (Zhu's Quest),2286,,Rock,Main Island,
-mi_zhu_quest_npc,Main Island - Zhu (Skipping Fox) Quest Completion NPC,2287,,NPC_Rock_Fox,Main Island,
-ti_bracelet_tutorial,Tutorial Island - ??? (Bracelet Monkey) Tutorial Bracelet,2288,,BraceletShop2,Tutorial Island,
-ec_bracelet_windmill,East (Creeklands) - ??? (Bracelet Monkey) Windmill Bracelet,2289,,BraceletShop1,Main Island,
-wf_bracelet_tree,West (Forest) - ??? (Bracelet Monkey) Tree Bracelet,2290,,BraceletShop0,Main Island,
-nm_bracelet_mountain,North (Mountain) - ??? (Bracelet Monkey) Mountain Bracelet,2291,,BraceletShop3,Main Island,
-mi_bracelet_all_npc,Main Island - ??? (Bracelet Monkey) All Bracelets NPC,2292,,NPC_BraceletMonkey,Main Island,
+amq_esme_quest_npc,Avery!'s Main Quest - Esme (Vampire Bat) Quest Completion NPC,2282,,NPC_Part-Timer,Main Island,
+amq_avery_quest_npc,Avery!'s Main Quest - Avery!'s Main Quest Quest Completion NPC,2283,,NPC_Tut_Frog,Main Island,
+cr_esther_quest_npc,Central (Ravine) - Esther (Directions Deer) Quest Completion NPC,2284,,NPC_Directions_Deer,Main Island,
+mi_billy_quest_npc,Main Island - Billy (Whale) Quest Completion NPC,2285,,NPC_BigWhale,Main Island,
+mi_billy_quest_item,Main Island - Billy (Whale) Quest Completion Item,2286,,Hat_Space,Main Island,
+mi_zhu_rock,Main Island - Rock (Zhu's Quest),2287,,Rock,Main Island,
+mi_zhu_quest_npc,Main Island - Zhu (Skipping Fox) Quest Completion NPC,2288,,NPC_Rock_Fox,Main Island,
+ti_bracelet_tutorial,Tutorial Island - ??? (Bracelet Monkey) Tutorial Bracelet,2289,,BraceletShop2,Tutorial Island,
+ec_bracelet_windmill,East (Creeklands) - ??? (Bracelet Monkey) Windmill Bracelet,2290,,BraceletShop1,Main Island,
+wf_bracelet_tree,West (Forest) - ??? (Bracelet Monkey) Tree Bracelet,2291,,BraceletShop0,Main Island,
+nm_bracelet_mountain,North (Mountain) - ??? (Bracelet Monkey) Mountain Bracelet,2292,,BraceletShop3,Main Island,
+mi_bracelet_all_npc,Main Island - ??? (Bracelet Monkey) All Bracelets NPC,2293,,NPC_BraceletMonkey,Main Island,
