@@ -4,7 +4,7 @@ namespace GatorRando.QuestMods;
 
 static class JadaQuestMods
 {
-    //Reference LogicStateCollectGrassPatch and LogicStateSubmergePatch for additional changes to Jada's Quest
+    //Reference LogicState for additional changes to Jada's Quest
     public static void Edits()
     {
         GameObject boar_quest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
