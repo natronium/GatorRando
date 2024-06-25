@@ -18,7 +18,7 @@ public static class ItemUtil
         ItemObject itemObject = Util.FindItemObjectByName(item);
         if (itemObject != null)
         {
-            ItemManager.i.UnlockItem(itemObject.id);
+            ItemManager.i.GiveItem(itemObject);
             UIMenus.craftNotification.LoadItems([itemObject]);
             return;
         }
