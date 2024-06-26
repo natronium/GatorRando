@@ -6,6 +6,7 @@ using Data;
 using System;
 using System.Linq;
 using System.Collections.Concurrent;
+using Archipelago.MultiClient.Net.Packets;
 
 namespace GatorRando;
 
@@ -206,4 +207,10 @@ public class ArchipelagoManager : MonoBehaviour
         return false;
     }
 
+    public static void SendCompletion()
+    {
+        var statusUpdatePacket = new StatusUpdatePacket();
+        statusUpdatePacket.Status = ArchipelagoClientState.ClientGoal;
+        Session.Socket.SendPacket(statusUpdatePacket);
+    }
 }
