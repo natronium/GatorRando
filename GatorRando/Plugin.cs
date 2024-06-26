@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using BepInEx;
 using GatorRando.QuestMods;
@@ -12,9 +12,6 @@ namespace GatorRando;
 public class Plugin : BaseUnityPlugin
 {
     public static Plugin Instance;
-
-    //TODO: fix to be options from Archipelago
-    readonly bool freeplay_from_start = true;
 
     private void Awake()
     {
@@ -49,7 +46,7 @@ public class Plugin : BaseUnityPlugin
         if (scene.name == "Island")
         {
             //Allow Freeplay
-            if (freeplay_from_start)
+            if (ArchipelagoManager.Options("start_with_freeplay") == "1")
             {
                 TutorialQuestMods.HandleFreeplay();
             }

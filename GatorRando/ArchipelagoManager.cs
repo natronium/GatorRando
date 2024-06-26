@@ -94,6 +94,11 @@ public class ArchipelagoManager : MonoBehaviour
 
     }
 
+    public static string Options(string option_name)
+    {
+        return LoginInfo.SlotData[option_name].ToString();
+    }
+
     public static void OnSceneLoad()
     {
         var lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
