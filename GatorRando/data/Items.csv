@@ -34,29 +34,30 @@ grabby_hand,Grabby Hand (Item),33,Sword_Grabby,,Item,progression,"Sword,Item",1
 laser_sword,Laser Sword (Craft),34,Sword_Laser,,Craft,progression,"Sword,Craft",1
 bug_net,Bug Net (Item),35,Sword_Net,,Item,progression,"Sword,Item",1
 nunchucks,Nunchaku (Item),36,Sword_Nunchucks,,Item,progression,"Sword,Item",1
-pencil,Oversized Pencil (Craft),37,Sword_Pencil,,Craft,progression,"Sword,Craft",1
-wrench,Wrench (Item),38,Sword_Wrench,,Item,progression,"Sword,Item",1
-paleolithic,Paleolithic Tool (Item),39,Sword_RockHammer,,Item,progression,"Sword,Item",1
-wand,Princess Wand (Craft),40,Sword_Wand,,Craft,progression,"Sword,Craft",1
-pot_lid,Pot Lid (Item),41,Shield_PotLid,,Item,progression,"Shield,Item",1
-palette,Art Palette (Craft),42,Shield_Palette,,Craft,progression,"Shield,Craft",1
-tube,Inner Tube (Craft),43,Shield_Tube,,Craft,progression,"Shield,Craft",1
-platter,Platter (Item),44,Shield_Platter,,Item,progression,"Shield,Item",1
-skateboard,Skateboard (Craft),45,Shield_Skateboard,,Craft,progression,"Shield,Craft",1
-martin_shield,Martin (Item),46,Shield_Martin,,Item,progression,"Shield,Item",1
-chessboard,Chessboard (Craft),47,Shield_Chessboard,,Craft,progression,"Shield,Craft",1
-big_leaf,Big Leaf (Item),48,Shield_Leaf,,Item,progression,"Shield,Item",1
-trampoline,Trampoline (Item),49,Shield_Stretch,,Item,progression,"Traversal,Item,Cardboard_Destroyer",1
-tower_shield,Tower Shield (Craft),50,Shield_TowerShield,,Craft,progression,"Shield,Craft",1
-trash_can,Trash Can Lid (Item),51,Shield_TrashCanLid,,Item,progression,"Shield,Item",1
-blue_scooter,Blue Scooter Board (Craft),52,Shield_ScooterBoardBlue,,Craft,progression,"Shield,Craft",1
-ragdoll,Ragdoll (Craft),53,Item_Ragdoll,,Craft,filler,Craft,1
-balloon,Balloon (Item),54,Item_Balloon,,Item,useful,"Traversal,Item",1
-rock,Skipping Rock (Item),55,Rock,,Item,progression,"Ranged,Item",1
-blaster,Space Blaster (Item),56,Item_SpaceGun,,Item,progression,"Ranged,Item",1
-shuriken,Shuriken (Item),57,Item_Shuriken,,Item,progression,"Ranged,Item",1
-bowling_bomb,Bowling Bomb (Item),58,Item_Bomb,,Item,useful,"Cardboard_Destroyer,Item",1
-bubblegum,Bubble Gum (Item),59,Item_Gum,,Item,useful,"Traversal,Item",1
-sticky_hand,Sticky Hand (Item),60,Item_StickyHand,,Item,filler,Item,1
-paint_gun,Paint Blaster (Item),61,Item_PaintGun,,Item,progression,"Ranged,Item",1
-camera,An Actual Digital Camera (Craft),62,Item_Camera,,Craft,filler,Craft,1
+thrown_pencil,Thrown Pencil,37,Thrown_Pencil,,Item,progression,Quest_Item,3
+pencil,Oversized Pencil (Craft),38,Sword_Pencil,,Craft,progression,"Sword,Craft",1
+wrench,Wrench (Item),39,Sword_Wrench,,Item,progression,"Sword,Item",1
+paleolithic,Paleolithic Tool (Item),40,Sword_RockHammer,,Item,progression,"Sword,Item",1
+wand,Princess Wand (Craft),41,Sword_Wand,,Craft,progression,"Sword,Craft",1
+pot_lid,Pot Lid (Item),42,Shield_PotLid,,Item,progression,"Shield,Item",1
+palette,Art Palette (Craft),43,Shield_Palette,,Craft,progression,"Shield,Craft",1
+tube,Inner Tube (Craft),44,Shield_Tube,,Craft,progression,"Shield,Craft",1
+platter,Platter (Item),45,Shield_Platter,,Item,progression,"Shield,Item",1
+skateboard,Skateboard (Craft),46,Shield_Skateboard,,Craft,progression,"Shield,Craft",1
+martin_shield,Martin (Item),47,Shield_Martin,,Item,progression,"Shield,Item",1
+chessboard,Chessboard (Craft),48,Shield_Chessboard,,Craft,progression,"Shield,Craft",1
+big_leaf,Big Leaf (Item),49,Shield_Leaf,,Item,progression,"Shield,Item",1
+trampoline,Trampoline (Item),50,Shield_Stretch,,Item,progression,"Traversal,Item,Cardboard_Destroyer",1
+tower_shield,Tower Shield (Craft),51,Shield_TowerShield,,Craft,progression,"Shield,Craft",1
+trash_can,Trash Can Lid (Item),52,Shield_TrashCanLid,,Item,progression,"Shield,Item",1
+blue_scooter,Blue Scooter Board (Craft),53,Shield_ScooterBoardBlue,,Craft,progression,"Shield,Craft",1
+ragdoll,Ragdoll (Craft),54,Item_Ragdoll,,Craft,filler,Craft,1
+balloon,Balloon (Item),55,Item_Balloon,,Item,useful,"Traversal,Item",1
+rock,Skipping Rock (Item),56,Rock,,Item,progression,"Ranged,Item",1
+blaster,Space Blaster (Item),57,Item_SpaceGun,,Item,progression,"Ranged,Item",1
+shuriken,Shuriken (Item),58,Item_Shuriken,,Item,progression,"Ranged,Item",1
+bowling_bomb,Bowling Bomb (Item),59,Item_Bomb,,Item,useful,"Cardboard_Destroyer,Item",1
+bubblegum,Bubble Gum (Item),60,Item_Gum,,Item,useful,"Traversal,Item",1
+sticky_hand,Sticky Hand (Item),61,Item_StickyHand,,Item,filler,Item,1
+paint_gun,Paint Blaster (Item),62,Item_PaintGun,,Item,progression,"Ranged,Item",1
+camera,An Actual Digital Camera (Craft),63,Item_Camera,,Craft,filler,Craft,1

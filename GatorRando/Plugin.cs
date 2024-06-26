@@ -72,6 +72,7 @@ public class Plugin : BaseUnityPlugin
 
             //Edits to sidequests
             KasenQuestMods.Edits();
+            SamQuestMods.Edits();
 
             Junk4TrashQuestMods.HideCollectedItems();
         }
