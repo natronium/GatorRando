@@ -23,6 +23,9 @@ public class ArchipelagoManager : MonoBehaviour
 
     public static bool LocationIsCollected(string location) =>
         Session.Locations.AllLocationsChecked.Contains(GetLocationApId(location));
+    
+    public static int GetItemUnlockCount(string itemName) =>
+        Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
 
     public void Awake()
     {
