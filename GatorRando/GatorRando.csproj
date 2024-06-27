@@ -31,6 +31,9 @@
     <Reference Include="UnityEngine">
       <HintPath>lib/UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>lib/UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

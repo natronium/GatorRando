@@ -43,6 +43,7 @@ public class Plugin : BaseUnityPlugin
         if (scene.name == "Prologue")
         {
             StartCoroutine(WaitThenRun(0.5f, ArchipelagoManager.Connect));
+            SettingsMods.Edits();
         }
         if (scene.name == "Island")
         {
