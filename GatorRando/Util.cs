@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using BepInEx;
 using HarmonyLib;
@@ -21,7 +22,7 @@ public static class Util
         GameObject current = root;
         foreach (var element in elements.Skip(1))
         {
-            current = current.GetComponentsInChildren<Transform>(true)
+            current = current.transform.Cast<Transform>()
                 .First((t) => t.name == element)
                 .gameObject;
         }
