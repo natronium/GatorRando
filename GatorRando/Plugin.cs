@@ -71,6 +71,9 @@ public class Plugin : BaseUnityPlugin
             KasenQuestMods.Edits();
             SamQuestMods.Edits();
 
+            //Goal Completion Edits
+            CreditsMods.Edits();
+
             Junk4TrashQuestMods.HideCollectedItems();
         }
     }
