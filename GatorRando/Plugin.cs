@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using BepInEx;
 using GatorRando.QuestMods;
+using GatorRando.UIMods;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -74,7 +75,11 @@ public class Plugin : BaseUnityPlugin
             //Goal Completion Edits
             CreditsMods.Edits();
 
+            // Junk4Trash Edits
             Junk4TrashQuestMods.HideCollectedItems();
+
+            //UI Edits
+            TutorialUIMods.Edits();
         }
     }
 
