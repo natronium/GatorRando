@@ -18,6 +18,10 @@ public static class ItemUtil
         ItemObject itemObject = Util.FindItemObjectByName(item);
         if (itemObject != null)
         {
+            if (item == "Bracelet")
+            {
+                ItemManager.i.BraceletsCollected = ItemManager.i.BraceletsCollected + 1;
+            }
             ItemManager.i.GiveItem(itemObject);
             UIMenus.craftNotification.LoadItems([itemObject]);
             return;
