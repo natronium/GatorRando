@@ -10,14 +10,6 @@ static class TownNPCManagerPatch
     [HarmonyPatch("Awake")]
     static void PreAwake(TownNPCManager __instance)
     {
-        ItemResource dummyResource = new()
-        {
-            id = "Dummy_Resource_Population",
-            name = "Dummy Resource Population",
-            itemGetID = "Dummy_Pop",
-            showItemGet = false,
-            onAmountChanged = new UnityEvent<int>()
-        };
-        __instance.populationResource = dummyResource;
+        __instance.populationResource = Util.GenerateItemResource("Dummy_Resource_Population");
     }
 }

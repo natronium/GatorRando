@@ -53,4 +53,24 @@ public static class Util
         }
         return null;
     }
+
+    public static ItemObject GenerateItemObject(string name, Sprite sprite)
+    {
+        ItemObject itemObj = ScriptableObject.CreateInstance<ItemObject>();
+        itemObj.id = name;
+        itemObj.name = name;
+        itemObj.sprite = sprite;
+        itemObj.document = ScriptableObject.CreateInstance<MultilingualTextDocument>(); // To avoid a NullReferenceException when speedrun mode is enabled
+        return itemObj;
+    }
+    public static ItemResource GenerateItemResource(string name)
+    {
+        ItemResource itemRes = ScriptableObject.CreateInstance<ItemResource>();
+        itemRes.id = name;
+        itemRes.name = name;
+        itemRes.itemGetID = name;
+        itemRes.showItemGet = false;
+        itemRes.onAmountChanged = new UnityEvent<int>();
+        return itemRes;
+    }
 }
