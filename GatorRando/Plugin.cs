@@ -29,27 +29,20 @@ public class Plugin : BaseUnityPlugin
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-
-    static IEnumerator WaitThenRun(float duration, Action action)
-    {
-        yield return new WaitForSeconds(duration);
-        action();
-        yield break;
-    }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
         Debug.Log(mode);
         if (scene.name == "Prologue")
         {
-            StartCoroutine(WaitThenRun(0.5f, ArchipelagoManager.Connect));
+            StartCoroutine(Util.WaitThenRun(0.5f, ArchipelagoManager.Connect));
         }
         if (scene.name == "Island")
         {
             //Allow Freeplay
             if (ArchipelagoManager.Options("start_with_freeplay") == "1")
             {
-                TutorialQuestMods.HandleFreeplay();
+                StartCoroutine(Util.WaitThenRun(0.5f, TutorialQuestMods.HandleFreeplay));
             }
 
             ArchipelagoManager.OnSceneLoad();

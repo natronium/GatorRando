@@ -12,6 +12,12 @@ namespace GatorRando;
 
 public static class Util
 {
+    public static IEnumerator WaitThenRun(float duration, Action action)
+    {
+        yield return new WaitForSeconds(duration);
+        action();
+        yield break;
+    }
     public static GameObject GetByPath(string path)
     {
         var elements = path.Trim('/').Split('/');
