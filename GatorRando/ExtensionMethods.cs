@@ -9,7 +9,7 @@ public static class ExtensionMethods
         "Publicizer001:Accessing a member that was not originally public",
         Justification = "There's no public way to remove persistent listeners"
     )]
-    public static void ObliteratePersistentListenerByIndex(this UnityEvent uevent, int eventIndex)
+    public static void ObliteratePersistentListenerByIndex(this UnityEventBase uevent, int eventIndex)
     {
         var persistentCalls = uevent.m_PersistentCalls;
         persistentCalls.UnregisterPersistentListener(eventIndex);
