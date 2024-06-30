@@ -22,6 +22,9 @@ static class InventoryMods
         QuestItemTabToggle.onValueChanged.ObliteratePersistentListenerByIndex(0);
         QuestItemTabToggle.onValueChanged.AddListener(QuestItemGrid.SetActive);
 
+        // TODO: replace sprites for Quest Item Tab---found under Inactive Tab and Active Tab images
+        
+        // Reposition Tabs and button prompts to accommodate additional tab
         Tabs.transform.localPosition += new Vector3(-25,0,0);
         GameObject TabButtomPrompsLeft = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Area/TabButtonPrompts/Left");
         GameObject TabButtomPrompsRight = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Area/TabButtonPrompts/Right");
