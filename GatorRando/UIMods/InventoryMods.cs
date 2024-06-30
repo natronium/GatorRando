@@ -15,22 +15,18 @@ static class InventoryMods
         Toggle QuestItemTabToggle = QuestItemTab.GetComponent<Toggle>();
         TabNav.tabs = TabNav.tabs.Add<Toggle>(QuestItemTabToggle);
         QuestItemTab.name = "Quest Item Tab";
-
+        
         GameObject TabContents = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Contents Mask/Tab Contents");
         GameObject QuestItemGrid = GameObject.Instantiate(TabContents.transform.Find("Item Grid").gameObject,TabContents.transform);
         QuestItemGrid.name = "Quest Item Grid";
         QuestItemTabToggle.onValueChanged.ObliteratePersistentListenerByIndex(0);
         QuestItemTabToggle.onValueChanged.AddListener(QuestItemGrid.SetActive);
 
-        // Reposition the Tabs
-        Tabs.transform.localPosition.Set(-25, Tabs.transform.localPosition.y, Tabs.transform.localPosition.z);
+        Tabs.transform.localPosition += new Vector3(-25,0,0);
         GameObject TabButtomPrompsLeft = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Area/TabButtonPrompts/Left");
         GameObject TabButtomPrompsRight = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Area/TabButtonPrompts/Right");
-        TabButtomPrompsLeft.transform.localPosition.Set(-275,TabButtomPrompsLeft.transform.localPosition.y, TabButtomPrompsLeft.transform.localPosition.z);
-        TabButtomPrompsRight.transform.localPosition.Set(300,TabButtomPrompsRight.transform.localPosition.y, TabButtomPrompsRight.transform.localPosition.z);
-        
-
-
+        TabButtomPrompsLeft.transform.localPosition += new Vector3(-10,0,0);
+        TabButtomPrompsRight.transform.localPosition += new Vector3(33,0,0);
     }
 
 }

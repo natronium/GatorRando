@@ -8,7 +8,7 @@ namespace GatorRando.Patches;
 [HarmonyPatch(typeof(UISwapItemsMenu))]
 static class UISwapItemsMenuPatch
 {
-    [HarmonyPostfix]
+    [HarmonyPrefix]
     [HarmonyPatch("UpdateInventories")]
     static void PreUpdateInventories()
     {
