@@ -61,6 +61,7 @@ static class SettingsMods
         player_descript.prefab = connect_descript.prefab;
 
         //TODO: disable backspace means go back on Settings screen
+        //TODO: force player into the Setting Menu to make sure they connect on loading a save
         
     }
 

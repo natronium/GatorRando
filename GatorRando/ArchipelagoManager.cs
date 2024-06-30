@@ -91,6 +91,7 @@ public class ArchipelagoManager : MonoBehaviour
         }
 
         LoginInfo = (LoginSuccessful)result;
+        //TODO: Likely move this code somewhere more appropriate
         if (result.Successful)
         {
             OnSceneLoad();
@@ -106,6 +107,7 @@ public class ArchipelagoManager : MonoBehaviour
 
     public static void OnSceneLoad()
     {
+        //TODO: This likely should not be occuring on scene load anymore? given that we connect after scene load now
         var lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
         Plugin.LogDebug($"saved lastindex is {lastIndex}, AP's last index is {Session.Items.Index}");
         if (lastIndex < Session.Items.Index)
