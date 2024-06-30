@@ -74,6 +74,7 @@ public class Plugin : BaseUnityPlugin
             //UI Edits
             TutorialUIMods.Edits();
             QuestItems.AddItems();
+            InventoryMods.AddQuestItemTab();
         }
     }
 
