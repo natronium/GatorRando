@@ -57,10 +57,9 @@ public class ArchipelagoManager : MonoBehaviour
         {
             return;
         }
-        //TODO: Get settings via config, eventually in-game UI
-        var server = "localhost";
-        var user = "TestGator";
-        var port = 62761;
+        var server = Settings.s.ReadString("server address");
+        var user = GameData.g.gameSaveData.playerName;
+        var port = Settings.s.ReadInt("server port");
 
         Session = ArchipelagoSessionFactory.CreateSession(server, port);
         LoginResult result;
@@ -92,6 +91,11 @@ public class ArchipelagoManager : MonoBehaviour
         }
 
         LoginInfo = (LoginSuccessful)result;
+        if (result.Successful)
+        {
+            OnSceneLoad();
+            Plugin.Setup();
+        }
 
     }
 
