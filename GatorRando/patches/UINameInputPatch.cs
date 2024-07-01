@@ -17,4 +17,6 @@ static class UINameInputPatch
         Text player_label_text = player_label.GetComponent<Text>();
         player_label_text.text = "player: " + GameData.g.gameSaveData.playerName; // Get player name and display it here
     }
+
+    //TODO: edit InputField to be 16 characters (instead of 15) to match AP's player name limit
 }
