@@ -94,7 +94,6 @@ public class ArchipelagoManager : MonoBehaviour
         //TODO: Likely move this code somewhere more appropriate
         if (result.Successful)
         {
-            OnSceneLoad();
             Plugin.Setup();
             GameObject back_button = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back");
             back_button.SetActive(true);
@@ -109,7 +108,6 @@ public class ArchipelagoManager : MonoBehaviour
 
     public static void OnSceneLoad()
     {
-        //TODO: This likely should not be occuring on scene load anymore? given that we connect after scene load now
         var lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
         Plugin.LogDebug($"saved lastindex is {lastIndex}, AP's last index is {Session.Items.Index}");
         if (lastIndex < Session.Items.Index)
@@ -126,7 +124,7 @@ public class ArchipelagoManager : MonoBehaviour
             Session.Items.DequeueItem();
         }
 
-        GameData.g.Write("LastAPItemIndex", Session.Items.Index);
+        GameData.g.Write("LastAPItemIndex", Session.Items.Index); //TODO: fix this to only write larger number
 
         Session.Items.ItemReceived += helper => ItemQueue.Enqueue(GetEntryByApId(helper.DequeueItem().ItemId));
     }
