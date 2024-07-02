@@ -62,7 +62,8 @@ static class SettingsMods
 
         //TODO: disable backspace means go back on Settings screen
         //TODO: force player into the Setting Menu to make sure they connect on loading a save
-        
+        GameObject back_button = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back");
+        back_button.SetActive(false);
     }
 
     private static GameObject CreateStringSetting(int siblingIndex, string name, string description, int charLimit, bool shrink_to_fit, InputField.ContentType contentType = InputField.ContentType.Standard)
