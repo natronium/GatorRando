@@ -36,6 +36,11 @@ public class Plugin : BaseUnityPlugin
         if (scene.name == "Island")
         {
             SettingsMods.Edits();
+            // Force into settings menu
+            GameObject pausemenu = Util.GetByPath("Canvas/Pause Menu");
+            pausemenu.SetActive(true);
+            GameObject settings = Util.GetByPath("Canvas/Pause Menu/Settings");
+            settings.SetActive(true);
         }
     }
 
