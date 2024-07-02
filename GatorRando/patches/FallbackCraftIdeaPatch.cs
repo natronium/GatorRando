@@ -9,7 +9,10 @@ static class FallbackCraftIdeaPatch {
     private static bool PreCheckState(FallbackCraftIdea __instance, int stateID) {
         if (stateID >= __instance.minState)
 		{
-			ArchipelagoManager.CollectLocationByName(__instance.craft.name);
+            if (ArchipelagoManager.LoginInfo != null && ArchipelagoManager.LoginInfo.Successful)
+            {
+			    ArchipelagoManager.CollectLocationByName(__instance.craft.name);
+            }
 		}
         return false;
     }
