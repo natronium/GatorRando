@@ -23,6 +23,4 @@ static class UINameInputPatch
     static void PostAwake(UINameInput __instance) {
         __instance.inputField.characterLimit = 16;
     }
-
-    //TODO: edit InputField to be 16 characters (instead of 15) to match AP's player name limit
 }
