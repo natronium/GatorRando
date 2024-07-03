@@ -30,20 +30,7 @@ static class SettingsMods
         AP_text_text.text = "ARCHIPELAGO";
 
         //Connect button
-        GameObject customize_button = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Customize Splits");
-        GameObject connect_button = GameObject.Instantiate(customize_button, settings_menu.transform);
-        connect_button.transform.SetSiblingIndex(4);
-        connect_button.name = "Connect Button";
-        GameObject connect_label = connect_button.transform.Find("Label").gameObject;
-        Object.Destroy(connect_label.GetComponent<MLText>());
-        Text connect_label_text = connect_label.GetComponent<Text>();
-        connect_label_text.text = "connect to server";
-        UIDescription connect_descript = connect_button.GetComponent<UIDescription>();
-        connect_descript.document = null;
-        connect_descript.descriptionText = "connect to Archipelago game server using player name, server address, and port set above";
-        Button connect_button_button = connect_button.GetComponent<Button>();
-        connect_button_button.onClick.ObliteratePersistentListenerByIndex(0);
-        connect_button_button.onClick.AddListener(ArchipelagoManager.Connect); //TODO: UI element indicating successful/unsuccessful connection
+        GameObject connect_button = CreateSettingsButton(4, "Connect To Server", "connect to Archipelago game server using player name, server address, and port set above", ArchipelagoManager.Connect);
 
         //Text fields for server address and port
         GameObject host_field = CreateStringSetting(4,"Server Address","type in Archipelago server address", 20, true, true);
@@ -58,12 +45,14 @@ static class SettingsMods
         player_label_text.text = "player: " + GameData.g.gameSaveData.playerName; // Get player name and display it here
         UIDescription player_descript = player_name.AddComponent(typeof(UIDescription)) as UIDescription;
         player_descript.descriptionText = "set player name to AP slot name";
-        player_descript.prefab = connect_descript.prefab;
+        UIDescription descript = connect_button.GetComponent<UIDescription>();
+        player_descript.prefab = descript.prefab;
 
-        //TODO: disable backspace means go back on Settings screen
-        //TODO: force player into the Setting Menu to make sure they connect on loading a save
+        // Disallow players starting gameplay before connecting to server
         GameObject back_button = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back");
         back_button.SetActive(false);
+        LoadScene backToTitle = Util.GetByPath("Canvas/Pause Menu/Pause Content/Back to Title").GetComponent<LoadScene>();
+        GameObject backToTitleButton = CreateSettingsButton(2,"Back To Title","return to title if you are unable to connect to an Archipelago game server (or chose the wrong save file)",backToTitle.DoLoadScene);
     }
 
     private static GameObject CreateStringSetting(int siblingIndex, string name, string description, int charLimit, bool shrink_to_fit, bool saveToGameData, InputField.ContentType contentType = InputField.ContentType.Standard)
@@ -104,5 +93,26 @@ static class SettingsMods
         label_text.text = name.ToLower();
         
         return field;
+    }
+
+    private static GameObject CreateSettingsButton(int siblingIndex, string name, string description, UnityEngine.Events.UnityAction call)
+    {
+        GameObject settings_menu = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content");
+        GameObject customize_button = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Customize Splits");
+        GameObject button = GameObject.Instantiate(customize_button, settings_menu.transform);
+        button.transform.SetSiblingIndex(siblingIndex);
+        button.name = name;
+        GameObject label = button.transform.Find("Label").gameObject;
+        Object.Destroy(label.GetComponent<MLText>());
+        Text label_text = label.GetComponent<Text>();
+        label_text.text = name.ToLower();
+        UIDescription descript = button.GetComponent<UIDescription>();
+        descript.document = null;
+        descript.descriptionText = description;
+        Button button_button = button.GetComponent<Button>();
+        button_button.onClick.ObliteratePersistentListenerByIndex(0);
+        button_button.onClick.AddListener(call);
+
+        return button;
     }
 } 

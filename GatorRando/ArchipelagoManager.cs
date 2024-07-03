@@ -101,8 +101,10 @@ public class ArchipelagoManager : MonoBehaviour
         if (result.Successful)
         {
             Plugin.Setup();
-            GameObject back_button = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back");
-            back_button.SetActive(true);
+            GameObject backButton = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back");
+            backButton.SetActive(true);
+            GameObject backToTitle = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back To Title");
+            backToTitle.SetActive(false);
         }
 
     }
