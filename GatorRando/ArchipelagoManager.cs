@@ -24,7 +24,7 @@ public class ArchipelagoManager : MonoBehaviour
 
     public static bool LocationIsCollected(string location) =>
         Session.Locations.AllLocationsChecked.Contains(GetLocationApId(location));
-    
+
     public static int GetItemUnlockCount(string itemName) =>
         Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
 
@@ -124,10 +124,12 @@ public class ArchipelagoManager : MonoBehaviour
             Session.Items.DequeueItem();
         }
 
-        if Session.Items.Index >= lastIndex {
+        if (Session.Items.Index >= lastIndex)
+        {
             GameData.g.Write("LastAPItemIndex", Session.Items.Index);
         }
-        else {
+        else
+        {
             Plugin.LogWarning("Current Item Index from Server is earlier than save file---is connection incorrect?")
         }
         Session.Items.ItemReceived += helper => ItemQueue.Enqueue(GetEntryByApId(helper.DequeueItem().ItemId));
