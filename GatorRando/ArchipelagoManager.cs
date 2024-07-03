@@ -107,6 +107,11 @@ public class ArchipelagoManager : MonoBehaviour
 
     }
 
+    public static bool IsConnected()
+    {
+        return LoginInfo != null && LoginInfo.Successful;
+    }
+
     public static string Options(string option_name)
     {
         return LoginInfo.SlotData[option_name].ToString();
