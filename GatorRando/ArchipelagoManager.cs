@@ -124,8 +124,12 @@ public class ArchipelagoManager : MonoBehaviour
             Session.Items.DequeueItem();
         }
 
-        GameData.g.Write("LastAPItemIndex", Session.Items.Index); //TODO: fix this to only write larger number
-
+        if Session.Items.Index >= lastIndex {
+            GameData.g.Write("LastAPItemIndex", Session.Items.Index);
+        }
+        else {
+            Plugin.LogWarning("Current Item Index from Server is earlier than save file---is connection incorrect?")
+        }
         Session.Items.ItemReceived += helper => ItemQueue.Enqueue(GetEntryByApId(helper.DequeueItem().ItemId));
     }
 
