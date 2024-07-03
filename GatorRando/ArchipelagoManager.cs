@@ -130,7 +130,7 @@ public class ArchipelagoManager : MonoBehaviour
         }
         else
         {
-            Plugin.LogWarning("Current Item Index from Server is earlier than save file---is connection incorrect?")
+            Plugin.LogWarn("Current Item Index from Server is earlier than save file---is connection incorrect?");
         }
         Session.Items.ItemReceived += helper => ItemQueue.Enqueue(GetEntryByApId(helper.DequeueItem().ItemId));
     }
