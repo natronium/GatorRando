@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -75,5 +76,42 @@ public static class Util
         itemRes.showItemGet = false;
         itemRes.onAmountChanged = new UnityEvent<int>();
         return itemRes;
+    }
+
+    public static string FindKeyByPrefix(string prefix)
+    {
+        List<string> keys = [];
+        foreach (string key in GameData.g.gameSaveData.ints.Keys)
+        {
+            if (key.StartsWith(prefix))
+            {
+                keys.Add(key);
+            }
+        }
+        if (keys.Count > 1)
+        {
+            Plugin.LogWarn($"{keys.Count} keys were found. Only returning 1st key.");
+        }
+        else if (keys.Count == 0)
+        {
+            return "";
+        }
+        return keys[0];
+    }
+
+    public static void RemoveKeysByPrefix(string prefix)
+    {
+        List<string> keys = [];
+        foreach (string key in GameData.g.gameSaveData.ints.Keys)
+        {
+            if (key.StartsWith(prefix))
+            {
+                keys.Add(key);
+            }
+        }
+        foreach (string key in keys)
+        {
+            GameData.g.gameSaveData.ints.Remove(key);
+        } 
     }
 }

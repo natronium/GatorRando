@@ -46,8 +46,8 @@ static class SettingsMods
         connect_button_button.onClick.AddListener(ArchipelagoManager.Connect); //TODO: UI element indicating successful/unsuccessful connection
 
         //Text fields for server address and port
-        GameObject host_field = CreateStringSetting(4,"Server Address","type in Archipelago server address", 20, true);
-        GameObject port_field = CreateStringSetting(5,"Server Port","type in Archipelago server port", 5, false, InputField.ContentType.IntegerNumber);
+        GameObject host_field = CreateStringSetting(4,"Server Address","type in Archipelago server address", 20, true, true);
+        GameObject port_field = CreateStringSetting(5,"Server Port","type in Archipelago server port", 5, false, true, InputField.ContentType.IntegerNumber);
 
         //Borrow character rename for player name
         GameObject player_name = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Rename Character");
@@ -66,7 +66,7 @@ static class SettingsMods
         back_button.SetActive(false);
     }
 
-    private static GameObject CreateStringSetting(int siblingIndex, string name, string description, int charLimit, bool shrink_to_fit, InputField.ContentType contentType = InputField.ContentType.Standard)
+    private static GameObject CreateStringSetting(int siblingIndex, string name, string description, int charLimit, bool shrink_to_fit, bool saveToGameData, InputField.ContentType contentType = InputField.ContentType.Standard)
     {
         GameObject settings_menu = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content");
         GameObject autoname = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/AutoName");
@@ -94,6 +94,7 @@ static class SettingsMods
         inputfield.onValueChanged.AddListener(input.OnValueChanged);
         field.AddComponent<SelectOnHighlight>();
         input.key = name.ToLower();
+        input.saveToGameData = saveToGameData;
         UIDescription descript = field.GetComponent<UIDescription>();
         descript.document = null;
         descript.descriptionText = description;
@@ -102,7 +103,6 @@ static class SettingsMods
         Text label_text = label.GetComponent<Text>();
         label_text.text = name.ToLower();
         
-
         return field;
     }
 } 

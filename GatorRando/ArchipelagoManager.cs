@@ -57,9 +57,15 @@ public class ArchipelagoManager : MonoBehaviour
         {
             return;
         }
-        var server = Settings.s.ReadString("server address");
-        var user = GameData.g.gameSaveData.playerName;
-        var port = Settings.s.ReadInt("server port");
+        string serverPrefix = "server address";
+        string serverWithPrefix = Util.FindKeyByPrefix(serverPrefix);
+        if (serverWithPrefix == "")
+        {
+            throw new Exception("No server address has been set in the Settings Menu");
+        }
+        string server = serverWithPrefix.Remove(0,serverPrefix.Length);
+        string user = GameData.g.gameSaveData.playerName;
+        int port = GameData.g.ReadInt("server port");
 
         Session = ArchipelagoSessionFactory.CreateSession(server, port);
         LoginResult result;
