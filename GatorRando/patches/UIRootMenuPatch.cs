@@ -1,5 +1,6 @@
 using HarmonyLib;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GatorRando.Patches;
 
@@ -10,16 +11,19 @@ static class UIRootMenuPatch
     [HarmonyPatch("OnCancel")]
     static bool PreOnCancel(UIRootMenu __instance)
     {
-        UISubMenu settingSubMenu = Util.GetByPath("Canvas/Pause Menu/Settings").GetComponent<UISubMenu>();
-        if (__instance.menuStack[__instance.menuStack.Count - 1] == settingSubMenu)
+        if (SceneManager.GetActiveScene().name == "Island")
         {
-            if (!ArchipelagoManager.IsConnected())
+            UISubMenu settingSubMenu = Util.GetByPath("Canvas/Pause Menu/Settings").GetComponent<UISubMenu>();
+            if (__instance.menuStack[__instance.menuStack.Count - 1] == settingSubMenu)
             {
-                return false;
-            }
-            if (Input.GetKeyDown(KeyCode.Backspace))
-            {
-                return false;
+                if (!ArchipelagoManager.IsConnected())
+                {
+                    return false;
+                }
+                if (Input.GetKeyDown(KeyCode.Backspace))
+                {
+                    return false;
+                }
             }
         }
         return true;
