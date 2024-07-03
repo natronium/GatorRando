@@ -37,6 +37,7 @@ public class Plugin : BaseUnityPlugin
         {
             SettingsMods.Edits();
             // Force into settings menu
+            Game.State = GameState.Menu;
             GameObject pausemenu = Util.GetByPath("Canvas/Pause Menu");
             pausemenu.SetActive(true);
             GameObject settings = Util.GetByPath("Canvas/Pause Menu/Settings");
