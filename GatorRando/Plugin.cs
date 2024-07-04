@@ -1,4 +1,5 @@
 using BepInEx;
+using GatorRando.prefabMods;
 using GatorRando.QuestMods;
 using GatorRando.UIMods;
 using HarmonyLib;
@@ -41,6 +42,7 @@ public class Plugin : BaseUnityPlugin
             {
                 ApplyQuestEdits();
                 ApplyUIEdits();
+                BalloonMods.EditBalloonStamina();
                 ForceIntoSettingsMenu();
             }
 
