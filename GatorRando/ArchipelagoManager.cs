@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Collections.Concurrent;
 using Archipelago.MultiClient.Net.Packets;
+using Archipelago.MultiClient.Net.Models;
 
 namespace GatorRando;
 
@@ -16,6 +17,7 @@ public class ArchipelagoManager : MonoBehaviour
     public static LoginSuccessful LoginInfo;
     public static ArchipelagoManager Instance;
     private static readonly ConcurrentQueue<Items.Entry> ItemQueue = new();
+    private static readonly Dictionary<long, ItemInfo> LocationLookup = [];
     private static readonly Dictionary<string, Action> SpecialItemFunctions = [];
     public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
 
@@ -63,7 +65,7 @@ public class ArchipelagoManager : MonoBehaviour
         {
             throw new Exception("No server address has been set in the Settings Menu");
         }
-        string server = serverWithPrefix.Remove(0,serverPrefix.Length);
+        string server = serverWithPrefix.Remove(0, serverPrefix.Length);
         string user = GameData.g.gameSaveData.playerName;
         int port = GameData.g.ReadInt("server port");
 
@@ -105,6 +107,7 @@ public class ArchipelagoManager : MonoBehaviour
             backButton.SetActive(true);
             GameObject backToTitle = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back To Title");
             backToTitle.SetActive(false);
+            ScoutLocations();
         }
 
     }
@@ -112,6 +115,31 @@ public class ArchipelagoManager : MonoBehaviour
     public static bool IsConnected()
     {
         return LoginInfo != null && LoginInfo.Successful;
+    }
+    private static void ScoutLocations()
+    {
+        Session.Locations.ScoutLocationsAsync([.. Session.Locations.AllLocations]).ContinueWith(locationInfoPacket =>
+        {
+            foreach (ItemInfo itemInfo in locationInfoPacket.Result.Values)
+            {
+                LocationLookup.Add(itemInfo.LocationId, itemInfo);
+            }
+        }).Wait(TimeSpan.FromSeconds(5.0f));
+        Plugin.LogInfo("Successfully scouted locations for item placements");
+    }
+
+    public static ItemInfo ItemAtLocation(int gatorID)
+    {
+        int ap_id = GetLocationApId(gatorID);
+        return LocationLookup[ap_id];
+        // Fails if invalid gatorID (only use on collected IDs?)
+    }
+
+    public static ItemInfo ItemAtLocation(string gatorName)
+    {
+        int ap_id = GetLocationApId(gatorName);
+        return LocationLookup[ap_id];
+        // Fails if invalid gatorName (only use on collected IDs?)
     }
 
     public static string Options(string option_name)

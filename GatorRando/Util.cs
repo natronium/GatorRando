@@ -78,6 +78,19 @@ public static class Util
         return itemRes;
     }
 
+    public static Sprite GetSpriteForItem(string name)
+    {
+        ItemObject itemObject = FindItemObjectByName(name);
+        if (itemObject != null)
+        {
+            return itemObject.sprite;
+        }
+        else
+        {
+            return FindItemObjectByName("Placeholder").sprite;
+        }
+    }
+
     public static string FindKeyByPrefix(string prefix)
     {
         List<string> keys = [];
