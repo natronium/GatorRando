@@ -10,12 +10,29 @@ namespace GatorRando;
 
 public static class Util
 {
-    public static IEnumerator WaitThenRun(float duration, Action action)
+    public static IEnumerator WaitThenRunCoroutine(float waitTime, Action action)
     {
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(waitTime);
         action();
         yield break;
     }
+
+    public static IEnumerator RunAfterCoroutine(float waitTime, Func<bool> condition, Action action)
+    {
+        while (true)
+        {
+            if (condition())
+            {
+                action();
+                yield break;
+            }
+            else
+            {
+                yield return new WaitForSeconds(waitTime);
+            }
+        }
+    }
+
     public static GameObject GetByPath(string path)
     {
         var elements = path.Trim('/').Split('/');
@@ -126,6 +143,6 @@ public static class Util
         foreach (string key in keys)
         {
             GameData.g.gameSaveData.ints.Remove(key);
-        } 
+        }
     }
 }

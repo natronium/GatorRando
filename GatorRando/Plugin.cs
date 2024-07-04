@@ -53,7 +53,7 @@ public class Plugin : BaseUnityPlugin
             TutorialQuestMods.HandleFreeplay();
         }
 
-        ArchipelagoManager.OnSceneLoad();
+        ArchipelagoManager.ReceiveUnreceivedItems();
 
         //Edits to Martin's Tutorial Quest
         MartinQuestMods.Edits();

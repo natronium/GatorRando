@@ -30,7 +30,7 @@ static class SettingsMods
         AP_text_text.text = "ARCHIPELAGO";
 
         //Connect button
-        GameObject connect_button = CreateSettingsButton(4, "Connect To Server", "connect to Archipelago game server using player name, server address, and port set above", ArchipelagoManager.Connect);
+        GameObject connect_button = CreateSettingsButton(4, "Connect To Server", "connect to Archipelago game server using player name, server address, and port set above", ArchipelagoManager.ConnectToServer);
 
         //Text fields for server address and port
         GameObject host_field = CreateStringSetting(4,"Server Address","type in Archipelago server address", 20, true, true);

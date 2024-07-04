@@ -30,6 +30,14 @@ public class ArchipelagoManager : MonoBehaviour
     public static int GetItemUnlockCount(string itemName) =>
         Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
 
+    public static bool IsFullyConnected
+    {
+        get => Session is not null
+                && LoginInfo is not null
+                && Session.Socket.Connected
+                && Session.Items.Index >= GameData.g.ReadInt("LastAPItemIndex", 0);
+    }
+
     public void Awake()
     {
         if (Instance is null)
@@ -99,17 +107,6 @@ public class ArchipelagoManager : MonoBehaviour
         }
 
         LoginInfo = (LoginSuccessful)result;
-        //TODO: Likely move this code somewhere more appropriate
-        if (result.Successful)
-        {
-            Plugin.Setup();
-            GameObject backButton = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back");
-            backButton.SetActive(true);
-            GameObject backToTitle = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back To Title");
-            backToTitle.SetActive(false);
-            ScoutLocations();
-        }
-
     }
 
     public static bool IsConnected()
@@ -134,6 +131,27 @@ public class ArchipelagoManager : MonoBehaviour
         if (Instance == this)
         {
             Disconnect();
+        }
+    }
+
+    public static void ConnectToServer()
+    {
+        Disconnect();
+        Connect();
+        // wait until Session is connected & knows about all its items
+        Instance.StartCoroutine(Util.RunAfterCoroutine(0.5f, () => IsFullyConnected, RunAfterConnect));
+    }
+
+    private static void RunAfterConnect()
+    {
+        if (LoginInfo.Successful)
+        {
+            Plugin.Setup();
+            GameObject backButton = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back");
+            backButton.SetActive(true);
+            GameObject backToTitle = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back To Title");
+            backToTitle.SetActive(false);
+            ScoutLocations();
         }
     }
 
@@ -168,7 +186,7 @@ public class ArchipelagoManager : MonoBehaviour
         return LoginInfo.SlotData[option_name].ToString();
     }
 
-    public static void OnSceneLoad()
+    public static void ReceiveUnreceivedItems()
     {
         var lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
         Plugin.LogDebug($"saved lastindex is {lastIndex}, AP's last index is {Session.Items.Index}");
