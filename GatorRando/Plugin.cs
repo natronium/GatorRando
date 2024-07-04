@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using BepInEx;
 using GatorRando.QuestMods;
 using GatorRando.UIMods;
@@ -20,68 +18,80 @@ public class Plugin : BaseUnityPlugin
         var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
         harmony.PatchAll(); // automatically patch based on harmony attributes
         Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
-        gameObject.AddComponent<ArchipelagoManager>();
+    }
+
+    private void Update()
+    {
+        if (ArchipelagoManager.IsFullyConnected)
+        {
+            ArchipelagoManager.ProcessItemQueue();
+        }
     }
 
     void OnEnable()
     {
         Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += OnSceneLoaded;
-    }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log(mode);
-        if (scene.name == "Island")
+        static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            ApplyQuestEdits();
-            ApplyUIEdits();
-            ForceIntoSettingsMenu();
+            Debug.Log("OnSceneLoaded: " + scene.name);
+            Debug.Log(mode);
+            if (scene.name == "Island")
+            {
+                ApplyQuestEdits();
+                ApplyUIEdits();
+                ForceIntoSettingsMenu();
+            }
+
+            static void ApplyQuestEdits()
+            {
+                //Edits to Martin's Tutorial Quest
+                MartinQuestMods.Edits();
+
+                //Edits to Jada's Quest
+                JadaQuestMods.Edits();
+
+                //Edits to Prep Quest
+                GeneQuestMods.Edits();
+                SusanneQuestMods.Edits();
+                AntoneQuestMods.Edits();
+
+                //Edits to Esme's Quest
+                EsmeQuestMods.Edits();
+
+                //Edits to sidequests
+                KasenQuestMods.Edits();
+                SamQuestMods.Edits();
+
+                //Goal Completion Edits
+                CreditsMods.Edits();
+            }
+
+            static void ApplyUIEdits()
+            {
+                //UI Edits
+                TutorialUIMods.Edits();
+                QuestItems.AddItems();
+                InventoryMods.AddQuestItemTab();
+                SettingsMods.Edits();
+            }
+
+            static void ForceIntoSettingsMenu()
+            {
+                // Force into settings menu
+                Game.State = GameState.Menu;
+                GameObject pausemenu = Util.GetByPath("Canvas/Pause Menu");
+                pausemenu.SetActive(true);
+                GameObject settings = Util.GetByPath("Canvas/Pause Menu/Settings");
+                settings.SetActive(true);
+            }
         }
     }
 
-    private static void ForceIntoSettingsMenu()
+    void Destroy()
     {
-        // Force into settings menu
-        Game.State = GameState.Menu;
-        GameObject pausemenu = Util.GetByPath("Canvas/Pause Menu");
-        pausemenu.SetActive(true);
-        GameObject settings = Util.GetByPath("Canvas/Pause Menu/Settings");
-        settings.SetActive(true);
-    }
-
-    private static void ApplyQuestEdits()
-    {
-        //Edits to Martin's Tutorial Quest
-        MartinQuestMods.Edits();
-
-        //Edits to Jada's Quest
-        JadaQuestMods.Edits();
-
-        //Edits to Prep Quest
-        GeneQuestMods.Edits();
-        SusanneQuestMods.Edits();
-        AntoneQuestMods.Edits();
-
-        //Edits to Esme's Quest
-        EsmeQuestMods.Edits();
-
-        //Edits to sidequests
-        KasenQuestMods.Edits();
-        SamQuestMods.Edits();
-
-        //Goal Completion Edits
-        CreditsMods.Edits();
-    }
-
-    private static void ApplyUIEdits()
-    {
-        //UI Edits
-        TutorialUIMods.Edits();
-        QuestItems.AddItems();
-        InventoryMods.AddQuestItemTab();
-        SettingsMods.Edits();
+        ArchipelagoManager.Disconnect();
     }
 
     public static void ApplyAPDependentMods()

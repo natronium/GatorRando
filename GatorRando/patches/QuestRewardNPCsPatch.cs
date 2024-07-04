@@ -1,5 +1,3 @@
-
-
 using HarmonyLib;
 
 namespace GatorRando.Patches;

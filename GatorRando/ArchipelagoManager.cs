@@ -1,22 +1,19 @@
 using System.Collections.Generic;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
-using UnityEngine;
 using Data;
 using System;
 using System.Linq;
 using System.Collections.Concurrent;
 using Archipelago.MultiClient.Net.Packets;
 using Archipelago.MultiClient.Net.Models;
-using System.Collections.ObjectModel;
 
 namespace GatorRando;
 
-public class ArchipelagoManager : MonoBehaviour
+public static class ArchipelagoManager
 {
     public static ArchipelagoSession Session;
     public static LoginSuccessful LoginInfo;
-    public static ArchipelagoManager Instance;
     private static ConcurrentQueue<Items.Entry> ItemQueue = new();
     private static readonly Dictionary<long, ItemInfo> LocationLookup = [];
     private static readonly Dictionary<string, Action> SpecialItemFunctions = [];
@@ -42,20 +39,7 @@ public class ArchipelagoManager : MonoBehaviour
                 && Session.Items.Index >= GameData.g.ReadInt("LastAPItemIndex", 0);
     }
 
-    public void Awake()
-    {
-        if (Instance is null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Plugin.LogWarn("ArchipelagoManager Instance already exists! Self destructing duplicate!");
-            Destroy(this);
-        }
-    }
-
-    public void Update()
+    public static void ProcessItemQueue()
     {
         //TODO: Move to doing this from Plugin
         while (ItemQueue.TryDequeue(out Items.Entry entry))
@@ -128,20 +112,12 @@ public class ArchipelagoManager : MonoBehaviour
         }
     }
 
-    public void Destroy()
-    {
-        if (Instance == this)
-        {
-            Disconnect();
-        }
-    }
-
     public static void InitiateNewAPSession(Action postConnectAction)
     {
         Disconnect();
         Connect();
         // wait until Session is connected & knows about all its items
-        Instance.StartCoroutine(Util.RunAfterCoroutine(0.5f, () => IsFullyConnected, () =>
+        Plugin.Instance.StartCoroutine(Util.RunAfterCoroutine(0.5f, () => IsFullyConnected, () =>
         {
             postConnectAction();
             ReceiveUnreceivedItems();
