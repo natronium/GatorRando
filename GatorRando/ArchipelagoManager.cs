@@ -16,7 +16,7 @@ public class ArchipelagoManager : MonoBehaviour
     public static ArchipelagoSession Session;
     public static LoginSuccessful LoginInfo;
     public static ArchipelagoManager Instance;
-    private static readonly ConcurrentQueue<Items.Entry> ItemQueue = new();
+    private static ConcurrentQueue<Items.Entry> ItemQueue = new();
     private static readonly Dictionary<long, ItemInfo> LocationLookup = [];
     private static readonly Dictionary<string, Action> SpecialItemFunctions = [];
     public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
@@ -122,7 +122,10 @@ public class ArchipelagoManager : MonoBehaviour
         if (IsConnected())
         {
             Plugin.LogWarn("Disconnected from multiworld");
+            LocationLookup.Clear();
+            ItemQueue = new();
             Session.Socket.DisconnectAsync();
+            LoginInfo = null;
         }
     }
 
