@@ -126,6 +126,14 @@ public class ArchipelagoManager : MonoBehaviour
         }
     }
 
+    public void Destroy()
+    {
+        if (Instance == this)
+        {
+            Disconnect();
+        }
+    }
+
     private static void ScoutLocations()
     {
         Session.Locations.ScoutLocationsAsync([.. Session.Locations.AllLocations]).ContinueWith(locationInfoPacket =>
