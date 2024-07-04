@@ -16,7 +16,7 @@ static class UIRootMenuPatch
             UISubMenu settingSubMenu = Util.GetByPath("Canvas/Pause Menu/Settings").GetComponent<UISubMenu>();
             if (__instance.menuStack.Count > 0 && __instance.menuStack[__instance.menuStack.Count - 1] == settingSubMenu)
             {
-                if (!ArchipelagoManager.IsConnected())
+                if (!ArchipelagoManager.IsFullyConnected)
                 {
                     return false;
                 }

@@ -11,6 +11,9 @@ static class QuestRewardNPCsPatch
     [HarmonyPatch("GiveReward")]
     static void PreGiveReward(QuestRewardNPCs __instance)
     {
-        ArchipelagoManager.CollectLocationForNPCs(__instance.rewards); //BUG: This line fails with ???                
+        if (ArchipelagoManager.IsFullyConnected)
+        {
+            ArchipelagoManager.CollectLocationForNPCs(__instance.rewards);
+        }
     }
 }

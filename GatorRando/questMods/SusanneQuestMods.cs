@@ -8,45 +8,38 @@ static class SusanneQuestMods
     {
         //Edits to Susanne's Quest
         // Need to remove QuestState.JustProgressState from Rock Get Sequence
-        GameObject rock_seq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Rock Get Sequence");
-        DialogueSequencer rock_sequencer = rock_seq.GetComponent<DialogueSequencer>();
-        rock_sequencer.beforeSequence.ObliteratePersistentListenerByIndex(0);
-        rock_sequencer.beforeSequence.AddListener(CollectedMagicOre);
+        GameObject rockSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Rock Get Sequence");
+        DialogueSequencer rockSequencer = rockSeq.GetComponent<DialogueSequencer>();
+        rockSequencer.beforeSequence.ObliteratePersistentListenerByIndex(0);
+        rockSequencer.beforeSequence.AddListener(CollectedMagicOre);
 
         ArchipelagoManager.RegisterItemListener("BEACH ROCK", UnlockedMagicOre);
-
-        if (ArchipelagoManager.LocationIsCollected("BEACH ROCK"))
-        {
-            CollectedMagicOre();
-        }
-        if (ArchipelagoManager.ItemIsUnlocked("BEACH ROCK"))
-        {
-            UnlockedMagicOre();
-        }
+        ArchipelagoManager.RegisterLocationListener("BEACH ROCK", CollectedMagicOre);
     }
 
     private static void CollectedMagicOre()
     {
-        GameObject engineer_quest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer");
-        GameObject special_rocks = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Special Rocks");
-        QuestStates engineer_quest_qs = engineer_quest.GetComponent<QuestStates>();
-        engineer_quest_qs.states[1].stateObjects = engineer_quest_qs.states[1].stateObjects.Remove(special_rocks);
-        special_rocks.SetActive(false);
+        GameObject engineerQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer");
+        GameObject specialRocks = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Special Rocks");
+        QuestStates engineerQuestQS = engineerQuest.GetComponent<QuestStates>();
+        engineerQuestQS.states[1].stateObjects = engineerQuestQS.states[1].stateObjects.Remove(specialRocks);
+        specialRocks.SetActive(false);
     }
 
     private static void UnlockedMagicOre()
     {
-        GameObject engineer_quest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer");
-        QuestStates engineer_quest_qs = engineer_quest.GetComponent<QuestStates>();
-        if (engineer_quest_qs.StateID == 1 && ArchipelagoManager.LocationIsCollected("BEACH ROCK"))
+        GameObject engineerQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer");
+        QuestStates engineerQuestQS = engineerQuest.GetComponent<QuestStates>();
+        if (engineerQuestQS.StateID == 1 && ArchipelagoManager.LocationIsCollected("BEACH ROCK"))
         {
-            engineer_quest_qs.JustProgressState();
+            engineerQuestQS.JustProgressState();
         }
         else
         {
-            GameObject rock_seq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Rock Get Sequence");
-            DialogueSequencer rock_sequencer = rock_seq.GetComponent<DialogueSequencer>();
-            rock_sequencer.beforeSequence.AddListener(engineer_quest_qs.JustProgressState);
+            GameObject rockSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Rock Get Sequence");
+            DialogueSequencer rockSequencer = rockSeq.GetComponent<DialogueSequencer>();
+            rockSequencer.beforeSequence.RemoveListener(engineerQuestQS.JustProgressState);
+            rockSequencer.beforeSequence.AddListener(engineerQuestQS.JustProgressState);
         }
     }
 }

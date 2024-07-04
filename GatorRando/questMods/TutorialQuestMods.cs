@@ -6,16 +6,18 @@ namespace GatorRando.QuestMods;
 static class TutorialQuestMods
 {
 
-    public static void HandleFreeplay()
+    public static void StartWithFreeplay()
     {
         ReenableTutorialQuests();
         GameObject act1 = Util.GetByPath("NorthWest (Tutorial Island)/Act 1");
         QuestStates act1QuestStates = act1.GetComponent<QuestStates>();
+        act1QuestStates.states[0].onDeactivate.RemoveListener(AdvanceToEndOfTutorial);
         act1QuestStates.states[0].onDeactivate.AddListener(AdvanceToEndOfTutorial);
         if (act1QuestStates.StateID < 2)
         {
             AdvanceToEndOfTutorial();
         }
+        act1QuestStates.states[3].onActivate.RemoveListener(ReenableTutorialQuests);
         act1QuestStates.states[3].onActivate.AddListener(ReenableTutorialQuests);
         GameObject manager = Util.GetByPath("Managers");
         Game game = manager.GetComponent<Game>();

@@ -5,7 +5,6 @@ namespace GatorRando.UIMods;
 
 public class SettingInput : MonoBehaviour
 {
-	// Token: 0x06000E2B RID: 3627 RVA: 0x0004441F File Offset: 0x0004261F
 	private void OnValidate()
 	{
         if (this.inputfield == null)
@@ -14,7 +13,6 @@ public class SettingInput : MonoBehaviour
 		}
 	}
 
-	// Token: 0x06000E2C RID: 3628 RVA: 0x0004443B File Offset: 0x0004263B
 	private void OnEnable()
 	{
         this.inputfield = this.gameObject.GetComponent<InputField>();
@@ -51,7 +49,6 @@ public class SettingInput : MonoBehaviour
 		this.setInitialSetting = true;
 	}
 
-	// Token: 0x06000E2D RID: 3629 RVA: 0x0004446A File Offset: 0x0004266A
 	public void OnValueChanged(string value)
 	{
         this.inputfield.textComponent.text = this.inputfield.text;

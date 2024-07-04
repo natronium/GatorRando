@@ -35,26 +35,24 @@ public class Plugin : BaseUnityPlugin
         Debug.Log(mode);
         if (scene.name == "Island")
         {
-            SettingsMods.Edits();
-            // Force into settings menu
-            Game.State = GameState.Menu;
-            GameObject pausemenu = Util.GetByPath("Canvas/Pause Menu");
-            pausemenu.SetActive(true);
-            GameObject settings = Util.GetByPath("Canvas/Pause Menu/Settings");
-            settings.SetActive(true);
+            ApplyQuestEdits();
+            ApplyUIEdits();
+            ForceIntoSettingsMenu();
         }
     }
 
-    public static void Setup()
+    private static void ForceIntoSettingsMenu()
     {
-        //Allow Freeplay
-        if (ArchipelagoManager.Options("start_with_freeplay") == "1")
-        {
-            TutorialQuestMods.HandleFreeplay();
-        }
+        // Force into settings menu
+        Game.State = GameState.Menu;
+        GameObject pausemenu = Util.GetByPath("Canvas/Pause Menu");
+        pausemenu.SetActive(true);
+        GameObject settings = Util.GetByPath("Canvas/Pause Menu/Settings");
+        settings.SetActive(true);
+    }
 
-        ArchipelagoManager.ReceiveUnreceivedItems();
-
+    private static void ApplyQuestEdits()
+    {
         //Edits to Martin's Tutorial Quest
         MartinQuestMods.Edits();
 
@@ -75,14 +73,27 @@ public class Plugin : BaseUnityPlugin
 
         //Goal Completion Edits
         CreditsMods.Edits();
+    }
 
-        // Junk4Trash Edits
-        Junk4TrashQuestMods.HideCollectedItems();
-
+    private static void ApplyUIEdits()
+    {
         //UI Edits
         TutorialUIMods.Edits();
         QuestItems.AddItems();
         InventoryMods.AddQuestItemTab();
+        SettingsMods.Edits();
+    }
+
+    public static void ApplyAPDependentMods()
+    {
+        //Allow Freeplay
+        if (ArchipelagoManager.GetOption("start_with_freeplay") == "1")
+        {
+            TutorialQuestMods.StartWithFreeplay();
+        }
+
+        // Junk4Trash Edits
+        Junk4TrashQuestMods.HideCollectedShopLocations();
     }
 
     public static void LogInfo(string infoMessage)

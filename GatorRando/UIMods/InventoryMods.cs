@@ -9,27 +9,27 @@ static class InventoryMods
     {
         // Create a new tab in the inventory screen for Quest Items
         // See UISwapItemsMenuPatch for prefix that populates this new tab
-        GameObject Tabs = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Area/Tabs");
-        GameObject QuestItemTab = GameObject.Instantiate(Tabs.transform.Find("Item Tab").gameObject,Tabs.transform);
-        UITabNavigation TabNav = Tabs.GetComponent<UITabNavigation>();
-        Toggle QuestItemTabToggle = QuestItemTab.GetComponent<Toggle>();
-        TabNav.tabs = TabNav.tabs.Add<Toggle>(QuestItemTabToggle);
-        QuestItemTab.name = "Quest Item Tab";
+        GameObject tabs = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Area/Tabs");
+        GameObject questItemTab = GameObject.Instantiate(tabs.transform.Find("Item Tab").gameObject,tabs.transform);
+        UITabNavigation tabNav = tabs.GetComponent<UITabNavigation>();
+        Toggle questItemTabToggle = questItemTab.GetComponent<Toggle>();
+        tabNav.tabs = tabNav.tabs.Add<Toggle>(questItemTabToggle);
+        questItemTab.name = "Quest Item Tab";
         
-        GameObject TabContents = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Contents Mask/Tab Contents");
-        GameObject QuestItemGrid = GameObject.Instantiate(TabContents.transform.Find("Item Grid").gameObject,TabContents.transform);
-        QuestItemGrid.name = "Quest Item Grid";
-        QuestItemTabToggle.onValueChanged.ObliteratePersistentListenerByIndex(0);
-        QuestItemTabToggle.onValueChanged.AddListener(QuestItemGrid.SetActive);
+        GameObject tabContents = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Contents Mask/Tab Contents");
+        GameObject questItemGrid = GameObject.Instantiate(tabContents.transform.Find("Item Grid").gameObject,tabContents.transform);
+        questItemGrid.name = "Quest Item Grid";
+        questItemTabToggle.onValueChanged.ObliteratePersistentListenerByIndex(0);
+        questItemTabToggle.onValueChanged.AddListener(questItemGrid.SetActive);
 
         // TODO: replace sprites for Quest Item Tab---found under Inactive Tab and Active Tab images
         
         // Reposition Tabs and button prompts to accommodate additional tab
-        Tabs.transform.localPosition += new Vector3(-25,0,0);
-        GameObject TabButtomPrompsLeft = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Area/TabButtonPrompts/Left");
-        GameObject TabButtomPrompsRight = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Area/TabButtonPrompts/Right");
-        TabButtomPrompsLeft.transform.localPosition += new Vector3(-10,0,0);
-        TabButtomPrompsRight.transform.localPosition += new Vector3(33,0,0);
+        tabs.transform.localPosition += new Vector3(-25,0,0);
+        GameObject tabButtomPrompsLeft = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Area/TabButtonPrompts/Left");
+        GameObject tabButtomPrompsRight = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Area/TabButtonPrompts/Right");
+        tabButtomPrompsLeft.transform.localPosition += new Vector3(-10,0,0);
+        tabButtomPrompsRight.transform.localPosition += new Vector3(33,0,0);
     }
 
 }

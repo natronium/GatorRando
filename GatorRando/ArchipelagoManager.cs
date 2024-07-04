@@ -8,6 +8,7 @@ using System.Linq;
 using System.Collections.Concurrent;
 using Archipelago.MultiClient.Net.Packets;
 using Archipelago.MultiClient.Net.Models;
+using System.Collections.ObjectModel;
 
 namespace GatorRando;
 
@@ -19,7 +20,10 @@ public class ArchipelagoManager : MonoBehaviour
     private static ConcurrentQueue<Items.Entry> ItemQueue = new();
     private static readonly Dictionary<long, ItemInfo> LocationLookup = [];
     private static readonly Dictionary<string, Action> SpecialItemFunctions = [];
+    private static readonly Dictionary<string, Action> SpecialLocationFunctions = [];
     public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
+    public static void RegisterLocationListener(string locationName, Action listener) => SpecialLocationFunctions[locationName] = listener;
+
 
     public static bool ItemIsUnlocked(string item) =>
         Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApId(item));
@@ -53,6 +57,7 @@ public class ArchipelagoManager : MonoBehaviour
 
     public void Update()
     {
+        //TODO: Move to doing this from Plugin
         while (ItemQueue.TryDequeue(out Items.Entry entry))
         {
             ReceiveItem(entry);
@@ -61,12 +66,14 @@ public class ArchipelagoManager : MonoBehaviour
         }
     }
 
-    public static void Connect()
+    //TODO take connection info as parameters instead of looking it up of our own initiative
+    private static void Connect()
     {
         if (Session is not null && Session.Socket.Connected)
         {
             return;
         }
+        // TODO: Refactor getters out
         string serverPrefix = "server address";
         string serverWithPrefix = Util.FindKeyByPrefix(serverPrefix);
         if (serverWithPrefix == "")
@@ -109,14 +116,9 @@ public class ArchipelagoManager : MonoBehaviour
         LoginInfo = (LoginSuccessful)result;
     }
 
-    public static bool IsConnected()
-    {
-        return LoginInfo != null && LoginInfo.Successful;
-    }
-
     public static void Disconnect()
     {
-        if (IsConnected())
+        if (LoginInfo != null)
         {
             Plugin.LogWarn("Disconnected from multiworld");
             LocationLookup.Clear();
@@ -134,38 +136,92 @@ public class ArchipelagoManager : MonoBehaviour
         }
     }
 
-    public static void ConnectToServer()
+    public static void InitiateNewAPSession(Action postConnectAction)
     {
         Disconnect();
         Connect();
         // wait until Session is connected & knows about all its items
-        Instance.StartCoroutine(Util.RunAfterCoroutine(0.5f, () => IsFullyConnected, RunAfterConnect));
-    }
-
-    private static void RunAfterConnect()
-    {
-        if (LoginInfo.Successful)
+        Instance.StartCoroutine(Util.RunAfterCoroutine(0.5f, () => IsFullyConnected, () =>
         {
-            Plugin.Setup();
-            GameObject backButton = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back");
-            backButton.SetActive(true);
-            GameObject backToTitle = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back To Title");
-            backToTitle.SetActive(false);
+            postConnectAction();
+            ReceiveUnreceivedItems();
+            TriggerItemListeners();//trigger listener functions for *any* item we have, not just recently received ones
+            TriggerLocationListeners();//trigger listener functions for any location that is collected
+            AttachListeners();//hook up listener functions for future live updates
             ScoutLocations();
+        }));
+
+        static void ReceiveUnreceivedItems()
+        {
+            var lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
+            Plugin.LogDebug($"saved lastindex is {lastIndex}, AP's last index is {Session.Items.Index}");
+            if (lastIndex < Session.Items.Index)
+            {
+                foreach (var item in Session.Items.AllItemsReceived.Skip(lastIndex))
+                {
+                    ReceiveItem(GetItemEntryByApId(item.ItemId));
+                }
+            }
+
+            while (Session.Items.Any())
+            {
+                //Clear the queue of all our initial items
+                Session.Items.DequeueItem();
+            }
+
+            if (Session.Items.Index >= lastIndex)
+            {
+                GameData.g.Write("LastAPItemIndex", Session.Items.Index);
+            }
+            else
+            {
+                Plugin.LogWarn("Current Item Index from Server is earlier than save file---is connection incorrect?");
+            }
+        }
+
+        static void TriggerItemListeners()
+        {
+            foreach (ItemInfo itemInfo in Session.Items.AllItemsReceived)
+            {
+                Items.Entry item = GetItemEntryByApId(itemInfo.ItemId);
+                if (item.client_name_id is not null && SpecialItemFunctions.ContainsKey(item.client_name_id))
+                {
+                    SpecialItemFunctions[item.client_name_id]();
+                }
+            }
+        }
+
+        static void TriggerLocationListeners()
+        {
+            foreach (long locationApId in Session.Locations.AllLocationsChecked)
+            {
+                Locations.Entry location = GetLocationEntryByApId(locationApId);
+                if (location.client_name_id is not null && SpecialLocationFunctions.ContainsKey(location.client_name_id))
+                {
+                    SpecialLocationFunctions[location.client_name_id]();
+                }
+            }
+        }
+
+        static void AttachListeners()
+        {
+            Session.Items.ItemReceived += helper => ItemQueue.Enqueue(GetItemEntryByApId(helper.DequeueItem().ItemId));
+        }
+
+        static void ScoutLocations()
+        {
+            Session.Locations.ScoutLocationsAsync([.. Session.Locations.AllLocations]).ContinueWith(locationInfoPacket =>
+            {
+                foreach (ItemInfo itemInfo in locationInfoPacket.Result.Values)
+                {
+                    LocationLookup.Add(itemInfo.LocationId, itemInfo);
+                }
+            }).Wait(TimeSpan.FromSeconds(5.0f));
+            Plugin.LogInfo("Successfully scouted locations for item placements");
         }
     }
 
-    private static void ScoutLocations()
-    {
-        Session.Locations.ScoutLocationsAsync([.. Session.Locations.AllLocations]).ContinueWith(locationInfoPacket =>
-        {
-            foreach (ItemInfo itemInfo in locationInfoPacket.Result.Values)
-            {
-                LocationLookup.Add(itemInfo.LocationId, itemInfo);
-            }
-        }).Wait(TimeSpan.FromSeconds(5.0f));
-        Plugin.LogInfo("Successfully scouted locations for item placements");
-    }
+
 
     public static ItemInfo ItemAtLocation(int gatorID)
     {
@@ -181,41 +237,13 @@ public class ArchipelagoManager : MonoBehaviour
         // Fails if invalid gatorName (only use on collected IDs?)
     }
 
-    public static string Options(string option_name)
+    public static string GetOption(string option_name)
     {
         return LoginInfo.SlotData[option_name].ToString();
     }
 
-    public static void ReceiveUnreceivedItems()
-    {
-        var lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
-        Plugin.LogDebug($"saved lastindex is {lastIndex}, AP's last index is {Session.Items.Index}");
-        if (lastIndex < Session.Items.Index)
-        {
-            foreach (var item in Session.Items.AllItemsReceived.Skip(lastIndex))
-            {
-                ReceiveItem(GetEntryByApId(item.ItemId));
-            }
-        }
-
-        while (Session.Items.Any())
-        {
-            //Clear the queue of all our initial items
-            Session.Items.DequeueItem();
-        }
-
-        if (Session.Items.Index >= lastIndex)
-        {
-            GameData.g.Write("LastAPItemIndex", Session.Items.Index);
-        }
-        else
-        {
-            Plugin.LogWarn("Current Item Index from Server is earlier than save file---is connection incorrect?");
-        }
-        Session.Items.ItemReceived += helper => ItemQueue.Enqueue(GetEntryByApId(helper.DequeueItem().ItemId));
-    }
-
-    private static Items.Entry GetEntryByApId(long id) => Items.Entries.First(entry => entry.ap_item_id == id);
+    private static Items.Entry GetItemEntryByApId(long id) => Items.Entries.First(entry => entry.ap_item_id == id);
+    private static Locations.Entry GetLocationEntryByApId(long id) => Locations.Entries.First(entry => entry.ap_location_id == id);
     private static void ReceiveItem(Items.Entry entry)
     {
         Plugin.LogDebug($"ReceiveItem for {entry.shortname} (\"{entry.longname}\"). ClientId:{entry.client_name_id}, Type:{entry.client_item_type}, AP:{entry.ap_item_id}");

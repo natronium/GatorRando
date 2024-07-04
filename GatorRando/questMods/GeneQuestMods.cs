@@ -7,32 +7,28 @@ static class GeneQuestMods
     public static void Edits()
     {
         //Edits to Gene's Quest
-        GameObject economist_quest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist");
-        QuestStates economist_quest_qs = economist_quest.GetComponent<QuestStates>();
+        GameObject economistQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist");
+        QuestStates economistQuestQS = economistQuest.GetComponent<QuestStates>();
         // Removing Loot Get Sequence from economist_quest_qs.states[2].onProgress()
-        economist_quest_qs.states[2].onProgress.ObliteratePersistentListenerByIndex(0);
+        economistQuestQS.states[2].onProgress.ObliteratePersistentListenerByIndex(0);
 
         ArchipelagoManager.RegisterItemListener("HALF A CHEESE SANDWICH", UnlockedCheeseSandwich);
-
-        if (ArchipelagoManager.ItemIsUnlocked("HALF A CHEESE SANDWICH"))
-        {
-            UnlockedCheeseSandwich();
-        }
     }
 
     private static void UnlockedCheeseSandwich()
     {
-        GameObject economist_quest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist");
-        QuestStates economist_quest_qs = economist_quest.GetComponent<QuestStates>();
-        if (economist_quest_qs.StateID == 1 && ArchipelagoManager.LocationIsCollected("HALF A CHEESE SANDWICH"))
+        GameObject economistQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist");
+        QuestStates economistQuestQS = economistQuest.GetComponent<QuestStates>();
+        if (economistQuestQS.StateID == 1 && ArchipelagoManager.LocationIsCollected("HALF A CHEESE SANDWICH"))
         {
-            economist_quest_qs.JustProgressState();
+            economistQuestQS.JustProgressState();
         }
         else
         {
-            GameObject loot_seq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist/Loot Get Sequence");
-            DialogueSequencer loot_sequencer = loot_seq.GetComponent<DialogueSequencer>();
-            loot_sequencer.afterSequence.AddListener(economist_quest_qs.JustProgressState);
+            GameObject lootSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist/Loot Get Sequence");
+            DialogueSequencer lootSequencer = lootSeq.GetComponent<DialogueSequencer>();
+            lootSequencer.afterSequence.RemoveListener(economistQuestQS.JustProgressState);
+            lootSequencer.afterSequence.AddListener(economistQuestQS.JustProgressState);
         }
     }
 

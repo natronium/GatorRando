@@ -10,23 +10,21 @@ static class SamQuestMods
     //Edit Sam's Quest to enable interception of each of the Thrown Pencils as an AP item
     public static void Edits()
     {
-        GameObject thrown_pencil_1_seq = Util.GetByPath("SouthEast (Beach)/Side Quests/Clumsy Quest/Thrown Pencil 1/Sequence");
-        GameObject thrown_pencil_2_seq = Util.GetByPath("SouthEast (Beach)/Side Quests/Clumsy Quest/Thrown Pencil 2/Sequence");
-        GameObject thrown_pencil_3_seq = Util.GetByPath("SouthEast (Beach)/Side Quests/Clumsy Quest/Thrown Pencil 3/Sequence");
-        GameObject[] seqs = [thrown_pencil_1_seq, thrown_pencil_2_seq, thrown_pencil_3_seq];
-        string[] item_names = ["Thrown_Pencil_1", "Thrown_Pencil_2", "Thrown_Pencil_3"];
+        GameObject thrownPencil1Seq = Util.GetByPath("SouthEast (Beach)/Side Quests/Clumsy Quest/Thrown Pencil 1/Sequence");
+        GameObject thrownPencil2Seq = Util.GetByPath("SouthEast (Beach)/Side Quests/Clumsy Quest/Thrown Pencil 2/Sequence");
+        GameObject thrownPencil3Seq = Util.GetByPath("SouthEast (Beach)/Side Quests/Clumsy Quest/Thrown Pencil 3/Sequence");
+        GameObject[] seqs = [thrownPencil1Seq, thrownPencil2Seq, thrownPencil3Seq];
+        string[] itemNames = ["Thrown_Pencil_1", "Thrown_Pencil_2", "Thrown_Pencil_3"];
 
         ArchipelagoManager.RegisterItemListener("Thrown_Pencil", UpdateSamState);
 
-        foreach ((GameObject seq, string item_name) in seqs.Zip(item_names, (s, i) => (s, i)))
+        foreach ((GameObject seq, string itemName) in seqs.Zip(itemNames, (s, i) => (s, i)))
         {
             DialogueSequencer sequencer = seq.GetComponent<DialogueSequencer>();
             sequencer.afterSequence.ObliteratePersistentListenerByIndex(0);
             DSItem item = seq.GetComponent<DSItem>();
-            item.item = Util.GenerateItemObject(item_name, item.item.sprite);
+            item.item = Util.GenerateItemObject(itemName, item.item.sprite);
         }
-
-        UpdateSamState();
     }
 
     private static void UpdateSamState()
