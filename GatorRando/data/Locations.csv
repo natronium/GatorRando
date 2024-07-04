@@ -1,119 +1,119 @@
 shortname,longname,ap_location_id,client_id,client_name_id,ap_region,ap_location_group
-nwt_pot_A1_1,nwt_pot_A1_1_235,100000234,235,,Tutorial Island Breakables,Pot
-nwt_pot_A1_2,nwt_pot_A1_2_238,100000237,238,,Tutorial Island Breakables,Pot
-nwt_pot_A1_3,nwt_pot_A1_3_562,100000561,562,,Tutorial Island Breakables,Pot
-nwt_pot_A1_4,nwt_pot_A1_4_425,100000424,425,,Tutorial Island Breakables,Pot
-nwt_pot_A2_1,Tutorial Island - Pot (A2) below Gerald to the south near water level (middle),100000228,229,,Tutorial Island Breakables,Pot
-nwt_pot_A2_2,nwt_pot_A2_2_423,100000422,423,,Tutorial Island Breakables,Pot
-nwt_pot_A2_3,nwt_pot_A2_3_426,100000425,426,,Tutorial Island Breakables,Pot
-nwt_pot_A2_4,nwt_pot_A2_4_427,100000426,427,,Tutorial Island Breakables,Pot
-nwt_pot_A2B2_1,Tutorial Island - Pot (A2-B2) below Gerald to the south near water level (westmost),100000189,190,,Tutorial Island Breakables,Pot
-nwt_pot_A3_1,Tutorial Island - Pot (A3) below Gerald to the south near water level (eastmost),100000219,220,,Tutorial Island Breakables,Pot
-nwt_chest_A3_1,nwt_chest_A3_1_185,100000184,185,,Main Island Breakables,Chest
-nec_pot_A8_1,nec_pot_A8_1_1457,100001456,1457,,Main Island Breakables,Pot
-nec_pot_A8_2,nec_pot_A8_2_1464,100001463,1464,,Main Island Breakables,Pot
-nwt_pot_B0_1,nwt_pot_B0_1_180,100000179,180,,Tutorial Island Breakables,Pot
-nwt_chest_B1_1,nwt_chest_B1_1_373,100000372,373,,Main Island Breakables,Chest
-nwt_chest_B1_2,nwt_chest_B1_2_433,100000432,433,,Main Island Breakables,Chest
-nwt_pot_B1_1,nwt_pot_B1_1_407,100000406,407,,Tutorial Island Breakables,Pot
-nwt_pot_B1_2,nwt_pot_B1_2_412,100000411,412,,Tutorial Island Breakables,Pot
-nwt_pot_B2_1,nwt_pot_B2_1_168,100000167,168,,Tutorial Island Breakables,Pot
-nwt_pot_B2_2,nwt_pot_B2_2_169,100000168,169,,Tutorial Island Breakables,Pot
-nwt_pot_B2_3,nwt_pot_B2_3_176,100000175,176,,Tutorial Island Breakables,Pot
-nwt_pot_B2_4,nwt_pot_B2_4_203,100000202,203,,Tutorial Island Breakables,Pot
-nwt_pot_B2_5,nwt_pot_B2_5_226,100000225,226,,Tutorial Island Breakables,Pot
-nwt_race_B2_1,nwt_race_B2_1_392,100000391,392,,Main Island Races,Race
-nwt_race_B3_1,nwt_race_B3_1_383,100000382,383,,Main Island Races,Race
-nm_chest_B4_1,nm_chest_B4_1_494,100000493,494,,Main Island Mountain Breakables,Chest
-nm_pot_B4_1,nm_pot_B4_1_200,100000199,200,,Main Island Mountain Breakables,Pot
-nm_pot_B4_2,nm_pot_B4_2_217,100000216,217,,Main Island Mountain Breakables,Pot
-nm_pot_B4_3,nm_pot_B4_3_693,100000692,693,,Main Island Mountain Breakables,Pot
-nm_pot_B4_4,nm_pot_B4_4_695,100000694,695,,Main Island Mountain Breakables,Pot
-nm_pot_B5_1,nm_pot_B5_1_1695,100001694,1695,,Main Island Mountain Breakables,Pot
-nm_pot_B5_2,nm_pot_B5_2_1709,100001708,1709,,Main Island Mountain Breakables,Pot
-nm_pot_B5_3,nm_pot_B5_3_1712,100001711,1712,,Main Island Mountain Breakables,Pot
-nec_race_B6_1,nec_race_B6_1_814,100000813,814,,Main Island Races,Race
-nec_pot_B8_1,nec_pot_B8_1_2071,100002070,2071,,Main Island Breakables,Pot
-nwt_pot_C1_1,nwt_pot_C1_1_366,100000365,366,,Tutorial Island Breakables,Pot
-nwt_pot_C1_2,nwt_pot_C1_2_367,100000366,367,,Tutorial Island Breakables,Pot
-nwt_pot_C2_1,nwt_pot_C2_1_372,100000371,372,,Tutorial Island Breakables,Pot
-nm_pot_C3_1,nm_pot_C3_1_1157,100001156,1157,,Main Island Breakables,Pot
-nm_pot_C3_2,nm_pot_C3_2_1159,100001158,1159,,Main Island Breakables,Pot
-nm_pot_C3C4_1,nm_pot_C3C4_1_696,100000695,696,,Main Island Mountain Breakables,Pot
-nm_pot_C4_1,nm_pot_C4_1_52,100000051,52,,Main Island Mountain Breakables,Pot
-nm_pot_C4_2,nm_pot_C4_2_80,100000079,80,,Main Island Mountain Breakables,Pot
-nm_pot_C4_3,nm_pot_C4_3_88,100000087,88,,Main Island Mountain Breakables,Pot
-nm_pot_C4_4,nm_pot_C4_4_101,100000100,101,,Main Island Mountain Breakables,Pot
-nm_pot_C4_5,nm_pot_C4_5_243,100000242,243,,Main Island Mountain Breakables,Pot
-nm_pot_C4_6,nm_pot_C4_6_1625,100001624,1625,,Main Island Mountain Breakables,Pot
-nm_pot_C4_7,nm_pot_C4_7_1167,100001166,1167,,Main Island Breakables,Pot
-nm_race_C4_1,nm_race_C4_1_304,100000303,304,,Main Island Races,Race
-nm_chest_C5_1,nm_chest_C5_1_1651,100001650,1651,,Main Island Mountain Breakables,Chest
-nm_pot_C5_1,nm_pot_C5_1_1662,100001661,1662,,Main Island Mountain Breakables,Pot
-nec_pot_C7_1,nec_pot_C7_1_1351,100001350,1351,,Main Island Breakables,Pot
-nec_pot_C7_2,nec_pot_C7_2_1352,100001351,1352,,Main Island Breakables,Pot
-nec_race_C7_1,nec_race_C7_1_754,100000753,754,,Main Island Races,Race
-nec_pot_C8_1,nec_pot_C8_1_1350,100001349,1350,,Main Island Breakables,Pot
-nec_pot_C8_2,nec_pot_C8_2_2072,100002071,2072,,Main Island Breakables,Pot
-nec_pot_C8_3,nec_pot_C8_3_2073,100002072,2073,,Main Island Breakables,Pot
-nwt_pot_D1_1,nwt_pot_D1_1_191,100000190,191,,Tutorial Island Breakables,Pot
-nwt_pot_D1_2,nwt_pot_D1_2_233,100000232,233,,Tutorial Island Breakables,Pot
-nwt_chest_D1_1,nwt_chest_D1_1_184,100000183,184,,Tutorial Island Breakables,Chest
-nm_pot_D3_1,nm_pot_D3_1_1195,100001194,1195,,Main Island Breakables,Pot
-nm_race_D5_1,nm_race_D5_1_1746,100001745,1746,,Main Island Races,Race
-nec_pot_D6_1,nec_pot_D6_1_7,100000006,7,,Main Island Breakables,Pot
-nec_pot_D7_1,nec_pot_D7_1_1363,100001362,1363,,Main Island Breakables,Pot
-nec_pot_D7_2,nec_pot_D7_2_1364,100001363,1364,,Main Island Breakables,Pot
-nec_pot_D7D8_1,nec_pot_D7D8_1_1362,100001361,1362,,Main Island Breakables,Pot
-ec_pot_D8_1,ec_pot_D8_1_492,100000491,492,,Main Island Breakables,Pot
-nec_chest_D8_1,nec_chest_D8_1_1361,100001360,1361,,Main Island Breakables,Chest
-wf_pot_E1_1,wf_pot_E1_1_1381,100001380,1381,,Main Island Breakables,Pot
-wf_pot_E1_2,wf_pot_E1_2_1382,100001381,1382,,Main Island Breakables,Pot
-wf_pot_E1_3,wf_pot_E1_3_1383,100001382,1383,,Main Island Breakables,Pot
-cr_pot_E3_1,cr_pot_E3_1_1127,100001126,1127,,Main Island Breakables,Pot
-cr_pot_E3E4_1,cr_pot_E3E4_1_1146,100001145,1146,,Main Island Breakables,Pot
-cr_pot_E3F3_1,cr_pot_E3F3_1_1124,100001123,1124,,Main Island Breakables,Pot
-cr_pot_E4_1,cr_pot_E4_1_2075,100002074,2075,,Main Island Breakables,Pot
-cr_chest_E4_1,cr_chest_E4_1_242,100000241,242,,Main Island Breakables,Chest
-ec_pot_E7_1,ec_pot_E7_1_63,100000062,63,,Main Island Breakables,Pot
-ec_pot_E7_2,ec_pot_E7_2_656,100000655,656,,Main Island Breakables,Pot
-ec_pot_E7_3,ec_pot_E7_3_1432,100001431,1432,,Main Island Breakables,Pot
-ec_pot_E7_4,ec_pot_E7_4_1445,100001444,1445,,Main Island Breakables,Pot
-cr_pot_F4_1,cr_pot_F4_1_2074,100002073,2074,,Main Island Breakables,Pot
-wf_race_F4_1,wf_race_F4_1_1410,100001409,1410,,Main Island Races,Race
-wf_pot_F4G4_1,wf_pot_F4G4_1_26,100000025,26,,Main Island Breakables,Pot
-ec_pot_F7_1,ec_pot_F7_1_118,100000117,118,,Main Island Breakables,Pot
-ec_pot_F8_1,ec_pot_F8_1_652,100000651,652,,Main Island Breakables,Pot
-wf_race_G0_1,wf_race_G0_1_73,100000072,73,,Main Island Races,Race
-wf_pot_G3_1,wf_pot_G3_1_1451,100001450,1451,,Main Island Breakables,Pot
-wf_pot_G3G4_1,wf_pot_G3G4_1_546,100000545,546,,Main Island Breakables,Pot
-wf_pot_G4_1,wf_pot_G4_1_547,100000546,547,,Main Island Breakables,Pot
-wf_pot_G4_2,wf_pot_G4_2_1541,100001540,1541,,Main Island Breakables,Pot
-wf_pot_G4_3,wf_pot_G4_3_1542,100001541,1542,,Main Island Breakables,Pot
-wf_pot_G4_4,wf_pot_G4_4_1543,100001542,1543,,Main Island Breakables,Pot
-ec_pot_G5_1,ec_pot_G5_1_2013,100002012,2013,,Main Island Breakables,Pot
-ec_chest_G6_1,ec_chest_G6_1_2027,100002026,2027,,Main Island Breakables,Chest
-ec_chest_G8_1,ec_chest_G8_1_154,100000153,154,,Main Island Breakables,Chest
-wf_pot_H2_1,Pot above Trish (Invisible Horse),100000094,95,,Main Island Breakables,Pot
-wf_race_H2_1,wf_race_H2_1_1400,100001399,1400,,Main Island Races,Race
-wf_chest_H4_1,wf_chest_H4_1_1519,100001518,1519,,Main Island Breakables,Chest
-wf_pot_H4_1,wf_pot_H4_1_1521,100001520,1521,,Main Island Breakables,Pot
-wf_pot_H4_2,wf_pot_H4_2_1533,100001532,1533,,Main Island Breakables,Pot
-ec_chest_H5_1,ec_chest_H5_1_767,100000766,767,,Main Island Breakables,Chest
-ec_pot_H5_1,ec_pot_H5_1_722,100000721,722,,Main Island Breakables,Pot
-ec_pot_H5_2,ec_pot_H5_2_723,100000722,723,,Main Island Breakables,Pot
-seb_pot_H8I8_1,seb_pot_H8I8_1_83,100000082,83,,Main Island Breakables,Pot
-seb_chest_H9_1,seb_chest_H9_1_202,100000201,202,,Main Island Breakables,Chest
-wf_pot_I4_1,wf_pot_I4_1_1518,100001517,1518,,Main Island Breakables,Pot
-seb_pot_I9_1,seb_pot_I9_1_70,100000069,70,,Main Island Breakables,Pot
-seb_pot_I9_2,seb_pot_I9_2_78,100000077,78,,Main Island Breakables,Pot
-wf_pot_J1_1,wf_pot_J1_1_1594,100001593,1594,,Main Island Breakables,Pot
-wf_pot_J1_2,wf_pot_J1_2_1595,100001594,1595,,Main Island Breakables,Pot
-wf_pot_J1_3,wf_pot_J1_3_1597,100001596,1597,,Main Island Breakables,Pot
-wf_pot_J3_1,wf_pot_J3_1_1585,100001584,1585,,Main Island Breakables,Pot
-wf_pot_J3_2,wf_pot_J3_2_1584,100001583,1584,,Main Island Breakables,Pot
-seb_pot_J6_1,seb_pot_J6_1_116,100000115,116,,Main Island Breakables,Pot
-seb_pot_J6_2,seb_pot_J6_2_102,100000101,102,,Main Island Breakables,Pot
+nec_pot_D6_7,Northeast (Canyon) - Pot (D6) on island in middle of pond northeast of playground,100000006,7,,Main Island Breakables,Pot
+wf_pot_F3_26,West (Forest) - Pot (F3) on north cliff edge of pond with dead trees,100000025,26,,Main Island Breakables,Pot
+nm_pot_C4_52,North (Mountain) - Pot (C4) part of Scooter's allergy quest (west),100000051,52,,Main Island Mountain Breakables,Pot
+ec_pot_E7_63,East (Creeklands) - Pot (E7) northwest of Splash Pad below cliff to northeast,100000062,63,,Main Island Breakables,Pot
+seb_pot_I9_70,Southeast (Beach) - Pot (I9) on south end of Skate Pug's island (west),100000069,70,,Main Island Breakables,Pot
+wf_race_G0_73,West (Forest) - Race (G0) starting from island west of Billy's Forest location,100000072,73,,Main Island Races,Race
+seb_pot_I9_78,Southeast (Beach) - Pot (I9) on south end of Skate Pug's island (east),100000077,78,,Main Island Breakables,Pot
+nm_pot_C4_80,"North (Mountain) - Pot (C4) part of Scooter's allergy quest (peak northwest, east)",100000079,80,,Main Island Mountain Breakables,Pot
+seb_pot_H8_83,Southeast (Beach) - Pot (H8) on taller section northwest of Skate Pug,100000082,83,,Main Island Breakables,Pot
+nm_pot_C4_88,"North (Mountain) - Pot (C4) part of Scooter's allergy quest (peak northwest, west)",100000087,88,,Main Island Mountain Breakables,Pot
+wf_pot_H2_95,West (Forest) - Pot (H2) above Trish (Invisible Horse),100000094,95,,Main Island Breakables,Pot
+nm_pot_C4_101,North (Mountain) - Pot (C4) part of Scooter's allergy quest (southwest),100000100,101,,Main Island Mountain Breakables,Pot
+seb_pot_J6_102,Southeast (Beach) - Pot (J6) on small tall island east of Leeland's peninsula,100000101,102,,Main Island Breakables,Pot
+seb_pot_I6_116,Southeast (Beach) - Pot (I6) on small island south of Marlow's deck,100000115,116,,Main Island Breakables,Pot
+ec_pot_F7_118,East (Creeklands) - Pot (F7) south of Splash Pad,100000117,118,,Main Island Breakables,Pot
+ec_chest_G8_154,East (Creeklands) - Chest (G8) on peak south of Splash Pad,100000153,154,,Main Island Breakables,Chest
+nwt_pot_B1_168,Tutorial Island - Pot (B1) between two waterfalls below ???'s Tutorial Island location,100000167,168,,Tutorial Island Breakables,Pot
+nwt_pot_B1_169,Tutorial Island - Pot (B1) on pillar by waterfalls,100000168,169,,Tutorial Island Breakables,Pot
+nwt_pot_B2_176,Tutorial Island - Pot (B2) on green cliff east of Simon's starting location,100000175,176,,Tutorial Island Breakables,Pot
+nwt_pot_B0_180,Tutorial Island - Pot (B0) at the end of the bone path on the west of Tutorial Island,100000179,180,,Tutorial Island Breakables,Pot
+nwt_chest_D1_184,Tutorial Island - Chest (D1) on small island south of Jill's picnic table,100000183,184,,Tutorial Island Breakables,Chest
+nwt_chest_A3_185,Tutorial Island - Chest (A3) below Gerald to east,100000184,185,,Main Island Breakables,Chest
+nwt_pot_B2_190,Tutorial Island - Pot (B2) below Gerald to the south near water level (westmost),100000189,190,,Tutorial Island Breakables,Pot
+nwt_pot_D0_191,Tutorial Island - Pot (D0) on small peninsula southwest of Jill's picnic table,100000190,191,,Tutorial Island Breakables,Pot
+nm_pot_B4_200,North (Mountain) - Pot (B4) on cliffside cutout east of raised area in northwest corner of Mountain (east),100000199,200,,Main Island Mountain Breakables,Pot
+seb_chest_H9_202,Southeast (Beach) - Chest (H9) on north end of Skate Pug's island,100000201,202,,Main Island Breakables,Chest
+nwt_pot_B2_203,Tutorial Island - Pot (B2) on green cliff northwest of Martin's lawn chairs,100000202,203,,Tutorial Island Breakables,Pot
+nm_pot_B4_217,North (Mountain) - Pot (B4) on cliffside cutout east of raised area in northwest corner of Mountain (west),100000216,217,,Main Island Mountain Breakables,Pot
+nwt_pot_B2_220,Tutorial Island - Pot (B2) below Gerald to the south near water level (eastmost),100000219,220,,Tutorial Island Breakables,Pot
+nwt_pot_B1_226,Tutorial Island - Pot (B1) between two waterfalls on same level as ???'s Tutorial Island location,100000225,226,,Tutorial Island Breakables,Pot
+nwt_pot_B2_229,Tutorial Island - Pot (B2) below Gerald to the south near water level (middle),100000228,229,,Tutorial Island Breakables,Pot
+nwt_pot_D1_233,Tutorial Island - Pot (D1) on small island with chest south of Jill's picnic table,100000232,233,,Tutorial Island Breakables,Pot
+nwt_pot_B0_235,Tutorial Island - Pot (B0) southwest of the three ropes in northwest of Tutorial Island,100000234,235,,Tutorial Island Breakables,Pot
+nwt_pot_B1_238,Tutorial Island - Pot (B1) near middle rope of the three ropes in northwest of Tutorial Island,100000237,238,,Tutorial Island Breakables,Pot
+cr_chest_E4_242,Central (Ravine) - Chest (E4) under overhang near river,100000241,242,,Main Island Breakables,Chest
+nm_pot_C4_243,North (Mountain) - Pot (C4) part of Scooter's allergy quest (northeast),100000242,243,,Main Island Mountain Breakables,Pot
+nm_race_C4_304,North (Mountain) - Race (C4) starting on western peak of the Mountain,100000303,304,,Main Island Races,Race
+nwt_pot_C1_366,Tutorial Island - Pot (C1) on rock near Stick pickup location,100000365,366,,Tutorial Island Breakables,Pot
+nwt_pot_C1_367,Tutorial Island - Pot (C1) on hill overlooking Jill's picnic table,100000366,367,,Tutorial Island Breakables,Pot
+nwt_pot_C2_372,Tutorial Island - Pot (C2) on cliff overlooking rope crossing the waterfall,100000371,372,,Tutorial Island Breakables,Pot
+nwt_chest_B0_373,Tutorial Island - Chest (B1) on mid-cliff outcropping visible from bone path on the west of Tutorial Island,100000372,373,,Main Island Breakables,Chest
+nwt_race_C2_383,Tutorial Island - Race (C2) starting near Martin's lawn chairs,100000382,383,,Main Island Races,Race
+nwt_race_C2_392,Tutorial Island - Race (C2) starting near grassy cliff,100000391,392,,Main Island Races,Race
+nwt_pot_B1_407,Tutorial Island - Pot (B1) on peak north of tallest peak on Tutorial Island,100000406,407,,Tutorial Island Breakables,Pot
+nwt_pot_B1_412,Tutorial Island - Pot (B1) west of rope to tallest peaks on Tutorial Island,100000411,412,,Tutorial Island Breakables,Pot
+nwt_pot_A3_423,Tutorial Island - Pot (A3) on green outcropping below and east of cliffs east of three ropes,100000422,423,,Tutorial Island Breakables,Pot
+nwt_pot_B1_425,Tutorial Island - Pot (B1) on peak south of the three ropes in northwest of Tutorial Island,100000424,425,,Tutorial Island Breakables,Pot
+nwt_pot_A3_426,Tutorial Island - Pot (A3) on green outcropping within cliffs east of three ropes,100000425,426,,Tutorial Island Breakables,Pot
+nwt_pot_B2_427,Tutorial Island - Pot (B2) on tall peak west of Gerald,100000426,427,,Tutorial Island Breakables,Pot
+nwt_chest_B1_433,Tutorial Island - Chest (B1) on tallest peak of Tutorial Island,100000432,433,,Main Island Breakables,Chest
+ec_pot_D8_492,East (Creeklands) - Pot (D8) northwest of Jada's pump below taller cliffs,100000491,492,,Main Island Breakables,Pot
+nm_chest_B3_494,North (Mountain) - Chest (B3) on northwest cliffside of Mountain,100000493,494,,Main Island Mountain Breakables,Chest
+wf_pot_G3_546,West (Forest) - Pot (G3) on west edge of pond with dead trees,100000545,546,,Main Island Breakables,Pot
+wf_pot_G4_547,West (Forest) - Pot (G4) on south edge of pond with dead trees,100000546,547,,Main Island Breakables,Pot
+nwt_pot_A1_562,Tutorial Island - Pot (A1) near highest rope of the three ropes in northwest of Tutorial Island,100000561,562,,Tutorial Island Breakables,Pot
+ec_pot_F9_652,East (Creeklands) - Pot (F9) on peak north of Duke's pump,100000651,652,,Main Island Breakables,Pot
+ec_pot_E7_656,East (Creeklands) - Pot (E7) northwest of Splash Pad on cliff (southwest),100000655,656,,Main Island Breakables,Pot
+nm_pot_B4_693,North (Mountain) - Pot (B4) on raised area in northwest corner of Mountain (northeast),100000692,693,,Main Island Mountain Breakables,Pot
+nm_pot_B4_695,North (Mountain) - Pot (B4) on raised area in northwest corner of Mountain (center),100000694,695,,Main Island Mountain Breakables,Pot
+nm_pot_C3_696,North (Mountain) - Pot (C3) on raised area in northwest corner of Mountain (southwest),100000695,696,,Main Island Mountain Breakables,Pot
+ec_pot_H5_722,East (Creeklands) - Pot (H5) on pair of peaks northwest of Tony's chessboard (south),100000721,722,,Main Island Breakables,Pot
+ec_pot_H5_723,East (Creeklands) - Pot (H5) on pair of peaks northwest of Tony's chessboard (north),100000722,723,,Main Island Breakables,Pot
+nec_race_C7_754,Northeast (Canyon) - Race (C7) starting west of Kasen,100000753,754,,Main Island Races,Race
+ec_chest_H5_767,East (Creeklands) - Chest (H5) on peak north-northwest of Tony's chessboard,100000766,767,,Main Island Breakables,Chest
+nec_race_B6_814,Northeast (Canyon) - Race (B6) starting east of waterfall on north side of Mountain,100000813,814,,Main Island Races,Race
+cr_pot_E2_1124,Central (Ravine) - Pot (E2) on hill on path east from Penelope's waterfall,100001123,1124,,Main Island Breakables,Pot
+cr_pot_E3_1127,Central (Ravine) - Pot (E3) south of beach where Esther roams,100001126,1127,,Main Island Breakables,Pot
+cr_pot_E3_1146,Central (Ravine) - Pot (E3) south of central river east of path south from Esther,100001145,1146,,Main Island Breakables,Pot
+nm_pot_C3_1157,North (Mountain) - Pot (C3) on cliff area across from Martin's deck (on raised section),100001156,1157,,Main Island Breakables,Pot
+nm_pot_C3_1159,North (Mountain) - Pot (C3) on cliff outcropping northwest and down from Twig,100001158,1159,,Main Island Breakables,Pot
+nm_pot_C3_1167,North (Mountain) - Pot (C3) on cliff area across from Martin's deck (next to cliffface),100001166,1167,,Main Island Breakables,Pot
+nm_pot_D3_1195,North (Mountain) - Pot (D3) on cliff outcropping west and down from Twig,100001194,1195,,Main Island Breakables,Pot
+nec_pot_C8_1350,Northeast (Canyon) - Pot (C8) at end of Kasen's stone outcropping,100001349,1350,,Main Island Breakables,Pot
+nec_pot_C7_1351,Northeast (Canyon) - Pot (C7) on cliffside west of and below Mochi,100001350,1351,,Main Island Breakables,Pot
+nec_pot_C8_1352,Northeast (Canyon) - Pot (C8) on cliffside east of and below Mochi,100001351,1352,,Main Island Breakables,Pot
+nec_chest_D8_1361,Northeast (Canyon) - Chest (D8) on peak northwest of Jada's pump,100001360,1361,,Main Island Breakables,Chest
+nec_pot_D8_1362,Northeast (Canyon) - Pot (D8) on peak northwest of Jada's pump,100001361,1362,,Main Island Breakables,Pot
+nec_pot_D7_1363,Northeast (Canyon) - Pot (D7) on peak by ropes north of Splash Pan (north),100001362,1363,,Main Island Breakables,Pot
+nec_pot_D7_1364,Northeast (Canyon) - Pot (D7) on peak by ropes north of Splash Pan (south),100001363,1364,,Main Island Breakables,Pot
+wf_pot_E1_1381,West (Forest) - Pot (E1) on cliff side west of Penelope's waterfall (west and up the cliff),100001380,1381,,Main Island Breakables,Pot
+wf_pot_E1_1382,West (Forest) - Pot (E1) on cliff side west of Penelope's waterfall (east and down the cliff),100001381,1382,,Main Island Breakables,Pot
+wf_pot_E1_1383,West (Forest) - Pot (E1) on cliff side west of Penelope's waterfall (east and up the cliff),100001382,1383,,Main Island Breakables,Pot
+wf_race_H1_1400,West (Forest) - Race (H1) starting from southwest of The Tree,100001399,1400,,Main Island Races,Race
+wf_race_F4_1410,West (Forest) - Race (F4) starting from west path exit from playground,100001409,1410,,Main Island Races,Race
+ec_pot_E7_1432,East (Creeklands) - Pot (E7) northwest of Splash Pad on cliff (northwest),100001431,1432,,Main Island Breakables,Pot
+ec_pot_E7_1445,East (Creeklands) - Pot (E7) northwest of Splash Pad on cliff (southeast),100001444,1445,,Main Island Breakables,Pot
+wf_pot_G3_1451,West (Forest) - Pot (G3) on cliff overlooking pond with dead trees from the west side,100001450,1451,,Main Island Breakables,Pot
+nec_pot_A8_1457,Northeast (Canyon) - Pot (A8) on west peak accessible from Billy,100001456,1457,,Main Island Breakables,Pot
+nec_pot_A8_1464,Northeast (Canyon) - Pot (A8) on north peak accessible from Billy,100001463,1464,,Main Island Breakables,Pot
+wf_pot_H4_1518,West (Forest) - Pot (H4) south of tallest peak north of Pepperoni's obstacle course,100001517,1518,,Main Island Breakables,Pot
+wf_chest_H4_1519,West (Forest) - Chest (H4) on tallest peak north of Pepperoni's obstacle course,100001518,1519,,Main Island Breakables,Chest
+wf_pot_H4_1521,West (Forest) - Pot (H4) east of tallest peak north of Pepperoni's obstacle course,100001520,1521,,Main Island Breakables,Pot
+wf_pot_H4_1533,West (Forest) - Pot (H4) north of tallest peak north of Pepperoni's obstacle course,100001532,1533,,Main Island Breakables,Pot
+wf_pot_G4_1541,West (Forest) - Pot (G4) on tall peak east of pond with dead trees (east),100001540,1541,,Main Island Breakables,Pot
+wf_pot_G4_1542,West (Forest) - Pot (G4) on tall peak east of pond with dead trees (west),100001541,1542,,Main Island Breakables,Pot
+wf_pot_G4_1543,West (Forest) - Pot (G4) south of tall peak east of pond with dead trees,100001542,1543,,Main Island Breakables,Pot
+wf_pot_J2_1584,West (Forest) - Pot (J3) on peninsula with stumps southeast of Ninja Clan (west),100001583,1584,,Main Island Breakables,Pot
+wf_pot_J3_1585,West (Forest) - Pot (J3) on peninsula with stumps southeast of Ninja Clan (east),100001584,1585,,Main Island Breakables,Pot
+wf_pot_J0_1594,West (Forest) - Pot (J0) in tidepool in southwest corner of island (northwest),100001593,1594,,Main Island Breakables,Pot
+wf_pot_J1_1595,West (Forest) - Pot (J1) in tidepool in southwest corner of island (southwest),100001594,1595,,Main Island Breakables,Pot
+wf_pot_J1_1597,West (Forest) - Pot (J1) in tidepool in southwest corner of island (southeast),100001596,1597,,Main Island Breakables,Pot
+nm_pot_C4_1625,"North (Mountain) - Pot (C4) on northwest tall peak, north of race",100001624,1625,,Main Island Mountain Breakables,Pot
+nm_chest_C5_1651,North (Mountain) - Chest (C5) below rope northwest of stage area,100001650,1651,,Main Island Mountain Breakables,Chest
+nm_pot_C5_1662,North (Mountain) - Pot (C5) west and up from stage,100001661,1662,,Main Island Mountain Breakables,Pot
+nm_pot_B5_1695,North (Mountain) - Pot (B5) part of Tanner's Pot Mimic quest (up on rock formation),100001694,1695,,Main Island Mountain Breakables,Pot
+nm_pot_B5_1709,North (Mountain) - Pot (B5) part of Tanner's Pot Mimic quest (next to Tanner),100001708,1709,,Main Island Mountain Breakables,Pot
+nm_pot_B5_1712,North (Mountain) - Pot (B5) part of Tanner's Pot Mimic quest (southwest of Tanner),100001711,1712,,Main Island Mountain Breakables,Pot
+nm_race_D5_1746,North (Mountain) - Race (D5) starting north of the playground and heading up the Mountain,100001745,1746,,Main Island Races,Race
+ec_pot_G5_2013,East (Creeklands) - Pot (G5) west of Junk4Trash in secluded area filled with ninjas and mimics,100002012,2013,,Main Island Breakables,Pot
+ec_chest_G6_2027,East (Creeklands) - Chest (G6) north of Junk4Trash,100002026,2027,,Main Island Breakables,Chest
+nec_pot_B8_2071,Northeast (Canyon) - Pot (B8) on tall rock southwest from Billy's Canyon location,100002070,2071,,Main Island Breakables,Pot
+nec_pot_C9_2072,Northeast (Canyon) - Pot (C9) on Ssumantha's island (lower),100002071,2072,,Main Island Breakables,Pot
+nec_pot_C9_2073,Northeast (Canyon) - Pot (C9) on Ssumantha's island (upper),100002072,2073,,Main Island Breakables,Pot
+cr_pot_F4_2074,Central (Ravine) - Pot (F4) on southern tall peak west of playground,100002073,2074,,Main Island Breakables,Pot
+cr_pot_E4_2075,Central (Ravine) - Pot (E4) on northern tall peak west of playground,100002074,2075,,Main Island Breakables,Pot
 ti_avery_recipe,Tutorial Island - Avery! Hat Recipe,100002192,,Hat_Basic,Tutorial Island,
 ti_avery_quest_item,Tutorial Island - Avery! Quest Completion,100002193,,Shirt,Tutorial Island,
 ti_jill_stick,Tutorial Island - Stick Pickup,100002194,,Sword_Stick,Tutorial Island,
@@ -170,7 +170,7 @@ sj_leeland_quest_npc,South (Jetty) - Leeland (Painting Rabbit) Quest Completion 
 sj_leeland_quest_item,South (Jetty) - Leeland (Painting Rabbit) Quest Completion Item,100002245,,Sword_Paintbrush,Main Island,
 wf_sierra_quest_npc,West (Forest) - Sierra (Origami Crane) Quest Completion NPC,100002246,,NPC_Ninja_Crane,Main Island,
 wf_sierra_quest_item,West (Forest) - Sierra (Origami Crane) Quest Completion Item,100002247,,Item_Shuriken,Main Island,
-wf_romeo_item,West (Forest) - Romeo (Ninja Rat) Nunchucks,100002248,,Sword_Nunchucks,Main Island,
+wf_romeo_item,West (Forest) - Romeo (Ninja Anteater) Nunchucks,100002248,,Sword_Nunchucks,Main Island,
 wf_ninjaclan_quest_npc,West (Forest) - Ninja Clan Quest Completion NPCs,100002249,,NPC_Ninja_Anteater,Main Island,
 wf_ninjaclan_quest_item,West (Forest) - Ninja Clan Quest Completion Item,100002250,,Hat_Ninja,Main Island,
 wf_pepperoni_quest_npc,West (Forest) - Pepperoni (Obstacle Ostrich) Quest Completion NPCs,100002251,,NPC_Obstacle_Ostrich,Main Island,
