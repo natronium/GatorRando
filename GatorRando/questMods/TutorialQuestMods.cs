@@ -10,9 +10,13 @@ static class TutorialQuestMods
     {
         ReenableTutorialQuests();
         GameObject act1 = Util.GetByPath("NorthWest (Tutorial Island)/Act 1");
-        QuestStates act1_qs = act1.GetComponent<QuestStates>();
-        act1_qs.states[0].onDeactivate.AddListener(AdvanceToEndOfTutorial);
-        act1_qs.states[3].onActivate.AddListener(ReenableTutorialQuests);
+        QuestStates act1QuestStates = act1.GetComponent<QuestStates>();
+        act1QuestStates.states[0].onDeactivate.AddListener(AdvanceToEndOfTutorial);
+        if (act1QuestStates.StateID < 2)
+        {
+            AdvanceToEndOfTutorial();
+        }
+        act1QuestStates.states[3].onActivate.AddListener(ReenableTutorialQuests);
         GameObject manager = Util.GetByPath("Managers");
         Game game = manager.GetComponent<Game>();
         game.SetToStory();
@@ -21,10 +25,10 @@ static class TutorialQuestMods
     private static void AdvanceToEndOfTutorial()
     {
         GameObject act1 = Util.GetByPath("NorthWest (Tutorial Island)/Act 1");
-        QuestStates act1qs = act1.GetComponent<QuestStates>();
-        if (act1qs.StateID < 2)
+        QuestStates act1QuestStates = act1.GetComponent<QuestStates>();
+        if (act1QuestStates.StateID < 2)
         {
-            act1qs.ProgressState(2);
+            act1QuestStates.ProgressState(2);
             ReenableTutorialQuests();
         }
     }
@@ -32,10 +36,10 @@ static class TutorialQuestMods
     private static void ReenableTutorialQuests()
     {
         GameObject act1 = Util.GetByPath("NorthWest (Tutorial Island)/Act 1");
-        LSQuests act1lsq = act1.GetComponent<LSQuests>();
-        act1lsq.enabled = true;
-        GameObject act1quests = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests");
-        act1quests.SetActive(true);
+        LSQuests act1LSQuests = act1.GetComponent<LSQuests>();
+        act1LSQuests.enabled = true;
+        GameObject act1Quests = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests");
+        act1Quests.SetActive(true);
     }
 
 }
