@@ -116,6 +116,16 @@ public class ArchipelagoManager : MonoBehaviour
     {
         return LoginInfo != null && LoginInfo.Successful;
     }
+
+    public static void Disconnect()
+    {
+        if (IsConnected())
+        {
+            Plugin.LogWarn("Disconnected from multiworld");
+            Session.Socket.DisconnectAsync();
+        }
+    }
+
     private static void ScoutLocations()
     {
         Session.Locations.ScoutLocationsAsync([.. Session.Locations.AllLocations]).ContinueWith(locationInfoPacket =>

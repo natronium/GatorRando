@@ -53,6 +53,9 @@ static class SettingsMods
         back_button.SetActive(false);
         LoadScene backToTitle = Util.GetByPath("Canvas/Pause Menu/Pause Content/Back to Title").GetComponent<LoadScene>();
         GameObject backToTitleButton = CreateSettingsButton(2,"Back To Title","return to title if you are unable to connect to an Archipelago game server (or chose the wrong save file)",backToTitle.DoLoadScene);
+    
+        // Add Disconnect to Back To Title button
+        Util.GetByPath("Canvas/Pause Menu/Pause Content/Back to Title").GetComponent<Button>().onClick.AddListener(ArchipelagoManager.Disconnect);
     }
 
     private static GameObject CreateStringSetting(int siblingIndex, string name, string description, int charLimit, bool shrink_to_fit, bool saveToGameData, InputField.ContentType contentType = InputField.ContentType.Standard)

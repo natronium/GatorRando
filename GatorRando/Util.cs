@@ -89,6 +89,7 @@ public static class Util
         {
             return FindItemObjectByName("Placeholder").sprite;
         }
+        // TODO: Add sprite for Friends and grab sprite for Craft Stuff
     }
 
     public static string FindKeyByPrefix(string prefix)
