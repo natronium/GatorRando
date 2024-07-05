@@ -50,11 +50,11 @@ public static class ArchipelagoManager
         }
     }
 
-    private static void Connect(string server, int port, string user, string password)
+    private static bool Connect(string server, int port, string user, string password)
     {
         if (Session is not null && Session.Socket.Connected)
         {
-            return;
+            return false;
         }
         
         Session = ArchipelagoSessionFactory.CreateSession(server, port);
@@ -83,11 +83,12 @@ public static class ArchipelagoManager
             }
 
             Plugin.LogError(errorMessage);
-            return;
+            return false;
 
         }
 
         LoginInfo = (LoginSuccessful)result;
+        return true;
     }
 
     public static void Disconnect()
@@ -108,17 +109,19 @@ public static class ArchipelagoManager
         (string server, int port) = GetServer();
         string user = GetUser();
         string password = GetPassword();
-        Connect(server, port, user, password);
-        // wait until Session is connected & knows about all its items
-        Plugin.Instance.StartCoroutine(Util.RunAfterCoroutine(0.5f, () => IsFullyConnected, () =>
+        if (Connect(server, port, user, password))
         {
-            postConnectAction();
-            ReceiveUnreceivedItems();
-            TriggerItemListeners();//trigger listener functions for *any* item we have, not just recently received ones
-            TriggerLocationListeners();//trigger listener functions for any location that is collected
-            AttachListeners();//hook up listener functions for future live updates
-            ScoutLocations();
-        }));
+        // wait until Session is connected & knows about all its items
+            Plugin.Instance.StartCoroutine(Util.RunAfterCoroutine(0.5f, () => IsFullyConnected, () =>
+            {
+                postConnectAction();
+                ReceiveUnreceivedItems();
+                TriggerItemListeners();//trigger listener functions for *any* item we have, not just recently received ones
+                TriggerLocationListeners();//trigger listener functions for any location that is collected
+                AttachListeners();//hook up listener functions for future live updates
+                ScoutLocations();
+            }));
+        }
 
         static (string server, int port) GetServer()
         {
