@@ -26,6 +26,7 @@ static class Junk4TrashQuestMods
                     }
                 }
             }
+            junkShop.UpdateInventory();
         }
     }
 }
