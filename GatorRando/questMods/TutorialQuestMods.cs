@@ -32,6 +32,7 @@ static class TutorialQuestMods
             act1QuestStates.ProgressState(2);
             ReenableTutorialQuests();
         }
+        act1QuestStates.states[2].stateObjects[0].SetActive(true); // Reenable End object to try to fix Cutscene in Start With Freeplay = true
     }
 
     private static void ReenableTutorialQuests()
