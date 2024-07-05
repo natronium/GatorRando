@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace GatorRando.prefabMods;
@@ -19,10 +20,14 @@ static class BalloonMods
         {
             foreach (string item in items)
             {
-                GameObject itemInUse = Util.GetByPath(basePath + anchor + item);
-                if (itemInUse != null)
+                try
                 {
+                    GameObject itemInUse = Util.GetByPath(basePath + anchor + item);
                     itemInUse.GetComponent<ItemSpawnObject>().minimumStamina = -1;
+                }
+                catch(InvalidOperationException)
+                {
+                    // Balloon-type item is not at that location, so we don't need to modify it
                 }
             }
         }

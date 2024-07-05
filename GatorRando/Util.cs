@@ -43,16 +43,9 @@ public static class Util
         GameObject current = root;
         foreach (var element in elements.Skip(1))
         {
-            try 
-            {
-                current = current.transform.Cast<Transform>()
-                .First((t) => t.name == element)
-                .gameObject;
-            }
-            catch(NullReferenceException)
-            {
-                return null;
-            }
+            current = current.transform.Cast<Transform>()
+            .First((t) => t.name == element)
+            .gameObject;
         }
         return current;
     }

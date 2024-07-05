@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,16 +13,23 @@ static class UINameInputPatch
     static void PostConfirm()
     {
         // Update the text in the settings menu to reflect the new player name
-        GameObject player_name = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Rename Character");
-        GameObject player_label = player_name.transform.Find("Label").gameObject;
-        Text player_label_text = player_label.GetComponent<Text>();
-        player_label_text.text = "player: " + GameData.g.gameSaveData.playerName; // Get player name and display it here
-        // Go back into Settings menu
-        Game.State = GameState.Menu;
-        GameObject pausemenu = Util.GetByPath("Canvas/Pause Menu");
-        pausemenu.SetActive(true);
-        GameObject settings = Util.GetByPath("Canvas/Pause Menu/Settings");
-        settings.SetActive(true);
+        try
+        {
+            GameObject player_name = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Rename Character");
+            GameObject player_label = player_name.transform.Find("Label").gameObject;
+            Text player_label_text = player_label.GetComponent<Text>();
+            player_label_text.text = "player: " + GameData.g.gameSaveData.playerName; // Get player name and display it here
+            // Go back into Settings menu
+            Game.State = GameState.Menu;
+            GameObject pausemenu = Util.GetByPath("Canvas/Pause Menu");
+            pausemenu.SetActive(true);
+            GameObject settings = Util.GetByPath("Canvas/Pause Menu/Settings");
+            settings.SetActive(true);
+        }
+        catch(InvalidOperationException)
+        {
+            // When setting name in Prologue, the Island version of Settings Menu doesn't exist yet
+        }
     }
 
     [HarmonyPostfix]
