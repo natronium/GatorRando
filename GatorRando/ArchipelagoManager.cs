@@ -50,29 +50,19 @@ public static class ArchipelagoManager
         }
     }
 
-    //TODO take connection info as parameters instead of looking it up of our own initiative
-    private static void Connect()
+    private static void Connect(string server, int port, string user, string password)
     {
         if (Session is not null && Session.Socket.Connected)
         {
             return;
         }
-        // TODO: Refactor getters out
-        string serverPrefix = "server address";
-        string serverWithPrefix = Util.FindKeyByPrefix(serverPrefix);
-        if (serverWithPrefix == "")
-        {
-            throw new Exception("No server address has been set in the Settings Menu");
-        }
-        string server = serverWithPrefix.Remove(0, serverPrefix.Length);
-        string user = GameData.g.gameSaveData.playerName;
-        int port = GameData.g.ReadInt("server port");
-
+        
         Session = ArchipelagoSessionFactory.CreateSession(server, port);
         LoginResult result;
         try
         {
-            result = Session.TryConnectAndLogin("Lil Gator Game", user, ItemsHandlingFlags.AllItems);
+            //TODO: report more useful fields
+            result = Session.TryConnectAndLogin("Lil Gator Game", user, ItemsHandlingFlags.AllItems, null, null, null, password);
         }
         catch (Exception e)
         {
@@ -115,7 +105,10 @@ public static class ArchipelagoManager
     public static void InitiateNewAPSession(Action postConnectAction)
     {
         Disconnect();
-        Connect();
+        (string server, int port) = GetServer();
+        string user = GetUser();
+        string password = GetPassword();
+        Connect(server, port, user, password);
         // wait until Session is connected & knows about all its items
         Plugin.Instance.StartCoroutine(Util.RunAfterCoroutine(0.5f, () => IsFullyConnected, () =>
         {
@@ -126,6 +119,40 @@ public static class ArchipelagoManager
             AttachListeners();//hook up listener functions for future live updates
             ScoutLocations();
         }));
+
+        static (string server, int port) GetServer()
+        {
+            string serverPrefix = "server address:port";
+            string serverWithPrefix = Util.FindKeyByPrefix(serverPrefix);
+            if (serverWithPrefix == "")
+            {
+                throw new Exception("No server address has been set in the Settings Menu");
+            }
+            string serverAddressPort = serverWithPrefix.Remove(0, serverPrefix.Length);
+            string[] serverComponents = serverAddressPort.Split(':');
+            string server = serverComponents[0];
+            int port = int.Parse(serverComponents[1]);
+            return (server, port);
+        }
+
+        static string GetUser()
+        {
+            return GameData.g.gameSaveData.playerName;
+        }
+
+        static string GetPassword()
+        {
+            string passwordPrefix = "password";
+            string passwordWithPrefix = Util.FindKeyByPrefix(passwordPrefix);
+            if (passwordWithPrefix == "")
+            {
+                return "";
+            }
+            else
+            {
+                return passwordWithPrefix.Remove(0, passwordPrefix.Length);
+            }
+        }
 
         static void ReceiveUnreceivedItems()
         {

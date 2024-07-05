@@ -31,8 +31,8 @@ static class SettingsMods
         );
 
         //Text fields for server address and port
-        CreateStringSetting(4, "Server Address", "type in Archipelago server address", 20, true, true);
-        CreateStringSetting(5, "Server Port", "type in Archipelago server port", 5, false, true, InputField.ContentType.IntegerNumber);
+        CreateStringSetting(4, "Server Address:Port", "type in Archipelago server address formated as address:port", 20, true, true);
+        CreateStringSetting(5, "Password", "type in Archipelago server password (if no password, leave blank)", 30, true, true, InputField.ContentType.Password);
 
         //Borrow character rename for player name
         ReworkPlayerRename();
