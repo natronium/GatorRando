@@ -38,7 +38,12 @@ public class Plugin : BaseUnityPlugin
         {
             Debug.Log("OnSceneLoaded: " + scene.name);
             Debug.Log(mode);
-            if (scene.name == "Island")
+            
+            if (scene.name == "Prologue")
+            {
+                TitleScreenMods.Edits();
+            }
+            else if (scene.name == "Island")
             {
                 ApplyQuestEdits();
                 ApplyUIEdits();
