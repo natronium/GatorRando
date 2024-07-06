@@ -38,7 +38,7 @@ public class Plugin : BaseUnityPlugin
         {
             Debug.Log("OnSceneLoaded: " + scene.name);
             Debug.Log(mode);
-            
+
             if (scene.name == "Prologue")
             {
                 TitleScreenMods.Edits();
@@ -49,6 +49,7 @@ public class Plugin : BaseUnityPlugin
                 ApplyUIEdits();
                 BalloonMods.EditBalloonStamina();
                 SettingsMods.ForceIntoSettingsMenu();
+                APConnectedUI.ShowAPQuest();
             }
 
             static void ApplyQuestEdits()
@@ -102,6 +103,7 @@ public class Plugin : BaseUnityPlugin
 
         // Junk4Trash Edits
         Junk4TrashQuestMods.HideCollectedShopLocations();
+        APConnectedUI.HideAPQuest();
     }
 
     public static void LogInfo(string infoMessage)

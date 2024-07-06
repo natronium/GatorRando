@@ -1,4 +1,5 @@
 using System;
+using GatorRando.UIMods;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,5 +38,6 @@ static class UINameInputPatch
     static void PostOnDestroy() {
         // Go back into Settings menu
         SettingsMods.ForceIntoSettingsMenu();
+        APConnectedUI.ShowAPQuest();
     }
 }
