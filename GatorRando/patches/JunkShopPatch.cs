@@ -57,7 +57,6 @@ static class JunkShopPatch
                 _ => instruction
             };
 
-            Plugin.LogDebug($"{instruction}");
             counter++;
             yield return newInstruction;
         }
