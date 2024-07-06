@@ -45,10 +45,6 @@ static class APConnectedUI
     {
         QuestProfile APQuestProfile = Util.GetByPath("Terrain/QuestZones/AP Quest Zone").GetComponent<QuestZone>().questProfile;
         QuestTrackerPopup questTrackerPopup = Util.GetByPath("Canvas/Notifications/Quest Tracker").GetComponent<QuestTrackerPopup>();
-        // questTrackerPopup.displayedProfile = APQuestProfile;
-        // GameObject questTrackerPopupObject = Util.GetByPath("Canvas/Notifications/Quest Tracker/Quest Tracker Popup");
-        // questTrackerPopupObject.SetActive(false);
-        // questTrackerPopupObject.SetActive(true);
         questTrackerPopup.DisplayQuest(APQuestProfile);
         questTrackerPopup.hideBehavior.autoHideTime = -1f;
     }
@@ -59,6 +55,6 @@ static class APConnectedUI
         Util.GetByPath("Terrain/QuestZones/AP Quest Zone").GetComponent<QuestZone>().questProfile.MarkTaskComplete(0);
         Util.GetByPath("Terrain/QuestZones/AP Quest Zone").SetActive(false);
         QuestTrackerPopup questTrackerPopup = Util.GetByPath("Canvas/Notifications/Quest Tracker").GetComponent<QuestTrackerPopup>();
-        questTrackerPopup.DisplayQuest(null);
+        // questTrackerPopup.DisplayQuest(null);
     }
 }
