@@ -48,7 +48,7 @@ public class Plugin : BaseUnityPlugin
                 ApplyQuestEdits();
                 ApplyUIEdits();
                 BalloonMods.EditBalloonStamina();
-                ForceIntoSettingsMenu();
+                SettingsMods.ForceIntoSettingsMenu();
             }
 
             static void ApplyQuestEdits()
@@ -82,16 +82,7 @@ public class Plugin : BaseUnityPlugin
                 QuestItems.AddItems();
                 InventoryMods.AddQuestItemTab();
                 SettingsMods.Edits();
-            }
-
-            static void ForceIntoSettingsMenu()
-            {
-                // Force into settings menu
-                Game.State = GameState.Menu;
-                GameObject pausemenu = Util.GetByPath("Canvas/Pause Menu");
-                pausemenu.SetActive(true);
-                GameObject settings = Util.GetByPath("Canvas/Pause Menu/Settings");
-                settings.SetActive(true);
+                APConnectedUI.ImplementAPConnectionStatusAsQuest();
             }
         }
     }
