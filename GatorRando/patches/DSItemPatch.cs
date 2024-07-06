@@ -1,4 +1,5 @@
 using Archipelago.MultiClient.Net.Models;
+using Data;
 using HarmonyLib;
 
 namespace GatorRando.Patches;
@@ -25,25 +26,32 @@ static class DSItemPatch
         {
             ItemInfo itemInfo = ArchipelagoManager.ItemAtLocation(name);
             __instance.document = null;
+            __instance.isRealItem = false;
+            if (itemInfo.ItemGame == "Lil Gator Game")
+            {
+                if (itemInfo.ItemName.Contains("Craft Stuff") || itemInfo.ItemName.Contains("Friend"))
+                {
+                    __instance.itemSprite = Util.GetSpriteForItem(itemInfo.ItemName);
+                }
+                else
+                {
+                    string clientID = ArchipelagoManager.GetClientIDByAPId(itemInfo.ItemId);
+                    __instance.itemSprite = Util.GetSpriteForItem(clientID);
+                }
+            }
             if (itemInfo.Player.Name == GameData.g.gameSaveData.playerName)
-            {  
+            {
                 __instance.dialogue = $"found my {itemInfo.ItemName}. why was that here??"; // Need to replace this with a valid dialogue?
-                __instance.isRealItem = false;
                 __instance.itemName = itemInfo.ItemName;
-                __instance.itemSprite = Util.GetSpriteForItem(itemInfo.ItemName);
             }
             else if (itemInfo.ItemGame == "Lil Gator Game")
             {
                 __instance.dialogue = $"found a {itemInfo.ItemName}, but it's {itemInfo.Player.Name}'s, not mine, I should send it back"; // Need to replace this with a valid dialogue?
-                __instance.isRealItem = false;
                 __instance.itemName = itemInfo.Player.Name + "'s " + itemInfo.ItemName;
-                __instance.itemSprite = Util.GetSpriteForItem(itemInfo.ItemName);
-                // Get correct itemSprite too
             }
             else
             {
                 __instance.dialogue = $"Found {itemInfo.Player.Name}'s {itemInfo.ItemName}"; // Need to replace this with a valid dialogue?
-                __instance.isRealItem = false;
                 __instance.itemName = itemInfo.Player.Name + "'s " + itemInfo.ItemName;
                 __instance.itemSprite = Util.GetSpriteForItem("Archipelago");
                 // Eventually replace itemSprite with AP logo

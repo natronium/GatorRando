@@ -10,6 +10,8 @@ namespace GatorRando;
 
 public static class Util
 {
+    private static Sprite[] sprites;
+
     public static IEnumerator WaitThenRunCoroutine(float waitTime, Action action)
     {
         yield return new WaitForSeconds(waitTime);
@@ -104,9 +106,17 @@ public static class Util
         }
         else
         {
-            return FindItemObjectByName("Placeholder").sprite;
+            sprites ??= Resources.FindObjectsOfTypeAll<Sprite>();
+            if (name.Contains("Craft Stuff"))
+            {
+                return sprites.First(sprite => sprite.name == "Itemsprite_core_crafting");
+            }
+            else if (name.Contains("Friend"))
+            {
+                return sprites.First(sprite => sprite.name == "GatorMewhenyouaremyfriend");
+            }
+            return FindItemObjectByName("Placeholder").sprite; //TODO: AP Item Sprite
         }
-        // TODO: Add sprite for Friends and grab sprite for Craft Stuff
     }
 
     public static string FindKeyByPrefix(string prefix)
