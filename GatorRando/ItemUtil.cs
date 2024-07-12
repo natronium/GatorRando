@@ -24,6 +24,7 @@ public static class ItemUtil
             }
             ItemManager.i.GiveItem(itemObject);
             UIMenus.craftNotification.LoadItems([itemObject]);
+            PlayerItemManager.p.Refresh(); // Originally only for "Shirt" not usuable on receipt but should result in updated visual for bracelets
             return;
         }
         ItemManager.i.UnlockItem(item);
