@@ -55,6 +55,5 @@ static class APConnectedUI
         Util.GetByPath("Terrain/QuestZones/AP Quest Zone").GetComponent<QuestZone>().questProfile.MarkTaskComplete(0);
         Util.GetByPath("Terrain/QuestZones/AP Quest Zone").SetActive(false);
         QuestTrackerPopup questTrackerPopup = Util.GetByPath("Canvas/Notifications/Quest Tracker").GetComponent<QuestTrackerPopup>();
-        // questTrackerPopup.DisplayQuest(null);
     }
 }
