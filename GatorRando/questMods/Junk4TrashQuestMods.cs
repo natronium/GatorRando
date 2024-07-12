@@ -11,6 +11,7 @@ static class Junk4TrashQuestMods
         GameObject junkShopObject = Util.GetByPath("East (Creeklands)/Junk Shop/Cool Shop");
         JunkShop junkShop = junkShopObject.GetComponent<JunkShop>();
         List<string> junk4trashItems = ["Shield_Stretch", "Shield_TrashCanLid", "Item_StickyHand", "Item_PaintGun", "Sword_Wrench", "Sword_Grabby"];
+        int count = 0;
         foreach (string item in junk4trashItems)
         {
             if (ArchipelagoManager.LocationIsCollected(item))
@@ -25,8 +26,12 @@ static class Junk4TrashQuestMods
                         break;
                     }
                 }
+                count++;
             }
-            junkShop.UpdateInventory();
+        }
+        if (count < 6)
+        {
+            junkShop.UpdateInventory(); //Don't update the inventory if at max count
         }
     }
 }
