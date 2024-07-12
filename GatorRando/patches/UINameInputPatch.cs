@@ -2,6 +2,7 @@ using System;
 using GatorRando.UIMods;
 using HarmonyLib;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace GatorRando.Patches;
@@ -21,7 +22,7 @@ static class UINameInputPatch
             Text player_label_text = player_label.GetComponent<Text>();
             player_label_text.text = "player: " + GameData.g.gameSaveData.playerName; // Get player name and display it here
         }
-        catch(InvalidOperationException)
+        catch (InvalidOperationException)
         {
             // When setting name in Prologue, the Island version of Settings Menu doesn't exist yet
         }
@@ -29,15 +30,20 @@ static class UINameInputPatch
 
     [HarmonyPostfix]
     [HarmonyPatch("Awake")]
-    static void PostAwake(UINameInput __instance) {
+    static void PostAwake(UINameInput __instance)
+    {
         __instance.inputField.characterLimit = 16;
     }
 
     [HarmonyPostfix]
     [HarmonyPatch("OnDestroy")]
-    static void PostOnDestroy() {
+    static void PostOnDestroy()
+    {
         // Go back into Settings menu
-        SettingsMods.ForceIntoSettingsMenu();
-        APConnectedUI.ShowAPQuest();
+        if (SceneManager.GetActiveScene().name == "Island")
+        {
+            SettingsMods.ForceIntoSettingsMenu();
+            APConnectedUI.ShowAPQuest();
+        }
     }
 }
