@@ -15,10 +15,27 @@ static class UISwapItemsMenuPatch
         List<ItemObject> questItemsReceived = [];
         foreach (ItemObject item in QuestItems.QuestItemObjects)
         {
-            if (ArchipelagoManager.ItemIsUnlocked(item.name))
+            if (item.name != "Thrown_Pencil_2" && item.name != "Thrown_Pencil_3" && ArchipelagoManager.ItemIsUnlocked(item.name))
             {
                 questItemsReceived.Add(item);
+                item.IsUnlocked = true;
             }
+            else if (item.name == "Thrown_Pencil_2")
+            {
+                if(ArchipelagoManager.GetItemUnlockCount("Thrown_Pencil") >= 2)
+                {
+                    questItemsReceived.Add(item);
+                    item.IsUnlocked = true;
+                }
+            }
+            else if (item.name == "Thrown_Pencil_3")
+            {
+                if(ArchipelagoManager.GetItemUnlockCount("Thrown_Pencil") >= 3)
+                {
+                    questItemsReceived.Add(item);
+                    item.IsUnlocked = true;
+                }
+            } 
         }
 
         GameObject QuestItemGrid = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Contents Mask/Tab Contents/Quest Item Grid");
