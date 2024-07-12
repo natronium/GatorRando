@@ -29,7 +29,8 @@ static class Junk4TrashQuestMods
                 count++;
             }
         }
-        if (count < 6)
+        QuestStates royQuestStates = Util.GetByPath("East (Creeklands)/Junk Shop").GetComponent<QuestStates>();
+        if (royQuestStates.StateID <= 3)
         {
             junkShop.UpdateInventory(); //Don't update the inventory if at max count
         }
