@@ -92,11 +92,11 @@ public static class ArchipelagoManager
 
     public static void Disconnect()
     {
+        LocationLookup.Clear();
+        ItemQueue = new();
         if (LoginInfo != null)
         {
             Plugin.LogWarn("Disconnected from multiworld");
-            LocationLookup.Clear();
-            ItemQueue = new();
             Session.Socket.DisconnectAsync();
             LoginInfo = null;
         }
