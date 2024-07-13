@@ -11,7 +11,6 @@ static class APConnectedUI
         GameObject settingsMenu = Util.GetByPath("Canvas/Pause Menu/Settings/");
         settingsMenu.AddComponent<ShowActiveQuestProfile>();
 
-        //
         GameObject coolQuestZoneObject = Util.GetByPath("Terrain/QuestZones/Cool");
         GameObject questZones = Util.GetByPath("Terrain/QuestZones");
         GameObject APQuestZoneObject = GameObject.Instantiate(coolQuestZoneObject, questZones.transform);
