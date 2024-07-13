@@ -5,6 +5,14 @@ namespace GatorRando.UIMods;
 
 static class SettingsMods
 {
+    public static void ForceIntoSettingsMenu()
+    {
+        // Force into settings menu
+        UIMenus uIMenus = Util.GetByPath("Canvas").GetComponent<UIMenus>();
+        uIMenus.OnPause();
+        UISubMenu settingsMenu = Util.GetByPath("Canvas/Pause Menu/Settings").GetComponent<UISubMenu>();
+        settingsMenu.Activate();
+    }
     private static void ReEnableMenuNavigation()
     {
         Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Back").SetActive(true);

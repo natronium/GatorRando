@@ -41,7 +41,6 @@ public static class ArchipelagoManager
 
     public static void ProcessItemQueue()
     {
-        //TODO: Move to doing this from Plugin
         while (ItemQueue.TryDequeue(out Items.Entry entry))
         {
             ReceiveItem(entry);
@@ -267,6 +266,12 @@ public static class ArchipelagoManager
         {
             SpecialItemFunctions[entry.client_name_id]();
         }
+    }
+
+    public static string GetClientIDByAPId(long id)
+    {
+        Items.Entry itemEntry = ArchipelagoManager.GetItemEntryByApId(id);
+        return itemEntry.client_name_id;
     }
 
     private static int GetItemApId(string gatorName) =>

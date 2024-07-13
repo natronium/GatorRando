@@ -38,7 +38,7 @@ public class Plugin : BaseUnityPlugin
         {
             Debug.Log("OnSceneLoaded: " + scene.name);
             Debug.Log(mode);
-            
+
             if (scene.name == "Prologue")
             {
                 TitleScreenMods.Edits();
@@ -48,7 +48,8 @@ public class Plugin : BaseUnityPlugin
                 ApplyQuestEdits();
                 ApplyUIEdits();
                 BalloonMods.EditBalloonStamina();
-                ForceIntoSettingsMenu();
+                SettingsMods.ForceIntoSettingsMenu();
+                APConnectedUI.ShowAPQuest();
             }
 
             static void ApplyQuestEdits()
@@ -82,16 +83,7 @@ public class Plugin : BaseUnityPlugin
                 QuestItems.AddItems();
                 InventoryMods.AddQuestItemTab();
                 SettingsMods.Edits();
-            }
-
-            static void ForceIntoSettingsMenu()
-            {
-                // Force into settings menu
-                Game.State = GameState.Menu;
-                GameObject pausemenu = Util.GetByPath("Canvas/Pause Menu");
-                pausemenu.SetActive(true);
-                GameObject settings = Util.GetByPath("Canvas/Pause Menu/Settings");
-                settings.SetActive(true);
+                APConnectedUI.ImplementAPConnectionStatusAsQuest();
             }
         }
     }
@@ -111,6 +103,7 @@ public class Plugin : BaseUnityPlugin
 
         // Junk4Trash Edits
         Junk4TrashQuestMods.HideCollectedShopLocations();
+        APConnectedUI.HideAPQuest();
     }
 
     public static void LogInfo(string infoMessage)

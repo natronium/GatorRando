@@ -1,6 +1,8 @@
 using System;
+using GatorRando.UIMods;
 using HarmonyLib;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace GatorRando.Patches;
@@ -19,14 +21,8 @@ static class UINameInputPatch
             GameObject player_label = player_name.transform.Find("Label").gameObject;
             Text player_label_text = player_label.GetComponent<Text>();
             player_label_text.text = "player: " + GameData.g.gameSaveData.playerName; // Get player name and display it here
-            // Go back into Settings menu
-            Game.State = GameState.Menu;
-            GameObject pausemenu = Util.GetByPath("Canvas/Pause Menu");
-            pausemenu.SetActive(true);
-            GameObject settings = Util.GetByPath("Canvas/Pause Menu/Settings");
-            settings.SetActive(true);
         }
-        catch(InvalidOperationException)
+        catch (InvalidOperationException)
         {
             // When setting name in Prologue, the Island version of Settings Menu doesn't exist yet
         }
@@ -34,7 +30,20 @@ static class UINameInputPatch
 
     [HarmonyPostfix]
     [HarmonyPatch("Awake")]
-    static void PostAwake(UINameInput __instance) {
+    static void PostAwake(UINameInput __instance)
+    {
         __instance.inputField.characterLimit = 16;
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPatch("OnDestroy")]
+    static void PostOnDestroy()
+    {
+        // Go back into Settings menu
+        if (SceneManager.GetActiveScene().name == "Island")
+        {
+            SettingsMods.ForceIntoSettingsMenu();
+            APConnectedUI.ShowAPQuest();
+        }
     }
 }
