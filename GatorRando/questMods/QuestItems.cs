@@ -8,6 +8,10 @@ static class QuestItems
     public static readonly List<ItemObject> QuestItemObjects = [];
     public static void AddItems()
     {
+        if (QuestItemObjects.Count == 0)
+        {
+            QuestItemObjects.Add(Util.FindItemObjectByName("QuestItem_Retainer"));
+
         DSItem rock = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Rock Get Sequence").GetComponent<DSItem>();
         QuestItemObjects.Add(Util.GenerateItemObject("BEACH ROCK", rock.itemSprite));
 
@@ -28,7 +32,6 @@ static class QuestItems
 
         ItemObject pencil = Util.FindItemObjectByName("Sword_Pencil");
         QuestItemObjects.Add(Util.GenerateItemObject("Thrown_Pencil", pencil.sprite));
-
-        QuestItemObjects.Add(Util.FindItemObjectByName("QuestItem_Retainer"));
+        }
     }
 }
