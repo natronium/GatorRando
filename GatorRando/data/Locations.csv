@@ -1,119 +1,119 @@
 shortname,longname,ap_location_id,client_id,client_name_id,ap_region,ap_location_group
-nec_pot_D6_7,Northeast (Canyon) - Pot (D6) on island in middle of pond northeast of playground,100000006,7,,Main Island Breakables,Pot
-wf_pot_F3_26,West (Forest) - Pot (F3) on north cliff edge of pond with dead trees,100000025,26,,Main Island Breakables,Pot
-nm_pot_C4_52,North (Mountain) - Pot (C4) part of Scooter's allergy quest (west),100000051,52,,Main Island Mountain Breakables,Pot
-ec_pot_E7_63,East (Creeklands) - Pot (E7) northwest of Splash Pad below cliff to northeast,100000062,63,,Main Island Breakables,Pot
-seb_pot_I9_70,Southeast (Beach) - Pot (I9) on south end of Skate Pug's island (west),100000069,70,,Main Island Breakables,Pot
-wf_race_G0_73,West (Forest) - Race (G0) starting from island west of Billy's Forest location,100000072,73,,Main Island Races,Race
-seb_pot_I9_78,Southeast (Beach) - Pot (I9) on south end of Skate Pug's island (east),100000077,78,,Main Island Breakables,Pot
-nm_pot_C4_80,"North (Mountain) - Pot (C4) part of Scooter's allergy quest (peak northwest, east)",100000079,80,,Main Island Mountain Breakables,Pot
-seb_pot_H8_83,Southeast (Beach) - Pot (H8) on taller section northwest of Skate Pug,100000082,83,,Main Island Breakables,Pot
-nm_pot_C4_88,"North (Mountain) - Pot (C4) part of Scooter's allergy quest (peak northwest, west)",100000087,88,,Main Island Mountain Breakables,Pot
-wf_pot_H2_95,West (Forest) - Pot (H2) above Trish (Invisible Horse),100000094,95,,Main Island Breakables,Pot
-nm_pot_C4_101,North (Mountain) - Pot (C4) part of Scooter's allergy quest (southwest),100000100,101,,Main Island Mountain Breakables,Pot
-seb_pot_J6_102,Southeast (Beach) - Pot (J6) on small tall island east of Leeland's peninsula,100000101,102,,Main Island Breakables,Pot
-seb_pot_I6_116,Southeast (Beach) - Pot (I6) on small island south of Marlow's deck,100000115,116,,Main Island Breakables,Pot
-ec_pot_F7_118,East (Creeklands) - Pot (F7) south of Splash Pad,100000117,118,,Main Island Breakables,Pot
-ec_chest_G8_154,East (Creeklands) - Chest (G8) on peak south of Splash Pad,100000153,154,,Main Island Breakables,Chest
+nec_pot_D6_7,Northeast (Canyon) - Pot (D6) on island in middle of pond northeast of playground,100000006,7,,Big Island Breakables,Pot
+wf_pot_F3_26,West (Forest) - Pot (F3) on north cliff edge of pond with dead trees,100000025,26,,Big Island Breakables,Pot
+nm_pot_C4_52,North (Mountain) - Pot (C4) part of Scooter's allergy quest (west),100000051,52,,Mountain Breakables,Pot
+ec_pot_E7_63,East (Creeklands) - Pot (E7) northwest of Splash Pad below cliff to northeast,100000062,63,,Big Island Breakables,Pot
+seb_pot_I9_70,Southeast (Beach) - Pot (I9) on south end of Skate Pug's island (west),100000069,70,,Big Island Breakables,Pot
+wf_race_G0_73,West (Forest) - Race (G0) starting from island west of Billy's Forest location,100000072,73,,Big Island Races,Race
+seb_pot_I9_78,Southeast (Beach) - Pot (I9) on south end of Skate Pug's island (east),100000077,78,,Big Island Breakables,Pot
+nm_pot_C4_80,"North (Mountain) - Pot (C4) part of Scooter's allergy quest (peak northwest, east)",100000079,80,,Mountain Breakables,Pot
+seb_pot_H8_83,Southeast (Beach) - Pot (H8) on taller section northwest of Skate Pug,100000082,83,,Big Island Breakables,Pot
+nm_pot_C4_88,"North (Mountain) - Pot (C4) part of Scooter's allergy quest (peak northwest, west)",100000087,88,,Mountain Breakables,Pot
+wf_pot_H2_95,West (Forest) - Pot (H2) above Trish (Invisible Horse),100000094,95,,Big Island Breakables,Pot
+nm_pot_C4_101,North (Mountain) - Pot (C4) part of Scooter's allergy quest (southwest),100000100,101,,Mountain Breakables,Pot
+seb_pot_J6_102,Southeast (Beach) - Pot (J6) on small tall island east of Leeland's peninsula,100000101,102,,Big Island Breakables,Pot
+seb_pot_I6_116,Southeast (Beach) - Pot (I6) on small island south of Marlow's deck,100000115,116,,Big Island Breakables,Pot
+ec_pot_F7_118,East (Creeklands) - Pot (F7) south of Splash Pad,100000117,118,,Big Island Breakables,Pot
+ec_chest_G8_154,East (Creeklands) - Chest (G8) on peak south of Splash Pad,100000153,154,,Big Island Breakables,Chest
 nwt_pot_B1_168,Tutorial Island - Pot (B1) between two waterfalls below ???'s Tutorial Island location,100000167,168,,Tutorial Island Breakables,Pot
 nwt_pot_B1_169,Tutorial Island - Pot (B1) on pillar by waterfalls,100000168,169,,Tutorial Island Breakables,Pot
 nwt_pot_B2_176,Tutorial Island - Pot (B2) on green cliff east of Simon's starting location,100000175,176,,Tutorial Island Breakables,Pot
 nwt_pot_B0_180,Tutorial Island - Pot (B0) at the end of the bone path on the west of Tutorial Island,100000179,180,,Tutorial Island Breakables,Pot
 nwt_chest_D1_184,Tutorial Island - Chest (D1) on small island south of Jill's picnic table,100000183,184,,Tutorial Island Breakables,Chest
-nwt_chest_A3_185,Tutorial Island - Chest (A3) below Gerald to east,100000184,185,,Main Island Breakables,Chest
+nwt_chest_A3_185,Tutorial Island - Chest (A3) below Gerald to east,100000184,185,,Tutorial Island Breakables,Chest
 nwt_pot_B2_190,Tutorial Island - Pot (B2) below Gerald to the south near water level (westmost),100000189,190,,Tutorial Island Breakables,Pot
 nwt_pot_D0_191,Tutorial Island - Pot (D0) on small peninsula southwest of Jill's picnic table,100000190,191,,Tutorial Island Breakables,Pot
-nm_pot_B4_200,North (Mountain) - Pot (B4) on cliffside cutout east of raised area in northwest corner of Mountain (east),100000199,200,,Main Island Mountain Breakables,Pot
-seb_chest_H9_202,Southeast (Beach) - Chest (H9) on north end of Skate Pug's island,100000201,202,,Main Island Breakables,Chest
+nm_pot_B4_200,North (Mountain) - Pot (B4) on cliffside cutout east of raised area in northwest corner of Mountain (east),100000199,200,,Mountain Breakables,Pot
+seb_chest_H9_202,Southeast (Beach) - Chest (H9) on north end of Skate Pug's island,100000201,202,,Big Island Breakables,Chest
 nwt_pot_B2_203,Tutorial Island - Pot (B2) on green cliff northwest of Martin's lawn chairs,100000202,203,,Tutorial Island Breakables,Pot
-nm_pot_B4_217,North (Mountain) - Pot (B4) on cliffside cutout east of raised area in northwest corner of Mountain (west),100000216,217,,Main Island Mountain Breakables,Pot
+nm_pot_B4_217,North (Mountain) - Pot (B4) on cliffside cutout east of raised area in northwest corner of Mountain (west),100000216,217,,Mountain Breakables,Pot
 nwt_pot_B2_220,Tutorial Island - Pot (B2) below Gerald to the south near water level (eastmost),100000219,220,,Tutorial Island Breakables,Pot
 nwt_pot_B1_226,Tutorial Island - Pot (B1) between two waterfalls on same level as ???'s Tutorial Island location,100000225,226,,Tutorial Island Breakables,Pot
 nwt_pot_B2_229,Tutorial Island - Pot (B2) below Gerald to the south near water level (middle),100000228,229,,Tutorial Island Breakables,Pot
 nwt_pot_D1_233,Tutorial Island - Pot (D1) on small island with chest south of Jill's picnic table,100000232,233,,Tutorial Island Breakables,Pot
 nwt_pot_B0_235,Tutorial Island - Pot (B0) southwest of the three ropes in northwest of Tutorial Island,100000234,235,,Tutorial Island Breakables,Pot
 nwt_pot_B1_238,Tutorial Island - Pot (B1) near middle rope of the three ropes in northwest of Tutorial Island,100000237,238,,Tutorial Island Breakables,Pot
-cr_chest_E4_242,Central (Ravine) - Chest (E4) under overhang near river,100000241,242,,Main Island Breakables,Chest
-nm_pot_C4_243,North (Mountain) - Pot (C4) part of Scooter's allergy quest (northeast),100000242,243,,Main Island Mountain Breakables,Pot
-nm_race_C4_304,North (Mountain) - Race (C4) starting on western peak of the Mountain,100000303,304,,Main Island Races,Race
+cr_chest_E4_242,Central (Ravine) - Chest (E4) under overhang near river,100000241,242,,Big Island Breakables,Chest
+nm_pot_C4_243,North (Mountain) - Pot (C4) part of Scooter's allergy quest (northeast),100000242,243,,Mountain Breakables,Pot
+nm_race_C4_304,North (Mountain) - Race (C4) starting on western peak of the Mountain,100000303,304,,Big Island Races,Race
 nwt_pot_C1_366,Tutorial Island - Pot (C1) on rock near Stick pickup location,100000365,366,,Tutorial Island Breakables,Pot
 nwt_pot_C1_367,Tutorial Island - Pot (C1) on hill overlooking Jill's picnic table,100000366,367,,Tutorial Island Breakables,Pot
 nwt_pot_C2_372,Tutorial Island - Pot (C2) on cliff overlooking rope crossing the waterfall,100000371,372,,Tutorial Island Breakables,Pot
-nwt_chest_B0_373,Tutorial Island - Chest (B1) on mid-cliff outcropping visible from bone path on the west of Tutorial Island,100000372,373,,Main Island Breakables,Chest
-nwt_race_C2_383,Tutorial Island - Race (C2) starting near Martin's lawn chairs,100000382,383,,Main Island Races,Race
-nwt_race_C2_392,Tutorial Island - Race (C2) starting near grassy cliff,100000391,392,,Main Island Races,Race
+nwt_chest_B0_373,Tutorial Island - Chest (B1) on mid-cliff outcropping visible from bone path on the west of Tutorial Island,100000372,373,,Tutorial Island Breakables,Chest
+nwt_race_C2_383,Tutorial Island - Race (C2) starting near Martin's lawn chairs,100000382,383,,Tutorial Island Races,Race
+nwt_race_C2_392,Tutorial Island - Race (C2) starting near grassy cliff,100000391,392,,Tutorial Island Races,Race
 nwt_pot_B1_407,Tutorial Island - Pot (B1) on peak north of tallest peak on Tutorial Island,100000406,407,,Tutorial Island Breakables,Pot
 nwt_pot_B1_412,Tutorial Island - Pot (B1) west of rope to tallest peaks on Tutorial Island,100000411,412,,Tutorial Island Breakables,Pot
 nwt_pot_A3_423,Tutorial Island - Pot (A3) on green outcropping below and east of cliffs east of three ropes,100000422,423,,Tutorial Island Breakables,Pot
 nwt_pot_B1_425,Tutorial Island - Pot (B1) on peak south of the three ropes in northwest of Tutorial Island,100000424,425,,Tutorial Island Breakables,Pot
 nwt_pot_A3_426,Tutorial Island - Pot (A3) on green outcropping within cliffs east of three ropes,100000425,426,,Tutorial Island Breakables,Pot
 nwt_pot_B2_427,Tutorial Island - Pot (B2) on tall peak west of Gerald,100000426,427,,Tutorial Island Breakables,Pot
-nwt_chest_B1_433,Tutorial Island - Chest (B1) on tallest peak of Tutorial Island,100000432,433,,Main Island Breakables,Chest
-ec_pot_D8_492,East (Creeklands) - Pot (D8) northwest of Jada's pump below taller cliffs,100000491,492,,Main Island Breakables,Pot
-nm_chest_B3_494,North (Mountain) - Chest (B3) on northwest cliffside of Mountain,100000493,494,,Main Island Mountain Breakables,Chest
-wf_pot_G3_546,West (Forest) - Pot (G3) on west edge of pond with dead trees,100000545,546,,Main Island Breakables,Pot
-wf_pot_G4_547,West (Forest) - Pot (G4) on south edge of pond with dead trees,100000546,547,,Main Island Breakables,Pot
+nwt_chest_B1_433,Tutorial Island - Chest (B1) on tallest peak of Tutorial Island,100000432,433,,Tutorial Island Breakables,Chest
+ec_pot_D8_492,East (Creeklands) - Pot (D8) northwest of Jada's pump below taller cliffs,100000491,492,,Big Island Breakables,Pot
+nm_chest_B3_494,North (Mountain) - Chest (B3) on northwest cliffside of Mountain,100000493,494,,Mountain Breakables,Chest
+wf_pot_G3_546,West (Forest) - Pot (G3) on west edge of pond with dead trees,100000545,546,,Big Island Breakables,Pot
+wf_pot_G4_547,West (Forest) - Pot (G4) on south edge of pond with dead trees,100000546,547,,Big Island Breakables,Pot
 nwt_pot_A1_562,Tutorial Island - Pot (A1) near highest rope of the three ropes in northwest of Tutorial Island,100000561,562,,Tutorial Island Breakables,Pot
-ec_pot_F9_652,East (Creeklands) - Pot (F9) on peak north of Duke's pump,100000651,652,,Main Island Breakables,Pot
-ec_pot_E7_656,East (Creeklands) - Pot (E7) northwest of Splash Pad on cliff (southwest),100000655,656,,Main Island Breakables,Pot
-nm_pot_B4_693,North (Mountain) - Pot (B4) on raised area in northwest corner of Mountain (northeast),100000692,693,,Main Island Mountain Breakables,Pot
-nm_pot_B4_695,North (Mountain) - Pot (B4) on raised area in northwest corner of Mountain (center),100000694,695,,Main Island Mountain Breakables,Pot
-nm_pot_C3_696,North (Mountain) - Pot (C3) on raised area in northwest corner of Mountain (southwest),100000695,696,,Main Island Mountain Breakables,Pot
-ec_pot_H5_722,East (Creeklands) - Pot (H5) on pair of peaks northwest of Tony's chessboard (south),100000721,722,,Main Island Breakables,Pot
-ec_pot_H5_723,East (Creeklands) - Pot (H5) on pair of peaks northwest of Tony's chessboard (north),100000722,723,,Main Island Breakables,Pot
-nec_race_C7_754,Northeast (Canyon) - Race (C7) starting west of Kasen,100000753,754,,Main Island Races,Race
-ec_chest_H5_767,East (Creeklands) - Chest (H5) on peak north-northwest of Tony's chessboard,100000766,767,,Main Island Breakables,Chest
-nec_race_B6_814,Northeast (Canyon) - Race (B6) starting east of waterfall on north side of Mountain,100000813,814,,Main Island Races,Race
-cr_pot_E2_1124,Central (Ravine) - Pot (E2) on hill on path east from Penelope's waterfall,100001123,1124,,Main Island Breakables,Pot
-cr_pot_E3_1127,Central (Ravine) - Pot (E3) south of beach where Esther roams,100001126,1127,,Main Island Breakables,Pot
-cr_pot_E3_1146,Central (Ravine) - Pot (E3) south of central river east of path south from Esther,100001145,1146,,Main Island Breakables,Pot
-nm_pot_C3_1157,North (Mountain) - Pot (C3) on cliff area across from Martin's deck (on raised section),100001156,1157,,Main Island Breakables,Pot
-nm_pot_C3_1159,North (Mountain) - Pot (C3) on cliff outcropping northwest and down from Twig,100001158,1159,,Main Island Breakables,Pot
-nm_pot_C3_1167,North (Mountain) - Pot (C3) on cliff area across from Martin's deck (next to cliffface),100001166,1167,,Main Island Breakables,Pot
-nm_pot_D3_1195,North (Mountain) - Pot (D3) on cliff outcropping west and down from Twig,100001194,1195,,Main Island Breakables,Pot
-nec_pot_C8_1350,Northeast (Canyon) - Pot (C8) at end of Kasen's stone outcropping,100001349,1350,,Main Island Breakables,Pot
-nec_pot_C7_1351,Northeast (Canyon) - Pot (C7) on cliffside west of and below Mochi,100001350,1351,,Main Island Breakables,Pot
-nec_pot_C8_1352,Northeast (Canyon) - Pot (C8) on cliffside east of and below Mochi,100001351,1352,,Main Island Breakables,Pot
-nec_chest_D8_1361,Northeast (Canyon) - Chest (D8) on peak northwest of Jada's pump,100001360,1361,,Main Island Breakables,Chest
-nec_pot_D8_1362,Northeast (Canyon) - Pot (D8) on peak northwest of Jada's pump,100001361,1362,,Main Island Breakables,Pot
-nec_pot_D7_1363,Northeast (Canyon) - Pot (D7) on peak by ropes north of Splash Pan (north),100001362,1363,,Main Island Breakables,Pot
-nec_pot_D7_1364,Northeast (Canyon) - Pot (D7) on peak by ropes north of Splash Pan (south),100001363,1364,,Main Island Breakables,Pot
-wf_pot_E1_1381,West (Forest) - Pot (E1) on cliff side west of Penelope's waterfall (west and up the cliff),100001380,1381,,Main Island Breakables,Pot
-wf_pot_E1_1382,West (Forest) - Pot (E1) on cliff side west of Penelope's waterfall (east and down the cliff),100001381,1382,,Main Island Breakables,Pot
-wf_pot_E1_1383,West (Forest) - Pot (E1) on cliff side west of Penelope's waterfall (east and up the cliff),100001382,1383,,Main Island Breakables,Pot
-wf_race_H1_1400,West (Forest) - Race (H1) starting from southwest of The Tree,100001399,1400,,Main Island Races,Race
-wf_race_F4_1410,West (Forest) - Race (F4) starting from west path exit from playground,100001409,1410,,Main Island Races,Race
-ec_pot_E7_1432,East (Creeklands) - Pot (E7) northwest of Splash Pad on cliff (northwest),100001431,1432,,Main Island Breakables,Pot
-ec_pot_E7_1445,East (Creeklands) - Pot (E7) northwest of Splash Pad on cliff (southeast),100001444,1445,,Main Island Breakables,Pot
-wf_pot_G3_1451,West (Forest) - Pot (G3) on cliff overlooking pond with dead trees from the west side,100001450,1451,,Main Island Breakables,Pot
-nec_pot_A8_1457,Northeast (Canyon) - Pot (A8) on west peak accessible from Billy,100001456,1457,,Main Island Breakables,Pot
-nec_pot_A8_1464,Northeast (Canyon) - Pot (A8) on north peak accessible from Billy,100001463,1464,,Main Island Breakables,Pot
-wf_pot_H4_1518,West (Forest) - Pot (H4) south of tallest peak north of Pepperoni's obstacle course,100001517,1518,,Main Island Breakables,Pot
-wf_chest_H4_1519,West (Forest) - Chest (H4) on tallest peak north of Pepperoni's obstacle course,100001518,1519,,Main Island Breakables,Chest
-wf_pot_H4_1521,West (Forest) - Pot (H4) east of tallest peak north of Pepperoni's obstacle course,100001520,1521,,Main Island Breakables,Pot
-wf_pot_H4_1533,West (Forest) - Pot (H4) north of tallest peak north of Pepperoni's obstacle course,100001532,1533,,Main Island Breakables,Pot
-wf_pot_G4_1541,West (Forest) - Pot (G4) on tall peak east of pond with dead trees (east),100001540,1541,,Main Island Breakables,Pot
-wf_pot_G4_1542,West (Forest) - Pot (G4) on tall peak east of pond with dead trees (west),100001541,1542,,Main Island Breakables,Pot
-wf_pot_G4_1543,West (Forest) - Pot (G4) south of tall peak east of pond with dead trees,100001542,1543,,Main Island Breakables,Pot
-wf_pot_J2_1584,West (Forest) - Pot (J3) on peninsula with stumps southeast of Ninja Clan (west),100001583,1584,,Main Island Breakables,Pot
-wf_pot_J3_1585,West (Forest) - Pot (J3) on peninsula with stumps southeast of Ninja Clan (east),100001584,1585,,Main Island Breakables,Pot
-wf_pot_J0_1594,West (Forest) - Pot (J0) in tidepool in southwest corner of island (northwest),100001593,1594,,Main Island Breakables,Pot
-wf_pot_J1_1595,West (Forest) - Pot (J1) in tidepool in southwest corner of island (southwest),100001594,1595,,Main Island Breakables,Pot
-wf_pot_J1_1597,West (Forest) - Pot (J1) in tidepool in southwest corner of island (southeast),100001596,1597,,Main Island Breakables,Pot
-nm_pot_C4_1625,"North (Mountain) - Pot (C4) on northwest tall peak, north of race",100001624,1625,,Main Island Mountain Breakables,Pot
-nm_chest_C5_1651,North (Mountain) - Chest (C5) below rope northwest of stage area,100001650,1651,,Main Island Mountain Breakables,Chest
-nm_pot_C5_1662,North (Mountain) - Pot (C5) west and up from stage,100001661,1662,,Main Island Mountain Breakables,Pot
-nm_pot_B5_1695,North (Mountain) - Pot (B5) part of Tanner's Pot Mimic quest (up on rock formation),100001694,1695,,Main Island Mountain Breakables,Pot
-nm_pot_B5_1709,North (Mountain) - Pot (B5) part of Tanner's Pot Mimic quest (next to Tanner),100001708,1709,,Main Island Mountain Breakables,Pot
-nm_pot_B5_1712,North (Mountain) - Pot (B5) part of Tanner's Pot Mimic quest (southwest of Tanner),100001711,1712,,Main Island Mountain Breakables,Pot
-nm_race_D5_1746,North (Mountain) - Race (D5) starting north of the playground and heading up the Mountain,100001745,1746,,Main Island Races,Race
-ec_pot_G5_2013,East (Creeklands) - Pot (G5) west of Junk4Trash in secluded area filled with ninjas and mimics,100002012,2013,,Main Island Breakables,Pot
-ec_chest_G6_2027,East (Creeklands) - Chest (G6) north of Junk4Trash,100002026,2027,,Main Island Breakables,Chest
-nec_pot_B8_2071,Northeast (Canyon) - Pot (B8) on tall rock southwest from Billy's Canyon location,100002070,2071,,Main Island Breakables,Pot
-nec_pot_C9_2072,Northeast (Canyon) - Pot (C9) on Ssumantha's island (lower),100002071,2072,,Main Island Breakables,Pot
-nec_pot_C9_2073,Northeast (Canyon) - Pot (C9) on Ssumantha's island (upper),100002072,2073,,Main Island Breakables,Pot
-cr_pot_F4_2074,Central (Ravine) - Pot (F4) on southern tall peak west of playground,100002073,2074,,Main Island Breakables,Pot
-cr_pot_E4_2075,Central (Ravine) - Pot (E4) on northern tall peak west of playground,100002074,2075,,Main Island Breakables,Pot
+ec_pot_F9_652,East (Creeklands) - Pot (F9) on peak north of Duke's pump,100000651,652,,Big Island Breakables,Pot
+ec_pot_E7_656,East (Creeklands) - Pot (E7) northwest of Splash Pad on cliff (southwest),100000655,656,,Big Island Breakables,Pot
+nm_pot_B4_693,North (Mountain) - Pot (B4) on raised area in northwest corner of Mountain (northeast),100000692,693,,Mountain Breakables,Pot
+nm_pot_B4_695,North (Mountain) - Pot (B4) on raised area in northwest corner of Mountain (center),100000694,695,,Mountain Breakables,Pot
+nm_pot_C3_696,North (Mountain) - Pot (C3) on raised area in northwest corner of Mountain (southwest),100000695,696,,Mountain Breakables,Pot
+ec_pot_H5_722,East (Creeklands) - Pot (H5) on pair of peaks northwest of Tony's chessboard (south),100000721,722,,Big Island Breakables,Pot
+ec_pot_H5_723,East (Creeklands) - Pot (H5) on pair of peaks northwest of Tony's chessboard (north),100000722,723,,Big Island Breakables,Pot
+nec_race_C7_754,Northeast (Canyon) - Race (C7) starting west of Kasen,100000753,754,,Big Island Races,Race
+ec_chest_H5_767,East (Creeklands) - Chest (H5) on peak north-northwest of Tony's chessboard,100000766,767,,Big Island Breakables,Chest
+nec_race_B6_814,Northeast (Canyon) - Race (B6) starting east of waterfall on north side of Mountain,100000813,814,,Big Island Races,Race
+cr_pot_E2_1124,Central (Ravine) - Pot (E2) on hill on path east from Penelope's waterfall,100001123,1124,,Big Island Breakables,Pot
+cr_pot_E3_1127,Central (Ravine) - Pot (E3) south of beach where Esther roams,100001126,1127,,Big Island Breakables,Pot
+cr_pot_E3_1146,Central (Ravine) - Pot (E3) south of central river east of path south from Esther,100001145,1146,,Big Island Breakables,Pot
+nm_pot_C3_1157,North (Mountain) - Pot (C3) on cliff area across from Martin's deck (on raised section),100001156,1157,,Pots Shootable from Tutorial Island,Pot
+nm_pot_C3_1159,North (Mountain) - Pot (C3) on cliff outcropping northwest and down from Twig,100001158,1159,,Pots Shootable from Tutorial Island,Pot
+nm_pot_C3_1167,North (Mountain) - Pot (C3) on cliff area across from Martin's deck (next to cliffface),100001166,1167,,Pots Shootable from Tutorial Island,Pot
+nm_pot_D3_1195,North (Mountain) - Pot (D3) on cliff outcropping west and down from Twig,100001194,1195,,Pots Shootable from Tutorial Island,Pot
+nec_pot_C8_1350,Northeast (Canyon) - Pot (C8) at end of Kasen's stone outcropping,100001349,1350,,Big Island Breakables,Pot
+nec_pot_C7_1351,Northeast (Canyon) - Pot (C7) on cliffside west of and below Mochi,100001350,1351,,Big Island Breakables,Pot
+nec_pot_C8_1352,Northeast (Canyon) - Pot (C8) on cliffside east of and below Mochi,100001351,1352,,Big Island Breakables,Pot
+nec_chest_D8_1361,Northeast (Canyon) - Chest (D8) on peak northwest of Jada's pump,100001360,1361,,Big Island Breakables,Chest
+nec_pot_D8_1362,Northeast (Canyon) - Pot (D8) on peak northwest of Jada's pump,100001361,1362,,Big Island Breakables,Pot
+nec_pot_D7_1363,Northeast (Canyon) - Pot (D7) on peak by ropes north of Splash Pan (north),100001362,1363,,Big Island Breakables,Pot
+nec_pot_D7_1364,Northeast (Canyon) - Pot (D7) on peak by ropes north of Splash Pan (south),100001363,1364,,Big Island Breakables,Pot
+wf_pot_E1_1381,West (Forest) - Pot (E1) on cliff side west of Penelope's waterfall (west and up the cliff),100001380,1381,,Big Island Breakables,Pot
+wf_pot_E1_1382,West (Forest) - Pot (E1) on cliff side west of Penelope's waterfall (east and down the cliff),100001381,1382,,Big Island Breakables,Pot
+wf_pot_E1_1383,West (Forest) - Pot (E1) on cliff side west of Penelope's waterfall (east and up the cliff),100001382,1383,,Big Island Breakables,Pot
+wf_race_H1_1400,West (Forest) - Race (H1) starting from southwest of The Tree,100001399,1400,,Big Island Races,Race
+wf_race_F4_1410,West (Forest) - Race (F4) starting from west path exit from playground,100001409,1410,,Big Island Races,Race
+ec_pot_E7_1432,East (Creeklands) - Pot (E7) northwest of Splash Pad on cliff (northwest),100001431,1432,,Big Island Breakables,Pot
+ec_pot_E7_1445,East (Creeklands) - Pot (E7) northwest of Splash Pad on cliff (southeast),100001444,1445,,Big Island Breakables,Pot
+wf_pot_G3_1451,West (Forest) - Pot (G3) on cliff overlooking pond with dead trees from the west side,100001450,1451,,Big Island Breakables,Pot
+nec_pot_A8_1457,Northeast (Canyon) - Pot (A8) on west peak accessible from Billy,100001456,1457,,Big Island Breakables,Pot
+nec_pot_A8_1464,Northeast (Canyon) - Pot (A8) on north peak accessible from Billy,100001463,1464,,Big Island Breakables,Pot
+wf_pot_H4_1518,West (Forest) - Pot (H4) south of tallest peak north of Pepperoni's obstacle course,100001517,1518,,Big Island Breakables,Pot
+wf_chest_H4_1519,West (Forest) - Chest (H4) on tallest peak north of Pepperoni's obstacle course,100001518,1519,,Big Island Breakables,Chest
+wf_pot_H4_1521,West (Forest) - Pot (H4) east of tallest peak north of Pepperoni's obstacle course,100001520,1521,,Big Island Breakables,Pot
+wf_pot_H4_1533,West (Forest) - Pot (H4) north of tallest peak north of Pepperoni's obstacle course,100001532,1533,,Big Island Breakables,Pot
+wf_pot_G4_1541,West (Forest) - Pot (G4) on tall peak east of pond with dead trees (east),100001540,1541,,Big Island Breakables,Pot
+wf_pot_G4_1542,West (Forest) - Pot (G4) on tall peak east of pond with dead trees (west),100001541,1542,,Big Island Breakables,Pot
+wf_pot_G4_1543,West (Forest) - Pot (G4) south of tall peak east of pond with dead trees,100001542,1543,,Big Island Breakables,Pot
+wf_pot_J2_1584,West (Forest) - Pot (J3) on peninsula with stumps southeast of Ninja Clan (west),100001583,1584,,Big Island Breakables,Pot
+wf_pot_J3_1585,West (Forest) - Pot (J3) on peninsula with stumps southeast of Ninja Clan (east),100001584,1585,,Big Island Breakables,Pot
+wf_pot_J0_1594,West (Forest) - Pot (J0) in tidepool in southwest corner of island (northwest),100001593,1594,,Big Island Breakables,Pot
+wf_pot_J1_1595,West (Forest) - Pot (J1) in tidepool in southwest corner of island (southwest),100001594,1595,,Big Island Breakables,Pot
+wf_pot_J1_1597,West (Forest) - Pot (J1) in tidepool in southwest corner of island (southeast),100001596,1597,,Big Island Breakables,Pot
+nm_pot_C4_1625,"North (Mountain) - Pot (C4) on northwest tall peak, north of race",100001624,1625,,Mountain Breakables,Pot
+nm_chest_C5_1651,North (Mountain) - Chest (C5) below rope northwest of stage area,100001650,1651,,Mountain Breakables,Chest
+nm_pot_C5_1662,North (Mountain) - Pot (C5) west and up from stage,100001661,1662,,Mountain Breakables,Pot
+nm_pot_B5_1695,North (Mountain) - Pot (B5) part of Tanner's Pot Mimic quest (up on rock formation),100001694,1695,,Mountain Breakables,Pot
+nm_pot_B5_1709,North (Mountain) - Pot (B5) part of Tanner's Pot Mimic quest (next to Tanner),100001708,1709,,Mountain Breakables,Pot
+nm_pot_B5_1712,North (Mountain) - Pot (B5) part of Tanner's Pot Mimic quest (southwest of Tanner),100001711,1712,,Mountain Breakables,Pot
+nm_race_D5_1746,North (Mountain) - Race (D5) starting north of the playground and heading up the Mountain,100001745,1746,,Big Island Races,Race
+ec_pot_G5_2013,East (Creeklands) - Pot (G5) west of Junk4Trash in secluded area filled with ninjas and mimics,100002012,2013,,Big Island Breakables,Pot
+ec_chest_G6_2027,East (Creeklands) - Chest (G6) north of Junk4Trash,100002026,2027,,Big Island Breakables,Chest
+nec_pot_B8_2071,Northeast (Canyon) - Pot (B8) on tall rock southwest from Billy's Canyon location,100002070,2071,,Big Island Breakables,Pot
+nec_pot_C9_2072,Northeast (Canyon) - Pot (C9) on Ssumantha's island (lower),100002071,2072,,Big Island Breakables,Pot
+nec_pot_C9_2073,Northeast (Canyon) - Pot (C9) on Ssumantha's island (upper),100002072,2073,,Big Island Breakables,Pot
+cr_pot_F4_2074,Central (Ravine) - Pot (F4) on southern tall peak west of playground,100002073,2074,,Big Island Breakables,Pot
+cr_pot_E4_2075,Central (Ravine) - Pot (E4) on northern tall peak west of playground,100002074,2075,,Big Island Breakables,Pot
 ti_avery_recipe,Tutorial Island - Avery! Hat Recipe,100002192,,Hat_Basic,Tutorial Island,
 ti_avery_quest_item,Tutorial Island - Avery! Quest Completion,100002193,,Shirt,Tutorial Island,
 ti_jill_stick,Tutorial Island - Stick Pickup,100002194,,Sword_Stick,Tutorial Island,
@@ -125,40 +125,40 @@ ti_franny_quest_npc,Tutorial Island - Franny (Stick Duck) Quest Completion NPC,1
 ti_franny_quest_item,Tutorial Island - Franny (Stick Duck) Quest Completion Item,100002200,,Sword_Wood,Tutorial Island,
 ti_gerald_quest_npc,Tutorial Island - Gerald (Slime Giraffe) Quest Completion NPC,100002201,,NPC_TutIsland_Giraffe,Tutorial Island,
 ti_gerald_quest_item,Tutorial Island - Gerald (Slime Giraffe) Quest Completion Item,100002202,,Hat_Slime,Tutorial Island,
-nec_darcie_quest_npc,Northeast (Canyon) - Darcie (Balloon Owl) Quest Completion NPC,100002203,,NPC_Balloon_Owl,Main Island,
-nec_darcie_quest_item,Northeast (Canyon) - Darcie (Balloon Owl) Quest Completion Item,100002204,,Item_Balloon,Main Island,
-nec_kasen_brokenscooter,Northeast (Canyon) - Broken Scooter Board Pickup (Kasen's Quest),100002205,,BROKEN WHEELIE THINGY,Main Island,
-nec_kasen_quest_npc,Northeast (Canyon) - Kasen (Scooter Vulture) Quest Completion NPC,100002206,,NPC_FetchVulture,Main Island,
-nec_kasen_quest_item,Northeast (Canyon) - Kasen (Scooter Vulture) Quest Completion Item,100002207,,Shield_ScooterBoardBlue,Main Island,
-nec_ssumantha_quest_npc,Northeast (Canyon) - Ssumantha (Waders Opposum) Quest Completion NPC,100002208,,NPC_SurfOpossum,Main Island,
-nec_ssumantha_quest_item,Northeast (Canyon) - Ssumantha (Waders Opposum) Quest Completion Item,100002209,,Shield_Tube,Main Island,
-nec_mochi_quest_npc,Northeast (Canyon) - Mochi (Heights Bear) Quest Completion NPC,100002210,,NPC_ScaredOfHeightsBear,Main Island,
-seb_tony_quest_npc,Southeast (Beach) - Tony (Chess Strategist Eagle) Quest Completion NPC,100002211,,NPC_Chess_Eagle,Main Island,
-seb_tony_quest_item,Southeast (Beach) - Tony (Chess Strategist Eagle) Quest Completion Item,100002212,,Shield_Chessboard,Main Island,
-seb_sam_thrown_pencil_1,Southeast (Beach) - Thrown Pencil 1 (Sam's Quest),100002213,,Thrown_Pencil_1,Main Island,
-seb_sam_thrown_pencil_2,Southeast (Beach) - Thrown Pencil 2 (Sam's Quest),100002214,,Thrown_Pencil_2,Main Island,
-seb_sam_thrown_pencil_3,Southeast (Beach) - Thrown Pencil 3 (Sam's Quest),100002215,,Thrown_Pencil_3,Main Island,
-seb_sam_quest_npc,Southeast (Beach) - Sam (Pencil Jackal) Quest Completion NPC,100002216,,NPC_Clumsy_Jackal,Main Island,
-seb_sam_quest_item,Southeast (Beach) - Sam (Pencil Jackal) Quest Completion Item,100002217,,Sword_Pencil,Main Island,
-seb_viraj_quest_npc,Southeast (Beach) - Viraj (Hot Shot Elephant) Quest Completion NPC,100002218,,NPC_Destroy_Elephant,Main Island,
-seb_doddler_quest_npc,Southeast (Beach) - Mr. Doddler (No Littering Sloth) Quest Completion NPC,100002219,,NPC_Old_Man_Sloth,Main Island,
-seb_doddler_quest_item,Southeast (Beach) - Mr. Doddler (No Littering Sloth) Quest Completion Item,100002220,,Item_Gum,Main Island,
-seb_cade_quest_npc,Southeast (Beach) - Cade (Floofy Bull) Quest Completion NPCs,100002221,,NPC_SwimBull,Main Island,
-seb_skatepug_quest_npc,Southeast (Beach) - Skate Pug (Skate Pug) Quest Completion NPCs,100002222,,NPC_Skate_Pug,Main Island,
-seb_skatepug_quest_item,Southeast (Beach) - Skate Pug (Skate Pug) Quest Completion Item,100002223,,Shield_Skateboard,Main Island,
-seb_joe_quest_npc,Southeast (Beach) - Joe (Pose Hawk) Quest Completion NPC,100002224,,NPC_WannaBeHawk,Main Island,
-ec_madeline_quest_npc,East (Creeklands) - Madeline (Little Thing Mouse) Quest Completion NPC,100002225,,NPC_AwkwardFriendly,Main Island,
-ec_robin_quest_npc,East (Creeklands) - Robin (Scared-to-Look Robin) Quest Completion NPC,100002226,,NPC_Rescue_Robin,Main Island,
-ec_robin_quest_item,East (Creeklands) - Robin (Scared-to-Look Robin) Quest Completion Item,100002227,,Shield_Palette,Main Island,
-ec_becca_retainerpickup,East (Creeklands) - Retainer Pickup (Becca's Quest),100002228,,QuestItem_Retainer,Main Island,
-ec_becca_quest_npc,East (Creeklands) - Becca (Retainer Shark) Quest Completion NPC,100002229,,NPC_Fetch_Shark,Main Island,
-mmq_lucas_quest_item,Martin's Main Quest - Lucas (Cool Wolf) Quest Completion Item,100002230,,Shield_Martin,Main Island,
-mmq_jada_clippings,Martin's Main Quest - Grassing Clippings Collect (Jada's Quest),100002231,,CLIPPINGS,Main Island,
-mmq_jada_bucket,Martin's Main Quest - Bucket Gift (Jada's Quest),100002232,,BUCKET,Main Island,
-mmq_jada_water,Martin's Main Quest - Water Collect (Jada's Quest),100002233,,WATER,Main Island,
-mmq_jada_quest_item,Martin's Main Quest - Jada (Cool Boar) Quest Completion Item,100002234,,Shield_Leaf,Main Island,
-mmq_duke_quest_item,Martin's Main Quest - Duke (Cool Goose) Quest Completion Item,100002235,,Hat_DetectiveCowl,Main Island,
-mmq_martin_quest_npc,Martin's Main Quest - Martin's Main Quest Completion NPCs,100002236,,NPC_Tut_Horse,Main Island,
+nec_darcie_quest_npc,Northeast (Canyon) - Darcie (Balloon Owl) Quest Completion NPC,100002203,,NPC_Balloon_Owl,Big Island,
+nec_darcie_quest_item,Northeast (Canyon) - Darcie (Balloon Owl) Quest Completion Item,100002204,,Item_Balloon,Big Island,
+nec_kasen_brokenscooter,Northeast (Canyon) - Broken Scooter Board Pickup (Kasen's Quest),100002205,,BROKEN WHEELIE THINGY,Big Island,
+nec_kasen_quest_npc,Northeast (Canyon) - Kasen (Scooter Vulture) Quest Completion NPC,100002206,,NPC_FetchVulture,Big Island,
+nec_kasen_quest_item,Northeast (Canyon) - Kasen (Scooter Vulture) Quest Completion Item,100002207,,Shield_ScooterBoardBlue,Big Island,
+nec_ssumantha_quest_npc,Northeast (Canyon) - Ssumantha (Waders Opposum) Quest Completion NPC,100002208,,NPC_SurfOpossum,Big Island,
+nec_ssumantha_quest_item,Northeast (Canyon) - Ssumantha (Waders Opposum) Quest Completion Item,100002209,,Shield_Tube,Big Island,
+nec_mochi_quest_npc,Northeast (Canyon) - Mochi (Heights Bear) Quest Completion NPC,100002210,,NPC_ScaredOfHeightsBear,Big Island,
+seb_tony_quest_npc,Southeast (Beach) - Tony (Chess Strategist Eagle) Quest Completion NPC,100002211,,NPC_Chess_Eagle,Big Island,
+seb_tony_quest_item,Southeast (Beach) - Tony (Chess Strategist Eagle) Quest Completion Item,100002212,,Shield_Chessboard,Big Island,
+seb_sam_thrown_pencil_1,Southeast (Beach) - Thrown Pencil 1 (Sam's Quest),100002213,,Thrown_Pencil_1,Big Island,
+seb_sam_thrown_pencil_2,Southeast (Beach) - Thrown Pencil 2 (Sam's Quest),100002214,,Thrown_Pencil_2,Big Island,
+seb_sam_thrown_pencil_3,Southeast (Beach) - Thrown Pencil 3 (Sam's Quest),100002215,,Thrown_Pencil_3,Big Island,
+seb_sam_quest_npc,Southeast (Beach) - Sam (Pencil Jackal) Quest Completion NPC,100002216,,NPC_Clumsy_Jackal,Big Island,
+seb_sam_quest_item,Southeast (Beach) - Sam (Pencil Jackal) Quest Completion Item,100002217,,Sword_Pencil,Big Island,
+seb_viraj_quest_npc,Southeast (Beach) - Viraj (Hot Shot Elephant) Quest Completion NPC,100002218,,NPC_Destroy_Elephant,Big Island,
+seb_doddler_quest_npc,Southeast (Beach) - Mr. Doddler (No Littering Sloth) Quest Completion NPC,100002219,,NPC_Old_Man_Sloth,Big Island,
+seb_doddler_quest_item,Southeast (Beach) - Mr. Doddler (No Littering Sloth) Quest Completion Item,100002220,,Item_Gum,Big Island,
+seb_cade_quest_npc,Southeast (Beach) - Cade (Floofy Bull) Quest Completion NPCs,100002221,,NPC_SwimBull,Big Island,
+seb_skatepug_quest_npc,Southeast (Beach) - Skate Pug (Skate Pug) Quest Completion NPCs,100002222,,NPC_Skate_Pug,Big Island,
+seb_skatepug_quest_item,Southeast (Beach) - Skate Pug (Skate Pug) Quest Completion Item,100002223,,Shield_Skateboard,Big Island,
+seb_joe_quest_npc,Southeast (Beach) - Joe (Pose Hawk) Quest Completion NPC,100002224,,NPC_WannaBeHawk,Big Island,
+ec_madeline_quest_npc,East (Creeklands) - Madeline (Little Thing Mouse) Quest Completion NPC,100002225,,NPC_AwkwardFriendly,Big Island,
+ec_robin_quest_npc,East (Creeklands) - Robin (Scared-to-Look Robin) Quest Completion NPC,100002226,,NPC_Rescue_Robin,Big Island,
+ec_robin_quest_item,East (Creeklands) - Robin (Scared-to-Look Robin) Quest Completion Item,100002227,,Shield_Palette,Big Island,
+ec_becca_retainerpickup,East (Creeklands) - Retainer Pickup (Becca's Quest),100002228,,QuestItem_Retainer,Big Island,
+ec_becca_quest_npc,East (Creeklands) - Becca (Retainer Shark) Quest Completion NPC,100002229,,NPC_Fetch_Shark,Big Island,
+mmq_lucas_quest_item,Martin's Main Quest - Lucas (Cool Wolf) Quest Completion Item,100002230,,Shield_Martin,Big Island,
+mmq_jada_clippings,Martin's Main Quest - Grassing Clippings Collect (Jada's Quest),100002231,,CLIPPINGS,Big Island,
+mmq_jada_bucket,Martin's Main Quest - Bucket Gift (Jada's Quest),100002232,,BUCKET,Big Island,
+mmq_jada_water,Martin's Main Quest - Water Collect (Jada's Quest),100002233,,WATER,Big Island,
+mmq_jada_quest_item,Martin's Main Quest - Jada (Cool Boar) Quest Completion Item,100002234,,Shield_Leaf,Big Island,
+mmq_duke_quest_item,Martin's Main Quest - Duke (Cool Goose) Quest Completion Item,100002235,,Hat_DetectiveCowl,Big Island,
+mmq_martin_quest_npc,Martin's Main Quest - Martin's Main Quest Completion NPCs,100002236,,NPC_Tut_Horse,Big Island,
 j4t_sticky_hand,Junk 4 Trash - Sticky Hand Purchase,100002237,,Item_StickyHand,Junk 4 Trash,
 j4t_trampoline,Junk 4 Trash - Trampoline Purchase,100002238,,Shield_Stretch,Junk 4 Trash,
 j4t_trash_lid,Junk 4 Trash - Trash Can Lid Purchase,100002239,,Shield_TrashCanLid,Junk 4 Trash,
@@ -166,55 +166,55 @@ j4t_wrench,Junk 4 Trash - Wrench Purchase,100002240,,Sword_Wrench,Junk 4 Trash,
 j4t_paint_gun,Junk 4 Trash - Paint Gun Purchase,100002241,,Item_PaintGun,Junk 4 Trash,
 j4t_grabby_hand,Junk 4 Trash - Grabby Hand Purchase,100002242,,Sword_Grabby,Junk 4 Trash,
 j4t_all_purchases,Junk 4 Trash - Roy (Trash Raccoon) All Purchases NPC,100002243,,NPC_TrashPanda,Junk 4 Trash,
-sj_leeland_quest_npc,South (Jetty) - Leeland (Painting Rabbit) Quest Completion NPC,100002244,,NPC_Destroy_Rabbit,Main Island,
-sj_leeland_quest_item,South (Jetty) - Leeland (Painting Rabbit) Quest Completion Item,100002245,,Sword_Paintbrush,Main Island,
-wf_sierra_quest_npc,West (Forest) - Sierra (Origami Crane) Quest Completion NPC,100002246,,NPC_Ninja_Crane,Main Island,
-wf_sierra_quest_item,West (Forest) - Sierra (Origami Crane) Quest Completion Item,100002247,,Item_Shuriken,Main Island,
-wf_romeo_item,West (Forest) - Romeo (Ninja Anteater) Nunchucks,100002248,,Sword_Nunchucks,Main Island,
-wf_ninjaclan_quest_npc,West (Forest) - Ninja Clan Quest Completion NPCs,100002249,,NPC_Ninja_Anteater,Main Island,
-wf_ninjaclan_quest_item,West (Forest) - Ninja Clan Quest Completion Item,100002250,,Hat_Ninja,Main Island,
-wf_pepperoni_quest_npc,West (Forest) - Pepperoni (Obstacle Ostrich) Quest Completion NPCs,100002251,,NPC_Obstacle_Ostrich,Main Island,
-wf_pepperoni_quest_item,West (Forest) - Pepperoni (Obstacle Ostrich) Quest Completion Item,100002252,,Hat_SkateHelmet,Main Island,
-wf_lunch_quest_npc,"West (Forest) - Sorin, Roe, Beeritney (Lunch Trio) Quest Completion NPCs",100002253,,NPC_LunchSwapSkink,Main Island,
-wf_lunch_quest_item,"West (Forest) - Sorin, Roe, Beeritney (Lunch Trio) Quest Completion Item",100002254,,Hat_Princess,Main Island,
-wf_potkid_quest_npc,West (Forest) - Pot Kid (Eepy Armadillo) Quest Completion NPC,100002255,,NPC_Pot_Armadillo,Main Island,
-wf_penelope_quest_npc,West (Forest) - Penelope (Bastion Beaver) Quest Completion NPC,100002256,,NPC_Warrior_Beaver,Main Island,
-wf_penelope_quest_item,West (Forest) - Penelope (Bastion Beaver) Quest Completion Item,100002257,,Shield_TowerShield,Main Island,
-wf_eva_quest_npc,West (Forest) - Eva (Photographer Cat) Quest Completion NPC,100002258,,NPC_Shy_Cat,Main Island,
-wf_eva_quest_item,West (Forest) - Eva (Photographer Cat) Quest Completion Item,100002259,,Item_Camera,Main Island,
-wf_gunther_quest_npc,West (Forest) - Gunther (Sidekick Hippo) Quest Completion NPC,100002260,,NPC_Sidekick_Hippo,Main Island,
-wf_trish_quest_npc,West (Forest) - Trish (Invisible Horse) Quest Completion NPC,100002261,,NPC_Invisible_Horse,Main Island,
-wf_tiffany_quest_npc,West (Forest) - Tiffany (Princess Cat) Quest Completion NPCs,100002262,,NPC_TutuCat,Main Island,
-wf_tiffany_quest_item,West (Forest) - Tiffany (Princess Cat) Quest Completion Item,100002263,,Sword_Wand,Main Island,
-jmq_susanne_ore,Jill's Main Quest - Magic Ore Pickup (Susanne's Quest),100002264,,BEACH ROCK,Main Island,
-jmq_susanne_quest_item,Jill's Main Quest - Susanne (Paleolithic Gazelle) Quest Completion,100002265,,Sword_RockHammer,Main Island,
-jmq_gene_sandwich,Jill's Main Quest - Cheese Sandwich Pickup (Gene's Quest),100002266,,HALF A CHEESE SANDWICH,Main Island,
-jmq_gene_quest_item,Jill's Main Quest - Gene (Merchant Beaver) Quest Completion Item,100002267,,Shield_Platter,Main Island,
-jmq_antone_bugnet,Jill's Main Quest - Bug Net Gift (Antone's Quest),100002268,,Sword_Net,Main Island,
-jmq_jill_quest_npc,Jill's Main Quest - Jill's Main Quest Completion NPCs,100002269,,NPC_Tut_Dog,Main Island,
-nm_flint_bomb,North (Mountain) - Bowling Bomb Gift (Flint's Quest),100002270,,Item_Bomb,Main Island,
-nm_flint_quest_npc,North (Mountain) - Flint (BombBowl Mole) Quest Completion NPC,100002271,,NPC_BombBowlMole,Main Island,
-nm_tanner_quest_npc,North (Mountain) - Tanner (Pot Mimic Elk) Quest Completion NPC,100002272,,NPC_Confused_Elk,Main Island,
-nm_twig_quest_npc,North (Mountain) - Twig (Flip Pomeranian) Quest Completion NPC,100002273,,NPC_Pomeranian,Main Island,
-nm_neil_quest_npc,North (Mountain) - Neil (Peptalk Rat) Quest Completion NPC,100002274,,NPC_Mistakes_Rat,Main Island,
-nm_neil_quest_item,North (Mountain) - Neil (Peptalk Rat) Quest Completion Item,100002275,,Hat_Beret,Main Island,
-nm_scooter_quest_npc,North (Mountain) - Scooter (Ceramic-Allergy Cougar) Quest Completion NPC,100002276,,NPC_ScaredPots_Cougar,Main Island,
-nm_luisa_quest_npc,North (Mountain) - Luisa (Tripping Lizard) Quest Completion NPC,100002277,,NPC_TripLizard,Main Island,
-nm_luisa_quest_item,North (Mountain) - Luisa (Tripping Lizard) Quest Completion Item,100002278,,Sword_CBSpear,Main Island,
-amq_andromeda_blaster,Avery!'s Main Quest - Nerf Blaster (Andromeda's Quest),100002279,,Item_SpaceGun,Main Island,
-amq_andromeda_quest_item,Avery!'s Main Quest - Andromeda (Space Hawk) Quest Completion Item,100002280,,Sword_Laser,Main Island,
-amq_velma_quest_item,Avery!'s Main Quest - Velma (Western Cow) Quest Completion Item,100002281,,Hat_Western,Main Island,
-amq_esme_sorbet,Avery!'s Main Quest - Sorbet (Esme's Quest),100002282,,ICE CREAM,Main Island,
-amq_esme_fangs,Avery!'s Main Quest - Plastic Fangs (Esme's Quest),100002283,,Hat_Vampire,Main Island,
-amq_esme_quest_npc,Avery!'s Main Quest - Esme (Vampire Bat) Quest Completion NPC,100002284,,NPC_Part-Timer,Main Island,
-amq_avery_quest_npc,Avery!'s Main Quest - Avery!'s Main Quest Quest Completion NPC,100002285,,NPC_Tut_Frog,Main Island,
-cr_esther_quest_npc,Central (Ravine) - Esther (Directions Deer) Quest Completion NPC,100002286,,NPC_Directions_Deer,Main Island,
-mi_billy_quest_npc,Main Island - Billy (Whale) Quest Completion NPC,100002287,,NPC_BigWhale,Main Island,
-mi_billy_quest_item,Main Island - Billy (Whale) Quest Completion Item,100002288,,Hat_Space,Main Island,
-mi_zhu_rock,Main Island - Rock (Zhu's Quest),100002289,,Rock,Main Island,
-mi_zhu_quest_npc,Main Island - Zhu (Skipping Fox) Quest Completion NPC,100002290,,NPC_Rock_Fox,Main Island,
+sj_leeland_quest_npc,South (Jetty) - Leeland (Painting Rabbit) Quest Completion NPC,100002244,,NPC_Destroy_Rabbit,Big Island,
+sj_leeland_quest_item,South (Jetty) - Leeland (Painting Rabbit) Quest Completion Item,100002245,,Sword_Paintbrush,Big Island,
+wf_sierra_quest_npc,West (Forest) - Sierra (Origami Crane) Quest Completion NPC,100002246,,NPC_Ninja_Crane,Big Island,
+wf_sierra_quest_item,West (Forest) - Sierra (Origami Crane) Quest Completion Item,100002247,,Item_Shuriken,Big Island,
+wf_romeo_item,West (Forest) - Romeo (Ninja Anteater) Nunchucks,100002248,,Sword_Nunchucks,Big Island,
+wf_ninjaclan_quest_npc,West (Forest) - Ninja Clan Quest Completion NPCs,100002249,,NPC_Ninja_Anteater,Big Island,
+wf_ninjaclan_quest_item,West (Forest) - Ninja Clan Quest Completion Item,100002250,,Hat_Ninja,Big Island,
+wf_pepperoni_quest_npc,West (Forest) - Pepperoni (Obstacle Ostrich) Quest Completion NPCs,100002251,,NPC_Obstacle_Ostrich,Big Island,
+wf_pepperoni_quest_item,West (Forest) - Pepperoni (Obstacle Ostrich) Quest Completion Item,100002252,,Hat_SkateHelmet,Big Island,
+wf_lunch_quest_npc,"West (Forest) - Sorin, Roe, Beeritney (Lunch Trio) Quest Completion NPCs",100002253,,NPC_LunchSwapSkink,Big Island,
+wf_lunch_quest_item,"West (Forest) - Sorin, Roe, Beeritney (Lunch Trio) Quest Completion Item",100002254,,Hat_Princess,Big Island,
+wf_potkid_quest_npc,West (Forest) - Pot Kid (Eepy Armadillo) Quest Completion NPC,100002255,,NPC_Pot_Armadillo,Big Island,
+wf_penelope_quest_npc,West (Forest) - Penelope (Bastion Beaver) Quest Completion NPC,100002256,,NPC_Warrior_Beaver,Big Island,
+wf_penelope_quest_item,West (Forest) - Penelope (Bastion Beaver) Quest Completion Item,100002257,,Shield_TowerShield,Big Island,
+wf_eva_quest_npc,West (Forest) - Eva (Photographer Cat) Quest Completion NPC,100002258,,NPC_Shy_Cat,Big Island,
+wf_eva_quest_item,West (Forest) - Eva (Photographer Cat) Quest Completion Item,100002259,,Item_Camera,Big Island,
+wf_gunther_quest_npc,West (Forest) - Gunther (Sidekick Hippo) Quest Completion NPC,100002260,,NPC_Sidekick_Hippo,Big Island,
+wf_trish_quest_npc,West (Forest) - Trish (Invisible Horse) Quest Completion NPC,100002261,,NPC_Invisible_Horse,Big Island,
+wf_tiffany_quest_npc,West (Forest) - Tiffany (Princess Cat) Quest Completion NPCs,100002262,,NPC_TutuCat,Big Island,
+wf_tiffany_quest_item,West (Forest) - Tiffany (Princess Cat) Quest Completion Item,100002263,,Sword_Wand,Big Island,
+jmq_susanne_ore,Jill's Main Quest - Magic Ore Pickup (Susanne's Quest),100002264,,BEACH ROCK,Big Island,
+jmq_susanne_quest_item,Jill's Main Quest - Susanne (Paleolithic Gazelle) Quest Completion,100002265,,Sword_RockHammer,Big Island,
+jmq_gene_sandwich,Jill's Main Quest - Cheese Sandwich Pickup (Gene's Quest),100002266,,HALF A CHEESE SANDWICH,Big Island,
+jmq_gene_quest_item,Jill's Main Quest - Gene (Merchant Beaver) Quest Completion Item,100002267,,Shield_Platter,Big Island,
+jmq_antone_bugnet,Jill's Main Quest - Bug Net Gift (Antone's Quest),100002268,,Sword_Net,Big Island,
+jmq_jill_quest_npc,Jill's Main Quest - Jill's Main Quest Completion NPCs,100002269,,NPC_Tut_Dog,Big Island,
+nm_flint_bomb,North (Mountain) - Bowling Bomb Gift (Flint's Quest),100002270,,Item_Bomb,Big Island,
+nm_flint_quest_npc,North (Mountain) - Flint (BombBowl Mole) Quest Completion NPC,100002271,,NPC_BombBowlMole,Big Island,
+nm_tanner_quest_npc,North (Mountain) - Tanner (Pot Mimic Elk) Quest Completion NPC,100002272,,NPC_Confused_Elk,Mountain Breakables,
+nm_twig_quest_npc,North (Mountain) - Twig (Flip Pomeranian) Quest Completion NPC,100002273,,NPC_Pomeranian,Mountain,
+nm_neil_quest_npc,North (Mountain) - Neil (Peptalk Rat) Quest Completion NPC,100002274,,NPC_Mistakes_Rat,Mountain,
+nm_neil_quest_item,North (Mountain) - Neil (Peptalk Rat) Quest Completion Item,100002275,,Hat_Beret,Mountain,
+nm_scooter_quest_npc,North (Mountain) - Scooter (Ceramic-Allergy Cougar) Quest Completion NPC,100002276,,NPC_ScaredPots_Cougar,Mountain Breakables,
+nm_luisa_quest_npc,North (Mountain) - Luisa (Tripping Lizard) Quest Completion NPC,100002277,,NPC_TripLizard,Mountain,
+nm_luisa_quest_item,North (Mountain) - Luisa (Tripping Lizard) Quest Completion Item,100002278,,Sword_CBSpear,Mountain,
+amq_andromeda_blaster,Avery!'s Main Quest - Nerf Blaster (Andromeda's Quest),100002279,,Item_SpaceGun,Mountain,
+amq_andromeda_quest_item,Avery!'s Main Quest - Andromeda (Space Hawk) Quest Completion Item,100002280,,Sword_Laser,Mountain,
+amq_velma_quest_item,Avery!'s Main Quest - Velma (Western Cow) Quest Completion Item,100002281,,Hat_Western,Mountain,
+amq_esme_sorbet,Avery!'s Main Quest - Sorbet (Esme's Quest),100002282,,ICE CREAM,Mountain,
+amq_esme_fangs,Avery!'s Main Quest - Plastic Fangs (Esme's Quest),100002283,,Hat_Vampire,Mountain,
+amq_esme_quest_npc,Avery!'s Main Quest - Esme (Vampire Bat) Quest Completion NPC,100002284,,NPC_Part-Timer,Mountain,
+amq_avery_quest_npc,Avery!'s Main Quest - Avery!'s Main Quest Quest Completion NPC,100002285,,NPC_Tut_Frog,Mountain,
+cr_esther_quest_npc,Central (Ravine) - Esther (Directions Deer) Quest Completion NPC,100002286,,NPC_Directions_Deer,Big Island,
+mi_billy_quest_npc,Big Island - Billy (Whale) Quest Completion NPC,100002287,,NPC_BigWhale,Big Island,
+mi_billy_quest_item,Big Island - Billy (Whale) Quest Completion Item,100002288,,Hat_Space,Big Island,
+mi_zhu_rock,Big Island - Rock (Zhu's Quest),100002289,,Rock,Big Island,
+mi_zhu_quest_npc,Big Island - Zhu (Skipping Fox) Quest Completion NPC,100002290,,NPC_Rock_Fox,Big Island,
 ti_bracelet_tutorial,Tutorial Island - ??? (Bracelet Monkey) Tutorial Bracelet,100002291,,BraceletShop2,Tutorial Island,
-ec_bracelet_windmill,East (Creeklands) - ??? (Bracelet Monkey) Windmill Bracelet,100002292,,BraceletShop1,Main Island,
-wf_bracelet_tree,West (Forest) - ??? (Bracelet Monkey) Tree Bracelet,100002293,,BraceletShop0,Main Island,
-nm_bracelet_mountain,North (Mountain) - ??? (Bracelet Monkey) Mountain Bracelet,100002294,,BraceletShop3,Main Island,
-mi_bracelet_all_npc,Main Island - ??? (Bracelet Monkey) All Bracelets NPC,100002295,,NPC_BraceletMonkey,Main Island,
+ec_bracelet_windmill,East (Creeklands) - ??? (Bracelet Monkey) Windmill Bracelet,100002292,,BraceletShop1,Big Island Bracelet Shops,
+wf_bracelet_tree,West (Forest) - ??? (Bracelet Monkey) Tree Bracelet,100002293,,BraceletShop0,Big Island Bracelet Shops,
+nm_bracelet_mountain,North (Mountain) - ??? (Bracelet Monkey) Mountain Bracelet,100002294,,BraceletShop3,Big Island Bracelet Shops,
+mi_bracelet_all_npc,Big Island - ??? (Bracelet Monkey) All Bracelets NPC,100002295,,NPC_BraceletMonkey,Big Island Bracelet Shops,
