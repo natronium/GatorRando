@@ -19,6 +19,12 @@ These instructions assume familiarity with command line tools. Please ask for he
 5. Navigate into the repository and run the command `dotnet build`
 
 ## Randomizer Details
+### Connecting to the server
+1. Enter Connection Details:
+	- New Worlds: For each new Archipelago world, you'll need a new save file. Play through the prologue (we recommend speedrun mode on to reduce mashing) and the initial cutscene, then pause the game. The Settings menu will appear and you'll have to enter in connection details. Your character's name is your slot name.  You can copy-paste or type your server address:port into its field in the menu.
+	- Continuing Worlds: When resuming an in-progress save, your connection details will have been saved and the Settings Menu should automatically appear. If your server port has changed (rarely occurs), update it before continuing.
+2. Connect to Server: Click "connect to server" once and wait for it to connect. When the quest in the upper right corner is complete, then you have successfully connected and you will be allowed to leave the Settings menu and start playing!
+
 ### Recommendations for Better Play Experiences
 - Download [Poptracker](https://poptracker.github.io/) and use the pack available at https://github.com/natronium/GatorPop.
 - If you are having trouble finding a specific location, you can search the map available at https://natronium.github.io/GatorMap/ to find all the pots, chests, and races with their locations labeled as they are in the Archipelago.
