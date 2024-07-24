@@ -1,22 +1,22 @@
 # GatorRando: Randomizer Client for Lil Gator Game
 Lil Gator Game is a game about being an adorable gator who is getting all of their friends involved in their giant hero quest in order to convince their big sister to stop working on her college assignment and instead play with them.
 
-This project is a randomizer mod that works with Archipelago ([APWorld link](https://github.com/natronium/GatorArchipelago)) to take the things your character would receive throughout the game and randomize them in either a solo or multiworld experience. If you are not familiar with Archipelago, we recommend reading Archipelago's introduction documents starting with the [FAQ](https://archipelago.gg/faq/en/).
+This project is a randomizer mod that works with [Archipelago](https://archipelago.gg/) (via a custom [APWorld](https://github.com/natronium/GatorArchipelago)) to take the things your character would receive throughout the game and randomize them, potentially between multiple games. If you are not familiar with Archipelago, we recommend reading Archipelago's introduction documents starting with the [FAQ](https://archipelago.gg/faq/en/).
 
 Recommendation: Use the map available at https://natronium.github.io/GatorMap/ to find all the pots, chests, and races with their locations labeled as they are in the Archipelago.
 ## Installation Instructions
-1. Download [BepInEx5](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.2|) for Windows and extract the contents into the root of your Lil Gator Game folder
+1. Download [BepInEx5](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.2|) for Windows and extract the contents into the root of your Lil Gator Game folder (you should now have a `BepInEx` folder in the same folder as `Lil Gator Game.exe`)
 2. Run the game and make sure it opens with an additional BepInEx terminal
-3. Build the GatorRando dll from source (see below) or download it from the Releases page
-4. Add the dll into the plugins folder inside the BepInEx folder
-5. See the APWorld Instructions for how to generate and host a game
+3. Build the GatorRando dll from source ([see below](#building-from-source)) or download it from the [Releases page](https://github.com/natronium/GatorRando/releases)
+4. Add the dll into the `plugins` folder inside the `BepInEx` folder
+5. See the [APWorld Instructions](https://github.com/natronium/GatorArchipelago) for how to generate and host a game
 
 ## Building from Source
 These instructions assume familiarity with command line tools. Please ask for help if you are not already familiar with command line tools as you may need to install additional packages.
 1. Download and install [.NET version 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) or higher
 2. In your command line interface of choice, navigate to the directory where you would like to store this project's source files.
 3. `git clone` this repository to that location
-4. Copy the Assembly-CSharp.dll and the UnityEngine.dll from the game's folder in "Lil Gator Game\\Lil Gator Game_Data\\Managed" into your local copy of GatorRando's "lib" folder
+4. Copy the Assembly-CSharp.dll and the UnityEngine.dll from the game's folder in `Lil Gator Game\Lil Gator Game_Data\Managed` into your local copy of GatorRando's `lib` folder
 5. Navigate into the repository and run the command `dotnet build`
 
 ## Randomizer Details
@@ -44,7 +44,7 @@ These instructions assume familiarity with command line tools. Please ask for he
 Right now, the goal is to finish the playground (takes 35 Friends worth of Friend items and completing all three main quests), play through the flashback, and watch the credits.
 
 ### Quest Item List and Uses
-- 3x Thrown Pencil for each stage of Sam (Clumsy Jackal) giant pencil dropping quest
+- 3x Thrown Pencil for each stage of Sam (Clumsy Jackal)'s giant pencil dropping quest
 - Grass Clippings and Water for Jada (Cool Boar)
 - Retainer for Becca (Retainer Shark)
 - Sorbet for Esme (Vampire Bat)
@@ -61,4 +61,4 @@ In addition to the quest items above needing to be received to progress in their
 - The Rock is required for Zhu (Skip Fox)'s quest (but you can skip anywhere on the map, Zhu is watching)
 
 ## Future plans
-See the feature issues for things that we believe are doable and are planning to implement in the short-term (monthish timescale) in this mod (see apworld for logic related issues). We may decide to scrap or change these proposals depending on feasibility, user experience during testing, or other constraints. We do not guarantee that we will ever get around to doing everything in the issues, especially those marked as idea. If you are interested, please feel free to work on ideas and suggest modifications.
+See the [issues with the "Feature" tag](https://github.com/natronium/GatorRando/issues?q=is%3Aissue+is%3Aopen+label%3Afeature) for things that we believe are doable and are planning to implement in the short-term in this mod (see apworld for logic related issues). We may decide to scrap or change these proposals depending on feasibility, user experience during testing, or other constraints. We do not guarantee that we will ever get around to doing everything in the issues, especially those tagged as "idea". If you are interested, please feel free to work on ideas and suggest modifications.
