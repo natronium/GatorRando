@@ -4,7 +4,7 @@ Lil Gator Game is a game about being an adorable gator who is getting all of the
 This project is a randomizer mod for [Lil Gator Game](https://store.steampowered.com/app/1586800/Lil_Gator_Game/) that works with [Archipelago](https://archipelago.gg/) (via a custom [APWorld](https://github.com/natronium/GatorArchipelago)) to take the things your character would receive throughout the game and randomize them, potentially between multiple games. If you are not familiar with Archipelago, we recommend reading Archipelago's introduction documents starting with the [FAQ](https://archipelago.gg/faq/en/).
 
 ## Installation Instructions
-1. Download [BepInEx5](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.2|) for Windows and extract the contents into the root of your Lil Gator Game folder (you should now have a `BepInEx` folder in the same folder as `Lil Gator Game.exe`)
+1. Download [BepInEx5](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.2) for Windows and extract the contents into the root of your Lil Gator Game folder (you should now have a `BepInEx` folder in the same folder as `Lil Gator Game.exe`)
 2. Run the game and make sure it opens with an additional BepInEx terminal
 3. Build the GatorRando dll from source ([see below](#building-from-source)) or download it from the [Releases page](https://github.com/natronium/GatorRando/releases)
 4. Add the dll into the `plugins` folder inside the `BepInEx` folder
