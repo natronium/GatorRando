@@ -3,8 +3,8 @@ friend_1,Friend,100000001,,1,Friends,progression_skip_balancing,Friends,47
 friend_2,Friend x2,100000002,,2,Friends,progression_skip_balancing,Friends,3
 friend_3,Friend x3,100000003,,3,Friends,progression_skip_balancing,Friends,1
 friend_4,Friend x4,100000004,,4,Friends,progression_skip_balancing,Friends,1
-craft_15,Craft Stuff x15,100000005,,15,Craft Stuff,filler,Crafting_Materials,53
-craft_30,Craft Stuff x30,100000006,,30,Craft Stuff,filler,Crafting_Materials,53
+craft_15,Craft Stuff x15,100000005,,15,Craft Stuff,filler,Crafting_Materials,0
+craft_30,Craft Stuff x30,100000006,,30,Craft Stuff,filler,Crafting_Materials,0
 bracelet,Bracelet,100000007,Bracelet,,Item,progression,Traversal,4
 glider,Glider,100000008,Shirt,,Item,progression,Traversal,1
 retainer,Retainer,100000009,QuestItem_Retainer,,Item,progression,Quest_Item,1
