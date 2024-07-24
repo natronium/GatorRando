@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>GatorRando</AssemblyName>
-    <Description>Randomizer for Lil Gator Game for connection to Archipelago</Description>
-    <Version>0.0.1</Version>
+    <Description>Randomizer for Lil Gator Game</Description>
+    <Version>1.0.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
