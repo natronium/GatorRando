@@ -1,9 +1,8 @@
 # GatorRando: Randomizer Client for Lil Gator Game
 Lil Gator Game is a game about being an adorable gator who is getting all of their friends involved in their giant hero quest in order to convince their big sister to stop working on her college assignment and instead play with them.
 
-This project is a randomizer mod that works with [Archipelago](https://archipelago.gg/) (via a custom [APWorld](https://github.com/natronium/GatorArchipelago)) to take the things your character would receive throughout the game and randomize them, potentially between multiple games. If you are not familiar with Archipelago, we recommend reading Archipelago's introduction documents starting with the [FAQ](https://archipelago.gg/faq/en/).
+This project is a randomizer mod for [Lil Gator Game](https://store.steampowered.com/app/1586800/Lil_Gator_Game/) that works with [Archipelago](https://archipelago.gg/) (via a custom [APWorld](https://github.com/natronium/GatorArchipelago)) to take the things your character would receive throughout the game and randomize them, potentially between multiple games. If you are not familiar with Archipelago, we recommend reading Archipelago's introduction documents starting with the [FAQ](https://archipelago.gg/faq/en/).
 
-Recommendation: Use the map available at https://natronium.github.io/GatorMap/ to find all the pots, chests, and races with their locations labeled as they are in the Archipelago.
 ## Installation Instructions
 1. Download [BepInEx5](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.2|) for Windows and extract the contents into the root of your Lil Gator Game folder (you should now have a `BepInEx` folder in the same folder as `Lil Gator Game.exe`)
 2. Run the game and make sure it opens with an additional BepInEx terminal
@@ -20,6 +19,11 @@ These instructions assume familiarity with command line tools. Please ask for he
 5. Navigate into the repository and run the command `dotnet build`
 
 ## Randomizer Details
+### Recommendations for Better Play Experiences
+- Download [Poptracker](https://poptracker.github.io/) and use the pack available at https://github.com/natronium/GatorPop.
+- If you are having trouble finding a specific location, you can search the map available at https://natronium.github.io/GatorMap/ to find all the pots, chests, and races with their locations labeled as they are in the Archipelago.
+- Use the text client (which you can also open from the Archipelago Launcher) alongside your game. Using the text client will allow you to see what items you are sending and receiving, as only some sent items currently display in game.
+
 ### Features added to the original game
 - New Tab in Item Inventory that displays all quest items (ex. Retainer) that you have received in order to be able to keep track of who you need to talk to
 
