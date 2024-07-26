@@ -20,6 +20,7 @@ static class SamQuestMods
         {
             DialogueSequencer sequencer = seq.GetComponent<DialogueSequencer>();
             sequencer.afterSequence.ObliteratePersistentListenerByIndex(0);
+            sequencer.afterSequence.AddListener(UpdateSamState);
             DSItem item = seq.GetComponent<DSItem>();
             item.item = Util.GenerateItemObject(itemName, item.item.sprite);
         }
