@@ -7,7 +7,7 @@ This project is a randomizer mod for [Lil Gator Game](https://store.steampowered
 1. Download [BepInEx5](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.2) for Windows and extract the contents into the root of your Lil Gator Game folder (you should now have a `BepInEx` folder in the same folder as `Lil Gator Game.exe`)
 2. Run the game and make sure that a plugins folder was generated inside of the BepInEx folder
 3. Download the GatorRando zip from the [Releases page](https://github.com/natronium/GatorRando/releases) or build the GatorRando dll from source ([see below](#building-from-source)) or 
-4. Add the GatorRando.dll, Archipelago.MultiClient.Net.dll, and Newtonsoft.Json.dll (either by extracting the zip from the [Releases page](https://github.com/natronium/GatorRando/releases) or from "bin\Debug\netstandard2.0" if built from source) into the `plugins` folder inside the `BepInEx` folder
+4. Add the GatorRando.dll, Archipelago.MultiClient.Net.dll, and Newtonsoft.Json.dll (either by extracting the zip from the [Releases page](https://github.com/natronium/GatorRando/releases) or from "GatorRando\bin\Debug\netstandard2.0" if built from source) into the `plugins` folder inside the `BepInEx` folder
 5. See the [APWorld Instructions](https://github.com/natronium/GatorArchipelago) for how to generate and host a game
 
 ## Building from Source
