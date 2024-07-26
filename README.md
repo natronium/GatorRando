@@ -29,6 +29,7 @@ These instructions assume familiarity with command line tools. Please ask for he
 - Download [Poptracker](https://poptracker.github.io/) and use the pack available at https://github.com/natronium/GatorPop.
 - If you are having trouble finding a specific location, you can search the map available at https://natronium.github.io/GatorMap/ to find all the pots, chests, and races with their locations labeled as they are in the Archipelago.
 - Use the text client (which you can also open from the Archipelago Launcher) alongside your game. Using the text client will allow you to see what items you are sending and receiving, as only some sent items currently display in game.
+- If you get stuck somewhere (i.e. without a bracelet), there's a handy "reset position" button in the Settings Menu!
 
 ### Features added to the original game
 - New Tab in Item Inventory that displays all quest items (ex. Retainer) that you have received in order to be able to keep track of who you need to talk to
