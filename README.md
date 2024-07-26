@@ -6,8 +6,8 @@ This project is a randomizer mod for [Lil Gator Game](https://store.steampowered
 ## Installation Instructions
 1. Download [BepInEx5](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.2) for Windows and extract the contents into the root of your Lil Gator Game folder (you should now have a `BepInEx` folder in the same folder as `Lil Gator Game.exe`)
 2. Run the game and make sure that a plugins folder was generated inside of the BepInEx folder
-3. Build the GatorRando dll from source ([see below](#building-from-source)) or download it from the [Releases page](https://github.com/natronium/GatorRando/releases)
-4. Add the GatorRando.dll, Archipelago.MultiClient.Net.dll, and Newtonsoft.Json.dll (the other two are available in Releases) into the `plugins` folder inside the `BepInEx` folder
+3. Download the GatorRando zip from the [Releases page](https://github.com/natronium/GatorRando/releases) or build the GatorRando dll from source ([see below](#building-from-source)) or 
+4. Add the GatorRando.dll, Archipelago.MultiClient.Net.dll, and Newtonsoft.Json.dll (either by extracting the zip from the [Releases page](https://github.com/natronium/GatorRando/releases) or from "bin\Debug\netstandard2.0" if built from source) into the `plugins` folder inside the `BepInEx` folder
 5. See the [APWorld Instructions](https://github.com/natronium/GatorArchipelago) for how to generate and host a game
 
 ## Building from Source
@@ -21,7 +21,7 @@ These instructions assume familiarity with command line tools. Please ask for he
 ## Randomizer Details
 ### Connecting to the server
 1. Enter Connection Details:
-	- New Worlds: For each new Archipelago world, you'll need a new save file. Play through the prologue (we recommend speedrun mode on to reduce mashing) and the initial cutscene, then pause the game. The Settings menu will appear and you'll have to enter in connection details. Your character's name is your slot name.  You can copy-paste or type your server address:port into its field in the menu.
+	- New Worlds: For each new Archipelago world, you'll need a new save file. Play through the prologue (we recommend speedrun mode on to reduce mashing) and the initial cutscene, then pause the game. The Settings menu will appear and you'll have to enter in connection details. Your character's name is your slot name.  You can copy-paste or type your server address:port into its field in the menu. If you are hosting locally, the server address is localhost
 	- Continuing Worlds: When resuming an in-progress save, your connection details will have been saved and the Settings Menu should automatically appear. If your server port has changed (rarely occurs), update it before continuing.
 2. Connect to Server: Click "connect to server" once and wait for it to connect. When the quest in the upper right corner is complete, then you have successfully connected and you will be allowed to leave the Settings menu and start playing!
 
@@ -61,8 +61,10 @@ Right now, the goal is to finish the playground (takes 35 Friends worth of Frien
 - Magic Ore for Susanne (Paleolithic Gazelle)
 - Cheese Sandwich for Gene (Merchant Beaver)
 - Pot? for Martin (Horse)'s Tutorial quest
+
 ### Requirements to do specific checks
 In addition to the quest items above needing to be received to progress in their relevant quest, below are some requirements for quests that may not be obvious from base game (because you would have these items by default at the relevant point in the game)
+- You must craft Pointy Floppy Thing (Craft) to finish Avery's Tutorial Quest
 - Jill's Tutorial Quest must be completed for Franny (Stick Duck) to appear
 - Bug Net is required to try to catch the Beetle in Antone (Beetle Iguana)'s quest
 - A sword is required to collect Grass Clippings for Jada (Cool Boar)'s quest
@@ -71,4 +73,4 @@ In addition to the quest items above needing to be received to progress in their
 - The Rock is required for Zhu (Skip Fox)'s quest (but you can skip anywhere on the map, Zhu is watching)
 
 ## Future plans
-See the [issues with the "Feature" tag](https://github.com/natronium/GatorRando/issues?q=is%3Aissue+is%3Aopen+label%3Afeature) for things that we believe are doable and are planning to implement in the short-term in this mod (see apworld for logic related issues). We may decide to scrap or change these proposals depending on feasibility, user experience during testing, or other constraints. We do not guarantee that we will ever get around to doing everything in the issues, especially those tagged as "idea". If you are interested, please feel free to work on ideas and suggest modifications.
+See the [issues with the "feature" tag](https://github.com/natronium/GatorRando/issues?q=is%3Aissue+is%3Aopen+label%3Afeature) for things that we believe are doable and are planning to implement in the short-term in this mod (see apworld for logic related issues). We may decide to scrap or change these proposals depending on feasibility, user experience during testing, or other constraints. We do not guarantee that we will ever get around to doing everything in the issues, especially those tagged as "idea". If you are interested, please feel free to work on ideas and suggest modifications.
