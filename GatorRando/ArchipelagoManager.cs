@@ -118,9 +118,11 @@ public static class ArchipelagoManager
     public static void InitiateNewAPSession(Action postConnectAction)
     {
         Disconnect();
+
         (string server, int port) = GetServer();
         string user = GetUser();
         string password = GetPassword();
+        GetCollectBehavior(); // check user setting for collect behavior
         if (Connect(server, port, user, password))
         {
             // wait until Session is connected & knows about all its items
@@ -168,6 +170,11 @@ public static class ArchipelagoManager
             {
                 return passwordWithPrefix.Remove(0, passwordPrefix.Length);
             }
+        }
+
+        static void GetCollectBehavior()
+        {
+            LocationAutoCollect = Settings.s.ReadBool("!collect counts as checked", true);
         }
 
         static void SendLocallySavedLocations()

@@ -59,7 +59,7 @@ static class SettingsMods
         Util.GetByPath("Canvas/Pause Menu/Pause Content/Back to Title").GetComponent<Button>().onClick.AddListener(ArchipelagoManager.Disconnect);
 
         // Add Toggle so that players can choose whether they want !collect-ed locations to count as checked or not
-        CreateSettingsToggle(9, "!collect counts as Checked", "if checked, locations that are !collect-ed by other seeds count as checked for advancing quests." +
+        CreateSettingsToggle(8, "!collect counts as Checked", "set before connecting to server. if checked, locations that are !collect-ed by other seeds count as checked for advancing quests." +
             "if unchecked, uses what locations as saved in the save file.");
     }
 
