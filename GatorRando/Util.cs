@@ -140,6 +140,20 @@ public static class Util
         return keys[0];
     }
 
+    public static List<string> FindKeysByPrefix(string prefix)
+    {
+        List<string> keys = [];
+        foreach (string key in GameData.g.gameSaveData.ints.Keys)
+        {
+            if (key.StartsWith(prefix))
+            {
+                keys.Add(key);
+            }
+        }
+        return keys;
+    }
+
+
     public static void RemoveKeysByPrefix(string prefix)
     {
         List<string> keys = [];
