@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Concurrent;
 using Archipelago.MultiClient.Net.Packets;
 using Archipelago.MultiClient.Net.Models;
+using System.Collections.ObjectModel;
 
 namespace GatorRando;
 
@@ -18,20 +19,31 @@ public static class ArchipelagoManager
     private static readonly Dictionary<long, ItemInfo> LocationLookup = [];
     private static readonly Dictionary<string, Action> SpecialItemFunctions = [];
     private static readonly Dictionary<string, Action> SpecialLocationFunctions = [];
+    public static bool LocationAutoCollect = true;
+    private static readonly string location_key_prefix = "AP ID: ";
     public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
     public static void RegisterLocationListener(string locationName, Action listener) => SpecialLocationFunctions[locationName] = listener;
-
 
     public static bool ItemIsUnlocked(string item) =>
         Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApId(item));
 
-    public static bool LocationIsCollected(string location) =>
-        Session.Locations.AllLocationsChecked.Contains(GetLocationApId(location));
+    public static bool LocationIsCollected(string location)
+    {
+        if (LocationAutoCollect)
+        {
+            return Session.Locations.AllLocationsChecked.Contains(GetLocationApId(location));
+        }
+        else
+        {
+            return CheckIfAPLocationInSave(GetLocationApId(location));
+        }
+    }
+
 
     public static int GetItemUnlockCount(string itemName) =>
         Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
 
-    public static bool CheckIfLocationInSave(int id) => Util.FindKeysByPrefix("AP ID: ").Contains(id.ToString());
+    public static bool CheckIfAPLocationInSave(int id) => Util.FindKeysByPrefix(location_key_prefix).Contains(id.ToString());
 
     public static bool IsFullyConnected
     {
@@ -57,7 +69,7 @@ public static class ArchipelagoManager
         {
             return false;
         }
-        
+
         Session = ArchipelagoSessionFactory.CreateSession(server, port);
         LoginResult result;
         try
@@ -112,7 +124,7 @@ public static class ArchipelagoManager
         string password = GetPassword();
         if (Connect(server, port, user, password))
         {
-        // wait until Session is connected & knows about all its items
+            // wait until Session is connected & knows about all its items
             Plugin.Instance.StartCoroutine(Util.RunAfterCoroutine(0.5f, () => IsFullyConnected, () =>
             {
                 postConnectAction();
@@ -200,7 +212,16 @@ public static class ArchipelagoManager
 
         static void TriggerLocationListeners()
         {
-            foreach (long locationApId in Session.Locations.AllLocationsChecked)
+            ReadOnlyCollection<long> locationsCollected = [];
+            if (LocationAutoCollect)
+            {
+                locationsCollected = Session.Locations.AllLocationsChecked;
+            }
+            else
+            {
+                locationsCollected = new ReadOnlyCollection<long>((List<long>)Util.FindKeysByPrefix("AP ID ").Select(long.Parse));
+            }
+            foreach (long locationApId in locationsCollected)
             {
                 Locations.Entry location = GetLocationEntryByApId(locationApId);
                 if (location.client_name_id is not null && SpecialLocationFunctions.ContainsKey(location.client_name_id))
@@ -294,7 +315,7 @@ public static class ArchipelagoManager
         try
         {
             ap_id = GetLocationApId(id);
-            GameData.g.Write("AP ID: " + ap_id, true);
+            GameData.g.Write(location_key_prefix + ap_id.ToString(), true);
         }
         catch (InvalidOperationException)
         {
