@@ -341,8 +341,10 @@ public static class ArchipelagoManager
 
     public static void SendCompletion()
     {
-        var statusUpdatePacket = new StatusUpdatePacket();
-        statusUpdatePacket.Status = ArchipelagoClientState.ClientGoal;
+        var statusUpdatePacket = new StatusUpdatePacket
+        {
+            Status = ArchipelagoClientState.ClientGoal
+        };
         Session.Socket.SendPacket(statusUpdatePacket);
     }
 }
