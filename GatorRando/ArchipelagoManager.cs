@@ -212,7 +212,7 @@ public static class ArchipelagoManager
 
         static void TriggerLocationListeners()
         {
-            ReadOnlyCollection<long> locationsCollected = [];
+            ReadOnlyCollection<long> locationsCollected;
             if (LocationAutoCollect)
             {
                 locationsCollected = Session.Locations.AllLocationsChecked;
