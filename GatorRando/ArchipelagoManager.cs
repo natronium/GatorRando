@@ -19,7 +19,7 @@ public static class ArchipelagoManager
     private static readonly Dictionary<string, Action> SpecialItemFunctions = [];
     private static readonly Dictionary<string, Action> SpecialLocationFunctions = [];
     public static bool LocationAutoCollect = true;
-    private static readonly string location_key_prefix = "AP ID: ";
+    private static readonly string locationKeyPrefix = "AP ID: ";
     public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
     public static void RegisterLocationListener(string locationName, Action listener) => SpecialLocationFunctions[locationName] = listener;
 
@@ -42,7 +42,7 @@ public static class ArchipelagoManager
     public static int GetItemUnlockCount(string itemName) =>
         Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
 
-    public static bool CheckIfAPLocationInSave(long id) => Util.FindBoolKeysByPrefix(location_key_prefix).Contains(id.ToString());
+    public static bool CheckIfAPLocationInSave(long id) => Util.FindBoolKeysByPrefix(locationKeyPrefix).Contains(id.ToString());
 
     public static bool IsFullyConnected
     {
@@ -179,7 +179,7 @@ public static class ArchipelagoManager
 
         static void SendLocallySavedLocations()
         {
-            foreach (long location in Util.FindBoolKeysByPrefix(location_key_prefix).Select(long.Parse))
+            foreach (long location in Util.FindBoolKeysByPrefix(locationKeyPrefix).Select(long.Parse))
             {
                 if (!Session.Locations.AllLocationsChecked.Contains(location))
                 {
@@ -344,7 +344,7 @@ public static class ArchipelagoManager
             return false;
         }
 
-        GameData.g.Write(location_key_prefix + ap_id.ToString(), true);
+        GameData.g.Write(locationKeyPrefix + ap_id.ToString(), true);
         CollectLocationByAPID(ap_id);
         return true;
     }
@@ -362,7 +362,7 @@ public static class ArchipelagoManager
             return false;
         }
 
-        GameData.g.Write(location_key_prefix + ap_id.ToString(), true);
+        GameData.g.Write(locationKeyPrefix + ap_id.ToString(), true);
         CollectLocationByAPID(ap_id);
         return true;
     }
