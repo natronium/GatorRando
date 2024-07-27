@@ -7,7 +7,6 @@ using System.Linq;
 using System.Collections.Concurrent;
 using Archipelago.MultiClient.Net.Packets;
 using Archipelago.MultiClient.Net.Models;
-using System.Collections.ObjectModel;
 
 namespace GatorRando;
 
@@ -327,7 +326,6 @@ public static class ArchipelagoManager
         try
         {
             ap_id = GetLocationApId(id);
-            GameData.g.Write(location_key_prefix + ap_id.ToString(), true);
         }
         catch (InvalidOperationException)
         {
@@ -338,6 +336,7 @@ public static class ArchipelagoManager
             return false;
         }
 
+        GameData.g.Write(location_key_prefix + ap_id.ToString(), true);
         CollectLocationByAPID(ap_id);
         return true;
     }
@@ -355,6 +354,7 @@ public static class ArchipelagoManager
             return false;
         }
 
+        GameData.g.Write(location_key_prefix + ap_id.ToString(), true);
         CollectLocationByAPID(ap_id);
         return true;
     }
