@@ -43,7 +43,7 @@ public static class ArchipelagoManager
     public static int GetItemUnlockCount(string itemName) =>
         Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
 
-    public static bool CheckIfAPLocationInSave(int id) => Util.FindKeysByPrefix(location_key_prefix).Contains(id.ToString());
+    public static bool CheckIfAPLocationInSave(long id) => Util.FindKeysByPrefix(location_key_prefix).Contains(id.ToString());
 
     public static bool IsFullyConnected
     {
@@ -253,14 +253,14 @@ public static class ArchipelagoManager
 
     public static ItemInfo ItemAtLocation(int gatorID)
     {
-        int ap_id = GetLocationApId(gatorID);
+        long ap_id = GetLocationApId(gatorID);
         return LocationLookup[ap_id];
         // Fails if invalid gatorID (only use on collected IDs?)
     }
 
     public static ItemInfo ItemAtLocation(string gatorName)
     {
-        int ap_id = GetLocationApId(gatorName);
+        long ap_id = GetLocationApId(gatorName);
         return LocationLookup[ap_id];
         // Fails if invalid gatorName (only use on collected IDs?)
     }
@@ -300,18 +300,18 @@ public static class ArchipelagoManager
     private static int GetItemApId(string gatorName) =>
         (int)Items.Entries.First(entry => entry.client_name_id == gatorName).ap_item_id;
 
-    private static int GetLocationApId(int gatorID) =>
-        (int)Locations.Entries.First(entry => entry.client_id == gatorID).ap_location_id;
+    private static long GetLocationApId(int gatorID) =>
+        (long)Locations.Entries.First(entry => entry.client_id == gatorID).ap_location_id;
 
-    private static int GetLocationApId(string gatorName) =>
-        (int)Locations.Entries.First(entry => entry.client_name_id == gatorName).ap_location_id;
+    private static long GetLocationApId(string gatorName) =>
+        (long)Locations.Entries.First(entry => entry.client_name_id == gatorName).ap_location_id;
 
-    private static void CollectLocationByAPID(int id) => Session.Locations.CompleteLocationChecks(id);
+    private static void CollectLocationByAPID(long id) => Session.Locations.CompleteLocationChecks(id);
 
 
     public static bool CollectLocationByID(int id)
     {
-        int ap_id;
+        long ap_id;
         try
         {
             ap_id = GetLocationApId(id);
@@ -332,7 +332,7 @@ public static class ArchipelagoManager
 
     public static bool CollectLocationByName(string name)
     {
-        int ap_id;
+        long ap_id;
         try
         {
             ap_id = GetLocationApId(name);
