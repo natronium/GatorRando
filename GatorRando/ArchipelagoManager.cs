@@ -18,18 +18,31 @@ public static class ArchipelagoManager
     private static readonly Dictionary<long, ItemInfo> LocationLookup = [];
     private static readonly Dictionary<string, Action> SpecialItemFunctions = [];
     private static readonly Dictionary<string, Action> SpecialLocationFunctions = [];
+    public static bool LocationAutoCollect = true;
+    private static readonly string LocationKeyPrefix = "AP ID: ";
     public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
     public static void RegisterLocationListener(string locationName, Action listener) => SpecialLocationFunctions[locationName] = listener;
-
 
     public static bool ItemIsUnlocked(string item) =>
         Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApId(item));
 
-    public static bool LocationIsCollected(string location) =>
-        Session.Locations.AllLocationsChecked.Contains(GetLocationApId(location));
+    public static bool LocationIsCollected(string location)
+    {
+        if (LocationAutoCollect)
+        {
+            return Session.Locations.AllLocationsChecked.Contains(GetLocationApId(location));
+        }
+        else
+        {
+            return CheckIfAPLocationInSave(GetLocationApId(location));
+        }
+    }
+
 
     public static int GetItemUnlockCount(string itemName) =>
         Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
+
+    public static bool CheckIfAPLocationInSave(long id) => Util.FindBoolKeysByPrefix(LocationKeyPrefix).Contains(id.ToString());
 
     public static bool IsFullyConnected
     {
@@ -55,7 +68,7 @@ public static class ArchipelagoManager
         {
             return false;
         }
-        
+
         Session = ArchipelagoSessionFactory.CreateSession(server, port);
         LoginResult result;
         try
@@ -105,27 +118,30 @@ public static class ArchipelagoManager
     public static void InitiateNewAPSession(Action postConnectAction)
     {
         Disconnect();
+
         (string server, int port) = GetServer();
         string user = GetUser();
         string password = GetPassword();
+        GetCollectBehavior(); // check user setting for collect behavior
         if (Connect(server, port, user, password))
         {
-        // wait until Session is connected & knows about all its items
+            // wait until Session is connected & knows about all its items
             Plugin.Instance.StartCoroutine(Util.RunAfterCoroutine(0.5f, () => IsFullyConnected, () =>
             {
                 postConnectAction();
-                ReceiveUnreceivedItems();
-                TriggerItemListeners();//trigger listener functions for *any* item we have, not just recently received ones
-                TriggerLocationListeners();//trigger listener functions for any location that is collected
-                AttachListeners();//hook up listener functions for future live updates
-                ScoutLocations();
+                SendLocallySavedLocations(); //send all locations that in the local save but are not in the server's record (in case of disconnection)
+                ReceiveUnreceivedItems(); //receive all new items from the AP server
+                TriggerItemListeners(); //trigger listener functions for *any* item we have, not just recently received ones
+                TriggerLocationListeners(); //trigger listener functions for any location that is collected
+                AttachListeners(); //hook up listener functions for future live updates
+                ScoutLocations(); //gather information on what items are at locations so that we can show notifications
             }));
         }
 
         static (string server, int port) GetServer()
         {
             string serverPrefix = "server address:port";
-            string serverWithPrefix = Util.FindKeyByPrefix(serverPrefix);
+            string serverWithPrefix = Util.FindIntKeyByPrefix(serverPrefix);
             if (serverWithPrefix == "")
             {
                 throw new Exception("No server address has been set in the Settings Menu");
@@ -145,7 +161,7 @@ public static class ArchipelagoManager
         static string GetPassword()
         {
             string passwordPrefix = "password";
-            string passwordWithPrefix = Util.FindKeyByPrefix(passwordPrefix);
+            string passwordWithPrefix = Util.FindIntKeyByPrefix(passwordPrefix);
             if (passwordWithPrefix == "")
             {
                 return "";
@@ -153,6 +169,23 @@ public static class ArchipelagoManager
             else
             {
                 return passwordWithPrefix.Remove(0, passwordPrefix.Length);
+            }
+        }
+
+        static void GetCollectBehavior()
+        {
+            LocationAutoCollect = Settings.s.ReadBool("!collect counts as checked", true);
+        }
+
+        static void SendLocallySavedLocations()
+        {
+            foreach (long location in Util.FindBoolKeysByPrefix(LocationKeyPrefix).Select(long.Parse))
+            {
+                if (!Session.Locations.AllLocationsChecked.Contains(location))
+                {
+                    Plugin.LogDebug("Collecting Saved Location: " + location.ToString());
+                    CollectLocationByAPID(location);
+                }
             }
         }
 
@@ -198,7 +231,16 @@ public static class ArchipelagoManager
 
         static void TriggerLocationListeners()
         {
-            foreach (long locationApId in Session.Locations.AllLocationsChecked)
+            IEnumerable<long> locationsCollected;
+            if (LocationAutoCollect)
+            {
+                locationsCollected = Session.Locations.AllLocationsChecked;
+            }
+            else
+            {
+                locationsCollected = Util.FindBoolKeysByPrefix("AP ID ").Select(long.Parse);
+            }
+            foreach (long locationApId in locationsCollected)
             {
                 Locations.Entry location = GetLocationEntryByApId(locationApId);
                 if (location.client_name_id is not null && SpecialLocationFunctions.ContainsKey(location.client_name_id))
@@ -230,14 +272,14 @@ public static class ArchipelagoManager
 
     public static ItemInfo ItemAtLocation(int gatorID)
     {
-        int ap_id = GetLocationApId(gatorID);
+        long ap_id = GetLocationApId(gatorID);
         return LocationLookup[ap_id];
         // Fails if invalid gatorID (only use on collected IDs?)
     }
 
     public static ItemInfo ItemAtLocation(string gatorName)
     {
-        int ap_id = GetLocationApId(gatorName);
+        long ap_id = GetLocationApId(gatorName);
         return LocationLookup[ap_id];
         // Fails if invalid gatorName (only use on collected IDs?)
     }
@@ -277,18 +319,18 @@ public static class ArchipelagoManager
     private static int GetItemApId(string gatorName) =>
         (int)Items.Entries.First(entry => entry.client_name_id == gatorName).ap_item_id;
 
-    private static int GetLocationApId(int gatorID) =>
-        (int)Locations.Entries.First(entry => entry.client_id == gatorID).ap_location_id;
+    private static long GetLocationApId(int gatorID) =>
+        (long)Locations.Entries.First(entry => entry.client_id == gatorID).ap_location_id;
 
-    private static int GetLocationApId(string gatorName) =>
-        (int)Locations.Entries.First(entry => entry.client_name_id == gatorName).ap_location_id;
+    private static long GetLocationApId(string gatorName) =>
+        (long)Locations.Entries.First(entry => entry.client_name_id == gatorName).ap_location_id;
 
-    private static void CollectLocationByAPID(int id) => Session.Locations.CompleteLocationChecks(id);
+    private static void CollectLocationByAPID(long id) => Session.Locations.CompleteLocationChecks(id);
 
 
     public static bool CollectLocationByID(int id)
     {
-        int ap_id;
+        long ap_id;
         try
         {
             ap_id = GetLocationApId(id);
@@ -302,13 +344,14 @@ public static class ArchipelagoManager
             return false;
         }
 
+        GameData.g.Write(LocationKeyPrefix + ap_id.ToString(), true);
         CollectLocationByAPID(ap_id);
         return true;
     }
 
     public static bool CollectLocationByName(string name)
     {
-        int ap_id;
+        long ap_id;
         try
         {
             ap_id = GetLocationApId(name);
@@ -319,6 +362,7 @@ public static class ArchipelagoManager
             return false;
         }
 
+        GameData.g.Write(LocationKeyPrefix + ap_id.ToString(), true);
         CollectLocationByAPID(ap_id);
         return true;
     }
@@ -340,8 +384,10 @@ public static class ArchipelagoManager
 
     public static void SendCompletion()
     {
-        var statusUpdatePacket = new StatusUpdatePacket();
-        statusUpdatePacket.Status = ArchipelagoClientState.ClientGoal;
+        var statusUpdatePacket = new StatusUpdatePacket
+        {
+            Status = ArchipelagoClientState.ClientGoal
+        };
         Session.Socket.SendPacket(statusUpdatePacket);
     }
 }

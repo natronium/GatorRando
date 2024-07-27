@@ -57,6 +57,10 @@ static class SettingsMods
 
         // Add Disconnect to Back To Title button
         Util.GetByPath("Canvas/Pause Menu/Pause Content/Back to Title").GetComponent<Button>().onClick.AddListener(ArchipelagoManager.Disconnect);
+
+        // Add Toggle so that players can choose whether they want !collect-ed locations to count as checked or not
+        CreateSettingsToggle(8, "!collect counts as Checked", "set before connecting to server. if checked, locations that are !collect-ed by other seeds count as checked for advancing quests." +
+            "if unchecked, uses what locations as saved in the save file.");
     }
 
     private static void ReworkPlayerRename()
@@ -129,6 +133,24 @@ static class SettingsMods
         Button buttonButton = button.GetComponent<Button>();
         buttonButton.onClick.ObliteratePersistentListenerByIndex(0);
         buttonButton.onClick.AddListener(call);
+    }
+
+    private static void CreateSettingsToggle(int siblingIndex, string name, string description)
+    {
+        GameObject settingsMenu = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content");
+        GameObject aimToggle = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/use movement to aim");
+        GameObject toggle = GameObject.Instantiate(aimToggle, settingsMenu.transform);
+        toggle.transform.SetSiblingIndex(siblingIndex);
+        toggle.name = name;
+        GameObject label = toggle.transform.Find("Label").gameObject;
+        Object.Destroy(label.GetComponent<MLText>());
+        Text labelText = label.GetComponent<Text>();
+        labelText.text = name.ToLower();
+        UIDescription descript = toggle.GetComponent<UIDescription>();
+        descript.document = null;
+        descript.descriptionText = description;
+        SettingToggle settingToggle = toggle.GetComponent<SettingToggle>();
+        settingToggle.key = name.ToLower();
     }
 
     private static void CreateSettingsHeader(int siblingIndex, string name)
