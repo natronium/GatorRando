@@ -172,7 +172,7 @@ public static class ArchipelagoManager
 
         static void SendLocallySavedLocations()
         {
-            foreach (long location in Util.FindKeysByPrefix("AP ID ").Select(long.Parse))
+            foreach (long location in Util.FindKeysByPrefix(location_key_prefix).Select(long.Parse))
             {
                 if (!Session.Locations.AllLocationsChecked.Contains(location))
                 {
