@@ -224,14 +224,14 @@ public static class ArchipelagoManager
 
         static void TriggerLocationListeners()
         {
-            ReadOnlyCollection<long> locationsCollected;
+            IEnumerable<long> locationsCollected;
             if (LocationAutoCollect)
             {
                 locationsCollected = Session.Locations.AllLocationsChecked;
             }
             else
             {
-                locationsCollected = new ReadOnlyCollection<long>((List<long>)Util.FindKeysByPrefix("AP ID ").Select(long.Parse));
+                locationsCollected = Util.FindKeysByPrefix("AP ID ").Select(long.Parse);
             }
             foreach (long locationApId in locationsCollected)
             {
