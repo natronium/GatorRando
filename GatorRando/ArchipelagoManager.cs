@@ -128,11 +128,12 @@ public static class ArchipelagoManager
             Plugin.Instance.StartCoroutine(Util.RunAfterCoroutine(0.5f, () => IsFullyConnected, () =>
             {
                 postConnectAction();
-                ReceiveUnreceivedItems();
-                TriggerItemListeners();//trigger listener functions for *any* item we have, not just recently received ones
-                TriggerLocationListeners();//trigger listener functions for any location that is collected
-                AttachListeners();//hook up listener functions for future live updates
-                ScoutLocations();
+                SendLocallySavedLocations(); //send all locations that in the local save but are not in the server's record (in case of disconnection)
+                ReceiveUnreceivedItems(); //receive all new items from the AP server
+                TriggerItemListeners(); //trigger listener functions for *any* item we have, not just recently received ones
+                TriggerLocationListeners(); //trigger listener functions for any location that is collected
+                AttachListeners(); //hook up listener functions for future live updates
+                ScoutLocations(); //gather information on what items are at locations so that we can show notifications
             }));
         }
 
@@ -167,6 +168,17 @@ public static class ArchipelagoManager
             else
             {
                 return passwordWithPrefix.Remove(0, passwordPrefix.Length);
+            }
+        }
+
+        static void SendLocallySavedLocations()
+        {
+            foreach (long location in Util.FindKeysByPrefix("AP ID ").Select(long.Parse))
+            {
+                if (!Session.Locations.AllLocationsChecked.Contains(location))
+                {
+                    CollectLocationByAPID(location);
+                }
             }
         }
 
