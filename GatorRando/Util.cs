@@ -119,7 +119,7 @@ public static class Util
         }
     }
 
-    public static string FindKeyByPrefix(string prefix)
+    public static string FindIntKeyByPrefix(string prefix)
     {
         List<string> keys = [];
         foreach (string key in GameData.g.gameSaveData.ints.Keys)
@@ -140,21 +140,21 @@ public static class Util
         return keys[0];
     }
 
-    public static List<string> FindKeysByPrefix(string prefix)
+    public static List<string> FindBoolKeysByPrefix(string prefix)
     {
         List<string> keys = [];
-        foreach (string key in GameData.g.gameSaveData.ints.Keys)
+        foreach (string key in GameData.g.gameSaveData.bools.Keys)
         {
             if (key.StartsWith(prefix))
             {
-                keys.Add(key);
+                keys.Add(key.Substring(prefix.Length));
             }
         }
         return keys;
     }
 
 
-    public static void RemoveKeysByPrefix(string prefix)
+    public static void RemoveIntKeysByPrefix(string prefix)
     {
         List<string> keys = [];
         foreach (string key in GameData.g.gameSaveData.ints.Keys)

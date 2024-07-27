@@ -42,7 +42,7 @@ public static class ArchipelagoManager
     public static int GetItemUnlockCount(string itemName) =>
         Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
 
-    public static bool CheckIfAPLocationInSave(long id) => Util.FindKeysByPrefix(location_key_prefix).Contains(id.ToString());
+    public static bool CheckIfAPLocationInSave(long id) => Util.FindBoolKeysByPrefix(location_key_prefix).Contains(id.ToString());
 
     public static bool IsFullyConnected
     {
@@ -141,7 +141,7 @@ public static class ArchipelagoManager
         static (string server, int port) GetServer()
         {
             string serverPrefix = "server address:port";
-            string serverWithPrefix = Util.FindKeyByPrefix(serverPrefix);
+            string serverWithPrefix = Util.FindIntKeyByPrefix(serverPrefix);
             if (serverWithPrefix == "")
             {
                 throw new Exception("No server address has been set in the Settings Menu");
@@ -161,7 +161,7 @@ public static class ArchipelagoManager
         static string GetPassword()
         {
             string passwordPrefix = "password";
-            string passwordWithPrefix = Util.FindKeyByPrefix(passwordPrefix);
+            string passwordWithPrefix = Util.FindIntKeyByPrefix(passwordPrefix);
             if (passwordWithPrefix == "")
             {
                 return "";
@@ -179,10 +179,11 @@ public static class ArchipelagoManager
 
         static void SendLocallySavedLocations()
         {
-            foreach (long location in Util.FindKeysByPrefix(location_key_prefix).Select(long.Parse))
+            foreach (long location in Util.FindBoolKeysByPrefix(location_key_prefix).Select(long.Parse))
             {
                 if (!Session.Locations.AllLocationsChecked.Contains(location))
                 {
+                    Plugin.LogDebug("Collecting Saved Location: " + location.ToString());
                     CollectLocationByAPID(location);
                 }
             }
@@ -237,7 +238,7 @@ public static class ArchipelagoManager
             }
             else
             {
-                locationsCollected = Util.FindKeysByPrefix("AP ID ").Select(long.Parse);
+                locationsCollected = Util.FindBoolKeysByPrefix("AP ID ").Select(long.Parse);
             }
             foreach (long locationApId in locationsCollected)
             {

@@ -24,7 +24,7 @@ public class SettingInput : MonoBehaviour
 			}
 			else
 			{
-				string currentPrefixAndValue = Util.FindKeyByPrefix(this.key);
+				string currentPrefixAndValue = Util.FindIntKeyByPrefix(this.key);
 				if (currentPrefixAndValue != "")
 				{
 					this.inputfield.text = currentPrefixAndValue.Remove(0,this.key.Length);
@@ -64,7 +64,7 @@ public class SettingInput : MonoBehaviour
 			}
 			else
 			{
-				Util.RemoveKeysByPrefix(this.key);
+				Util.RemoveIntKeysByPrefix(this.key);
 				GameData.g.Write(this.key + this.inputfield.text, 0);
 			}
 		}
