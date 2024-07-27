@@ -292,6 +292,7 @@ public static class ArchipelagoManager
         try
         {
             ap_id = GetLocationApId(id);
+            GameData.g.Write("AP ID: " + ap_id, true);
         }
         catch (InvalidOperationException)
         {
