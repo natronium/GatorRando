@@ -31,6 +31,8 @@ public static class ArchipelagoManager
     public static int GetItemUnlockCount(string itemName) =>
         Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
 
+    public static bool CheckIfLocationInSave(int id) => Util.FindKeysByPrefix("AP ID: ").Contains(id.ToString());
+
     public static bool IsFullyConnected
     {
         get => Session is not null
