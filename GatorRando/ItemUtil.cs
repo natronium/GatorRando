@@ -20,7 +20,7 @@ public static class ItemUtil
         {
             if (item == "Bracelet")
             {
-                ItemManager.i.BraceletsCollected = ItemManager.i.BraceletsCollected + 1;
+                ItemManager.i.BraceletsCollected++;
             }
             ItemManager.i.GiveItem(itemObject);
             UIMenus.craftNotification.LoadItems([itemObject]);
