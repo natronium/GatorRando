@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatorRando", "GatorRando\GatorRando.csproj", "{8248B59B-7AD2-4BD6-9A58-9DB3301A4F38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSVSourceGenerator", "CSVSourceGenerator\CSVSourceGenerator.csproj", "{745B035C-EFA7-4102-8983-7A85B37E5275}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSourceGenerator", "DataSourceGenerator\DataSourceGenerator.csproj", "{745B035C-EFA7-4102-8983-7A85B37E5275}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

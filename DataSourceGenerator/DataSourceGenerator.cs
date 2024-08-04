@@ -6,9 +6,9 @@ using Sylvan.Data.Csv;
 
 #nullable enable
 
-namespace CsvSourceGenerator;
+namespace DataSourceGenerator;
 [Generator]
-public class CSVSourceGenerator : ISourceGenerator
+public class DataSourceGenerator : ISourceGenerator
 {
 #pragma warning disable RS2008 // Enable analyzer release tracking
     private static readonly DiagnosticDescriptor failedToReadDiag = new DiagnosticDescriptor("FailedToRead", "Errors Reading AdditionalFile",
@@ -21,16 +21,24 @@ public class CSVSourceGenerator : ISourceGenerator
                     DiagnosticSeverity.Warning, true);
 #pragma warning restore RS2008 // Enable analyzer release tracking
 
-
+    private void GenerateItemStuff() { }
+    private void GenerateLocationStuff() { }
+    private void GenerateAccessStuff() { }
     public void Execute(GeneratorExecutionContext context)
     {
         foreach (var file in context.AdditionalFiles)
         {
+
+
+        }
+        if (false)
+        {
+            AdditionalText file;
             var sourceText = file.GetText();
             if (sourceText == null)
             {
                 context.ReportDiagnostic(Diagnostic.Create(failedToReadDiag, null, [file.Path]));
-                continue;
+                // continue;
             }
             var csvName = Path.GetFileNameWithoutExtension(file.Path);
             var csvStr = sourceText.ToString();
@@ -71,11 +79,11 @@ public class CSVSourceGenerator : ISourceGenerator
                     }
                 }
 
-                entriesStrings.Add($"new({String.Join(",", entryStrings)})");
+                entriesStrings.Add($"new({string.Join(",", entryStrings)})");
             }
-            var structArgs = String.Join(", ", structArgStrings);
-            var structProps = String.Join("\n", structFieldStrings);
-            var entries = String.Join(",\n", entriesStrings);
+            var structArgs = string.Join(", ", structArgStrings);
+            var structProps = string.Join("\n", structFieldStrings);
+            var entries = string.Join(",\n", entriesStrings);
             // var entries = entriesBuilder.ToString();
 
             var source = @$"

@@ -20,8 +20,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2"
-      PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,8 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2"
-      PrivateAssets="all" />
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" PrivateAssets="all" />
 
     <!-- Publicize directly when referencing -->
     <Reference Include="lib/Assembly-CSharp.dll" Publicize="true" />
@@ -49,8 +47,7 @@
 
   <!-- Embed Item & Location data from CSV -->
   <ItemGroup>
-    <ProjectReference Include="../CSVSourceGenerator/CSVSourceGenerator.csproj"
-      OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\DataSourceGenerator\DataSourceGenerator.csproj" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="data/Items.csv" CsvLoadType="Startup" />
