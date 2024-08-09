@@ -222,9 +222,9 @@ public static class ArchipelagoManager
             foreach (ItemInfo itemInfo in Session.Items.AllItemsReceived)
             {
                 Items.Entry item = GetItemEntryByApId(itemInfo.ItemId);
-                if (item.client_name_id is not null && SpecialItemFunctions.ContainsKey(item.client_name_id))
+                if (item.clientNameId is not null && SpecialItemFunctions.ContainsKey(item.clientNameId))
                 {
-                    SpecialItemFunctions[item.client_name_id]();
+                    SpecialItemFunctions[item.clientNameId]();
                 }
             }
         }
@@ -243,9 +243,9 @@ public static class ArchipelagoManager
             foreach (long locationApId in locationsCollected)
             {
                 Locations.Entry location = GetLocationEntryByApId(locationApId);
-                if (location.client_name_id is not null && SpecialLocationFunctions.ContainsKey(location.client_name_id))
+                if (location.clientNameId is not null && SpecialLocationFunctions.ContainsKey(location.clientNameId))
                 {
-                    SpecialLocationFunctions[location.client_name_id]();
+                    SpecialLocationFunctions[location.clientNameId]();
                 }
             }
         }
@@ -289,41 +289,41 @@ public static class ArchipelagoManager
         return LoginInfo.SlotData[option_name].ToString();
     }
 
-    private static Items.Entry GetItemEntryByApId(long id) => Items.Entries.First(entry => entry.ap_item_id == id);
-    private static Locations.Entry GetLocationEntryByApId(long id) => Locations.Entries.First(entry => entry.ap_location_id == id);
+    private static Items.Entry GetItemEntryByApId(long id) => Items.Entries.First(entry => entry.apItemId == id);
+    private static Locations.Entry GetLocationEntryByApId(long id) => Locations.Entries.First(entry => entry.apLocationId == id);
     private static void ReceiveItem(Items.Entry entry)
     {
-        Plugin.LogDebug($"ReceiveItem for {entry.shortname} (\"{entry.longname}\"). ClientId:{entry.client_name_id}, Type:{entry.client_item_type}, AP:{entry.ap_item_id}");
-        switch (entry.client_item_type)
+        Plugin.LogDebug($"ReceiveItem for {entry.shortName} (\"{entry.longName}\"). ClientId:{entry.clientNameId}, Type:{entry.clientItemType}, AP:{entry.apItemId}");
+        switch (entry.clientItemType)
         {
-            case "Item": ItemUtil.GiveItem(entry.client_name_id); break;
-            case "Craft": ItemUtil.GiveCraft(entry.client_name_id); break;
-            case "Friends": ItemUtil.GiveFriends((int)entry.client_resource_amount); break;
-            case "Craft Stuff": ItemUtil.GiveCraftStuff((int)entry.client_resource_amount); break;
+            case Items.ClientItemType.Item: ItemUtil.GiveItem(entry.clientNameId); break;
+            case Items.ClientItemType.Craft: ItemUtil.GiveCraft(entry.clientNameId); break;
+            case Items.ClientItemType.Friend: ItemUtil.GiveFriends((int)entry.clientResourceAmount); break;
+            case Items.ClientItemType.Craft_Stuff: ItemUtil.GiveCraftStuff((int)entry.clientResourceAmount); break;
             default:
-                throw new Exception($"Item {entry.client_name_id} in the item data CSV with an unknown client_item type of {entry.client_item_type}");
+                throw new Exception($"Item {entry.clientNameId} in the item data CSV with an unknown client_item type of {entry.clientItemType}");
         };
 
-        if (entry.client_name_id is not null && SpecialItemFunctions.ContainsKey(entry.client_name_id))
+        if (entry.clientNameId is not null && SpecialItemFunctions.ContainsKey(entry.clientNameId))
         {
-            SpecialItemFunctions[entry.client_name_id]();
+            SpecialItemFunctions[entry.clientNameId]();
         }
     }
 
     public static string GetClientIDByAPId(long id)
     {
         Items.Entry itemEntry = ArchipelagoManager.GetItemEntryByApId(id);
-        return itemEntry.client_name_id;
+        return itemEntry.clientNameId;
     }
 
     private static int GetItemApId(string gatorName) =>
-        (int)Items.Entries.First(entry => entry.client_name_id == gatorName).ap_item_id;
+        (int)Items.Entries.First(entry => entry.clientNameId == gatorName).apItemId;
 
     private static long GetLocationApId(int gatorID) =>
-        (long)Locations.Entries.First(entry => entry.client_id == gatorID).ap_location_id;
+        (long)Locations.Entries.First(entry => entry.clientId == gatorID).apLocationId;
 
     private static long GetLocationApId(string gatorName) =>
-        (long)Locations.Entries.First(entry => entry.client_name_id == gatorName).ap_location_id;
+        (long)Locations.Entries.First(entry => entry.clientNameId == gatorName).apLocationId;
 
     private static void CollectLocationByAPID(long id) => Session.Locations.CompleteLocationChecks(id);
 
@@ -351,10 +351,10 @@ public static class ArchipelagoManager
 
     public static bool CollectLocationByName(string name)
     {
-        long ap_id;
+        long apId;
         try
         {
-            ap_id = GetLocationApId(name);
+            apId = GetLocationApId(name);
         }
         catch (InvalidOperationException)
         {
@@ -362,8 +362,8 @@ public static class ArchipelagoManager
             return false;
         }
 
-        GameData.g.Write(LocationKeyPrefix + ap_id.ToString(), true);
-        CollectLocationByAPID(ap_id);
+        GameData.g.Write(LocationKeyPrefix + apId.ToString(), true);
+        CollectLocationByAPID(apId);
         return true;
     }
 
