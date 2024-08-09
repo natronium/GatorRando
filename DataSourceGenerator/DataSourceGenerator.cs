@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.CodeAnalysis;
-using Sylvan.Data.Csv;
+// using Newtonsoft.Json;
 
 #nullable enable
 
@@ -21,85 +21,143 @@ public class DataSourceGenerator : ISourceGenerator
                     DiagnosticSeverity.Warning, true);
 #pragma warning restore RS2008 // Enable analyzer release tracking
 
-    private void GenerateItemStuff() { }
-    private void GenerateLocationStuff() { }
-    private void GenerateAccessStuff() { }
+    private static GeneratorExecutionContext ctx;
+
+    private string GenerateItemStuff(string fileText) {
+        // var whosit = JsonConvert.DeserializeObject(fileText);
+        // JankLog(ctx, [$"{whosit.GetType()}"]);
+        return "";
+    }
+    private string GenerateLocationStuff(string fileText) { 
+        return "";
+    }
+    private string GenerateAccessStuff(string fileText) { 
+        return "";
+    }
+
+    enum DataType
+    {
+        Item,
+        Location,
+    }
     public void Execute(GeneratorExecutionContext context)
     {
+        JankLog(context, ["OHAI"]);
+        ctx = context;
         foreach (var file in context.AdditionalFiles)
         {
+            if (!context.AnalyzerConfigOptions.GetOptions(file).TryGetValue("build_metadata.additionalfiles.DataType", out string? dataTypeString))
+            {
+                // only generate for files with "DataType" set
+                continue;
+            }
+
+            if (!Enum.TryParse(dataTypeString, out DataType dataType))
+            {
+                continue;
+            }
+
+            string baseFileName = Path.GetFileNameWithoutExtension(file.Path);
+
+
+            string? fileText = file.GetText()?.ToString();  
+            if (fileText == null)
+            {
+                context.ReportDiagnostic(Diagnostic.Create(failedToReadDiag, null, [file.Path]));
+                continue;
+            }
+
+            switch (dataType)
+            {
+                case DataType.Item:
+                    string itemDataSource = GenerateItemStuff(fileText);
+                    context.AddSource($"{baseFileName}.g.cs", itemDataSource);
+                    break;
+
+                case DataType.Location:
+                    string locationDataSource = GenerateLocationStuff(fileText);
+                    context.AddSource($"{baseFileName}.g.cs", locationDataSource);
+
+                    string accessDataSource = GenerateAccessStuff(fileText);
+                    context.AddSource($"{baseFileName}Access.g.cs", accessDataSource);
+                    break;
+
+                default:
+                    continue; //Should never happen? but technically logically correct
+
+            }
 
 
         }
         if (false)
         {
-            AdditionalText file;
-            var sourceText = file.GetText();
-            if (sourceText == null)
-            {
-                context.ReportDiagnostic(Diagnostic.Create(failedToReadDiag, null, [file.Path]));
-                // continue;
-            }
-            var csvName = Path.GetFileNameWithoutExtension(file.Path);
-            var csvStr = sourceText.ToString();
-            // var csvStr = "foo,bar,baz\n1,qux,\"spam,eggs\"";
+//             AdditionalText file;
+//             var sourceText = file.GetText();
+//             if (sourceText == null)
+//             {
+//                 context.ReportDiagnostic(Diagnostic.Create(failedToReadDiag, null, [file.Path]));
+//                 // continue;
+//             }
+//             var csvName = Path.GetFileNameWithoutExtension(file.Path);
+//             var csvStr = sourceText.ToString();
+//             // var csvStr = "foo,bar,baz\n1,qux,\"spam,eggs\"";
 
-            List<(string, string)> headerInfo = GetHeaderInfo(csvStr);
+//             List<(string, string)> headerInfo = GetHeaderInfo(csvStr);
 
-            List<string> structArgStrings = [];
-            List<string> structFieldStrings = [];
-            foreach (var (name, type) in headerInfo)
-            {
-                structArgStrings.Add($"{type}? {name}");
-                structFieldStrings.Add($"public readonly {type}? {name} = {name};");
-            }
+//             List<string> structArgStrings = [];
+//             List<string> structFieldStrings = [];
+//             foreach (var (name, type) in headerInfo)
+//             {
+//                 structArgStrings.Add($"{type}? {name}");
+//                 structFieldStrings.Add($"public readonly {type}? {name} = {name};");
+//             }
 
 
-            var csv = CsvDataReader.Create(new StringReader(csvStr));
-            List<string> entriesStrings = [];
-            while (csv.Read())
-            {
-                List<string> entryStrings = new();
-                for (int i = 0; i < csv.FieldCount; i++)
-                {
-                    var field = csv.GetString(i);
-                    var type = headerInfo[i].Item2;
+//             var csv = CsvDataReader.Create(new StringReader(csvStr));
+//             List<string> entriesStrings = [];
+//             while (csv.Read())
+//             {
+//                 List<string> entryStrings = new();
+//                 for (int i = 0; i < csv.FieldCount; i++)
+//                 {
+//                     var field = csv.GetString(i);
+//                     var type = headerInfo[i].Item2;
 
-                    if (field == "")
-                    {
-                        entryStrings.Add("null");
-                    }
-                    else if (type == "string")
-                    {
-                        entryStrings.Add($"\"{field}\"");
-                    }
-                    else
-                    {
-                        entryStrings.Add(field);
-                    }
-                }
+//                     if (field == "")
+//                     {
+//                         entryStrings.Add("null");
+//                     }
+//                     else if (type == "string")
+//                     {
+//                         entryStrings.Add($"\"{field}\"");
+//                     }
+//                     else
+//                     {
+//                         entryStrings.Add(field);
+//                     }
+//                 }
 
-                entriesStrings.Add($"new({string.Join(",", entryStrings)})");
-            }
-            var structArgs = string.Join(", ", structArgStrings);
-            var structProps = string.Join("\n", structFieldStrings);
-            var entries = string.Join(",\n", entriesStrings);
-            // var entries = entriesBuilder.ToString();
+//                 entriesStrings.Add($"new({string.Join(",", entryStrings)})");
+//             }
+//             var structArgs = string.Join(", ", structArgStrings);
+//             var structProps = string.Join("\n", structFieldStrings);
+//             var entries = string.Join(",\n", entriesStrings);
+//             // var entries = entriesBuilder.ToString();
 
-            var source = @$"
-namespace Data;
-#nullable enable
-public static class {csvName}{{
-public readonly struct Entry({structArgs}){{
-{structProps}
-}}
-public static Entry[] Entries = [
-{entries}
-];
-}}
-";
+//             var source = @$"
+// namespace Data;
+// #nullable enable
+// public static class {csvName}{{
+// public readonly struct Entry({structArgs}){{
+// {structProps}
+// }}
+// public static Entry[] Entries = [
+// {entries}
+// ];
+// }}
+// ";
 
-            context.AddSource($"{csvName}.g.cs", source);
+//             context.AddSource($"{csvName}.g.cs", source);
 
         }
 
@@ -108,18 +166,18 @@ public static Entry[] Entries = [
         // context.ReportDiagnostic(Diagnostic.Create(msgDiag, null, ["It ran!!"]));
     }
 
-    private List<(string, string)> GetHeaderInfo(string csvString)
-    {
-        var csv = CsvDataReader.Create(new StringReader(csvString));
-        csv.Read(); // advance to first row
-        List<(string, string)> headerInfo = [];
-        for (int i = 0; i < csv.FieldCount; i++)
-        {
-            var name = csv.GetName(i);
-            headerInfo.Add((name, GetCsvFieldType(csv.GetString(i))));
-        }
-        return headerInfo;
-    }
+    // private List<(string, string)> GetHeaderInfo(string csvString)
+    // {
+    //     var csv = CsvDataReader.Create(new StringReader(csvString));
+    //     csv.Read(); // advance to first row
+    //     List<(string, string)> headerInfo = [];
+    //     for (int i = 0; i < csv.FieldCount; i++)
+    //     {
+    //         var name = csv.GetName(i);
+    //         headerInfo.Add((name, GetCsvFieldType(csv.GetString(i))));
+    //     }
+    //     return headerInfo;
+    // }
 
     // From the (MIT Licensed) CSVGenerator Source Generator sample in gh:dotnet/roslyn-sdk
     public static string GetCsvFieldType(string exemplar) => exemplar switch

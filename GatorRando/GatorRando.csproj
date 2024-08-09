@@ -47,10 +47,10 @@
 
   <!-- Embed Item & Location data from CSV -->
   <ItemGroup>
-    <ProjectReference Include="..\DataSourceGenerator\DataSourceGenerator.csproj" />
+    <ProjectReference Include="..\DataSourceGenerator\DataSourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="data/Items.csv" CsvLoadType="Startup" />
-    <AdditionalFiles Include="data/Locations.csv" CsvLoadType="Startup" />
+    <AdditionalFiles Include="data/items.json" DataType="Item" />
+    <!-- <AdditionalFiles Include="data/Locations.csv" CsvLoadType="Startup" /> -->
   </ItemGroup>
 </Project>
