@@ -6,7 +6,7 @@
             "item_id": 100000001,
             "client_name_id": "",
             "client_resource_amount": 1,
-            "client_item_type": "Friends",
+            "client_item_type": "Friend",
             "classification": "progression_skip_balancing",
             "base_quantity_in_item_pool": 47,
             "item_groups": "Friends"
@@ -17,7 +17,7 @@
             "item_id": 100000002,
             "client_name_id": "",
             "client_resource_amount": 2,
-            "client_item_type": "Friends",
+            "client_item_type": "Friend",
             "classification": "progression_skip_balancing",
             "base_quantity_in_item_pool": 3,
             "item_groups": "Friends"
@@ -28,7 +28,7 @@
             "item_id": 100000003,
             "client_name_id": "",
             "client_resource_amount": 3,
-            "client_item_type": "Friends",
+            "client_item_type": "Friend",
             "classification": "progression_skip_balancing",
             "base_quantity_in_item_pool": 1,
             "item_groups": "Friends"
@@ -39,7 +39,7 @@
             "item_id": 100000004,
             "client_name_id": "",
             "client_resource_amount": 4,
-            "client_item_type": "Friends",
+            "client_item_type": "Friend",
             "classification": "progression_skip_balancing",
             "base_quantity_in_item_pool": 1,
             "item_groups": "Friends"
@@ -50,7 +50,7 @@
             "item_id": 100000005,
             "client_name_id": "",
             "client_resource_amount": 15,
-            "client_item_type": "Craft Stuff",
+            "client_item_type": "Craft_Stuff",
             "classification": "filler",
             "base_quantity_in_item_pool": 0,
             "item_groups": "Crafting_Materials"
@@ -61,7 +61,7 @@
             "item_id": 100000006,
             "client_name_id": "",
             "client_resource_amount": 30,
-            "client_item_type": "Craft Stuff",
+            "client_item_type": "Craft_Stuff",
             "classification": "filler",
             "base_quantity_in_item_pool": 0,
             "item_groups": "Crafting_Materials"

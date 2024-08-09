@@ -50,7 +50,7 @@
     <ProjectReference Include="..\DataSourceGenerator\DataSourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="data/items.json" DataType="Item" />
-    <!-- <AdditionalFiles Include="data/Locations.csv" CsvLoadType="Startup" /> -->
+    <AdditionalFiles Include="data/Items.json"/>
+    <AdditionalFiles Include="data/Locations.json"/>
   </ItemGroup>
 </Project>
