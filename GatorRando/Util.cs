@@ -169,4 +169,34 @@ public static class Util
             GameData.g.gameSaveData.ints.Remove(key);
         }
     }
+
+    private static GameObject[] potPrefabs;
+
+    public static void PopulatePotPrefabs()
+    {
+        potPrefabs = Resources.FindObjectsOfTypeAll<ParticlePickup>()
+                .Where(e => e.name.Equals("Pot Confetti"))
+                .Select(e => e.gameObject.transform.parent.gameObject).ToArray();
+    }
+
+    public static PersistentObjectType GetPersistentObjectType(PersistentObject persistentObject) => persistentObject switch
+    {
+        BreakableObjectMulti _ => PersistentObjectType.Chest,
+        Racetrack _ => PersistentObjectType.Race,
+        PositionChallenge _ => PersistentObjectType.Challenge,
+        TimedBreakables _ => PersistentObjectType.Challenge,
+        BreakableObject pot when potPrefabs.Contains(pot.breakingPrefab) => PersistentObjectType.Pot,
+        BreakableObject cardboard when !potPrefabs.Contains(cardboard.breakingPrefab) => PersistentObjectType.Cardboard,
+        _ => PersistentObjectType.Other,
+    };
+
+    public enum PersistentObjectType
+    {
+        Pot,
+        Chest,
+        Race,
+        Cardboard,
+        Challenge,
+        Other,
+    }
 }

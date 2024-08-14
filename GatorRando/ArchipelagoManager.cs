@@ -20,6 +20,7 @@ public static class ArchipelagoManager
     private static readonly Dictionary<string, Action> SpecialLocationFunctions = [];
     public static bool LocationAutoCollect = true;
     private static readonly string LocationKeyPrefix = "AP ID: ";
+    private static List<long> AccessibleLocations;
     public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
     public static void RegisterLocationListener(string locationName, Action listener) => SpecialLocationFunctions[locationName] = listener;
 
@@ -38,11 +39,110 @@ public static class ArchipelagoManager
         }
     }
 
-
     public static int GetItemUnlockCount(string itemName) =>
         Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
 
     public static bool CheckIfAPLocationInSave(long id) => Util.FindBoolKeysByPrefix(LocationKeyPrefix).Contains(id.ToString());
+
+    private static Dictionary<string, int> GetObtainedItems() =>
+        Items.Entries.ToDictionary(entry => entry.shortName, entry => GetItemUnlockCount(entry.clientNameId));
+
+    private static LocationsAccess.RequiredFunctions functions = new()
+    {
+        cardboard_destroyer = (obtainedItems, options, functions) => HasAny(obtainedItems, Items.ItemGroup.Cardboard_Destroyer),
+        can_clear_tutorial = (obtainedItems, options, functions) => (functions.cardboard_destroyer(obtainedItems, options, functions)
+                                                                    && LocationsAccess.has(obtainedItems, "starter_hat")
+                                                                    && LocationsAccess.has(obtainedItems, "pot_q"))
+                                                                    || (options.TryGetValue("start_with_freeplay", out bool val) ? val : false),
+        ranged = (obtainedItems, options, functions) => HasAny(obtainedItems, Items.ItemGroup.Ranged),
+        shield = (obtainedItems, options, functions) => HasAny(obtainedItems, Items.ItemGroup.Shield),
+        sword = (obtainedItems, options, functions) => HasAny(obtainedItems, Items.ItemGroup.Sword),
+        hard = (obtainedItems, options, functions) => options.TryGetValue("harder_ranged_quests", out bool val) && val,
+        shield_jump = (obtainedItems, options, functions) => options.TryGetValue("shield_jump", out bool val) && val && HasAny(obtainedItems, Items.ItemGroup.Shield),
+    };
+
+    private static void UpdateAccessibleLocations() => AccessibleLocations = LocationsAccess.GetAccessibleLocations(GetObtainedItems(), GetOptions(), functions);
+    public static bool IsLocationAccessible(string gatorName)
+    {
+        string[] excludedNPCs = ["NPC_LunchSwapCardinal", "NPC_Bee", "NPC_Ninja_Tiger", "NPC_SwimSheep", "NPC_Ninja_Tiger"];
+        if (excludedNPCs.Contains(gatorName))
+        {
+            return false;
+        }
+        try
+        {
+            return AccessibleLocations.Contains(GetLocationApId(gatorName));
+        }
+        catch (InvalidOperationException)
+        {
+            Plugin.LogWarn($"Tried to check accessibility of location {gatorName}, which did not correspond to an AP location.");
+            return false;
+        }
+    }
+    
+    public static bool IsLocationACheck(string gatorName)
+    {
+        string[] excludedNPCs = ["NPC_LunchSwapCardinal", "NPC_Bee", "NPC_Ninja_Tiger", "NPC_SwimSheep", "NPC_Ninja_Tiger"];
+        if (excludedNPCs.Contains(gatorName))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static bool IsLocationAccessible(PersistentObject gatorObject)
+    {
+        Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(gatorObject);
+        if (persistentObjectType == Util.PersistentObjectType.Pot || persistentObjectType == Util.PersistentObjectType.Chest || persistentObjectType == Util.PersistentObjectType.Race)
+        {
+            try
+            {
+                return AccessibleLocations.Contains(GetLocationApId(gatorObject.id));
+            }
+            catch (InvalidOperationException)
+            {
+                // Plugin.LogWarn($"Tried to check accessibility of location {gatorID}, which did not correspond to an AP location.");
+                return false;
+            }
+        }
+        else if (persistentObjectType == Util.PersistentObjectType.Cardboard)
+        {
+            return false;
+        }
+        else
+        {
+            Plugin.LogWarn($"Tried to check accessibility of location {gatorObject.id}, which is not a Pot, Race, Chest, or a BreakableObject.");
+            return false;
+        }
+    }
+    public static bool IsLocationACheck(PersistentObject gatorObject)
+    {
+        Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(gatorObject);
+        if (persistentObjectType == Util.PersistentObjectType.Pot || persistentObjectType == Util.PersistentObjectType.Chest || persistentObjectType == Util.PersistentObjectType.Race)
+        {
+            return true;
+        }
+        else if (persistentObjectType == Util.PersistentObjectType.Cardboard)
+        {
+            return false;
+        }
+        else
+        {
+            Plugin.LogWarn($"Tried to check accessibility of location {gatorObject.id}, which is not a Pot, Race, Chest, or a BreakableObject.");
+            return false;
+        }
+    }
+
+    static List<string> ItemsInItemGroup(Items.ItemGroup itemGroup) =>
+            Items.Entries
+                .Where(entry => entry.itemGroups.Contains(itemGroup))
+                .Select(entry => entry.shortName).ToList();
+
+    static bool HasAny(Dictionary<string, int> obtainedItems, Items.ItemGroup itemGroup) =>
+        obtainedItems
+            .Where(kv => ItemsInItemGroup(itemGroup).Contains(kv.Key))
+            .Where(kv => kv.Value > 0)
+            .ToArray().Length > 0;
 
     public static bool IsFullyConnected
     {
@@ -57,6 +157,7 @@ public static class ArchipelagoManager
         while (ItemQueue.TryDequeue(out Items.Entry entry))
         {
             ReceiveItem(entry);
+            UpdateAccessibleLocations();
             var lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
             GameData.g.Write("LastAPItemIndex", lastIndex + 1);
         }
@@ -135,6 +236,7 @@ public static class ArchipelagoManager
                 TriggerLocationListeners(); //trigger listener functions for any location that is collected
                 AttachListeners(); //hook up listener functions for future live updates
                 ScoutLocations(); //gather information on what items are at locations so that we can show notifications
+                UpdateAccessibleLocations();
             }));
         }
 
@@ -284,10 +386,32 @@ public static class ArchipelagoManager
         // Fails if invalid gatorName (only use on collected IDs?)
     }
 
-    public static string GetOption(string option_name)
+    public static bool GetOption(Option option) => option switch
     {
-        return LoginInfo.SlotData[option_name].ToString();
+        // For now, all options are boolean, so we have to convert 0 or 1 to a boolean value
+        Option.StartWithFreeplay => LoginInfo.SlotData[OptionName(option)].ToString() != "0",
+        Option.RequireShieldJump => LoginInfo.SlotData[OptionName(option)].ToString() != "0",
+        Option.HarderRangedQuests => LoginInfo.SlotData[OptionName(option)].ToString() != "0",
+        _ => throw new Exception("Invalid enum value for Option"),
+    };
+
+    public enum Option
+    {
+        StartWithFreeplay,
+        RequireShieldJump,
+        HarderRangedQuests
     }
+
+    public static string OptionName(Option option) => option switch
+    {
+        Option.StartWithFreeplay => "start_with_freeplay",
+        Option.RequireShieldJump => "require_shield_jump",
+        Option.HarderRangedQuests => "harder_ranged_quests",
+        _ => throw new Exception("Invalid enum value for Option"),
+    };
+
+    private static Dictionary<string, bool> GetOptions() =>
+        Enum.GetValues(typeof(Option)).Cast<Option>().ToDictionary(OptionName, GetOption);
 
     private static Items.Entry GetItemEntryByApId(long id) => Items.Entries.First(entry => entry.apItemId == id);
     private static Locations.Entry GetLocationEntryByApId(long id) => Locations.Entries.First(entry => entry.apLocationId == id);
@@ -316,24 +440,24 @@ public static class ArchipelagoManager
         return itemEntry.clientNameId;
     }
 
-    private static int GetItemApId(string gatorName) =>
-        (int)Items.Entries.First(entry => entry.clientNameId == gatorName).apItemId;
+    private static long GetItemApId(string gatorName) =>
+        Items.Entries.First(entry => entry.clientNameId == gatorName).apItemId;
 
     private static long GetLocationApId(int gatorID) =>
-        (long)Locations.Entries.First(entry => entry.clientId == gatorID).apLocationId;
+        Locations.Entries.First(entry => entry.clientId == gatorID).apLocationId;
 
     private static long GetLocationApId(string gatorName) =>
-        (long)Locations.Entries.First(entry => entry.clientNameId == gatorName).apLocationId;
+        Locations.Entries.First(entry => entry.clientNameId == gatorName).apLocationId;
 
     private static void CollectLocationByAPID(long id) => Session.Locations.CompleteLocationChecks(id);
 
 
     public static bool CollectLocationByID(int id)
     {
-        long ap_id;
+        long apId;
         try
         {
-            ap_id = GetLocationApId(id);
+            apId = GetLocationApId(id);
         }
         catch (InvalidOperationException)
         {
@@ -344,8 +468,8 @@ public static class ArchipelagoManager
             return false;
         }
 
-        GameData.g.Write(LocationKeyPrefix + ap_id.ToString(), true);
-        CollectLocationByAPID(ap_id);
+        GameData.g.Write(LocationKeyPrefix + apId.ToString(), true);
+        CollectLocationByAPID(apId);
         return true;
     }
 

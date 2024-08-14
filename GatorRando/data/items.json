@@ -681,6 +681,28 @@
             "classification": "filler",
             "base_quantity_in_item_pool": 1,
             "item_groups": "Craft"
+        },
+        "Megaphone (Item)": {
+            "long_name": "Megaphone (Item)",
+            "short_name": "megaphone",
+            "item_id": 100000063,
+            "client_name_id": "Item_SearchNPCs",
+            "client_resource_amount": null,
+            "client_item_type": "Item",
+            "classification": "useful",
+            "base_quantity_in_item_pool": 0,
+            "item_groups": "Item"
+        },
+        "Texting With Jill (Item)": {
+            "long_name": "Texting With Jill (Item)",
+            "short_name": "texting",
+            "item_id": 100000064,
+            "client_name_id": "Item_SearchObjects",
+            "client_resource_amount": null,
+            "client_item_type": "Item",
+            "classification": "useful",
+            "base_quantity_in_item_pool": 0,
+            "item_groups": "Item"
         }
     }
 ]

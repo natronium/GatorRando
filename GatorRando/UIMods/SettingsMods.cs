@@ -5,6 +5,14 @@ namespace GatorRando.UIMods;
 
 static class SettingsMods
 {
+    public enum CheckfinderBehavior
+    {
+        Logic,
+        ChecksOnly,
+        Original
+    }
+
+    private static CheckfinderBehavior checkfinderBehavior = CheckfinderBehavior.Original;
     public static void ForceIntoSettingsMenu()
     {
         // Force into settings menu
@@ -61,6 +69,8 @@ static class SettingsMods
         // Add Toggle so that players can choose whether they want !collect-ed locations to count as checked or not
         CreateSettingsToggle(8, "!collect counts as Checked", "set before connecting to server. if checked, locations that are !collect-ed by other seeds count as checked for advancing quests." +
             "if unchecked, uses what locations as saved in the save file.");
+        CreateSettingsOptions(9, "Megaphone and Texting Logic?","The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
+            "This setting changes how these tools work. \"logic\": use randomizer logic to show only valid checks, \"checks only\": show all possible checks, \"original\": original behavior", ["logic","checks only","original"]);
     }
 
     private static void ReworkPlayerRename()
@@ -165,4 +175,26 @@ static class SettingsMods
         Text textText = text.GetComponent<Text>();
         textText.text = name.ToUpper();
     }
+
+    private static void CreateSettingsOptions(int siblingIndex, string name, string description, string[] options)
+    {
+        GameObject settingsMenu = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content");
+        GameObject recenterOptions = Util.GetByPath("Canvas/Pause Menu/Settings/Viewport/Content/Re-Center Camera");
+        GameObject optionsItem = GameObject.Instantiate(recenterOptions, settingsMenu.transform);
+        optionsItem.transform.SetSiblingIndex(siblingIndex);
+        optionsItem.name = name;
+        GameObject label = optionsItem.transform.Find("Label").gameObject;
+        Object.Destroy(label.GetComponent<MLText>());
+        Text labelText = label.GetComponent<Text>();
+        labelText.text = name.ToLower();
+        UIDescription descript = optionsItem.GetComponent<UIDescription>();
+        descript.document = null;
+        descript.descriptionText = description;
+        SettingOptions settingOptions = optionsItem.GetComponent<SettingOptions>();
+        settingOptions.key = name.ToLower();
+        SelectOptions selectOptions = settingOptions.selectOptions;
+        selectOptions.options = options;
+    }
+
+    public static CheckfinderBehavior GetCheckfinderBehavior() => (CheckfinderBehavior)Settings.s.ReadInt("megaphone and texting logic?");
 }

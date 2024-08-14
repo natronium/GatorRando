@@ -50,6 +50,7 @@ public class Plugin : BaseUnityPlugin
                 BalloonMods.EditBalloonStamina();
                 SettingsMods.ForceIntoSettingsMenu();
                 APConnectedUI.ShowAPQuest();
+                Util.PopulatePotPrefabs();
             }
 
             static void ApplyQuestEdits()
@@ -96,7 +97,7 @@ public class Plugin : BaseUnityPlugin
     public static void ApplyAPDependentMods()
     {
         //Allow Freeplay
-        if (ArchipelagoManager.GetOption("start_with_freeplay") == "1")
+        if (ArchipelagoManager.GetOption(ArchipelagoManager.Option.StartWithFreeplay))
         {
             TutorialQuestMods.StartWithFreeplay();
         }
