@@ -12,7 +12,6 @@ static class SettingsMods
         Original
     }
 
-    private static CheckfinderBehavior checkfinderBehavior = CheckfinderBehavior.Original;
     public static void ForceIntoSettingsMenu()
     {
         // Force into settings menu
