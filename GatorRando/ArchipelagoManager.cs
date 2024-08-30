@@ -310,11 +310,7 @@ public static class ArchipelagoManager
         }
     }
 
-    public static string GetClientIDByAPId(long id)
-    {
-        Items.Entry itemEntry = ArchipelagoManager.GetItemEntryByApId(id);
-        return itemEntry.clientNameId;
-    }
+    public static string GetClientIDByAPId(long id) => GetItemEntryByApId(id).clientNameId;
 
     private static int GetItemApId(string gatorName) =>
         (int)Items.Entries.First(entry => entry.clientNameId == gatorName).apItemId;
@@ -330,10 +326,11 @@ public static class ArchipelagoManager
 
     public static bool CollectLocationByID(int id)
     {
-        long ap_id;
+        long apId;
         try
         {
-            ap_id = GetLocationApId(id);
+            apId = GetLocationApId(id);
+            Plugin.LogInfo($"Tried to collect location with numeric ID {id}, which does have an entry in the locations table!");
         }
         catch (InvalidOperationException)
         {
@@ -344,8 +341,8 @@ public static class ArchipelagoManager
             return false;
         }
 
-        GameData.g.Write(LocationKeyPrefix + ap_id.ToString(), true);
-        CollectLocationByAPID(ap_id);
+        GameData.g.Write(LocationKeyPrefix + apId.ToString(), true);
+        CollectLocationByAPID(apId);
         return true;
     }
 

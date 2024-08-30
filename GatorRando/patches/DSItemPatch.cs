@@ -11,8 +11,7 @@ static class DSItemPatch
     [HarmonyPatch("RunItemSequence")]
     static bool PreRunItemSequence(DSItem __instance)
     {
-        //TODO: Don't intercept Craft Stuff, Pot Lid?, LITTER
-        // TODO: decide how to handle Sword_Pencil
+        //TODO: Don't intercept LITTER
         string name = "";
         if (__instance.item == null || __instance.itemName == "POT?" || __instance.itemName == "POT LID?")
         {
@@ -21,6 +20,11 @@ static class DSItemPatch
         else
         {
             name = __instance.item.name;
+        }
+        if (name == "")
+        {
+            // Make sure the first Craft Stuff is not caught by this alteration
+            return true;
         }
         if (ArchipelagoManager.CollectLocationByName(name))
         {
