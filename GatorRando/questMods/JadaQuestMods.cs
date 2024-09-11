@@ -30,7 +30,7 @@ static class JadaQuestMods
     {
         GameObject boarQuest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
         QuestStates boarQuestQS = boarQuest.GetComponent<QuestStates>();
-        if (boarQuestQS.StateID == 1 && ArchipelagoManager.LocationIsCollected("CLIPPINGS"))
+        if (boarQuestQS.StateID == 1 && ArchipelagoManager.IsLocationCollected("CLIPPINGS"))
         {
             boarQuestQS.JustProgressState();
         }
@@ -47,7 +47,7 @@ static class JadaQuestMods
     {
         GameObject boarQuest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
         QuestStates boarQuestQS = boarQuest.GetComponent<QuestStates>();
-        if (boarQuestQS.StateID == 3 && ArchipelagoManager.LocationIsCollected("WATER"))
+        if (boarQuestQS.StateID == 3 && ArchipelagoManager.IsLocationCollected("WATER"))
         {
             boarQuestQS.JustProgressState();
         }

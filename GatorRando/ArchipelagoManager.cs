@@ -25,10 +25,10 @@ public static class ArchipelagoManager
     public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
     public static void RegisterLocationListener(string locationName, Action listener) => SpecialLocationFunctions[locationName] = listener;
 
-    public static bool ItemIsUnlocked(string item) =>
+    public static bool IsItemUnlocked(string item) =>
         Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApId(item));
 
-    public static bool LocationIsCollected(string location)
+    public static bool IsLocationCollected(string location)
     {
         if (LocationAutoCollect)
         {

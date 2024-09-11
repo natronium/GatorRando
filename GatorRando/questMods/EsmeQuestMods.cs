@@ -30,7 +30,7 @@ static class EsmeQuestMods
     {
         GameObject vampireQuest = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire");
         QuestStates vampireQuestQS = vampireQuest.GetComponent<QuestStates>();
-        if (vampireQuestQS.StateID == 1 && ArchipelagoManager.LocationIsCollected("ICE CREAM"))
+        if (vampireQuestQS.StateID == 1 && ArchipelagoManager.IsLocationCollected("ICE CREAM"))
         {
             vampireQuestQS.JustProgressState();
         }

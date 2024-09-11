@@ -19,7 +19,7 @@ static class MartinQuestMods
     {
         GameObject martinQuest = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest");
         QuestStates martinQuestQS = martinQuest.GetComponent<QuestStates>();
-        if (martinQuestQS.StateID == 1 && ArchipelagoManager.LocationIsCollected("POT?"))
+        if (martinQuestQS.StateID == 1 && ArchipelagoManager.IsLocationCollected("POT?"))
         {
             martinQuestQS.JustProgressState();
         }

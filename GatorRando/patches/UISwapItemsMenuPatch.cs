@@ -15,7 +15,7 @@ static class UISwapItemsMenuPatch
         List<ItemObject> questItemsReceived = [];
         foreach (ItemObject item in QuestItems.QuestItemObjects)
         {
-            if (item.name != "Thrown_Pencil_2" && item.name != "Thrown_Pencil_3" && ArchipelagoManager.ItemIsUnlocked(item.name))
+            if (item.name != "Thrown_Pencil_2" && item.name != "Thrown_Pencil_3" && ArchipelagoManager.IsItemUnlocked(item.name))
             {
                 questItemsReceived.Add(item);
                 item.IsUnlocked = true;
