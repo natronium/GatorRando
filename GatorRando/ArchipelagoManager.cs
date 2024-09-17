@@ -21,7 +21,7 @@ public static class ArchipelagoManager
     public static bool LocationAutoCollect = true;
     private static readonly string LocationKeyPrefix = "AP ID: ";
     private static List<long> AccessibleLocations;
-    private static readonly string[] excludedNPCs = ["NPC_LunchSwapCardinal", "NPC_Bee", "NPC_Ninja_Tiger", "NPC_SwimSheep", "NPC_Ninja_Tiger"];
+    private static readonly string[] excludedNPCs = ["NPC_LunchSwapCardinal", "NPC_Bee", "NPC_Ninja_Tiger", "NPC_SwimSheep"];
     public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
     public static void RegisterLocationListener(string locationName, Action listener) => SpecialLocationFunctions[locationName] = listener;
 
