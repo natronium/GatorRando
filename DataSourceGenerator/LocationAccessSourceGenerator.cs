@@ -16,9 +16,9 @@ using System.Collections.Generic;
 using System.Linq;
 namespace Data;
 
-class {locationsFileName}Access
+public static class {locationsFileName}Access
 {{
-    public static List<int> GetAccessibleLocations(
+    public static List<long> GetAccessibleLocations(
         Dictionary<string, int> obtainedItems,
         Dictionary<string, bool> options,
         RequiredFunctions functions
@@ -28,7 +28,7 @@ class {locationsFileName}Access
     public static bool hasCount(Dictionary<string, int> obtainedItems, string name, int count) => (obtainedItems.TryGetValue(name, out int val) ? val : 0) >= count;
     public delegate bool LogicFunction(Dictionary<string, int> obtainedItems, Dictionary<string, bool> options, RequiredFunctions functions);
 
-    public static Dictionary<int, LogicFunction> LocationRules = new()
+    public static Dictionary<long, LogicFunction> LocationRules = new()
     {{
         ");
         foreach (GeneratorLocation location in locationInformation)

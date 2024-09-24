@@ -30,7 +30,7 @@ static class SusanneQuestMods
     {
         GameObject engineerQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer");
         QuestStates engineerQuestQS = engineerQuest.GetComponent<QuestStates>();
-        if (engineerQuestQS.StateID == 1 && ArchipelagoManager.LocationIsCollected("BEACH ROCK"))
+        if (engineerQuestQS.StateID == 1 && ArchipelagoManager.IsLocationCollected("BEACH ROCK"))
         {
             engineerQuestQS.JustProgressState();
         }
