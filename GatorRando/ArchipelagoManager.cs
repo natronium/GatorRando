@@ -617,11 +617,7 @@ public static class ArchipelagoManager
         }
     }
 
-    public static string GetClientIDByAPId(long id)
-    {
-        Items.Entry itemEntry = ArchipelagoManager.GetItemEntryByApId(id);
-        return itemEntry.clientNameId;
-    }
+    public static string GetClientIDByAPId(long id) => GetItemEntryByApId(id).clientNameId;
 
     private static long GetItemApId(string gatorName) =>
         Items.Entries.First(entry => entry.clientNameId == gatorName).apItemId;

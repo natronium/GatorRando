@@ -3,6 +3,8 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
+#nullable enable
+
 namespace DataSourceGenerator;
 
 public static class LocationGenerator
@@ -13,17 +15,20 @@ public static class LocationGenerator
 
         sb.Append(@$"
 namespace Data;
+
+#nullable enable
+
 public static class {locationsFileName}{{
     public readonly struct Entry(
         string name,
         long apLocationId,
         int? clientId,
-        string clientNameId
+        string? clientNameId
     ){{
         public readonly string name = name;
         public readonly long apLocationId = apLocationId;
         public readonly int? clientId = clientId;
-        public readonly string clientNameId = clientNameId;
+        public readonly string? clientNameId = clientNameId;
     }}
 
     public static Entry[] Entries = [
@@ -32,15 +37,19 @@ public static class {locationsFileName}{{
         static string GenerateLocationEntryDeclaration(GeneratorLocation location)
         {
             string clientIDString;
+            string clientNameIDString;
+            // We expect clientId and clientNameId to be mutually exclusive, one of them should always be null
             if (location.clientId == null)
             {
                 clientIDString = "null";
+                clientNameIDString = $"\"{location.clientNameId}\"";
             }
             else
             {
                 clientIDString = location.clientId.ToString()!;
+                clientNameIDString = "null";
             }
-            return $"new(\"{location.name}\", {location.locationId}, {clientIDString}, \"{location.clientNameId}\")";
+            return $"new(\"{location.name}\", {location.locationId}, {clientIDString}, {clientNameIDString})";
         }
 
         foreach (GeneratorLocation location in locationInformation)
@@ -99,12 +108,12 @@ public static class {locationsFileName}{{
         }
     }
 
-    public struct GeneratorLocation(string name, long locationId, int? clientId, string clientNameId, string[][] accessRules)
+    public struct GeneratorLocation(string name, long locationId, int? clientId, string? clientNameId, string[][] accessRules)
     {
         public string name = name;
         public long locationId = locationId;
         public int? clientId = clientId;
-        public string clientNameId = clientNameId;
+        public string? clientNameId = clientNameId;
         public string[][] accessRules = accessRules;
     }
 
