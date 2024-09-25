@@ -236,6 +236,17 @@
                         "access_rules": [
                             "$cardboard_destroyer"
                         ]
+                    },
+                    {
+                        "name": "Big Island - ??? (Bracelet Monkey) All Bracelets NPC",
+                        "location_id": 100002295,
+                        "region": "Big Island Bracelet Shops",
+                        "client_id": null,
+                        "client_name_id": "NPC_BraceletMonkey",
+                        "location_group": "",
+                        "access_rules": [
+                            "bracelet,$can_clear_tutorial,$cardboard_destroyer"
+                        ]
                     }
                 ]
             },
@@ -776,7 +787,7 @@
                         ]
                     },
                     {
-                        "name": "(102.2629, 249.3436)",
+                        "name": "Jada (Cool Boar)",
                         "region": "Big Island",
                         "access_rules": [],
                         "map_locations": [
@@ -973,7 +984,8 @@
                                 "client_name_id": "Sword_Nunchucks",
                                 "location_group": "",
                                 "access_rules": [
-                                    "$cardboard_destroyer"
+                                    "$cardboard_destroyer,bracelet",
+                                    "$ranged"
                                 ]
                             },
                             {
@@ -984,7 +996,8 @@
                                 "client_name_id": "NPC_Ninja_Anteater",
                                 "location_group": "",
                                 "access_rules": [
-                                    "$cardboard_destroyer"
+                                    "$cardboard_destroyer,bracelet",
+                                    "$ranged"
                                 ]
                             },
                             {
@@ -995,7 +1008,8 @@
                                 "client_name_id": "Hat_Ninja",
                                 "location_group": "",
                                 "access_rules": [
-                                    "$cardboard_destroyer"
+                                    "$cardboard_destroyer,bracelet",
+                                    "$ranged"
                                 ]
                             }
                         ]
@@ -1464,6 +1478,11 @@
                                 "map": "the_island",
                                 "x": 186,
                                 "y": 1263
+                            },
+                            {
+                                "map": "the_island",
+                                "x": 1838,
+                                "y": 213
                             }
                         ],
                         "sections": [
@@ -1488,7 +1507,7 @@
                         ]
                     },
                     {
-                        "name": "(-79.67713, -82.9561)",
+                        "name": "Zhu (Skipping Fox)",
                         "region": "Big Island",
                         "access_rules": [],
                         "map_locations": [
@@ -1496,6 +1515,16 @@
                                 "map": "the_island",
                                 "x": 350,
                                 "y": 1684
+                            },
+                            {
+                                "map": "the_island",
+                                "x": 1470,
+                                "y": 654
+                            },
+                            {
+                                "map": "the_island",
+                                "x": 895,
+                                "y": 890
                             }
                         ],
                         "sections": [
@@ -3211,7 +3240,7 @@
                                 ]
                             },
                             {
-                                "name": "(148.17, 102.75)",
+                                "name": "Andromeda (Space Hawk)",
                                 "region": "Mountain",
                                 "access_rules": [],
                                 "map_locations": [
@@ -3294,7 +3323,7 @@
                                 ]
                             },
                             {
-                                "name": "(185.7675, 158.2035)",
+                                "name": "Esme (Vampire Bat)",
                                 "region": "Mountain",
                                 "access_rules": [],
                                 "map_locations": [
@@ -3924,7 +3953,7 @@
                         ],
                         "children": [
                             {
-                                "name": "(62.871, 237.2092)",
+                                "name": "??? (Bracelet Monkey) Windmill",
                                 "region": "Big Island Bracelet Shops",
                                 "access_rules": [],
                                 "map_locations": [
@@ -3975,7 +4004,17 @@
                                         "client_name_id": "BraceletShop0",
                                         "location_group": "",
                                         "access_rules": []
+                                    },
+                                    {
+                                        "name": "Big Island - ??? (Bracelet Monkey) All Bracelets NPC",
+                                        "location_id": 100002295,
+                                        "region": "Big Island Bracelet Shops",
+                                        "client_id": null,
+                                        "client_name_id": "NPC_BraceletMonkey",
+                                        "location_group": "",
+                                        "access_rules": []
                                     }
+                                    
                                 ]
                             },
                             {
@@ -3996,6 +4035,15 @@
                                         "region": "Big Island Bracelet Shops",
                                         "client_id": null,
                                         "client_name_id": "BraceletShop3",
+                                        "location_group": "",
+                                        "access_rules": []
+                                    },
+                                    {
+                                        "name": "Big Island - ??? (Bracelet Monkey) All Bracelets NPC",
+                                        "location_id": 100002295,
+                                        "region": "Big Island Bracelet Shops",
+                                        "client_id": null,
+                                        "client_name_id": "NPC_BraceletMonkey",
                                         "location_group": "",
                                         "access_rules": []
                                     }
