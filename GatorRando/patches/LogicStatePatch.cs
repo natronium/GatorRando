@@ -33,7 +33,7 @@ static class LogicStatePatch
         {
             //Jada's quest, if you have a bucket, run the enough water sequence at the end of go get water without progressing Jada's quest
             // otherwise, reset go get water
-            if (ArchipelagoManager.ItemIsUnlocked("Hat_Bucket"))
+            if (ArchipelagoManager.IsItemUnlocked("Hat_Bucket"))
             {
                 GameObject water_seq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Got Enough Water Sequence");
                 DialogueSequencer water_sequencer = water_seq.GetComponent<DialogueSequencer>();

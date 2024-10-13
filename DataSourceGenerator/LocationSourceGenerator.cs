@@ -21,12 +21,12 @@ namespace Data;
 public static class {locationsFileName}{{
     public readonly struct Entry(
         string name,
-        int apLocationId,
+        long apLocationId,
         int? clientId,
         string? clientNameId
     ){{
         public readonly string name = name;
-        public readonly int apLocationId = apLocationId;
+        public readonly long apLocationId = apLocationId;
         public readonly int? clientId = clientId;
         public readonly string? clientNameId = clientNameId;
     }}
@@ -139,7 +139,7 @@ public static class {locationsFileName}{{
     struct Section
     {
         public string name;
-        public int location_id;
+        public long location_id;
         public string region;
         public int? client_id;
         public string client_name_id;

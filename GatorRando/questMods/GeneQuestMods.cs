@@ -19,7 +19,7 @@ static class GeneQuestMods
     {
         GameObject economistQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist");
         QuestStates economistQuestQS = economistQuest.GetComponent<QuestStates>();
-        if (economistQuestQS.StateID == 1 && ArchipelagoManager.LocationIsCollected("HALF A CHEESE SANDWICH"))
+        if (economistQuestQS.StateID == 1 && ArchipelagoManager.IsLocationCollected("HALF A CHEESE SANDWICH"))
         {
             economistQuestQS.JustProgressState();
         }

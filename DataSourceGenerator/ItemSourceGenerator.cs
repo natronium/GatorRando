@@ -84,7 +84,7 @@ public static class {itemsFileName}{{
     public readonly struct Entry(
         string shortName,
         string longName,
-        int apItemId,
+        long apItemId,
         string clientNameId,
         int? clientResourceAmount,
         ClientItemType clientItemType,
@@ -92,7 +92,7 @@ public static class {itemsFileName}{{
     ){{
         public readonly string shortName = shortName;
         public readonly string longName = longName;
-        public readonly int apItemId = apItemId;
+        public readonly long apItemId = apItemId;
         public readonly string clientNameId = clientNameId;
         public readonly int? clientResourceAmount = clientResourceAmount;
         public readonly ClientItemType clientItemType = clientItemType;
