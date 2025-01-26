@@ -21,7 +21,7 @@ public static class ArchipelagoManager
     public static bool LocationAutoCollect = true;
     private static readonly string LocationKeyPrefix = "AP ID: ";
     private static List<long> AccessibleLocations;
-    private static readonly string[] excludedNPCs = ["NPC_LunchSwapCardinal", "NPC_Bee", "NPC_Ninja_Tiger", "NPC_SwimSheep"];
+    private static readonly string[] excludedNPCs = ["NPC_LunchSwapCardinal", "NPC_Bee", "NPC_Ninja_Tiger", "NPC_SwimSheep", "Dialogue Actor No Longer Exists"];
     public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
     public static void RegisterLocationListener(string locationName, Action listener) => SpecialLocationFunctions[locationName] = listener;
 
@@ -54,7 +54,7 @@ public static class ArchipelagoManager
         can_clear_tutorial = (obtainedItems, options, functions) => (functions.cardboard_destroyer(obtainedItems, options, functions)
                                                                     && LocationsAccess.has(obtainedItems, "starter_hat")
                                                                     && LocationsAccess.has(obtainedItems, "pot_q"))
-                                                                    || (options.TryGetValue("start_with_freeplay", out bool val) ? val : false),
+                                                                    || (options.TryGetValue("start_with_freeplay", out bool val) && val),
         ranged = (obtainedItems, options, functions) => HasAny(obtainedItems, Items.ItemGroup.Ranged),
         shield = (obtainedItems, options, functions) => HasAny(obtainedItems, Items.ItemGroup.Shield),
         sword = (obtainedItems, options, functions) => HasAny(obtainedItems, Items.ItemGroup.Sword),
@@ -99,56 +99,84 @@ public static class ArchipelagoManager
 
     public static string ConvertDAToGatorName(DialogueActor dialogueActor)
     {
-        string gatorName = dialogueActor.profile.id switch
+        try
         {
-            "NPC_Tut_Dog" => DetectJillVariant(dialogueActor),
-            "NPC_Tut_Frog" => DetectAveryVariant(dialogueActor),
-            "NPC_Tut_Horse" => DetectMartinVariant(dialogueActor),
-            "NPC_Cool_Goose" when dialogueActor.transform.parent.name != "Goose Quest" => "Unhandled Duke",
-            "NPC_Cool_Boar" when dialogueActor.transform.parent.name != "Boar Quest" => "Unhandled Jada",
-            "NPC_Cool_Wolf" when dialogueActor.transform.parent.name != "Wolf Quest" => "Unhandled Lucas",
-            "NPC_Susanne" when dialogueActor.transform.parent.name != "Character" => "Unhandled Susanne",
-            "NPC_Gene" when dialogueActor.transform.parent.name != "Character" => "Unhandled Gene",
-            "NPC_Antone" when dialogueActor.transform.parent.name != "Character" => "Unhandled Antone",
-            "NPC_Theatre_Cowboy" when dialogueActor.transform.parent.name != "Cowfolk" => "Unhandled Velma",
-            "NPC_Theatre_Space" when dialogueActor.transform.parent.name != "Space!!!" => "Unhandled Andromeda",
-            "NPC_Theatre_Bat" when dialogueActor.transform.parent.name != "Vampire" => "Unhandled Esme",
-            string name => name
-        };
-        return gatorName;
+            string gatorName = dialogueActor.profile.id switch
+            {
+                "NPC_Tut_Dog" => DetectJillVariant(dialogueActor),
+                "NPC_Tut_Frog" => DetectAveryVariant(dialogueActor),
+                "NPC_Tut_Horse" => DetectMartinVariant(dialogueActor),
+                "NPC_Cool_Goose" when dialogueActor.transform.parent.name != "Goose Quest" => "Unhandled Duke",
+                "NPC_Cool_Boar" when dialogueActor.transform.parent.name != "Boar Quest" => "Unhandled Jada",
+                "NPC_Cool_Wolf" when dialogueActor.transform.parent.name != "Wolf Quest" => "Unhandled Lucas",
+                "NPC_Susanne" when dialogueActor.transform.parent.name != "Character" => "Unhandled Susanne",
+                "NPC_Gene" when dialogueActor.transform.parent.name != "Character" => "Unhandled Gene",
+                "NPC_Antone" when dialogueActor.transform.parent.name != "Character" => "Unhandled Antone",
+                "NPC_Theatre_Cowboy" when dialogueActor.transform.parent.name != "Cowfolk" => "Unhandled Velma",
+                "NPC_Theatre_Space" when dialogueActor.transform.parent.name != "Space!!!" => "Unhandled Andromeda",
+                "NPC_Theatre_Bat" when dialogueActor.transform.parent.name != "Vampire" => "Unhandled Esme",
+                string name => name
+            };
+            return gatorName;
+        }
+        catch (NullReferenceException)
+        {
+            return "Dialogue Actor No Longer Exists";
+        }
     }
 
     private static string DetectMartinVariant(DialogueActor dialogueActor)
     {
-        return dialogueActor.transform.parent.name switch
+        try
         {
-            "Martin Quest" => "Tutorial Martin",
-            "Cool CoolKids" => "Cool Kid Martin",
-            _ => "Unhandled Martin"
-        };
+            return dialogueActor.transform.parent.name switch
+            {
+                "Martin Quest" => "Tutorial Martin",
+                "Cool CoolKids" => "Cool Kid Martin",
+                _ => "Unhandled Martin"
+            };
+        }
+        catch (NullReferenceException)
+        {
+            return "Dialogue Actor No Longer Exists";
+        }
     }
 
     private static string DetectAveryVariant(DialogueActor dialogueActor)
     {
-        return dialogueActor.transform.parent.name switch
+        try
         {
-            "Avery Quest" => "Tutorial Avery",
-            "Introduction" => "Theatre Introduction Avery",
-            "Unhappy" => "Theatre Finale Avery",
-            _ => "Unhandled Avery"
-        };
+            return dialogueActor.transform.parent.name switch
+            {
+                "Avery Quest" => "Tutorial Avery",
+                "Introduction" => "Theatre Introduction Avery",
+                "Unhappy" => "Theatre Finale Avery",
+                _ => "Unhandled Avery"
+            };
+        }
+        catch (NullReferenceException)
+        {
+            return "Dialogue Actor No Longer Exists";
+        }
     }
 
     private static string DetectJillVariant(DialogueActor dialogueActor)
     {
-        return dialogueActor.transform.parent.name switch
+        try
         {
-            "Fantasy" => "Tutorial Stick Jill",
-            "Studying" => "Tutorial End Jill",
-            "Intro Actors" => "Prep Introduction Jill",
-            "Sad Jill" => "Prep Finale Jill",
-            _ => "Unhandled Jill"
-        };
+            return dialogueActor.transform.parent.name switch
+            {
+                "Fantasy" => "Tutorial Stick Jill",
+                "Studying" => "Tutorial End Jill",
+                "Intro Actors" => "Prep Introduction Jill",
+                "Sad Jill" => "Prep Finale Jill",
+                _ => "Unhandled Jill"
+            };
+        }
+        catch (NullReferenceException)
+        {
+            return "Dialogue Actor No Longer Exists";
+        }
     }
 
     public static bool IsMainQuestAccessible(DialogueActor dialogueActor)
@@ -194,13 +222,19 @@ public static class ArchipelagoManager
         {
             gatorName = WhichBraceletMonkey(dialogueActor);
         }
+        if (gatorName == "AlreadyPurchased")
+        {
+            return false;
+        }
         string[] checks = ChecksForNPC(gatorName);
         return checks.Select(IsLocationAccessible).Any(b => b);
     }
-    
+
     private static string WhichBraceletMonkey(DialogueActor dialogueActor)
     {
-        if (dialogueActor.transform.parent.parent.name == "North (Mountain)")
+        try
+        {
+            if (dialogueActor.transform.parent.parent.name == "North (Mountain)")
             {
                 return "BraceletShop3";
             }
@@ -214,6 +248,12 @@ public static class ArchipelagoManager
                     _ => "Unhandled"
                 };
             }
+        }
+        catch (NullReferenceException)
+        {
+            // When a Bracelet Monkey has been purchased, they need to be excluded from the check
+            return "AlreadyPurchased";
+        }
     }
 
     public static bool IsLocationAccessible(PersistentObject gatorObject)
@@ -609,7 +649,8 @@ public static class ArchipelagoManager
             case Items.ClientItemType.Craft_Stuff: ItemUtil.GiveCraftStuff((int)entry.clientResourceAmount); break;
             default:
                 throw new Exception($"Item {entry.clientNameId} in the item data CSV with an unknown client_item type of {entry.clientItemType}");
-        };
+        }
+        ;
 
         if (entry.clientNameId is not null && SpecialItemFunctions.ContainsKey(entry.clientNameId))
         {
