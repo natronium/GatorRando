@@ -222,7 +222,7 @@ public static class ArchipelagoManager
         {
             gatorName = WhichBraceletMonkey(dialogueActor);
         }
-        if (gatorName == "AlreadyPurchased")
+        if (gatorName == "Dialogue Actor No Longer Exists")
         {
             return false;
         }
