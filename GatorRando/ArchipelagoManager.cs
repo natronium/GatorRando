@@ -12,6 +12,7 @@ namespace GatorRando;
 
 public static class ArchipelagoManager
 {
+    public const string APVersion = "0.5.1";
     public static ArchipelagoSession Session;
     public static LoginSuccessful LoginInfo;
     private static ConcurrentQueue<Items.Entry> ItemQueue = new();
@@ -398,7 +399,7 @@ public static class ArchipelagoManager
         try
         {
             //TODO: report more useful fields
-            result = Session.TryConnectAndLogin("Lil Gator Game", user, ItemsHandlingFlags.AllItems, null, null, null, password);
+            result = Session.TryConnectAndLogin("Lil Gator Game", user, ItemsHandlingFlags.AllItems, new Version(APVersion), null, null, password);
         }
         catch (Exception e)
         {
