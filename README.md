@@ -4,10 +4,10 @@ Lil Gator Game is a game about being an adorable gator who is getting all of the
 This project is a randomizer mod for [Lil Gator Game](https://store.steampowered.com/app/1586800/Lil_Gator_Game/) that works with [Archipelago](https://archipelago.gg/) (via a custom [APWorld](https://github.com/natronium/GatorArchipelago)) to take the things your character would receive throughout the game and randomize them, potentially between multiple games. If you are not familiar with Archipelago, we recommend reading Archipelago's introduction documents starting with the [FAQ](https://archipelago.gg/faq/en/).
 
 ## Installation Instructions
-1. Download [BepInEx5](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.2) for Windows and extract the contents into the root of your Lil Gator Game folder (you should now have a `BepInEx` folder in the same folder as `Lil Gator Game.exe`)
+1. Download [BepInEx_win_x64_5.4.23.2.zip](https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.2) for Windows and extract the contents into the root of your Lil Gator Game folder (you should now have a `BepInEx` folder in the same folder as `Lil Gator Game.exe`)
 2. Run the game and make sure that a plugins folder was generated inside of the BepInEx folder
 3. Download the GatorRando zip from the [Releases page](https://github.com/natronium/GatorRando/releases) or build the GatorRando dll from source ([see below](#building-from-source)) or 
-4. Add the GatorRando.dll, Archipelago.MultiClient.Net.dll, and Newtonsoft.Json.dll (either by extracting the zip from the [Releases page](https://github.com/natronium/GatorRando/releases) or from "GatorRando\bin\Debug\netstandard2.0" if built from source) into the `plugins` folder inside the `BepInEx` folder
+4. Add the GatorRando.dll, Archipelago.MultiClient.Net.dll, and Newtonsoft.Json.dll into the `plugins` folder inside the `BepInEx` folder. These dlls can be obtained either by extracting the zip from the [Releases page](https://github.com/natronium/GatorRando/releases) or from "GatorRando\bin\Debug\netstandard2.0" if built from source.
 5. See the [APWorld Instructions](https://github.com/natronium/GatorArchipelago) for how to generate and host a game
 
 ## Building from Source
@@ -26,9 +26,10 @@ These instructions assume familiarity with command line tools. Please ask for he
 2. Connect to Server: Click "connect to server" once and wait for it to connect. When the quest in the upper right corner is complete, then you have successfully connected and you will be allowed to leave the Settings menu and start playing!
 
 ### Recommendations for Better Play Experiences
-- Download [Poptracker](https://poptracker.github.io/) and use the pack available at https://github.com/natronium/GatorPop.
+- For at least your first few plays, we recommend you set `start_with_checkfinders` to be true and go into the Settings Menu and switch the Checkfinder setting to `Logic`. Using the Megaphone and Texting With Jill in game will then point you towards the nearest locations/people that are in logic (available with the items you currently have)
+- Download [Poptracker](https://poptracker.github.io/) and use the pack available at https://github.com/natronium/GatorPop
 - If you are having trouble finding a specific location, you can search the map available at https://natronium.github.io/GatorMap/ to find all the pots, chests, and races with their locations labeled as they are in the Archipelago.
-- Use the text client (which you can also open from the Archipelago Launcher) alongside your game. Using the text client will allow you to see what items you are sending and receiving, as only some sent items currently display in game.
+- Use the text client (which you can also open from the Archipelago Launcher) alongside your game. Using the text client will allow you to see what items you are sending and receiving, as only some sent items currently display in game
 - If you get stuck somewhere (i.e. without a bracelet), there's a handy "reset position" button in the Settings Menu!
 
 ### Features added to the original game
