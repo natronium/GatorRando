@@ -33,7 +33,14 @@ public static class ArchipelagoManager
     {
         if (LocationAutoCollect)
         {
-            return Session.Locations.AllLocationsChecked.Contains(GetLocationApId(location));
+            try
+            {
+                return Session.Locations.AllLocationsChecked.Contains(GetLocationApId(location));
+            }
+            catch (InvalidOperationException)
+            {
+                return true;
+            }
         }
         else
         {
