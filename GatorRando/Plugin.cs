@@ -26,6 +26,7 @@ public class Plugin : BaseUnityPlugin
         if (ArchipelagoManager.IsFullyConnected)
         {
             ArchipelagoManager.ProcessItemQueue();
+            MapManager.UpdateCoordsIfNeeded();
         }
     }
 

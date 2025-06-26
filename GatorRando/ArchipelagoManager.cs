@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Concurrent;
 using Archipelago.MultiClient.Net.Packets;
 using Archipelago.MultiClient.Net.Models;
+using Newtonsoft.Json.Linq;
 
 namespace GatorRando;
 
@@ -741,5 +742,14 @@ public static class ArchipelagoManager
             Status = ArchipelagoClientState.ClientGoal
         };
         Session.Socket.SendPacket(statusUpdatePacket);
+    }
+
+    public static void StorePosition(MapManager.PlayerCoords playerCoords)
+    {
+        if (!IsFullyConnected)
+        {
+            return;
+        }
+        Session.DataStorage[$"{Session.ConnectionInfo.Slot}_{Session.ConnectionInfo.Team}_gator_coords"] = JObject.FromObject(playerCoords);
     }
 }
