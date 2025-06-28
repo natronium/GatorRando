@@ -703,6 +703,84 @@
             "classification": "useful",
             "base_quantity_in_item_pool": 0,
             "item_groups": "Item"
+        },
+        "Oar": {
+            "long_name": "Oar",
+            "short_name": "oar",
+            "item_id": 100000065,
+            "client_name_id": "oar",
+            "client_resource_amount": null,
+            "client_item_type": "Item",
+            "classification": "progression",
+            "base_quantity_in_item_pool": 0,
+            "item_groups": "Unlock"
+        },
+        "Sleep Mask": {
+            "long_name": "Sleep Mask",
+            "short_name": "mask",
+            "item_id": 100000066,
+            "client_name_id": "mask",
+            "client_resource_amount": null,
+            "client_item_type": "Item",
+            "classification": "progression",
+            "base_quantity_in_item_pool": 0,
+            "item_groups": "Unlock"
+        },
+        "Giant Socks": {
+            "long_name": "Giant Socks",
+            "short_name": "Giant_socks",
+            "item_id": 100000067,
+            "client_name_id": "giant_socks",
+            "client_resource_amount": null,
+            "client_item_type": "Item",
+            "classification": "progression",
+            "base_quantity_in_item_pool": 0,
+            "item_groups": "Unlock"
+        },
+        "Tiger Form": {
+            "long_name": "Tiger Form",
+            "short_name": "tiger_form",
+            "item_id": 100000068,
+            "client_name_id": "tiger_form",
+            "client_resource_amount": null,
+            "client_item_type": "Item",
+            "classification": "progression",
+            "base_quantity_in_item_pool": 0,
+            "item_groups": "Unlock"
+        },
+        "Guitar of Space": {
+            "long_name": "Guitar of Space",
+            "short_name": "guitar",
+            "item_id": 100000069,
+            "client_name_id": "guitar",
+            "client_resource_amount": null,
+            "client_item_type": "Item",
+            "classification": "progression",
+            "base_quantity_in_item_pool": 0,
+            "item_groups": "Unlock"
+        },
+        "Key": {
+            "long_name": "Key",
+            "short_name": "key",
+            "item_id": 100000070,
+            "client_name_id": "key",
+            "client_resource_amount": null,
+            "client_item_type": "Item",
+            "classification": "progression",
+            "base_quantity_in_item_pool": 0,
+            "item_groups": "Unlock"
+        },
+        "Finish Flag": {
+            "long_name": "Finish Flag",
+            "short_name": "flag",
+            "item_id": 100000071,
+            "client_name_id": "flag",
+            "client_resource_amount": null,
+            "client_item_type": "Item",
+            "classification": "progression",
+            "base_quantity_in_item_pool": 0,
+            "item_groups": "Unlock"
         }
+        
     }
 ]

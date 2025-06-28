@@ -174,9 +174,9 @@ public static class Util
 
     public static void PopulatePotPrefabs()
     {
-        potPrefabs = Resources.FindObjectsOfTypeAll<ParticlePickup>()
+        potPrefabs = [.. Resources.FindObjectsOfTypeAll<ParticlePickup>()
                 .Where(e => e.name.Equals("Pot Confetti"))
-                .Select(e => e.gameObject.transform.parent.gameObject).ToArray();
+                .Select(e => e.gameObject.transform.parent.gameObject)];
     }
 
     public static PersistentObjectType GetPersistentObjectType(PersistentObject persistentObject) => persistentObject switch

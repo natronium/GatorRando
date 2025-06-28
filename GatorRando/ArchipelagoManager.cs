@@ -618,20 +618,28 @@ public static class ArchipelagoManager
         // Fails if invalid gatorName (only use on collected IDs?)
     }
 
-    public static bool GetOption(Option option) => option switch
-    {
-        // For now, all options are boolean, so we have to convert 0 or 1 to a boolean value
-        Option.StartWithFreeplay => LoginInfo.SlotData[OptionName(option)].ToString() != "0",
-        Option.RequireShieldJump => LoginInfo.SlotData[OptionName(option)].ToString() != "0",
-        Option.HarderRangedQuests => LoginInfo.SlotData[OptionName(option)].ToString() != "0",
-        _ => throw new Exception("Invalid enum value for Option"),
-    };
+    private static bool TryGetOptionBool(Option option) {
+        try
+        {
+            object option_return = LoginInfo.SlotData[OptionName(option)];
+            return option_return.ToString() != "0";
+        }
+        catch (KeyNotFoundException)
+        {
+            // if game was not generated with an option, assume it is false
+            return false;
+        }
+    }
+    public static bool GetOptionBool(Option option) => TryGetOptionBool(option);
 
     public enum Option
     {
         StartWithFreeplay,
         RequireShieldJump,
-        HarderRangedQuests
+        HarderRangedQuests,
+        LockPotsBehindItems,
+        LockChestsBehindKey,
+        LockRacesBehindFlag,
     }
 
     public static string OptionName(Option option) => option switch
@@ -639,11 +647,15 @@ public static class ArchipelagoManager
         Option.StartWithFreeplay => "start_with_freeplay",
         Option.RequireShieldJump => "require_shield_jump",
         Option.HarderRangedQuests => "harder_ranged_quests",
+        Option.LockPotsBehindItems => "lock_pots_behind_items",
+        Option.LockChestsBehindKey => "lock_chests_behind_key",
+        Option.LockRacesBehindFlag => "lock_races_behind_flag",
         _ => throw new Exception("Invalid enum value for Option"),
     };
 
+    // TODO: Think about what to do if have non-bool options
     private static Dictionary<string, bool> GetOptions() =>
-        Enum.GetValues(typeof(Option)).Cast<Option>().ToDictionary(OptionName, GetOption);
+        Enum.GetValues(typeof(Option)).Cast<Option>().ToDictionary(OptionName, GetOptionBool);
 
     private static Items.Entry GetItemEntryByApId(long id) => Items.Entries.First(entry => entry.apItemId == id);
     private static Locations.Entry GetLocationEntryByApId(long id) => Locations.Entries.First(entry => entry.apLocationId == id);
@@ -680,26 +692,34 @@ public static class ArchipelagoManager
 
     private static void CollectLocationByAPID(long id) => Session.Locations.CompleteLocationChecks(id);
 
-
-    public static bool CollectLocationByID(int id)
+    public static long? GetApIdById(int id)
     {
         long apId;
         try
         {
             apId = GetLocationApId(id);
+            return apId;
         }
         catch (InvalidOperationException)
         {
-            //NB: This logs at Info level because it gets hit for *allll* the breakables we don't currently track
-            //      perhaps in the future if we're tracking *everything* it might make sense for this to be a warning
-            //      but not right now.
-            Plugin.LogInfo($"Tried to collect location with numeric ID {id}, which does not have an entry in the locations table!");
+            return null;
+        }
+    }
+
+    public static bool CollectLocationByID(int id)
+    {
+
+        long? apId = GetApIdById(id);
+        if (apId is long apIdValue)
+        {
+            GameData.g.Write(LocationKeyPrefix + apIdValue.ToString(), true);
+            CollectLocationByAPID(apIdValue);
+            return true;
+        }
+        else
+        {
             return false;
         }
-
-        GameData.g.Write(LocationKeyPrefix + apId.ToString(), true);
-        CollectLocationByAPID(apId);
-        return true;
     }
 
     public static bool CollectLocationByName(string name)

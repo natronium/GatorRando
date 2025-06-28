@@ -99,7 +99,7 @@ public class Plugin : BaseUnityPlugin
     public static void ApplyAPDependentMods()
     {
         //Allow Freeplay
-        if (ArchipelagoManager.GetOption(ArchipelagoManager.Option.StartWithFreeplay))
+        if (ArchipelagoManager.GetOptionBool(ArchipelagoManager.Option.StartWithFreeplay))
         {
             TutorialQuestMods.StartWithFreeplay();
         }

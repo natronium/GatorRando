@@ -79,6 +79,7 @@ public static class {itemsFileName}{{
         Craft,
         Item,
         Cardboard_Destroyer,
+        Unlock,
     }}
     
     public readonly struct Entry(
