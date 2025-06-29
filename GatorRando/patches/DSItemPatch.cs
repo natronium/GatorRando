@@ -1,18 +1,23 @@
+using System.Data.Common;
+using System.Linq;
 using Archipelago.MultiClient.Net.Models;
-using Data;
+using GatorRando.UIMods;
 using HarmonyLib;
+using UnityEngine;
 
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(DSItem))]
 static class DSItemPatch
 {
+    
+ 
     [HarmonyPrefix]
     [HarmonyPatch("RunItemSequence")]
     static bool PreRunItemSequence(DSItem __instance)
     {
         //TODO: Don't intercept LITTER
-        string name = "";
+        string name;
         if (__instance.item == null || __instance.itemName == "POT?" || __instance.itemName == "POT LID?")
         {
             name = __instance.itemName;
@@ -29,7 +34,7 @@ static class DSItemPatch
         if (ArchipelagoManager.CollectLocationByName(name))
         {
             ItemInfo itemInfo = ArchipelagoManager.ItemAtLocation(name);
-            __instance.document = null;
+
             __instance.isRealItem = false;
             if (itemInfo.ItemGame == "Lil Gator Game")
             {
@@ -43,23 +48,28 @@ static class DSItemPatch
                     __instance.itemSprite = Util.GetSpriteForItem(clientID);
                 }
             }
+            string dialogueString;
             if (itemInfo.Player.Name == GameData.g.gameSaveData.playerName)
             {
-                __instance.dialogue = $"found my {itemInfo.ItemName}. why was that here??"; // Need to replace this with a valid dialogue?
+                dialogueString = $"found my {itemInfo.ItemName}. why was that here??";
                 __instance.itemName = itemInfo.ItemName;
             }
             else if (itemInfo.ItemGame == "Lil Gator Game")
             {
-                __instance.dialogue = $"found a {itemInfo.ItemName}, but it's {itemInfo.Player.Name}'s, not mine, I should send it back"; // Need to replace this with a valid dialogue?
+                dialogueString = $"found a {itemInfo.ItemName}, but it's {itemInfo.Player.Name}'s, not mine, I should send it back";
                 __instance.itemName = itemInfo.Player.Name + "'s " + itemInfo.ItemName;
             }
             else
             {
-                __instance.dialogue = $"Found {itemInfo.Player.Name}'s {itemInfo.ItemName}"; // Need to replace this with a valid dialogue?
+                dialogueString = $"found {itemInfo.Player.Name}'s {itemInfo.ItemName}";
                 __instance.itemName = itemInfo.Player.Name + "'s " + itemInfo.ItemName;
                 __instance.itemSprite = Util.GetSpriteForItem("Archipelago");
                 // Eventually replace itemSprite with AP logo
             }
+            
+            __instance.dialogue = dialogueString;
+
+            DialogueModifier.AddNewDialogueChunk(__instance.document, dialogueString);
         }
         return true;
     }

@@ -199,4 +199,17 @@ public static class Util
         Challenge,
         Other,
     }
+
+    public static T[] Append<T>(this T[] array, T item)
+    {
+        if (array == null)
+        {
+            return [item];
+        }
+        Array.Resize(ref array, array.Length + 1);
+        array[array.Length - 1] = item;
+
+        return array;
+    }
+
 }
