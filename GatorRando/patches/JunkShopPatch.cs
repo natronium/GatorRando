@@ -19,31 +19,34 @@ static class JunkShopPatch
     static DialogueChunk GetDialogueChunk(string name) => replacementDialogues[name];
 
 
-    [HarmonyPostfix]
-    [HarmonyPatch("Start")]
-    static void PostStart(JunkShop __instance)
+    [HarmonyPrefix]
+    [HarmonyPatch("RunShopDialogueSequence")]
+    static void PreRunShopDialogueSequence(JunkShop __instance)
     {
-        foreach (JunkShop.ShopItem shopItem in __instance.shopItems)
+        if (replacementSprites.Keys.Count == 0)
         {
-            ItemInfo itemInfo = ArchipelagoManager.ItemAtLocation(shopItem.item.name);
-            if (itemInfo.ItemGame == "Lil Gator Game")
+            foreach (JunkShop.ShopItem shopItem in __instance.shopItems)
             {
-                if (itemInfo.ItemName.Contains("Craft Stuff") || itemInfo.ItemName.Contains("Friend"))
+                ItemInfo itemInfo = ArchipelagoManager.ItemAtLocation(shopItem.item.name);
+                if (itemInfo.ItemGame == "Lil Gator Game")
                 {
-                    replacementSprites.Add(shopItem.item.name, Util.GetSpriteForItem(itemInfo.ItemName));
+                    if (itemInfo.ItemName.Contains("Craft Stuff") || itemInfo.ItemName.Contains("Friend"))
+                    {
+                        replacementSprites.Add(shopItem.item.name, Util.GetSpriteForItem(itemInfo.ItemName));
+                    }
+                    else
+                    {
+                        string clientID = ArchipelagoManager.GetClientIDByAPId(itemInfo.ItemId);
+                        replacementSprites.Add(shopItem.item.name, Util.GetSpriteForItem(clientID));
+                    }
                 }
                 else
                 {
-                    string clientID = ArchipelagoManager.GetClientIDByAPId(itemInfo.ItemId);
-                    replacementSprites.Add(shopItem.item.name, Util.GetSpriteForItem(clientID));
+                    replacementSprites.Add(shopItem.item.name, Util.GetSpriteForItem("Archipelago"));
                 }
+                replacementDisplayNames.Add(shopItem.item.name, $"{itemInfo.Player.Name}'s {itemInfo.ItemName}");
+                replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"bought {itemInfo.Player.Name}'s {itemInfo.ItemName}"));
             }
-            else
-            {
-                replacementSprites.Add(shopItem.item.name, Util.GetSpriteForItem("Archipelago"));
-            }
-            replacementDisplayNames.Add(shopItem.item.name, $"{itemInfo.Player.Name}'s {itemInfo.ItemName}");
-            replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"bought {itemInfo.Player.Name}'s {itemInfo.ItemName}"));
         }
     }
 
@@ -89,7 +92,6 @@ static class JunkShopPatch
                 // changing the argument of CoroutineUtil.Start  to:
                 //  RunSequence(JunkShopPatch.getSprite(shopItem.item.name), JunkShopPatch.getDisplayName(shopItem.item.name), JunkShopPatch.getReplacementDialogueChunk(shopItem.item.name), this.actors)
                 245 => nop,
-
                 246 => nop,
                 247 => nop,
                 248 => nop,
@@ -98,7 +100,6 @@ static class JunkShopPatch
                 251 => nop,
                 252 => nop,
                 253 => nop,
-                254 => nop,
 
 
                 //instead of RunSequence(shopItem.item.sprite, shopItem.item.DisplayName, this.document.FetchChunk(shopItem.unlockChunk), this.actors)
