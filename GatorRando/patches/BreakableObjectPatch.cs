@@ -1,3 +1,4 @@
+using GatorRando.UIMods;
 using HarmonyLib;
 using UnityEngine;
 
@@ -15,9 +16,11 @@ static class BreakableObjectPatch
         {
             if (!PotManager.CheckIfPotBreakable(__instance.id))
             {
+                DialogueModifier.GatorBubble(PotManager.GetPotString(__instance.id));
                 __result = false;
                 return false;
             }
+            
         }
         return true;
     }

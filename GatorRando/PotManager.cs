@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace GatorRando;
 
@@ -56,11 +57,9 @@ public static class PotManager
             }
         }
     }
-
-    public static bool CheckIfPotBreakable(int id)
+    private static PotType? GetPotType(int id)
     {
-        PopulateMapping();
-        PotType potType;
+        PotType? potType;
         try
         {
             potType = pot_mapping[id];
@@ -68,16 +67,64 @@ public static class PotManager
         catch (KeyNotFoundException)
         {
             Plugin.LogDebug($"You missed pot {id}");
+            potType = null;
+        }
+        return potType;
+    }
+
+    public static bool CheckIfPotBreakable(int id)
+    {
+        PopulateMapping();
+        PotType? potType = GetPotType(id);
+        if (potType == null)
+        {
             return false;
         }
 
         if (ArchipelagoManager.GetOptionBool(ArchipelagoManager.Option.LockPotsBehindItems))
         {
-            return ArchipelagoManager.IsItemUnlocked(PotItem[potType]);
+            return ArchipelagoManager.IsItemUnlocked(PotItem[(PotType)potType]);
         }
         else
         {
             return true;
         }
+    }
+
+    public static string GetPotString(int id)
+    {
+        PotType? potType = GetPotType(id);
+        if (potType == null)
+        {
+            return "I'm trying to break a pot I don't know about.";
+        }
+        if (ArchipelagoManager.GetOptionBool(ArchipelagoManager.Option.LockPotsBehindItems))
+        {
+            if (ArchipelagoManager.IsItemUnlocked(PotItem[(PotType)potType]))
+            {
+                return potType switch
+                {
+                    PotType.MC => "I use my giant socks to become big and stomp around!",
+                    PotType.WW => "I paddle through the fierce pond with my oar to calm the breeze!",
+                    PotType.LA => "I help the tired monsters sleep through the night with my sleep mask!",
+                    PotType.OoT => "I play my guitar of space to open the Sacred Place of Space!",
+                    PotType.TP => "I change into a tiger to rescue the Dawn Prince!",
+                    _ => throw new System.NotImplementedException(),
+                };
+            }
+            else
+            {
+                return potType switch
+                {
+                    PotType.MC => "I need my GIANT SOCKS to become big and stomp around...",
+                    PotType.WW => "I need my OAR to calm the breeze...",
+                    PotType.LA => "I need my SLEEP MASK to help the tired monsters sleep...",
+                    PotType.OoT => "I need my GUITAR OF SPACE to open the Sacred Place of Space...",
+                    PotType.TP => "I need my TIGER FORM to rescue the Dawn Prince...",
+                    _ => throw new System.NotImplementedException(),
+                };
+            }
+        }
+        return "Pots are easy to break!";
     }
 }

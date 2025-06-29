@@ -8,6 +8,7 @@ using System.Collections.Concurrent;
 using Archipelago.MultiClient.Net.Packets;
 using Archipelago.MultiClient.Net.Models;
 using Newtonsoft.Json.Linq;
+using GatorRando.UIMods;
 
 namespace GatorRando;
 
@@ -714,6 +715,7 @@ public static class ArchipelagoManager
         {
             GameData.g.Write(LocationKeyPrefix + apIdValue.ToString(), true);
             CollectLocationByAPID(apIdValue);
+            DialogueModifier.AnnounceLocationCollected(id);
             return true;
         }
         else
@@ -737,6 +739,7 @@ public static class ArchipelagoManager
 
         GameData.g.Write(LocationKeyPrefix + apId.ToString(), true);
         CollectLocationByAPID(apId);
+        DialogueModifier.AnnounceLocationCollected(name);
         return true;
     }
 

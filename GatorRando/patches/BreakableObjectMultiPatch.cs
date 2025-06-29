@@ -1,3 +1,4 @@
+using GatorRando.UIMods;
 using HarmonyLib;
 using UnityEngine;
 
@@ -15,7 +16,20 @@ static class BreakableObjectMultiPatch
         {
             if (!ChestManager.CheckIfChestBreakable())
             {
+                DialogueModifier.GatorBubble("I need a KEY before I can unlock chests...");
                 return false;
+            }
+            else
+            {
+                if (ArchipelagoManager.GetOptionBool(ArchipelagoManager.Option.LockChestsBehindKey))
+                {
+                    DialogueModifier.GatorBubble("Keys are reusable, so chests are easy to open!");
+                }
+                else
+                {
+                    DialogueModifier.GatorBubble("Who needs keys when I can smash things!");
+                }
+                
             }
         }
         return true;

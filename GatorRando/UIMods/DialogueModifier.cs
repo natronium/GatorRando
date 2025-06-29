@@ -1,3 +1,4 @@
+using Archipelago.MultiClient.Net.Models;
 using UnityEngine;
 
 namespace GatorRando.UIMods;
@@ -29,15 +30,108 @@ public static class DialogueModifier
         document.chunks = document.chunks.Append(newDialogueChunk);
         return newDialogueChunk;
     }
-}
 
-            // foreach (DialogueChunk dialogueChunk in __instance.document.chunks)
-            // {
-            //     Plugin.LogDebug(dialogueChunk.name);
-            //     foreach (DialogueLine dialogueLine in dialogueChunk.lines)
-            //     {
-            //         // Plugin.LogDebug(dialogueLine.actorIndex.ToString());
-            //         Plugin.LogDebug(dialogueLine.english[0].ToString());
-            //         Plugin.LogDebug(dialogueLine.state.ToString());
-            //     }  
-            // }
+    public static DialogueChunk AddNewDialogueChunk(string dialogueString)
+    {
+
+        DialogueLine newDialogueLine = new()
+        {
+            actorIndex = 0,
+            emote = 0,
+            english = [dialogueString],
+            position = 0,
+            holdEmote = false,
+            cue = false,
+            noInput = false,
+            lookTarget = 0,
+            state = -1,
+        };
+        DialogueChunk newDialogueChunk = new()
+        {
+            name = dialogueString,
+            id = Animator.StringToHash(dialogueString),
+            lines = [newDialogueLine],
+            options = [],
+            mlOptions = [],
+        };
+        DialogueManager.d.chunkDic[dialogueString] = newDialogueChunk;
+        return newDialogueChunk;
+    }
+
+    public static void GatorBubble(string dialogueString)
+    {
+        AddNewDialogueChunk(dialogueString);
+        DialogueManager.d.Bubble(dialogueString, null, 0f, false, true, true);
+    }
+
+    public static void AnnounceLocationCollected(int gatorID)
+    {
+        ItemInfo itemInfo = ArchipelagoManager.ItemAtLocation(gatorID);
+        GatorBubble(GetDialogueStringForItemInfo(itemInfo));
+    }
+
+    public static void AnnounceLocationCollected(string gatorName)
+    {
+        ItemInfo itemInfo = ArchipelagoManager.ItemAtLocation(gatorName);
+        GatorBubble(GetDialogueStringForItemInfo(itemInfo));
+    }
+
+    public static string GetDialogueStringForItemInfo(ItemInfo itemInfo)
+    {
+        string dialogueString;
+        if (itemInfo.Player.Name == GameData.g.gameSaveData.playerName)
+        {
+            dialogueString = $"I found my {itemInfo.ItemName}. why was that here??";
+        }
+        else if (itemInfo.ItemGame == "Lil Gator Game")
+        {
+            dialogueString = $"I found a {itemInfo.ItemName}, but it's {itemInfo.Player.Name}'s, not mine, I should send it back";
+        }
+        else
+        {
+            dialogueString = $"I found {itemInfo.Player.Name}'s {itemInfo.ItemName}";
+            // Eventually replace itemSprite with AP logo
+        }
+        return dialogueString;
+    }
+
+    public static string GetItemNameForItemInfo(ItemInfo itemInfo)
+    {
+        string itemName;
+        if (itemInfo.Player.Name == GameData.g.gameSaveData.playerName)
+        {
+            itemName = itemInfo.ItemName;
+        }
+        else if (itemInfo.ItemGame == "Lil Gator Game")
+        {
+            itemName = itemInfo.Player.Name + "'s " + itemInfo.ItemName;
+        }
+        else
+        {
+            itemName = itemInfo.Player.Name + "'s " + itemInfo.ItemName;
+        }
+        return itemName;
+    }
+
+    public static Sprite GetSpriteForItemInfo(ItemInfo itemInfo)
+    {
+        Sprite itemSprite;
+        if (itemInfo.ItemGame == "Lil Gator Game")
+        {
+            if (itemInfo.ItemName.Contains("Craft Stuff") || itemInfo.ItemName.Contains("Friend"))
+            {
+                itemSprite = Util.GetSpriteForItem(itemInfo.ItemName);
+            }
+            else
+            {
+                string clientID = ArchipelagoManager.GetClientIDByAPId(itemInfo.ItemId);
+                itemSprite = Util.GetSpriteForItem(clientID);
+            }
+        }
+        else
+        {
+            itemSprite = Util.GetSpriteForItem("Archipelago");
+        }
+        return itemSprite;
+    }
+}
