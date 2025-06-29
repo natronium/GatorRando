@@ -28,10 +28,10 @@ public static class MapManager
     }
 
     private static PlayerCoords CurrentCoords() {
-        GameObject lil_gator = Util.GetByPath("Players/Player/Heroboy");
-        float west_east = lil_gator.transform.position.x;
-        float north_south = lil_gator.transform.position.z; // y is height
-        return new(west_east, north_south);
+        GameObject lilGator = Util.GetByPath("Players/Player/Heroboy");
+        float westEast = lilGator.transform.position.x;
+        float northSouth = lilGator.transform.position.z; // y is height
+        return new(westEast, northSouth);
     }
 
     private static void UpdateCoordinates() {

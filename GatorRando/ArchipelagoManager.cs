@@ -203,9 +203,9 @@ public static class ArchipelagoManager
     {
         string gatorName = ConvertDAToGatorName(dialogueActor);
         // filter out non-main quest NPCs from actors pulled to populate the Main Quest list
-        string[] filtered_npcs = ["NPC_WannaBeHawk", "NPC_BigSis", "NPC_Destroy_Elephant", "NPC_Chess_Eagle", "NPC_Warrior_Beaver", "NPC_Obstacle_Ostrich",
+        string[] filteredNPCs = ["NPC_WannaBeHawk", "NPC_BigSis", "NPC_Destroy_Elephant", "NPC_Chess_Eagle", "NPC_Warrior_Beaver", "NPC_Obstacle_Ostrich",
             "NPC_Theatre_Cow1", "NPC_Theatre_Cow2", "NPC_Theatre_Cow3", "NPC_FetchVulture", "NPC_SurfOpossum", "NPC_TripLizard", "Signs"];
-        if (gatorName == "" || gatorName.Contains("Unhandled") || filtered_npcs.Contains(gatorName))
+        if (gatorName == "" || gatorName.Contains("Unhandled") || filteredNPCs.Contains(gatorName))
         {
             return false;
         }
@@ -606,23 +606,23 @@ public static class ArchipelagoManager
 
     public static ItemInfo ItemAtLocation(int gatorID)
     {
-        long ap_id = GetLocationApId(gatorID);
-        return LocationLookup[ap_id];
+        long apId = GetLocationApId(gatorID);
+        return LocationLookup[apId];
         // Fails if invalid gatorID (only use on collected IDs?)
     }
 
     public static ItemInfo ItemAtLocation(string gatorName)
     {
-        long ap_id = GetLocationApId(gatorName);
-        return LocationLookup[ap_id];
+        long apId = GetLocationApId(gatorName);
+        return LocationLookup[apId];
         // Fails if invalid gatorName (only use on collected IDs?)
     }
 
     private static bool TryGetOptionBool(Option option) {
         try
         {
-            object option_return = LoginInfo.SlotData[OptionName(option)];
-            return option_return.ToString() != "0";
+            object optionReturn = LoginInfo.SlotData[OptionName(option)];
+            return optionReturn.ToString() != "0";
         }
         catch (KeyNotFoundException)
         {
