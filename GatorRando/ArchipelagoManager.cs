@@ -678,6 +678,7 @@ public static class ArchipelagoManager
         {
             SpecialItemFunctions[entry.clientNameId]();
         }
+        DialogueModifier.GatorBubble($"Someone sent me {entry.longName}!");
     }
 
     public static string GetClientIDByAPId(long id) => GetItemEntryByApId(id).clientNameId;
