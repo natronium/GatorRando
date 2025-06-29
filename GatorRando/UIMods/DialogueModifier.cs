@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace GatorRando.UIMods;
 
+// TODO:
+// BubbleNotificationManager
+
 public static class DialogueModifier
 {
     public static DialogueChunk AddNewDialogueChunk(MultilingualTextDocument document, string dialogueString)

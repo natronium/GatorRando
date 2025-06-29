@@ -45,7 +45,14 @@ static class JunkShopPatch
                     replacementSprites.Add(shopItem.item.name, Util.GetSpriteForItem("Archipelago"));
                 }
                 replacementDisplayNames.Add(shopItem.item.name, $"{itemInfo.Player.Name}'s {itemInfo.ItemName}");
-                replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"bought {itemInfo.Player.Name}'s {itemInfo.ItemName}"));
+                if (itemInfo.Player.Name == GameData.g.gameSaveData.playerName)
+                {
+                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"I bought my own {itemInfo.ItemName}"));
+                }
+                else
+                {
+                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"I bought {itemInfo.Player.Name}'s {itemInfo.ItemName}"));
+                }
             }
         }
     }

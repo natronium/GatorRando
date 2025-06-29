@@ -12,6 +12,8 @@ using GatorRando.UIMods;
 
 namespace GatorRando;
 
+//TODO: Redo items and locations json stuff; figure out how to convey the sending player in item received bubble notification
+
 public static class ArchipelagoManager
 {
     public const string APVersion = "0.5.1";
@@ -619,7 +621,8 @@ public static class ArchipelagoManager
         // Fails if invalid gatorName (only use on collected IDs?)
     }
 
-    private static bool TryGetOptionBool(Option option) {
+    private static bool TryGetOptionBool(Option option)
+    {
         try
         {
             object optionReturn = LoginInfo.SlotData[OptionName(option)];
