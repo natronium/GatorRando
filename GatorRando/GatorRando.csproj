@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>GatorRando</AssemblyName>
     <Description>Randomizer for Lil Gator Game</Description>
-    <Version>1.0.3</Version>
+    <Version>1.0.6</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -45,12 +45,7 @@
     <Publicize Include="Assembly-CSharp" />
   </ItemGroup>
 
-  <!-- Embed Item & Location data from CSV -->
   <ItemGroup>
-    <ProjectReference Include="..\DataSourceGenerator\DataSourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
-  </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="data/Items.json"/>
-    <AdditionalFiles Include="data/Locations.json"/>
+    <EmbeddedResource Include="Data/Rules.json" />
   </ItemGroup>
 </Project>
