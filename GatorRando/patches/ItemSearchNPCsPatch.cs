@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GatorRando.Archipelago;
 using GatorRando.UIMods;
 using HarmonyLib;
 using UnityEngine;
@@ -31,16 +32,16 @@ static class ItemSearchNPCsPatch
 
         List<DialogueActor> filteredMainActors = SettingsMods.GetCheckfinderBehavior() switch
         {
-            SettingsMods.CheckfinderBehavior.Logic => additionalActors.FindAll(ArchipelagoManager.IsMainQuestAccessible),
-            SettingsMods.CheckfinderBehavior.ChecksOnly => additionalActors.FindAll(ArchipelagoManager.IsMainQuestACheck),
+            SettingsMods.CheckfinderBehavior.Logic => additionalActors.FindAll(LocationAccessibilty.IsMainQuestAccessible),
+            SettingsMods.CheckfinderBehavior.ChecksOnly => additionalActors.FindAll(LocationAccessibilty.IsMainQuestACheck),
             SettingsMods.CheckfinderBehavior.Original => additionalActors,
             _ => throw new Exception("Invalid enum value for CheckfinderBehavior"),
         };
 
         DialogueActor[] sideQuestActors = SettingsMods.GetCheckfinderBehavior() switch
         {
-            SettingsMods.CheckfinderBehavior.Logic => Array.FindAll(__result, ArchipelagoManager.IsNPCAccessible),
-            SettingsMods.CheckfinderBehavior.ChecksOnly => Array.FindAll(__result, ArchipelagoManager.IsNPCACheck),
+            SettingsMods.CheckfinderBehavior.Logic => Array.FindAll(__result, LocationAccessibilty.IsNPCAccessible),
+            SettingsMods.CheckfinderBehavior.ChecksOnly => Array.FindAll(__result, LocationAccessibilty.IsNPCACheck),
             SettingsMods.CheckfinderBehavior.Original => __result,
             _ => throw new Exception("Invalid enum value for CheckfinderBehavior"),
         };
@@ -57,14 +58,14 @@ static class ItemSearchNPCsPatch
     static void PostIsValid(DialogueActor item, ref bool __result)
     {
         __result = __result && item.gameObject.activeInHierarchy;
-        string gatorName = ArchipelagoManager.ConvertDAToGatorName(item);
-        string[] checks = ArchipelagoManager.ChecksForNPC(gatorName);
+        string gatorName = LocationAccessibilty.ConvertDAToGatorName(item);
+        string[] checks = LocationAccessibilty.ChecksForNPC(gatorName);
         __result = gatorName switch
         {
-            "Tutorial Avery" => !checks.Select(ArchipelagoManager.IsLocationCollected).All(b => b),
-            "Tutorial Stick Jill" => !checks.Select(ArchipelagoManager.IsLocationCollected).All(b => b),
-            "Tutorial End Jill" => !checks.Select(ArchipelagoManager.IsLocationCollected).All(b => b),
-            "Tutorial Martin" => !checks.Select(ArchipelagoManager.IsLocationCollected).All(b => b),
+            "Tutorial Avery" => !checks.Select(LocationHandling.IsLocationCollected).All(b => b),
+            "Tutorial Stick Jill" => !checks.Select(LocationHandling.IsLocationCollected).All(b => b),
+            "Tutorial End Jill" => !checks.Select(LocationHandling.IsLocationCollected).All(b => b),
+            "Tutorial Martin" => !checks.Select(LocationHandling.IsLocationCollected).All(b => b),
             _ => __result,
         };
     }

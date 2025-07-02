@@ -1,12 +1,14 @@
+using GatorRando.Archipelago;
+
 namespace GatorRando;
 
 public static class RaceManager
 {
     public static bool CheckIfRaceAvailable()
     {
-        if (ArchipelagoManager.GetOptionBool(ArchipelagoManager.Option.LockRacesBehindFlag))
+        if (Options.GetOptionBool(Options.Option.LockRacesBehindFlag))
         {
-            return ArchipelagoManager.IsItemUnlocked("flag");
+            return ItemHandling.IsItemUnlocked("flag");
         }
         else
         {

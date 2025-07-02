@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using GatorRando.UIMods;
 using HarmonyLib;
 using UnityEngine;
@@ -21,7 +22,7 @@ static class BreakableObjectMultiPatch
             }
             else
             {
-                if (ArchipelagoManager.GetOptionBool(ArchipelagoManager.Option.LockChestsBehindKey))
+                if (Options.GetOptionBool(Options.Option.LockChestsBehindKey))
                 {
                     DialogueModifier.GatorBubble("Keys are reusable, so chests are easy to open!");
                 }
@@ -41,7 +42,7 @@ static class BreakableObjectMultiPatch
     {
         if (__instance.IsBroken)
         {
-            ArchipelagoManager.CollectLocationByID(__instance.id);
+            LocationHandling.CollectLocationByID(__instance.id);
         }
     }
 }

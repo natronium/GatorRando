@@ -1,12 +1,14 @@
+using GatorRando.Archipelago;
+
 namespace GatorRando;
 
 public static class ChestManager
 {
     public static bool CheckIfChestBreakable()
     {
-        if (ArchipelagoManager.GetOptionBool(ArchipelagoManager.Option.LockChestsBehindKey))
+        if (Options.GetOptionBool(Options.Option.LockChestsBehindKey))
         {
-            return ArchipelagoManager.IsItemUnlocked("key");
+            return ItemHandling.IsItemUnlocked("key");
         }
         else
         {

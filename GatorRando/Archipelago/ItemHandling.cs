@@ -1,0 +1,112 @@
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using Archipelago.MultiClient.Net.Models;
+using GatorRando.Data;
+
+namespace GatorRando.Archipelago;
+
+
+public static class ItemHandling
+{
+    private static ConcurrentQueue<Items.Item> ItemQueue = new();
+    private static readonly Dictionary<string, Action> SpecialItemFunctions = [];
+    public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
+    public static void TriggerItemListeners()
+    {
+        foreach (ItemInfo itemInfo in ArchipelagoManager.Session.Items.AllItemsReceived)
+        {
+            Items.Item item = GetItemEntryByApId(itemInfo.ItemId);
+            if (item.clientNameId is not null && SpecialItemFunctions.ContainsKey(item.clientNameId))
+            {
+                SpecialItemFunctions[item.clientNameId]();
+            }
+        }
+    }
+
+
+    private static Items.Item GetItemEntryByApId(long id) => Items.itemData.First(entry => entry.apItemId == id);
+    public static string GetClientIDByAPId(long id) => GetItemEntryByApId(id).clientNameId;
+    private static long GetItemApId(string gatorName) =>
+        Items.itemData.First(entry => entry.clientNameId == gatorName).apItemId;
+
+
+    public static bool IsItemUnlocked(string item) =>
+        ArchipelagoManager.Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApId(item));
+    public static int GetItemUnlockCount(string itemName) =>
+        ArchipelagoManager.Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
+    public static Dictionary<string, int> GetObtainedItems() =>
+        Items.itemData.ToDictionary(item => item.name, item => GetItemUnlockCount(item.clientNameId));
+
+    public static void ProcessItemQueue()
+    {
+        while (ItemQueue.TryDequeue(out Items.Item item))
+        {
+            ReceiveItem(item);
+            LocationAccessibilty.UpdateAccessibleLocations();
+            var lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
+            GameData.g.Write("LastAPItemIndex", lastIndex + 1);
+        }
+    }
+
+    public static void OnDisconnect()
+    {
+        ItemQueue = new();
+    }
+
+    public static void EnqueueItem(long id)
+    {
+        ItemQueue.Enqueue(GetItemEntryByApId(id));
+    }
+
+    private static void ReceiveItem(Items.Item item)
+    {
+        Plugin.LogDebug($"ReceiveItem for {item.name}. ClientId:{item.clientNameId}, Type:{item.clientItemType}, AP:{item.apItemId}");
+        switch (item.clientItemType)
+        {
+            case Items.ClientItemType.Item: ItemUtil.GiveItem(item.clientNameId); break;
+            case Items.ClientItemType.Craft: ItemUtil.GiveCraft(item.clientNameId); break;
+            case Items.ClientItemType.Friend: ItemUtil.GiveFriends((int)item.clientResourceAmount); break;
+            case Items.ClientItemType.CraftStuff: ItemUtil.GiveCraftStuff((int)item.clientResourceAmount); break;
+            default:
+                throw new Exception($"Item {item.clientNameId} in the item data CSV with an unknown client_item type of {item.clientItemType}");
+        }
+        ;
+
+        if (item.clientNameId is not null && SpecialItemFunctions.ContainsKey(item.clientNameId))
+        {
+            SpecialItemFunctions[item.clientNameId]();
+        }
+        // DialogueModifier.GatorBubble($"Someone sent me {entry.longName}!");
+    }
+
+    public static void ReceiveUnreceivedItems()
+    {
+        var lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
+        Plugin.LogDebug($"saved lastindex is {lastIndex}, AP's last index is {ArchipelagoManager.Session.Items.Index}");
+        if (lastIndex < ArchipelagoManager.Session.Items.Index)
+        {
+            foreach (var item in ArchipelagoManager.Session.Items.AllItemsReceived.Skip(lastIndex))
+            {
+                ReceiveItem(GetItemEntryByApId(item.ItemId));
+            }
+        }
+
+        while (ArchipelagoManager.Session.Items.Any())
+        {
+            //Clear the queue of all our initial items
+            ArchipelagoManager.Session.Items.DequeueItem();
+        }
+
+        if (ArchipelagoManager.Session.Items.Index >= lastIndex)
+        {
+            GameData.g.Write("LastAPItemIndex", ArchipelagoManager.Session.Items.Index);
+        }
+        else
+        {
+            Plugin.LogWarn("Current Item Index from Server is earlier than save file---is connection incorrect?");
+        }
+    }
+
+}

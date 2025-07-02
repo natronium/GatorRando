@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using GatorRando.UIMods;
 using HarmonyLib;
 
@@ -14,7 +15,7 @@ static class TimedChallengePatch
         {
             if (RaceManager.CheckIfRaceAvailable())
             {
-                if (ArchipelagoManager.GetOptionBool(ArchipelagoManager.Option.LockRacesBehindFlag))
+                if (Options.GetOptionBool(Options.Option.LockRacesBehindFlag))
                 {
                     DialogueModifier.GatorBubble("I can run races since I have my Finish Flag!");
                 }
@@ -39,7 +40,7 @@ static class TimedChallengePatch
     {
         if (__instance is Racetrack)
         {
-            ArchipelagoManager.CollectLocationByID(__instance.id);
+            LocationHandling.CollectLocationByID(__instance.id);
         }
     }
 }

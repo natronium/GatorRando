@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -12,14 +13,14 @@ static class GeneQuestMods
         // Removing Loot Get Sequence from economist_quest_qs.states[2].onProgress()
         economistQuestQS.states[2].onProgress.ObliteratePersistentListenerByIndex(0);
 
-        ArchipelagoManager.RegisterItemListener("HALF A CHEESE SANDWICH", UnlockedCheeseSandwich);
+        ItemHandling.RegisterItemListener("HALF A CHEESE SANDWICH", UnlockedCheeseSandwich);
     }
 
     private static void UnlockedCheeseSandwich()
     {
         GameObject economistQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist");
         QuestStates economistQuestQS = economistQuest.GetComponent<QuestStates>();
-        if (economistQuestQS.StateID == 1 && ArchipelagoManager.IsLocationCollected("HALF A CHEESE SANDWICH"))
+        if (economistQuestQS.StateID == 1 && LocationHandling.IsLocationCollected("HALF A CHEESE SANDWICH"))
         {
             economistQuestQS.JustProgressState();
         }

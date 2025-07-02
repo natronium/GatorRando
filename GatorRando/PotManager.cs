@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using GatorRando.Archipelago;
 
 namespace GatorRando;
 
@@ -81,9 +81,9 @@ public static class PotManager
             return false;
         }
 
-        if (ArchipelagoManager.GetOptionBool(ArchipelagoManager.Option.LockPotsBehindItems))
+        if (Options.GetOptionBool(Options.Option.LockPotsBehindItems))
         {
-            return ArchipelagoManager.IsItemUnlocked(PotItem[(PotType)potType]);
+            return ItemHandling.IsItemUnlocked(PotItem[(PotType)potType]);
         }
         else
         {
@@ -98,9 +98,9 @@ public static class PotManager
         {
             return "I'm trying to break a pot I don't know about.";
         }
-        if (ArchipelagoManager.GetOptionBool(ArchipelagoManager.Option.LockPotsBehindItems))
+        if (Options.GetOptionBool(Options.Option.LockPotsBehindItems))
         {
-            if (ArchipelagoManager.IsItemUnlocked(PotItem[(PotType)potType]))
+            if (ItemHandling.IsItemUnlocked(PotItem[(PotType)potType]))
             {
                 return potType switch
                 {

@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -13,7 +14,7 @@ static class AntoneQuestMods
         entomologistQuestQS.states[1].stateObjects = entomologistQuestQS.states[1].stateObjects.Remove(sneakSeq);
         sneakSeq.SetActive(false);
 
-        ArchipelagoManager.RegisterItemListener("Sword_Net", UnlockedBugNet);
+        ItemHandling.RegisterItemListener("Sword_Net", UnlockedBugNet);
     }
 
     private static void UnlockedBugNet()

@@ -1,4 +1,5 @@
 using Archipelago.MultiClient.Net.Models;
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.UIMods;
@@ -69,13 +70,13 @@ public static class DialogueModifier
 
     public static void AnnounceLocationCollected(int gatorID)
     {
-        ItemInfo itemInfo = ArchipelagoManager.ItemAtLocation(gatorID);
+        ItemInfo itemInfo = LocationHandling.ItemAtLocation(gatorID);
         GatorBubble(GetDialogueStringForItemInfo(itemInfo));
     }
 
     public static void AnnounceLocationCollected(string gatorName)
     {
-        ItemInfo itemInfo = ArchipelagoManager.ItemAtLocation(gatorName);
+        ItemInfo itemInfo = LocationHandling.ItemAtLocation(gatorName);
         GatorBubble(GetDialogueStringForItemInfo(itemInfo));
     }
 
@@ -127,7 +128,7 @@ public static class DialogueModifier
             }
             else
             {
-                string clientID = ArchipelagoManager.GetClientIDByAPId(itemInfo.ItemId);
+                string clientID = ItemHandling.GetClientIDByAPId(itemInfo.ItemId);
                 itemSprite = Util.GetSpriteForItem(clientID);
             }
         }

@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using GatorRando.UIMods;
 using HarmonyLib;
 using UnityEngine;
@@ -31,7 +32,7 @@ static class BreakableObjectPatch
     {
         if (__instance.IsBroken)
         {
-            ArchipelagoManager.CollectLocationByID(__instance.id);
+            LocationHandling.CollectLocationByID(__instance.id);
         }
     }
 }

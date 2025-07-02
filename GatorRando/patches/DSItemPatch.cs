@@ -1,9 +1,7 @@
-using System.Data.Common;
-using System.Linq;
 using Archipelago.MultiClient.Net.Models;
+using GatorRando.Archipelago;
 using GatorRando.UIMods;
 using HarmonyLib;
-using UnityEngine;
 
 namespace GatorRando.Patches;
 
@@ -31,9 +29,9 @@ static class DSItemPatch
             // Make sure the first Craft Stuff is not caught by this alteration
             return true;
         }
-        if (ArchipelagoManager.CollectLocationByName(name))
+        if (LocationHandling.CollectLocationByName(name))
         {
-            ItemInfo itemInfo = ArchipelagoManager.ItemAtLocation(name);
+            ItemInfo itemInfo = LocationHandling.ItemAtLocation(name);
             __instance.isRealItem = false;
             string dialogueString = DialogueModifier.GetDialogueStringForItemInfo(itemInfo);
             __instance.itemName = DialogueModifier.GetItemNameForItemInfo(itemInfo);

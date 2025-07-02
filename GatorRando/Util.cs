@@ -97,6 +97,7 @@ public static class Util
         return itemRes;
     }
 
+    //TODO Retrieve Sprites in a way that does not result in them becoming unloaded
     public static Sprite GetSpriteForItem(string name)
     {
         ItemObject itemObject = FindItemObjectByName(name);

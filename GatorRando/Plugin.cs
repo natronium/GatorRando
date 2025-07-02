@@ -1,4 +1,5 @@
 using BepInEx;
+using GatorRando.Archipelago;
 using GatorRando.prefabMods;
 using GatorRando.QuestMods;
 using GatorRando.UIMods;
@@ -25,7 +26,7 @@ public class Plugin : BaseUnityPlugin
     {
         if (ArchipelagoManager.IsFullyConnected)
         {
-            ArchipelagoManager.ProcessItemQueue();
+            ItemHandling.ProcessItemQueue();
             MapManager.UpdateCoordsIfNeeded();
         }
     }
@@ -99,7 +100,7 @@ public class Plugin : BaseUnityPlugin
     public static void ApplyAPDependentMods()
     {
         //Allow Freeplay
-        if (ArchipelagoManager.GetOptionBool(ArchipelagoManager.Option.StartWithFreeplay))
+        if (Options.GetOptionBool(Options.Option.StartWithFreeplay))
         {
             TutorialQuestMods.StartWithFreeplay();
         }

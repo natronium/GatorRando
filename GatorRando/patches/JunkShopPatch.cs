@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using Archipelago.MultiClient.Net.Models;
+using GatorRando.Archipelago;
 using GatorRando.UIMods;
 using HarmonyLib;
 using UnityEngine;
@@ -27,7 +28,7 @@ static class JunkShopPatch
         {
             foreach (JunkShop.ShopItem shopItem in __instance.shopItems)
             {
-                ItemInfo itemInfo = ArchipelagoManager.ItemAtLocation(shopItem.item.name);
+                ItemInfo itemInfo = LocationHandling.ItemAtLocation(shopItem.item.name);
                 if (itemInfo.ItemGame == "Lil Gator Game")
                 {
                     if (itemInfo.ItemName.Contains("Craft Stuff") || itemInfo.ItemName.Contains("Friend"))
@@ -36,7 +37,7 @@ static class JunkShopPatch
                     }
                     else
                     {
-                        string clientID = ArchipelagoManager.GetClientIDByAPId(itemInfo.ItemId);
+                        string clientID = ItemHandling.GetClientIDByAPId(itemInfo.ItemId);
                         replacementSprites.Add(shopItem.item.name, Util.GetSpriteForItem(clientID));
                     }
                 }
@@ -87,7 +88,7 @@ static class JunkShopPatch
                 //  ArchipelagoManager.CollectLocationByName(shopItem.item.name);
                 //  QuestMods.Junk4TrashQuestMods.HideCollectedShopLocations();
                 231 => CodeInstruction.Call(typeof(UnityEngine.Object), "get_name"),
-                232 => CodeInstruction.Call(typeof(ArchipelagoManager), nameof(ArchipelagoManager.CollectLocationByName), [typeof(string)]),
+                232 => CodeInstruction.Call(typeof(ArchipelagoManager), nameof(LocationHandling.CollectLocationByName), [typeof(string)]),
                 233 => new(OpCodes.Pop),
                 234 => CodeInstruction.Call(typeof(QuestMods.Junk4TrashQuestMods), nameof(QuestMods.Junk4TrashQuestMods.HideCollectedShopLocations)),
                 235 => nop,
@@ -159,7 +160,7 @@ static class JunkShopPatch
         __result[0] = __instance.document.FetchString(__instance.cancelChoice, Language.Auto);
         for (int i = 0; i < __instance.displayedItemCount; i++)
         {
-            ItemInfo itemInfo = ArchipelagoManager.ItemAtLocation(__instance.shopItems[__instance.displayedItems[i]].item.name);
+            ItemInfo itemInfo = LocationHandling.ItemAtLocation(__instance.shopItems[__instance.displayedItems[i]].item.name);
             ///TODO: Hint the items that appear in the list!
             __result[i + 1] = $"{itemInfo.Player.Name}'s {itemInfo.ItemName}";
         }
