@@ -7,6 +7,7 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Reflection;
+using Newtonsoft.Json.Converters;
 
 namespace GatorRando.Data;
 
@@ -32,7 +33,7 @@ public class Rules
 
         // inspired by https://stackoverflow.com/a/30176798
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {            
+        {
             JToken token = JToken.Load(reader);
             if (token.Type != JTokenType.Object)
             {
@@ -52,12 +53,11 @@ public class Rules
                 _ => throw new Exception($"Don't know how to parse rule type: {ruleString}"),
             };
 
-            Plugin.LogDebug($"RulesConverter: Our rule is a {ruleString} aka {ruleType}");
 
+            // parse that "as normal" into the appropriate Rule type
             return token.ToObject(ruleType, serializer);
 
 
-            // parse that "as normal" into the appropriate Rule
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -76,7 +76,7 @@ public class Rules
         public string StartingRegion;
         public string EndingRegion;
 
-        [JsonProperty(PropertyName = "rule_json", ItemConverterType = typeof(RulesJsonConverter))]
+        [JsonProperty(PropertyName = "rule_json")]
         public Rule rule;
     }
 
@@ -85,14 +85,15 @@ public class Rules
         public string LocationName;
         public int LocationId;
 
-        [JsonProperty(PropertyName = "rule_json", ItemConverterType = typeof(RulesJsonConverter))]
+        [JsonProperty(PropertyName = "rule_json")]
         public Rule rule;
     }
 
-    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
+#pragma warning disable 0649 //is never assigned to and will always have default value
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy), MemberSerialization = MemberSerialization.Fields)]
     public abstract class Rule
     {
-        OptionFilter[] options;
+        readonly List<OptionFilter> options;
 
         public abstract bool Evaluate();
 
@@ -105,16 +106,17 @@ public class Rules
     }
     public class And : Rule
     {
-        readonly Rule[] children;
+        readonly List<Rule> children;
         public override bool Evaluate() => children.All(rule => rule.Evaluate()) && EvaluateOptions();
     }
     public class Or : Rule
     {
-        readonly Rule[] children;
+        readonly List<Rule> children;
         public override bool Evaluate() => children.Any(rule => rule.Evaluate()) && EvaluateOptions();
     }
     public class Has : Rule
     {
+        [JsonObject(MemberSerialization = MemberSerialization.Fields)]
         readonly struct Args
         {
             public readonly string itemName;
@@ -127,9 +129,10 @@ public class Rules
     }
     public class HasAny : Rule
     {
+        [JsonObject(MemberSerialization = MemberSerialization.Fields)]
         readonly struct Args
         {
-            public readonly string[] itemNames;
+            public readonly List<string> itemNames;
         }
         readonly Args args;
 
@@ -137,9 +140,10 @@ public class Rules
     }
     public class HasAll : Rule
     {
+        [JsonObject(MemberSerialization = MemberSerialization.Fields)]
         readonly struct Args
         {
-            public readonly string[] itemNames;
+            public readonly List<string> itemNames;
         }
         readonly Args args;
 
@@ -147,6 +151,7 @@ public class Rules
     }
     public class HasGroup : Rule
     {
+        [JsonObject(MemberSerialization = MemberSerialization.Fields)]
         readonly struct Args
         {
             public readonly Items.ItemGroup itemNameGroup;
@@ -169,9 +174,10 @@ public class Rules
             throw new NotImplementedException();
         }
     }
+#pragma warning restore 0649 // never assigned to, always default value, etc.
 
 
-
+    //TODO: figure out if there's a better way to get OptionFilters to parse than just annotating the properties
     public class OptionFilter
     {
         public enum Operator
@@ -185,8 +191,13 @@ public class Rules
             Contains,
         }
 
+        [JsonProperty(propertyName: "option")]
         public readonly Options.Option option;
+
+        [JsonProperty(propertyName: "value")]
         public readonly int value;
+
+        [JsonProperty(propertyName: "operator")]
         public readonly Operator oper;
 
         public bool Evaluate()
@@ -207,22 +218,30 @@ public class Rules
         public GatorRules()
         {
             var assembly = Assembly.GetExecutingAssembly();
+            var settings = new JsonSerializerSettings()
+            {
+                ContractResolver = new DefaultContractResolver
+                {
+                    NamingStrategy = new SnakeCaseNamingStrategy()
+                },
+                Converters = [
+                    new RulesJsonConverter(),
+                    new ItemGroupConverter(),
+                    new GatorOptionConverter(),
+                    new StringEnumConverter(),
+                ],
+            };
 
-            Plugin.LogDebug("Parsing our gator rules!");
             using (var reader = new StreamReader(assembly.GetManifestResourceStream("GatorRando.Data.EntranceRules.json")))
             {
-                entranceRules = JsonConvert.DeserializeObject<List<EntranceRule>>(reader.ReadToEnd(), new RulesJsonConverter());
+                entranceRules = JsonConvert.DeserializeObject<List<EntranceRule>>(reader.ReadToEnd(), settings);
             }
-            Plugin.LogDebug("Successfully parsed entrance rules!");
 
             using (var reader = new StreamReader(assembly.GetManifestResourceStream("GatorRando.Data.LocationRules.json")))
             {
-                locationRules = JsonConvert.DeserializeObject<List<LocationRule>>(reader.ReadToEnd(), new RulesJsonConverter());
+                locationRules = JsonConvert.DeserializeObject<List<LocationRule>>(reader.ReadToEnd(), settings);
             }
-            Plugin.LogDebug("Successfully parsed location rules!");
         }
     }
 
 }
-
-//var GatorRules = new GatorRando.Data.Rules.GatorRules();
