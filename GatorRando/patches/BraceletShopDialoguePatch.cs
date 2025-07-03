@@ -28,7 +28,7 @@ static class BraceletShopDialoguePatch
                 234 => nop, // nop the  ItemManager.i dup so our stack is clean
                 237 => new(OpCodes.Ldloc_1), // push "this"
                 238 => CodeInstruction.Call(typeof(BraceletShopDialogue), "get_SaveID"), // this.get_SaveID
-                239 => CodeInstruction.Call(typeof(ArchipelagoManager), nameof(LocationHandling.CollectLocationByName), [typeof(string)]),
+                239 => CodeInstruction.Call(typeof(LocationHandling), nameof(LocationHandling.CollectLocationByName), [typeof(string)]),
                 240 => new(OpCodes.Pop), // clean up the bool from CollectLocationByName
 
                 //IL_033A

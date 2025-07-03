@@ -88,7 +88,7 @@ static class JunkShopPatch
                 //  ArchipelagoManager.CollectLocationByName(shopItem.item.name);
                 //  QuestMods.Junk4TrashQuestMods.HideCollectedShopLocations();
                 231 => CodeInstruction.Call(typeof(UnityEngine.Object), "get_name"),
-                232 => CodeInstruction.Call(typeof(ArchipelagoManager), nameof(LocationHandling.CollectLocationByName), [typeof(string)]),
+                232 => CodeInstruction.Call(typeof(LocationHandling), nameof(LocationHandling.CollectLocationByName), [typeof(string)]),
                 233 => new(OpCodes.Pop),
                 234 => CodeInstruction.Call(typeof(QuestMods.Junk4TrashQuestMods), nameof(QuestMods.Junk4TrashQuestMods.HideCollectedShopLocations)),
                 235 => nop,
