@@ -9,7 +9,7 @@ public static class LocationAccessibilty
 {
     private static readonly string[] excludedNPCs = ["NPC_LunchSwapCardinal", "NPC_Bee", "NPC_Ninja_Tiger", "NPC_SwimSheep", "Dialogue Actor No Longer Exists"];
     private static List<long> AccessibleLocations;
-    public static void UpdateAccessibleLocations() => AccessibleLocations = LocationsAccess.GetAccessibleLocations(ItemHandling.GetObtainedItems(), Options.GetOptions());
+    public static void UpdateAccessibleLocations() => AccessibleLocations = []; //LocationsAccess.GetAccessibleLocations(ItemHandling.GetObtainedItems(), Options.GetOptions()); //TODO fix this when Rules.cs complete
     public static bool IsLocationAccessible(string gatorName)
     {
         if (excludedNPCs.Contains(gatorName) || LocationHandling.IsLocationCollected(gatorName))
