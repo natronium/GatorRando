@@ -32,8 +32,8 @@ public static class ItemHandling
         Items.itemData.First(entry => entry.clientNameId == gatorName).apItemId;
 
 
-    public static bool IsItemUnlocked(string item) =>
-        ArchipelagoManager.Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApId(item));
+    public static bool IsItemUnlocked(string itemName) =>
+        ArchipelagoManager.Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApId(itemName));
     public static int GetItemUnlockCount(string itemName) =>
         ArchipelagoManager.Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
     public static Dictionary<string, int> GetObtainedItems() =>

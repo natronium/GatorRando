@@ -35,6 +35,8 @@ public static class ArchipelagoManager
         try
         {
             //TODO: report more useful fields
+            //TODO: Figure out what past us meant?
+            //TODO: report a UUID
             result = Session.TryConnectAndLogin("Lil Gator Game", user, ItemsHandlingFlags.AllItems, new Version(APVersion), null, null, password);
         }
         catch (Exception e)

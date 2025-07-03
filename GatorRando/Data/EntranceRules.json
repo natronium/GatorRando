@@ -1,0 +1,396 @@
+[
+    {
+        "starting_region": "Tutorial Island",
+        "ending_region": "Big Island",
+        "rule_json": {
+            "rule": "Or",
+            "options": [],
+            "children": [
+                {
+                    "rule": "True_",
+                    "options": [
+                        {
+                            "option": "worlds.lil_gator_game.options.StartWithFreeplay",
+                            "value": 1,
+                            "operator": "eq"
+                        }
+                    ],
+                    "args": {}
+                },
+                {
+                    "rule": "And",
+                    "options": [],
+                    "children": [
+                        {
+                            "rule": "HasAll",
+                            "options": [],
+                            "args": {
+                                "item_names": [
+                                    "Pointy Floppy Thing",
+                                    "Pot?"
+                                ]
+                            }
+                        },
+                        {
+                            "rule": "HasGroup",
+                            "options": [],
+                            "args": {
+                                "item_name_group": "Cardboard Destroyer",
+                                "count": 1
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "starting_region": "Tutorial Island",
+        "ending_region": "Tutorial Island Races",
+        "rule_json": {
+            "rule": "Or",
+            "options": [],
+            "children": [
+                {
+                    "rule": "True_",
+                    "options": [
+                        {
+                            "option": "worlds.lil_gator_game.options.LockRacesBehindFlag",
+                            "value": 0,
+                            "operator": "eq"
+                        }
+                    ],
+                    "args": {}
+                },
+                {
+                    "rule": "Has",
+                    "options": [],
+                    "args": {
+                        "item_name": "Finish Flag",
+                        "count": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "starting_region": "Tutorial Island",
+        "ending_region": "Tutorial Island Breakables",
+        "rule_json": {
+            "rule": "HasGroup",
+            "options": [],
+            "args": {
+                "item_name_group": "Cardboard Destroyer",
+                "count": 1
+            }
+        }
+    },
+    {
+        "starting_region": "Tutorial Island",
+        "ending_region": "Pots Shootable from Tutorial Island",
+        "rule_json": {
+            "rule": "HasGroup",
+            "options": [],
+            "args": {
+                "item_name_group": "Ranged",
+                "count": 1
+            }
+        }
+    },
+    {
+        "starting_region": "Big Island",
+        "ending_region": "Big Island Races",
+        "rule_json": {
+            "rule": "Or",
+            "options": [],
+            "children": [
+                {
+                    "rule": "True_",
+                    "options": [
+                        {
+                            "option": "worlds.lil_gator_game.options.LockRacesBehindFlag",
+                            "value": 0,
+                            "operator": "eq"
+                        }
+                    ],
+                    "args": {}
+                },
+                {
+                    "rule": "Has",
+                    "options": [],
+                    "args": {
+                        "item_name": "Finish Flag",
+                        "count": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "starting_region": "Big Island",
+        "ending_region": "Big Island Breakables",
+        "rule_json": {
+            "rule": "HasGroup",
+            "options": [],
+            "args": {
+                "item_name_group": "Cardboard Destroyer",
+                "count": 1
+            }
+        }
+    },
+    {
+        "starting_region": "Big Island",
+        "ending_region": "Big Island Bracelet Shops",
+        "rule_json": {
+            "rule": "And",
+            "options": [],
+            "children": [
+                {
+                    "rule": "HasGroup",
+                    "options": [],
+                    "args": {
+                        "item_name_group": "Cardboard Destroyer",
+                        "count": 1
+                    }
+                },
+                {
+                    "rule": "Has",
+                    "options": [],
+                    "args": {
+                        "item_name": "Bracelet",
+                        "count": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "starting_region": "Big Island",
+        "ending_region": "Junk 4 Trash",
+        "rule_json": {
+            "rule": "HasGroup",
+            "options": [],
+            "args": {
+                "item_name_group": "Cardboard Destroyer",
+                "count": 1
+            }
+        }
+    },
+    {
+        "starting_region": "Big Island",
+        "ending_region": "Playground",
+        "rule_json": {
+            "rule": "And",
+            "options": [],
+            "children": [
+                {
+                    "rule": "Or",
+                    "options": [],
+                    "children": [
+                        {
+                            "rule": "True_",
+                            "options": [
+                                {
+                                    "option": "worlds.lil_gator_game.options.StartWithFreeplay",
+                                    "value": 1,
+                                    "operator": "eq"
+                                }
+                            ],
+                            "args": {}
+                        },
+                        {
+                            "rule": "And",
+                            "options": [],
+                            "children": [
+                                {
+                                    "rule": "HasAll",
+                                    "options": [],
+                                    "args": {
+                                        "item_names": [
+                                            "Pointy Floppy Thing",
+                                            "Pot?"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "rule": "HasGroup",
+                                    "options": [],
+                                    "args": {
+                                        "item_name_group": "Cardboard Destroyer",
+                                        "count": 1
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "rule": "Has",
+                    "options": [],
+                    "args": {
+                        "item_name": "Sorbet",
+                        "count": 1
+                    }
+                },
+                {
+                    "rule": "Or",
+                    "options": [],
+                    "children": [
+                        {
+                            "rule": "And",
+                            "options": [],
+                            "children": [
+                                {
+                                    "rule": "HasGroup",
+                                    "options": [],
+                                    "args": {
+                                        "item_name_group": "Cardboard Destroyer",
+                                        "count": 1
+                                    }
+                                },
+                                {
+                                    "rule": "Or",
+                                    "options": [],
+                                    "children": [
+                                        {
+                                            "rule": "True_",
+                                            "options": [
+                                                {
+                                                    "option": "worlds.lil_gator_game.options.HarderRangedQuests",
+                                                    "value": 1,
+                                                    "operator": "eq"
+                                                }
+                                            ],
+                                            "args": {}
+                                        },
+                                        {
+                                            "rule": "Has",
+                                            "options": [],
+                                            "args": {
+                                                "item_name": "Out of Logic Item",
+                                                "count": 1
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "rule": "HasGroup",
+                            "options": [],
+                            "args": {
+                                "item_name_group": "Ranged",
+                                "count": 1
+                            }
+                        }
+                    ]
+                },
+                {
+                    "rule": "HasAll",
+                    "options": [],
+                    "args": {
+                        "item_names": [
+                            "Bug Net",
+                            "Cheese Sandwich",
+                            "Magic Ore"
+                        ]
+                    }
+                },
+                {
+                    "rule": "Or",
+                    "options": [],
+                    "children": [
+                        {
+                            "rule": "And",
+                            "options": [],
+                            "children": [
+                                {
+                                    "rule": "HasGroup",
+                                    "options": [],
+                                    "args": {
+                                        "item_name_group": "Cardboard Destroyer",
+                                        "count": 1
+                                    }
+                                },
+                                {
+                                    "rule": "HasGroup",
+                                    "options": [],
+                                    "args": {
+                                        "item_name_group": "Sword",
+                                        "count": 1
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "rule": "HasGroup",
+                            "options": [],
+                            "args": {
+                                "item_name_group": "Ranged",
+                                "count": 1
+                            }
+                        }
+                    ]
+                },
+                {
+                    "rule": "HasAll",
+                    "options": [],
+                    "args": {
+                        "item_names": [
+                            "Bucket",
+                            "Grass Clippings",
+                            "Water"
+                        ]
+                    }
+                },
+                {
+                    "rule": "HasGroup",
+                    "options": [],
+                    "args": {
+                        "item_name_group": "Cardboard Destroyer",
+                        "count": 1
+                    }
+                },
+                {
+                    "rule": "HasGroup",
+                    "options": [],
+                    "args": {
+                        "item_name_group": "Sword",
+                        "count": 1
+                    }
+                },
+                {
+                    "rule": "HasEnoughFriends",
+                    "options": [],
+                    "args": {}
+                }
+            ]
+        }
+    },
+    {
+        "starting_region": "Big Island",
+        "ending_region": "Mountain",
+        "rule_json": {
+            "rule": "HasAny",
+            "options": [],
+            "args": {
+                "item_names": [
+                    "Bracelet",
+                    "Glider"
+                ]
+            }
+        }
+    },
+    {
+        "starting_region": "Mountain",
+        "ending_region": "Mountain Breakables",
+        "rule_json": {
+            "rule": "HasGroup",
+            "options": [],
+            "args": {
+                "item_name_group": "Cardboard Destroyer",
+                "count": 1
+            }
+        }
+    }
+]

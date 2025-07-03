@@ -1,13 +1,16 @@
-using System.Data;
+using System.IO;
 using System.Linq;
 using System;
 using GatorRando.Archipelago;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace GatorRando.Data;
 
-public class AccessRules
+public class Rules
 {
     // Read in json
     // process json into rules
@@ -29,7 +32,7 @@ public class AccessRules
 
         // inspired by https://stackoverflow.com/a/30176798
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
+        {            
             JToken token = JToken.Load(reader);
             if (token.Type != JTokenType.Object)
             {
@@ -38,18 +41,22 @@ public class AccessRules
             string ruleString = token["rule"].ToString();
             Type ruleType = ruleString switch
             {
-                "True_" => typeof(TrueRule),
+                "True_" => typeof(True_),
                 "And" => typeof(And),
                 "Or" => typeof(Or),
                 "Has" => typeof(Has),
                 "HasAny" => typeof(HasAny),
                 "HasAll" => typeof(HasAll),
                 "HasGroup" => typeof(HasGroup),
+                "HasEnoughFriends" => typeof(HasEnoughFriends),
                 _ => throw new Exception($"Don't know how to parse rule type: {ruleString}"),
             };
+
+            Plugin.LogDebug($"RulesConverter: Our rule is a {ruleString} aka {ruleType}");
+
             return token.ToObject(ruleType, serializer);
 
-            
+
             // parse that "as normal" into the appropriate Rule
         }
 
@@ -58,11 +65,10 @@ public class AccessRules
             throw new NotImplementedException("Rules are read-only");
         }
 
-        public override bool CanConvert(Type objectType) => typeof(Rule).IsAssignableFrom(objectType);
+        public override bool CanConvert(Type objectType) => objectType == typeof(Rule);
 
         public override bool CanWrite => false;
     }
-
 
 
     public class EntranceRule
@@ -70,22 +76,99 @@ public class AccessRules
         public string StartingRegion;
         public string EndingRegion;
 
-        [JsonProperty(PropertyName = "rule_json")]
+        [JsonProperty(PropertyName = "rule_json", ItemConverterType = typeof(RulesJsonConverter))]
         public Rule rule;
     }
 
-    public abstract class Rule
+    public class LocationRule
     {
-        public OptionFilter[] options;
+        public string LocationName;
+        public int LocationId;
+
+        [JsonProperty(PropertyName = "rule_json", ItemConverterType = typeof(RulesJsonConverter))]
+        public Rule rule;
     }
 
-    public class TrueRule : Rule { }
-    public class And : Rule { }
-    public class Or : Rule { }
-    public class Has : Rule { }
-    public class HasAny : Rule { }
-    public class HasAll : Rule { }
-    public class HasGroup : Rule { }
+    [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy))]
+    public abstract class Rule
+    {
+        OptionFilter[] options;
+
+        public abstract bool Evaluate();
+
+        public bool EvaluateOptions() => options.All(option => option.Evaluate());
+    }
+
+    public class True_ : Rule
+    {
+        public override bool Evaluate() => EvaluateOptions() /* && true*/;
+    }
+    public class And : Rule
+    {
+        readonly Rule[] children;
+        public override bool Evaluate() => children.All(rule => rule.Evaluate()) && EvaluateOptions();
+    }
+    public class Or : Rule
+    {
+        readonly Rule[] children;
+        public override bool Evaluate() => children.Any(rule => rule.Evaluate()) && EvaluateOptions();
+    }
+    public class Has : Rule
+    {
+        readonly struct Args
+        {
+            public readonly string itemName;
+            public readonly int count;
+        }
+
+        readonly Args args;
+
+        public override bool Evaluate() => ItemHandling.GetItemUnlockCount(args.itemName) >= args.count;
+    }
+    public class HasAny : Rule
+    {
+        readonly struct Args
+        {
+            public readonly string[] itemNames;
+        }
+        readonly Args args;
+
+        public override bool Evaluate() => args.itemNames.Any(ItemHandling.IsItemUnlocked);
+    }
+    public class HasAll : Rule
+    {
+        readonly struct Args
+        {
+            public readonly string[] itemNames;
+        }
+        readonly Args args;
+
+        public override bool Evaluate() => args.itemNames.All(ItemHandling.IsItemUnlocked);
+    }
+    public class HasGroup : Rule
+    {
+        readonly struct Args
+        {
+            public readonly Items.ItemGroup itemNameGroup;
+            public readonly int count;
+        }
+        readonly Args args;
+
+        static List<string> ItemsInItemGroup(Items.ItemGroup itemGroup) =>
+            [.. Items.itemData
+                .Where(item => item.itemGroups.Contains(itemGroup))
+                .Select(item => item.name)];
+
+        public override bool Evaluate() => ItemsInItemGroup(args.itemNameGroup).Where(ItemHandling.IsItemUnlocked).Count() >= args.count;
+    }
+
+    public class HasEnoughFriends : Rule
+    {
+        public override bool Evaluate()
+        {
+            throw new NotImplementedException();
+        }
+    }
 
 
 
@@ -102,54 +185,44 @@ public class AccessRules
             Contains,
         }
 
-        public Options.Option option;
-        public int value;
-        public Operator oper;
+        public readonly Options.Option option;
+        public readonly int value;
+        public readonly Operator oper;
+
+        public bool Evaluate()
+        {
+            return oper switch
+            {
+                Operator.EQ => Options.GetOptionBool(option) == Convert.ToBoolean(value),
+                _ => throw new NotImplementedException(),
+            };
+        }
     }
 
-    public static void LoadAccessRules()
+
+    public readonly struct GatorRules
     {
-        // using var reader = new StreamReader(assembly.GetManifestResourceStream("Data/Rules.json"));
-        // doStuff(reader.ReadToEnd());
+        public readonly List<EntranceRule> entranceRules;
+        public readonly List<LocationRule> locationRules;
+        public GatorRules()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            Plugin.LogDebug("Parsing our gator rules!");
+            using (var reader = new StreamReader(assembly.GetManifestResourceStream("GatorRando.Data.EntranceRules.json")))
+            {
+                entranceRules = JsonConvert.DeserializeObject<List<EntranceRule>>(reader.ReadToEnd(), new RulesJsonConverter());
+            }
+            Plugin.LogDebug("Successfully parsed entrance rules!");
+
+            using (var reader = new StreamReader(assembly.GetManifestResourceStream("GatorRando.Data.LocationRules.json")))
+            {
+                locationRules = JsonConvert.DeserializeObject<List<LocationRule>>(reader.ReadToEnd(), new RulesJsonConverter());
+            }
+            Plugin.LogDebug("Successfully parsed location rules!");
+        }
     }
 
-    // public static bool Has(Items.Item item)
-    // {
-    //     return ItemHandling.IsItemUnlocked(item.name);
-    // }
-
-    // public static bool HasAny(Items.Item[] items)
-    // {
-    //     foreach (Items.Item item in items)
-    //     {
-    //         if (ItemHandling.IsItemUnlocked(item.name))
-    //         {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-
-    // public static bool HasAll(Items.Item[] items)
-    // {
-    //     foreach (Items.Item item in items)
-    //     {
-    //         if (!ItemHandling.IsItemUnlocked(item.name))
-    //         {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
-
-    // static List<string> ItemsInItemGroup(Items.ItemGroup itemGroup) =>
-    //         [.. Items.itemData
-    //             .Where(item => item.itemGroups.Contains(itemGroup))
-    //             .Select(item => item.name)];
-
-    // static bool HasGroup(Dictionary<string, int> obtainedItems, Items.ItemGroup itemGroup) =>
-    //     obtainedItems
-    //         .Where(kv => ItemsInItemGroup(itemGroup).Contains(kv.Key))
-    //         .Where(kv => kv.Value > 0)
-    //         .ToArray().Length > 0;
 }
+
+//var GatorRules = new GatorRando.Data.Rules.GatorRules();
