@@ -15,11 +15,11 @@ static class ItemHatBarePatch
         {
             if (__instance.itemManager == null)
             {
-                Plugin.LogWarn("ItemHatBare's itemManager is null");
+                // Plugin.LogWarn("ItemHatBare's itemManager is null");
             }
             else
             {
-                Plugin.LogWarn("ItemHatBare's itemManager.bareHead is null");
+                // Plugin.LogWarn("ItemHatBare's itemManager.bareHead is null");
             }
             return false;
         }

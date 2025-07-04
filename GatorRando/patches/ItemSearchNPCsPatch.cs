@@ -48,9 +48,9 @@ static class ItemSearchNPCsPatch
 
         __result =  [.. sideQuestActors, .. filteredMainActors];
 
-        foreach(DialogueActor actor in __result){
-            Plugin.LogInfo("ID:" + actor.profile.id + ", Parent:" + actor.transform.parent.name);
-        }
+        // foreach(DialogueActor actor in __result){
+        //     Plugin.LogInfo("ID:" + actor.profile.id + ", Parent:" + actor.transform.parent.name);
+        // }
     }
 
     [HarmonyPostfix]

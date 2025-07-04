@@ -167,7 +167,17 @@ public class Rules
                 .Where(item => item.itemGroups.Contains(itemGroup))
                 .Select(item => item.name)];
 
-        public override bool Evaluate() => ItemsInItemGroup(args.ItemNameGroup).Where(item => ItemHandling.IsItemUnlocked(item, true)).Count() >= args.Count;
+        public override bool Evaluate()
+        {
+            if (args.Count == 1)
+            {
+                return ItemsInItemGroup(args.ItemNameGroup).Any(item => ItemHandling.IsItemUnlocked(item, true));
+            }
+            else
+            {
+                return ItemsInItemGroup(args.ItemNameGroup).Where(item => ItemHandling.IsItemUnlocked(item, true)).Count() >= args.Count;
+            }
+        } 
     }
 
     public class HasEnoughFriends : Rule

@@ -30,14 +30,8 @@ public static class ItemHandling
     public static string GetClientIDByAPId(long id) => GetItemEntryByApId(id).clientNameId;
     private static long GetItemApIdFromGatorName(string gatorName) =>
         Items.itemData.First(entry => entry.clientNameId == gatorName).apItemId;
-    // private static long GetItemApIdFromAPName(string apName) =>
-    //     Items.itemData.First(entry => entry.name == apName).apItemId;
-    private static long GetItemApIdFromAPName(string apName)
-    {
-        Plugin.LogDebug(apName);
-        return Items.itemData.First(entry => entry.name == apName).apItemId;
-    }
-        
+    private static long GetItemApIdFromAPName(string apName) =>
+        Items.itemData.First(entry => entry.name == apName).apItemId;
 
     public static bool IsItemUnlocked(string itemName, bool isAPName = false)
     {

@@ -145,7 +145,7 @@ public static class LocationHandling
                 return true;
             }
         }
-        Plugin.LogWarn("No NPCs in the collected location recognized as a valid AP location. Is the spreadsheet missing stuff??");
+        Plugin.LogWarn("No NPCs in the collected location recognized as a valid AP location. Did the DLC release? :P");
         return false;
     }
 
