@@ -10,7 +10,7 @@ namespace GatorRando;
 
 public static class Util
 {
-    private static Sprite[] sprites;
+    
 
     public static IEnumerator WaitThenRunCoroutine(float waitTime, Action action)
     {
@@ -96,29 +96,7 @@ public static class Util
         itemRes.onAmountChanged = new UnityEvent<int>();
         return itemRes;
     }
-
-    //TODO Retrieve Sprites in a way that does not result in them becoming unloaded
-    public static Sprite GetSpriteForItem(string name)
-    {
-        ItemObject itemObject = FindItemObjectByName(name);
-        if (itemObject != null)
-        {
-            return itemObject.sprite;
-        }
-        else
-        {
-            sprites ??= Resources.FindObjectsOfTypeAll<Sprite>();
-            if (name.Contains("Craft Stuff"))
-            {
-                return sprites.First(sprite => sprite.name == "Itemsprite_core_crafting");
-            }
-            else if (name.Contains("Friend"))
-            {
-                return sprites.First(sprite => sprite.name == "GatorMewhenyouaremyfriend");
-            }
-            return FindItemObjectByName("Placeholder").sprite; //TODO: AP Item Sprite
-        }
-    }
+    
 
     public static string FindIntKeyByPrefix(string prefix)
     {

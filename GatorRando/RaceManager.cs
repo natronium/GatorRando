@@ -8,7 +8,7 @@ public static class RaceManager
     {
         if (Options.GetOptionBool(Options.Option.LockRacesBehindFlag))
         {
-            return ItemHandling.IsItemUnlocked("flag");
+            return ItemHandling.IsItemUnlocked("Flag");
         }
         else
         {

@@ -8,7 +8,7 @@ public static class ChestManager
     {
         if (Options.GetOptionBool(Options.Option.LockChestsBehindKey))
         {
-            return ItemHandling.IsItemUnlocked("key");
+            return ItemHandling.IsItemUnlocked("Key");
         }
         else
         {

@@ -33,17 +33,17 @@ static class JunkShopPatch
                 {
                     if (itemInfo.ItemName.Contains("Craft Stuff") || itemInfo.ItemName.Contains("Friend"))
                     {
-                        replacementSprites.Add(shopItem.item.name, Util.GetSpriteForItem(itemInfo.ItemName));
+                        replacementSprites.Add(shopItem.item.name, Texture2DHandler.GetSpriteForItem(itemInfo.ItemName));
                     }
                     else
                     {
                         string clientID = ItemHandling.GetClientIDByAPId(itemInfo.ItemId);
-                        replacementSprites.Add(shopItem.item.name, Util.GetSpriteForItem(clientID));
+                        replacementSprites.Add(shopItem.item.name, Texture2DHandler.GetSpriteForItem(clientID));
                     }
                 }
                 else
                 {
-                    replacementSprites.Add(shopItem.item.name, Util.GetSpriteForItem("Archipelago"));
+                    replacementSprites.Add(shopItem.item.name, Texture2DHandler.GetSpriteForItem("Archipelago"));
                 }
                 replacementDisplayNames.Add(shopItem.item.name, $"{itemInfo.Player.Name}'s {itemInfo.ItemName}");
                 if (itemInfo.Player.Name == GameData.g.gameSaveData.playerName)

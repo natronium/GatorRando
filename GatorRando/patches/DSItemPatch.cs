@@ -35,6 +35,7 @@ static class DSItemPatch
             __instance.isRealItem = false;
             string dialogueString = DialogueModifier.GetDialogueStringForItemInfo(itemInfo);
             __instance.itemName = DialogueModifier.GetItemNameForItemInfo(itemInfo);
+            __instance.itemName_ID = __instance.itemName;
             __instance.itemSprite = DialogueModifier.GetSpriteForItemInfo(itemInfo);
             __instance.dialogue = dialogueString;
 

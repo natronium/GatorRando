@@ -33,6 +33,15 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>lib/UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>lib/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Addressables">
+      <HintPath>lib/Unity.Addressables.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ResourceManager">
+      <HintPath>lib/Unity.ResourceManager.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -48,5 +57,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Data/EntranceRules.json" />
     <EmbeddedResource Include="Data/LocationRules.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sprites/guitar.png" />
+    <EmbeddedResource Include="Sprites/key.png" />
+    <EmbeddedResource Include="Sprites/oar.png" />
+    <EmbeddedResource Include="Sprites/quest_item_tab_AP_down.png" />
+    <EmbeddedResource Include="Sprites/quest_item_tab_AP_up.png" />
+    <EmbeddedResource Include="Sprites/sleep_mask.png" />
+    <EmbeddedResource Include="Sprites/tiger.png" />
+    <EmbeddedResource Include="Sprites/archipelago_sticker_style.png" />
+    <EmbeddedResource Include="Sprites/checkered_flag.png" />
+    <EmbeddedResource Include="Sprites/giant_socks.png" />
   </ItemGroup>
 </Project>

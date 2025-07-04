@@ -16,11 +16,11 @@ public static class PotManager
 
     private static readonly Dictionary<PotType, string> PotItem = new()
     {
-        {PotType.MC, "giant_socks"},
-        {PotType.WW, "oar"},
-        {PotType.LA, "mask"},
-        {PotType.OoT, "guitar"},
-        {PotType.TP, "tiger_form"},
+        {PotType.MC, "Socks"},
+        {PotType.WW, "Oar"},
+        {PotType.LA, "SleepMask"},
+        {PotType.OoT, "Guitar"},
+        {PotType.TP, "Tiger"},
     };
 
     static readonly Dictionary<int, PotType> pot_mapping = [];

@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using GatorRando.UIMods;
 
 namespace GatorRando.QuestMods;
 
@@ -34,6 +35,8 @@ static class QuestItems
             QuestItemObjects.Add(Util.GenerateItemObject("Thrown_Pencil", pencil.sprite));
             QuestItemObjects.Add(Util.GenerateItemObject("Thrown_Pencil_2", pencil.sprite));
             QuestItemObjects.Add(Util.GenerateItemObject("Thrown_Pencil_3", pencil.sprite));
+
+            QuestItemObjects.Add(Util.GenerateItemObject("Key", Texture2DHandler.GetSpriteForItem("Key")));
 
             //TODO: Retrieve/Store sprites in a way that does not result in them unloading
             //TODO: Populate items for pot, chest, race items

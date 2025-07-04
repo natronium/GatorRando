@@ -14,7 +14,7 @@ public class GatorOptionConverter : JsonConverter<Options.Option>
     {
         string prefix = "worlds.lil_gator_game.options.";
         var enumString = JToken.Load(reader).Value<string>();
-        Console.WriteLine($"converting gatoroption {enumString}");
+        // Console.WriteLine($"converting gatoroption {enumString}");
         if (!enumString.StartsWith(prefix))
         {
             throw new Exception($"GatorOptions must start with {prefix}");
@@ -33,7 +33,7 @@ public class ItemGroupConverter : JsonConverter<Items.ItemGroup>
     public override Items.ItemGroup ReadJson(JsonReader reader, Type objectType, Items.ItemGroup existingValue, bool hasExistingValue, JsonSerializer serializer)
     {
         var enumString = JToken.Load(reader).Value<string>();
-        Console.WriteLine($"converting itemgroup {enumString}");
+        // Console.WriteLine($"converting itemgroup {enumString}");
         enumString = Regex.Replace(enumString, @"\s+", "");
         return (Items.ItemGroup)Enum.Parse(typeof(Items.ItemGroup), enumString);
     }
