@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Reflection;
 using Newtonsoft.Json.Converters;
+using HarmonyLib;
 
 namespace GatorRando.Data;
 
@@ -77,85 +78,87 @@ public class Rules
         public string EndingRegion;
 
         [JsonProperty(PropertyName = "rule_json")]
-        public Rule rule;
+        public Rule Rule;
     }
 
     public class LocationRule
     {
         public string LocationName;
         public int LocationId;
+        public string Region;
 
         [JsonProperty(PropertyName = "rule_json")]
-        public Rule rule;
+        public Rule Rule;
     }
 
 #pragma warning disable 0649 //is never assigned to and will always have default value
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy), MemberSerialization = MemberSerialization.Fields)]
     public abstract class Rule
     {
-        readonly List<OptionFilter> options;
+        readonly List<OptionFilter> Options;
 
         public abstract bool Evaluate();
 
-        public bool EvaluateOptions() => options.All(option => option.Evaluate());
+        public bool EvaluateOptions() => Options?.All(option => option.Evaluate()) ?? true;
     }
 
     public class True_ : Rule
     {
         public override bool Evaluate() => EvaluateOptions() /* && true*/;
     }
-    public class And : Rule
+    public class And(List<Rule> children) : Rule
     {
-        readonly List<Rule> children;
-        public override bool Evaluate() => children.All(rule => rule.Evaluate()) && EvaluateOptions();
+        readonly List<Rule> Children = children;
+
+        public override bool Evaluate() => Children.All(rule => rule.Evaluate()) && EvaluateOptions();
     }
-    public class Or : Rule
+    public class Or(List<Rule> children) : Rule
     {
-        readonly List<Rule> children;
-        public override bool Evaluate() => children.Any(rule => rule.Evaluate()) && EvaluateOptions();
+        readonly List<Rule> Children = children;
+        public override bool Evaluate() => Children.Any(rule => rule.Evaluate()) && EvaluateOptions();
     }
     public class Has : Rule
     {
         [JsonObject(MemberSerialization = MemberSerialization.Fields)]
         readonly struct Args
         {
-            public readonly string itemName;
-            public readonly int count;
+            public readonly string ItemName;
+            public readonly int Count;
         }
 
         readonly Args args;
 
-        public override bool Evaluate() => ItemHandling.GetItemUnlockCount(args.itemName) >= args.count;
+        public override bool Evaluate() => ItemHandling.GetItemUnlockCount(args.ItemName, true) >= args.Count;
     }
     public class HasAny : Rule
     {
         [JsonObject(MemberSerialization = MemberSerialization.Fields)]
         readonly struct Args
         {
-            public readonly List<string> itemNames;
+            public readonly List<string> ItemNames;
         }
         readonly Args args;
 
-        public override bool Evaluate() => args.itemNames.Any(ItemHandling.IsItemUnlocked);
+        public override bool Evaluate() => args.ItemNames.Any(item => ItemHandling.IsItemUnlocked(item, true));
     }
     public class HasAll : Rule
     {
         [JsonObject(MemberSerialization = MemberSerialization.Fields)]
         readonly struct Args
         {
-            public readonly List<string> itemNames;
+            public readonly List<string> ItemNames;
         }
         readonly Args args;
 
-        public override bool Evaluate() => args.itemNames.All(ItemHandling.IsItemUnlocked);
+        public override bool Evaluate() => args.ItemNames.All(item => ItemHandling.IsItemUnlocked(item, true));
     }
     public class HasGroup : Rule
     {
         [JsonObject(MemberSerialization = MemberSerialization.Fields)]
         readonly struct Args
         {
-            public readonly Items.ItemGroup itemNameGroup;
-            public readonly int count;
+            public readonly Items.ItemGroup ItemNameGroup;
+            public readonly int Count;
         }
         readonly Args args;
 
@@ -164,14 +167,14 @@ public class Rules
                 .Where(item => item.itemGroups.Contains(itemGroup))
                 .Select(item => item.name)];
 
-        public override bool Evaluate() => ItemsInItemGroup(args.itemNameGroup).Where(ItemHandling.IsItemUnlocked).Count() >= args.count;
+        public override bool Evaluate() => ItemsInItemGroup(args.ItemNameGroup).Where(item => ItemHandling.IsItemUnlocked(item, true)).Count() >= args.Count;
     }
 
     public class HasEnoughFriends : Rule
     {
         public override bool Evaluate()
         {
-            throw new NotImplementedException();
+            return ItemHandling.GetItemUnlockCount("Friend", true) + ItemHandling.GetItemUnlockCount("Friend x2", true) * 2 + ItemHandling.GetItemUnlockCount("Friend x3", true) * 3 + ItemHandling.GetItemUnlockCount("Friend x4", true) * 4 >= 35;
         }
     }
 #pragma warning restore 0649 // never assigned to, always default value, etc.
@@ -192,32 +195,34 @@ public class Rules
         }
 
         [JsonProperty(propertyName: "option")]
-        public readonly Options.Option option;
+        public readonly Options.Option Option;
 
         [JsonProperty(propertyName: "value")]
-        public readonly int value;
+        public readonly int Value;
 
         [JsonProperty(propertyName: "operator")]
-        public readonly Operator oper;
+        public readonly Operator Oper;
 
         public bool Evaluate()
         {
-            return oper switch
+            return Oper switch
             {
-                Operator.EQ => Options.GetOptionBool(option) == Convert.ToBoolean(value),
+                Operator.EQ => Options.GetOptionBool(Option) == Convert.ToBoolean(Value),
                 _ => throw new NotImplementedException(),
             };
         }
     }
 
 
-    public readonly struct GatorRules
+    public static class GatorRules
     {
-        public readonly List<EntranceRule> entranceRules;
-        public readonly List<LocationRule> locationRules;
-        public GatorRules()
+        public static readonly Dictionary<long, Rule> Rules;
+
+        static GatorRules()
         {
             var assembly = Assembly.GetExecutingAssembly();
+            List<EntranceRule> entranceRules;
+            List<LocationRule> locationRules;
             var settings = new JsonSerializerSettings()
             {
                 ContractResolver = new DefaultContractResolver
@@ -240,6 +245,52 @@ public class Rules
             using (var reader = new StreamReader(assembly.GetManifestResourceStream("GatorRando.Data.LocationRules.json")))
             {
                 locationRules = JsonConvert.DeserializeObject<List<LocationRule>>(reader.ReadToEnd(), settings);
+            }
+
+            Rules = PrecomputeRules(entranceRules, locationRules);
+        }
+
+        private static Dictionary<long, Rule> PrecomputeRules(List<EntranceRule> entranceRules, List<LocationRule> locationRules)
+        {
+            Dictionary<long, Rule> precomputedRules = [];
+            Dictionary<string, Rule> regionRules = ComputeRegionRules(entranceRules);
+            foreach (LocationRule location in locationRules)
+            {
+                precomputedRules[location.LocationId] = new And([regionRules[location.Region], location.Rule]);
+            }
+            return precomputedRules;
+        }
+
+        private static Dictionary<string, Rule> ComputeRegionRules(List<EntranceRule> entranceRules)
+        {
+            Dictionary<string, Rule> regionRules = [];
+            foreach (string region in entranceRules.Select(rule => rule.EndingRegion).Distinct().AddItem("Tutorial Island"))
+            {
+                regionRules[region] = ComputeRegionRule(entranceRules, region);
+            }
+
+            return regionRules;
+        }
+
+        private static Rule ComputeRegionRule(List<EntranceRule> entranceRules, string regionName)
+        {
+            // base case
+            if (regionName == "Tutorial Island")
+            {
+                return new True_();
+            }
+            List<Rule> orRules = [];
+            foreach (EntranceRule entrance in entranceRules.Where(e => e.EndingRegion == regionName))
+            {
+                orRules.Add(new And([entrance.Rule, ComputeRegionRule(entranceRules, entrance.StartingRegion)]));
+            }
+            if (orRules.Count() == 1)
+            {
+                return orRules[0];
+            }
+            else
+            {
+                return new Or(orRules);
             }
         }
     }

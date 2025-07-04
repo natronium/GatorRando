@@ -28,16 +28,54 @@ public static class ItemHandling
 
     private static Items.Item GetItemEntryByApId(long id) => Items.itemData.First(entry => entry.apItemId == id);
     public static string GetClientIDByAPId(long id) => GetItemEntryByApId(id).clientNameId;
-    private static long GetItemApId(string gatorName) =>
+    private static long GetItemApIdFromGatorName(string gatorName) =>
         Items.itemData.First(entry => entry.clientNameId == gatorName).apItemId;
+    // private static long GetItemApIdFromAPName(string apName) =>
+    //     Items.itemData.First(entry => entry.name == apName).apItemId;
+    private static long GetItemApIdFromAPName(string apName)
+    {
+        Plugin.LogDebug(apName);
+        return Items.itemData.First(entry => entry.name == apName).apItemId;
+    }
+        
 
+    public static bool IsItemUnlocked(string itemName, bool isAPName = false)
+    {
+        if (isAPName)
+        {
+            return ArchipelagoManager.Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApIdFromAPName(itemName));
+        }
+        else
+        {
+            return ArchipelagoManager.Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApIdFromGatorName(itemName));
+        }
+    }
+    // =>
+    //  ArchipelagoManager.Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApId(itemName));
+    public static int GetItemUnlockCount(string itemName, bool isAPName = false)
+    {
+        if (isAPName)
+        {
+            return ArchipelagoManager.Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApIdFromAPName(itemName)).Count();
+        }
+        else
+        {
+            return ArchipelagoManager.Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApIdFromGatorName(itemName)).Count();
+        }
+    }
 
-    public static bool IsItemUnlocked(string itemName) =>
-        ArchipelagoManager.Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApId(itemName));
-    public static int GetItemUnlockCount(string itemName) =>
-        ArchipelagoManager.Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApId(itemName)).Count();
-    public static Dictionary<string, int> GetObtainedItems() =>
-        Items.itemData.ToDictionary(item => item.name, item => GetItemUnlockCount(item.clientNameId));
+    // public static Dictionary<string, int> GetObtainedItems(bool areAPNames = false)
+    // {
+    //     if (areAPNames)
+    //     {
+    //         return Items.itemData.ToDictionary(item => item.name, item => GetItemUnlockCount(item.name));
+    //     }
+    //     else
+    //     {
+    //         return Items.itemData.ToDictionary(item => item.name, item => GetItemUnlockCount(item.clientNameId));
+    //     }
+    // }
+        
 
     public static void ProcessItemQueue()
     {

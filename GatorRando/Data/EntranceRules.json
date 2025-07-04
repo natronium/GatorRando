@@ -392,5 +392,14 @@
                 "count": 1
             }
         }
+    },
+    {
+        "starting_region": "Mountain Breakables",
+        "ending_region": "Pots Shootable from Tutorial Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
     }
 ]

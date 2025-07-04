@@ -169,6 +169,36 @@
         }
     },
     {
+        "location_name": "Avery!'s Main Quest - Sorbet (Esme's Quest)",
+        "location_id": 100002282,
+        "region": "Mountain",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Avery!'s Main Quest - Velma (Western Cow) Quest Completion Item",
+        "location_id": 100002281,
+        "region": "Mountain",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Southeast (Beach) - Cade (Floofy Bull) Quest Completion NPCs",
+        "location_id": 100002221,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
         "location_name": "Southeast (Beach) - Chest (H9) on north end of Skate Pug's island",
         "location_id": 100000201,
         "region": "Big Island Breakables",
@@ -196,6 +226,16 @@
                     }
                 }
             ]
+        }
+    },
+    {
+        "location_name": "Southeast (Beach) - Joe (Pose Hawk) Quest Completion NPC",
+        "location_id": 100002224,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -502,6 +542,16 @@
         }
     },
     {
+        "location_name": "Southeast (Beach) - Thrown Pencil 1 (Sam's Quest)",
+        "location_id": 100002213,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
         "location_name": "Southeast (Beach) - Thrown Pencil 2 (Sam's Quest)",
         "location_id": 100002214,
         "region": "Big Island",
@@ -567,6 +617,46 @@
         }
     },
     {
+        "location_name": "Big Island - Billy (Whale) Quest Completion Item",
+        "location_id": 100002288,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Big Island - Billy (Whale) Quest Completion NPC",
+        "location_id": 100002287,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Big Island - ??? (Bracelet Monkey) All Bracelets NPC",
+        "location_id": 100002295,
+        "region": "Big Island Bracelet Shops",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Big Island - Rock (Zhu's Quest)",
+        "location_id": 100002289,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
         "location_name": "Big Island - Zhu (Skipping Fox) Quest Completion NPC",
         "location_id": 100002290,
         "region": "Big Island",
@@ -577,6 +667,16 @@
                 "item_name": "Skipping Rock",
                 "count": 1
             }
+        }
+    },
+    {
+        "location_name": "Northeast (Canyon) - Broken Scooter Board Pickup (Kasen's Quest)",
+        "location_id": 100002205,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -687,6 +787,16 @@
                 "item_name": "Broken Scooter Board",
                 "count": 1
             }
+        }
+    },
+    {
+        "location_name": "Northeast (Canyon) - Mochi (Heights Bear) Quest Completion NPC",
+        "location_id": 100002210,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -1381,6 +1491,16 @@
         }
     },
     {
+        "location_name": "East (Creeklands) - ??? (Bracelet Monkey) Windmill Bracelet",
+        "location_id": 100002292,
+        "region": "Big Island Bracelet Shops",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
         "location_name": "East (Creeklands) - Chest (G6) north of Junk4Trash",
         "location_id": 100002026,
         "region": "Big Island Breakables",
@@ -1496,6 +1616,16 @@
                     ]
                 }
             ]
+        }
+    },
+    {
+        "location_name": "East (Creeklands) - Madeline (Little Thing Mouse) Quest Completion NPC",
+        "location_id": 100002225,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -1871,6 +2001,16 @@
         }
     },
     {
+        "location_name": "East (Creeklands) - Retainer Pickup (Becca's Quest)",
+        "location_id": 100002228,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
         "location_name": "East (Creeklands) - Robin (Scared-to-Look Robin) Quest Completion Item",
         "location_id": 100002227,
         "region": "Big Island",
@@ -1894,6 +2034,16 @@
                 "item_name_group": "Cardboard Destroyer",
                 "count": 1
             }
+        }
+    },
+    {
+        "location_name": "West (Forest) - ??? (Bracelet Monkey) Tree Bracelet",
+        "location_id": 100002293,
+        "region": "Big Island Bracelet Shops",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -1978,6 +2128,16 @@
                 "item_name": "Bracelet",
                 "count": 1
             }
+        }
+    },
+    {
+        "location_name": "West (Forest) - Gunther (Sidekick Hippo) Quest Completion NPC",
+        "location_id": 100002260,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -3106,6 +3266,16 @@
         }
     },
     {
+        "location_name": "West (Forest) - Race (F4) starting from west path exit from playground",
+        "location_id": 100001409,
+        "region": "Big Island Races",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
         "location_name": "West (Forest) - Race (G0) starting from island west of Billy's Forest location",
         "location_id": 100000072,
         "region": "Big Island Races",
@@ -3130,6 +3300,16 @@
                     }
                 }
             ]
+        }
+    },
+    {
+        "location_name": "West (Forest) - Race (H1) starting from southwest of The Tree",
+        "location_id": 100001399,
+        "region": "Big Island Races",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -3200,6 +3380,26 @@
         }
     },
     {
+        "location_name": "West (Forest) - Sorin, Roe, Beeritney (Lunch Trio) Quest Completion Item",
+        "location_id": 100002254,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "West (Forest) - Sorin, Roe, Beeritney (Lunch Trio) Quest Completion NPCs",
+        "location_id": 100002253,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
         "location_name": "West (Forest) - Tiffany (Princess Cat) Quest Completion Item",
         "location_id": 100002263,
         "region": "Big Island",
@@ -3226,6 +3426,86 @@
         }
     },
     {
+        "location_name": "West (Forest) - Trish (Invisible Horse) Quest Completion NPC",
+        "location_id": 100002261,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Junk 4 Trash - Grabby Hand Purchase",
+        "location_id": 100002242,
+        "region": "Junk 4 Trash",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Junk 4 Trash - Paint Gun Purchase",
+        "location_id": 100002241,
+        "region": "Junk 4 Trash",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Junk 4 Trash - Roy (Trash Raccoon) All Purchases NPC",
+        "location_id": 100002243,
+        "region": "Junk 4 Trash",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Junk 4 Trash - Sticky Hand Purchase",
+        "location_id": 100002237,
+        "region": "Junk 4 Trash",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Junk 4 Trash - Trampoline Purchase",
+        "location_id": 100002238,
+        "region": "Junk 4 Trash",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Junk 4 Trash - Trash Can Lid Purchase",
+        "location_id": 100002239,
+        "region": "Junk 4 Trash",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Junk 4 Trash - Wrench Purchase",
+        "location_id": 100002240,
+        "region": "Junk 4 Trash",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
         "location_name": "South (Jetty) - Leeland (Painting Rabbit) Quest Completion Item",
         "location_id": 100002245,
         "region": "Big Island",
@@ -3249,6 +3529,16 @@
                 "item_name_group": "Cardboard Destroyer",
                 "count": 1
             }
+        }
+    },
+    {
+        "location_name": "Jill's Main Quest - Bug Net Gift (Antone's Quest)",
+        "location_id": 100002268,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -3289,6 +3579,16 @@
                     }
                 }
             ]
+        }
+    },
+    {
+        "location_name": "Jill's Main Quest - Magic Ore Pickup (Susanne's Quest)",
+        "location_id": 100002264,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -3440,6 +3740,16 @@
         }
     },
     {
+        "location_name": "Martin's Main Quest - Duke (Cool Goose) Quest Completion Item",
+        "location_id": 100002235,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
         "location_name": "Martin's Main Quest - Grassing Clippings Collect (Jada's Quest)",
         "location_id": 100002231,
         "region": "Big Island",
@@ -3502,6 +3812,16 @@
                     }
                 }
             ]
+        }
+    },
+    {
+        "location_name": "Martin's Main Quest - Lucas (Cool Wolf) Quest Completion Item",
+        "location_id": 100002230,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -3577,6 +3897,26 @@
                     }
                 }
             ]
+        }
+    },
+    {
+        "location_name": "North (Mountain) - Bowling Bomb Gift (Flint's Quest)",
+        "location_id": 100002270,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "North (Mountain) - ??? (Bracelet Monkey) Mountain Bracelet",
+        "location_id": 100002294,
+        "region": "Big Island Bracelet Shops",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -3664,6 +4004,26 @@
                     }
                 }
             ]
+        }
+    },
+    {
+        "location_name": "North (Mountain) - Luisa (Tripping Lizard) Quest Completion Item",
+        "location_id": 100002278,
+        "region": "Mountain",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "North (Mountain) - Luisa (Tripping Lizard) Quest Completion NPC",
+        "location_id": 100002277,
+        "region": "Mountain",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -4820,6 +5180,16 @@
         }
     },
     {
+        "location_name": "Central (Ravine) - Esther (Directions Deer) Quest Completion NPC",
+        "location_id": 100002286,
+        "region": "Big Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
         "location_name": "Central (Ravine) - Pot (E2) on hill on path east from Penelope's waterfall",
         "location_id": 100001123,
         "region": "Big Island Breakables",
@@ -5097,6 +5467,16 @@
                     }
                 }
             ]
+        }
+    },
+    {
+        "location_name": "Tutorial Island - Avery! Hat Recipe",
+        "location_id": 100002192,
+        "region": "Tutorial Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     },
     {
@@ -6358,6 +6738,16 @@
         }
     },
     {
+        "location_name": "Tutorial Island - Pot? Pickup",
+        "location_id": 100002195,
+        "region": "Tutorial Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
         "location_name": "Tutorial Island - Race (C2) starting near grassy cliff",
         "location_id": 100000391,
         "region": "Tutorial Island Races",
@@ -6409,6 +6799,36 @@
                     }
                 }
             ]
+        }
+    },
+    {
+        "location_name": "Tutorial Island - Simon (Ragdoll Bear) Quest Completion Item",
+        "location_id": 100002198,
+        "region": "Tutorial Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Tutorial Island - Simon (Ragdoll Bear) Quest Completion NPC",
+        "location_id": 100002197,
+        "region": "Tutorial Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
+        }
+    },
+    {
+        "location_name": "Tutorial Island - Stick Pickup",
+        "location_id": 100002194,
+        "region": "Tutorial Island",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "args": {}
         }
     }
 ]

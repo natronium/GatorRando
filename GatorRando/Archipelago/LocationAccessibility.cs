@@ -8,8 +8,19 @@ namespace GatorRando.Archipelago;
 public static class LocationAccessibilty
 {
     private static readonly string[] excludedNPCs = ["NPC_LunchSwapCardinal", "NPC_Bee", "NPC_Ninja_Tiger", "NPC_SwimSheep", "Dialogue Actor No Longer Exists"];
-    private static List<long> AccessibleLocations;
-    public static void UpdateAccessibleLocations() => AccessibleLocations = []; //LocationsAccess.GetAccessibleLocations(ItemHandling.GetObtainedItems(), Options.GetOptions()); //TODO fix this when Rules.cs complete
+    private static readonly List<long> AccessibleLocations = [];
+
+    public static void UpdateAccessibleLocations()
+    {        
+        var inaccessibleIds = Locations.locationData.Where(data => !AccessibleLocations.Contains(data.apLocationId)).Select(data => data.apLocationId);
+        foreach (long inaccessibleId in inaccessibleIds){
+            
+            if (Rules.GatorRules.Rules[inaccessibleId].Evaluate()){
+                AccessibleLocations.Add(inaccessibleId);
+            }
+        }
+    }
+
     public static bool IsLocationAccessible(string gatorName)
     {
         if (excludedNPCs.Contains(gatorName) || LocationHandling.IsLocationCollected(gatorName))
