@@ -1,3 +1,5 @@
+using System.Linq;
+using GatorRando.QuestMods;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +23,23 @@ static class InventoryMods
         questItemGrid.name = "Quest Item Grid";
         questItemTabToggle.onValueChanged.ObliteratePersistentListenerByIndex(0);
         questItemTabToggle.onValueChanged.AddListener(questItemGrid.SetActive);
+        GameObject activeTab = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Area/Tabs/Quest Item Tab/Inactive Tab/Active Tab");
+        GameObject inactiveTab = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Area/Tabs/Quest Item Tab/Inactive Tab/");
+        activeTab.GetComponent<Image>().sprite = SpriteHandler.GetSpriteForItem("QuestActiveTab");
+        inactiveTab.GetComponent<Image>().sprite = SpriteHandler.GetSpriteForItem("QuestInactiveTab");
+        questItemGrid.GetComponent<ItemGrid>().LoadElements([QuestItems.QuestItemObjects.First(item => item.name == "Archipelago")]);
+        ItemGrid questItemGridIG = questItemGrid.GetComponent<ItemGrid>();
+        ScrollRect scrollRect = questItemGrid.AddComponent<ScrollRect>();
+        scrollRect.content = questItemGrid.GetComponent<RectTransform>();
+        UIScrollSelected uIScrollSelected = questItemGrid.transform.GetChild(0).gameObject.AddComponent<UIScrollSelected>();
+        UIScrollToSelected uIScrollToSelected = questItemGrid.AddComponent<UIScrollToSelected>();
+        questItemGridIG.scrollRect = scrollRect;
+        questItemGridIG.scrollSelected = uIScrollSelected;
+
+        questItemGridIG.scrollToSelected = uIScrollToSelected;
+        uIScrollToSelected.scrollRect = scrollRect;
+
+
 
         // TODO: replace sprites for Quest Item Tab---found under Inactive Tab and Active Tab images
 

@@ -124,17 +124,17 @@ public static class DialogueModifier
         {
             if (itemInfo.ItemName.Contains("Craft Stuff") || itemInfo.ItemName.Contains("Friend"))
             {
-                itemSprite = Texture2DHandler.GetSpriteForItem(itemInfo.ItemName);
+                itemSprite = SpriteHandler.GetSpriteForItem(itemInfo.ItemName);
             }
             else
             {
                 string clientID = ItemHandling.GetClientIDByAPId(itemInfo.ItemId);
-                itemSprite = Texture2DHandler.GetSpriteForItem(clientID);
+                itemSprite = SpriteHandler.GetSpriteForItem(clientID);
             }
         }
         else
         {
-            itemSprite = Texture2DHandler.GetSpriteForItem("Archipelago");
+            itemSprite = SpriteHandler.GetSpriteForItem("Archipelago");
         }
         return itemSprite;
     }
