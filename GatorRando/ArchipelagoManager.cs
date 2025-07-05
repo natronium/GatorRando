@@ -4,6 +4,7 @@ using System;
 using Archipelago.MultiClient.Net.Packets;
 using Newtonsoft.Json.Linq;
 using GatorRando.Archipelago;
+using Archipelago.MultiClient.Net.Models;
 
 namespace GatorRando;
 
@@ -11,7 +12,7 @@ namespace GatorRando;
 
 public static class ArchipelagoManager
 {
-    public const string APVersion = "0.5.1";
+    public const string APVersion = "0.6.2";
     public static ArchipelagoSession Session;
     public static LoginSuccessful LoginInfo;
 
@@ -137,7 +138,11 @@ public static class ArchipelagoManager
 
         static void AttachListeners()
         {
-            Session.Items.ItemReceived += helper => ItemHandling.EnqueueItem(helper.DequeueItem().ItemId);
+            Session.Items.ItemReceived += helper =>
+            {
+                ItemInfo item = helper.DequeueItem();
+                ItemHandling.EnqueueItem(item.ItemId, item.Player.Alias);
+            };
         }
     }
 

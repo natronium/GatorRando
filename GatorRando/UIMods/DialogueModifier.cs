@@ -68,18 +68,6 @@ public static class DialogueModifier
         DialogueManager.d.Bubble(dialogueString, null, 0f, false, true, true);
     }
 
-    public static void AnnounceLocationCollected(int gatorID)
-    {
-        ItemInfo itemInfo = LocationHandling.ItemAtLocation(gatorID);
-        GatorBubble(GetDialogueStringForItemInfo(itemInfo));
-    }
-
-    public static void AnnounceLocationCollected(string gatorName)
-    {
-        ItemInfo itemInfo = LocationHandling.ItemAtLocation(gatorName);
-        GatorBubble(GetDialogueStringForItemInfo(itemInfo));
-    }
-
     public static string GetDialogueStringForItemInfo(ItemInfo itemInfo)
     {
         string dialogueString;

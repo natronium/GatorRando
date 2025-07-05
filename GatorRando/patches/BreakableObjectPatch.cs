@@ -17,11 +17,14 @@ static class BreakableObjectPatch
         {
             if (!PotManager.CheckIfPotBreakable(__instance.id))
             {
-                DialogueModifier.GatorBubble(PotManager.GetPotString(__instance.id));
+                BubbleManager.QueueBubble(PotManager.GetPotString(__instance.id), BubbleManager.BubbleType.Alert);
                 __result = false;
                 return false;
             }
-            
+            else
+            {
+                BubbleManager.QueueBubble(PotManager.GetPotString(__instance.id), BubbleManager.BubbleType.Unimportant);
+            }
         }
         return true;
     }

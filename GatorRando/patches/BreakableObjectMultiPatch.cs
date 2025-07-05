@@ -17,18 +17,18 @@ static class BreakableObjectMultiPatch
         {
             if (!ChestManager.CheckIfChestBreakable())
             {
-                DialogueModifier.GatorBubble("I need a KEY before I can unlock chests...");
+                BubbleManager.QueueBubble("I need a KEY before I can unlock chests...", BubbleManager.BubbleType.Alert);
                 return false;
             }
             else
             {
                 if (Options.GetOptionBool(Options.Option.LockChestsBehindKey))
                 {
-                    DialogueModifier.GatorBubble("Keys are reusable, so chests are easy to open!");
+                    BubbleManager.QueueBubble("Keys are reusable, so chests are easy to open!", BubbleManager.BubbleType.Unimportant);
                 }
                 else
                 {
-                    DialogueModifier.GatorBubble("Who needs keys when I can smash things!");
+                    BubbleManager.QueueBubble("Who needs keys when I can smash things!", BubbleManager.BubbleType.Unimportant);
                 }
                 
             }

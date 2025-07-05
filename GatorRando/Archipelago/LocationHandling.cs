@@ -98,6 +98,18 @@ public static class LocationHandling
         // Fails if invalid gatorName (only use on collected IDs?)
     }
 
+    private static void AnnounceLocationChecked(int gatorID)
+    {
+        ItemInfo itemInfo = ItemAtLocation(gatorID);
+        BubbleManager.QueueBubble(DialogueModifier.GetDialogueStringForItemInfo(itemInfo),BubbleManager.BubbleType.LocationChecked);
+    }
+    private static void AnnounceLocationChecked(string gatorName)
+    {
+        ItemInfo itemInfo = ItemAtLocation(gatorName);
+        BubbleManager.QueueBubble(DialogueModifier.GetDialogueStringForItemInfo(itemInfo),BubbleManager.BubbleType.LocationChecked);
+    }
+
+
     public static bool CollectLocationByID(int id)
     {
 
@@ -106,7 +118,7 @@ public static class LocationHandling
         {
             GameData.g.Write(LocationKeyPrefix + apIdValue.ToString(), true);
             CollectLocationByAPID(apIdValue);
-            DialogueModifier.AnnounceLocationCollected(id);
+            AnnounceLocationChecked(id);
             return true;
         }
         else
@@ -130,7 +142,7 @@ public static class LocationHandling
 
         GameData.g.Write(LocationKeyPrefix + apId.ToString(), true);
         CollectLocationByAPID(apId);
-        DialogueModifier.AnnounceLocationCollected(name);
+        AnnounceLocationChecked(name);
         return true;
     }
 

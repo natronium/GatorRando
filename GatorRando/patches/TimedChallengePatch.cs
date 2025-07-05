@@ -17,17 +17,17 @@ static class TimedChallengePatch
             {
                 if (Options.GetOptionBool(Options.Option.LockRacesBehindFlag))
                 {
-                    DialogueModifier.GatorBubble("I can run races since I have my Finish Flag!");
+                    BubbleManager.QueueBubble("I can run races since I have my Finish Flag!", BubbleManager.BubbleType.Unimportant);
                 }
                 else
                 {
-                    DialogueModifier.GatorBubble("I'm down for a race any time!");
+                    BubbleManager.QueueBubble("I'm down for a race any time!", BubbleManager.BubbleType.Unimportant);
                 }
                 return true;
             }
             else
             {
-                DialogueModifier.GatorBubble("I need a FINISH FLAG before I can run races...");
+                BubbleManager.QueueBubble("I need a FINISH FLAG before I can run races...", BubbleManager.BubbleType.Alert);
                 return false;
             }
         }

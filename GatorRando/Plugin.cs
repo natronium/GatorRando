@@ -1,6 +1,6 @@
 using BepInEx;
 using GatorRando.Archipelago;
-using GatorRando.prefabMods;
+using GatorRando.PrefabMods;
 using GatorRando.QuestMods;
 using GatorRando.UIMods;
 using HarmonyLib;
@@ -28,6 +28,7 @@ public class Plugin : BaseUnityPlugin
         {
             ItemHandling.ProcessItemQueue();
             MapManager.UpdateCoordsIfNeeded();
+            BubbleManager.Update();
         }
     }
 
