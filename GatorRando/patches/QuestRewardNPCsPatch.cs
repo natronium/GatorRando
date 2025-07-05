@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using HarmonyLib;
 
 namespace GatorRando.Patches;
@@ -11,7 +12,7 @@ static class QuestRewardNPCsPatch
     {
         if (ArchipelagoManager.IsFullyConnected)
         {
-            ArchipelagoManager.CollectLocationForNPCs(__instance.rewards);
+            LocationHandling.CollectLocationForNPCs(__instance.rewards);
         }
     }
 }

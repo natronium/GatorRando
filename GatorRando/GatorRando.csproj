@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>GatorRando</AssemblyName>
     <Description>Randomizer for Lil Gator Game</Description>
-    <Version>1.0.3</Version>
+    <Version>1.0.6</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -33,6 +33,15 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>lib/UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>lib/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Addressables">
+      <HintPath>lib/Unity.Addressables.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ResourceManager">
+      <HintPath>lib/Unity.ResourceManager.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -45,12 +54,21 @@
     <Publicize Include="Assembly-CSharp" />
   </ItemGroup>
 
-  <!-- Embed Item & Location data from CSV -->
   <ItemGroup>
-    <ProjectReference Include="..\DataSourceGenerator\DataSourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+    <EmbeddedResource Include="Data/EntranceRules.json" />
+    <EmbeddedResource Include="Data/LocationRules.json" />
   </ItemGroup>
+
   <ItemGroup>
-    <AdditionalFiles Include="data/Items.json"/>
-    <AdditionalFiles Include="data/Locations.json"/>
+    <EmbeddedResource Include="Sprites/guitar.png" />
+    <EmbeddedResource Include="Sprites/key.png" />
+    <EmbeddedResource Include="Sprites/oar.png" />
+    <EmbeddedResource Include="Sprites/quest_item_tab_AP_down.png" />
+    <EmbeddedResource Include="Sprites/quest_item_tab_AP_up.png" />
+    <EmbeddedResource Include="Sprites/sleep_mask.png" />
+    <EmbeddedResource Include="Sprites/tiger.png" />
+    <EmbeddedResource Include="Sprites/archipelago_sticker_style.png" />
+    <EmbeddedResource Include="Sprites/checkered_flag.png" />
+    <EmbeddedResource Include="Sprites/giant_socks.png" />
   </ItemGroup>
 </Project>

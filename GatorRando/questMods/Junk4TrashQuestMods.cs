@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -13,7 +14,7 @@ static class Junk4TrashQuestMods
         List<string> junk4trashItems = ["Shield_Stretch", "Shield_TrashCanLid", "Item_StickyHand", "Item_PaintGun", "Sword_Wrench", "Sword_Grabby"];
         foreach (string item in junk4trashItems)
         {
-            if (ArchipelagoManager.IsLocationCollected(item))
+            if (LocationHandling.IsLocationCollected(item))
             {
                 foreach (int i in Enumerable.Range(0, junkShop.shopItems.Length))
                 {

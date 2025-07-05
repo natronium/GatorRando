@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GatorRando.Archipelago;
 using GatorRando.QuestMods;
 using HarmonyLib;
 using UnityEngine;
@@ -13,16 +14,21 @@ static class UISwapItemsMenuPatch
     static void PreUpdateInventories()
     {
         List<ItemObject> questItemsReceived = [];
+
         foreach (ItemObject item in QuestItems.QuestItemObjects)
         {
-            if (item.name != "Thrown_Pencil_2" && item.name != "Thrown_Pencil_3" && ArchipelagoManager.IsItemUnlocked(item.name))
+            if (item.name == "Archipelago")
+            {
+                questItemsReceived.Add(item);
+            }
+            else if (item.name != "Thrown_Pencil_2" && item.name != "Thrown_Pencil_3" && ItemHandling.IsItemUnlocked(item.name))
             {
                 questItemsReceived.Add(item);
                 item.IsUnlocked = true;
             }
             else if (item.name == "Thrown_Pencil_2")
             {
-                if(ArchipelagoManager.GetItemUnlockCount("Thrown_Pencil") >= 2)
+                if (ItemHandling.GetItemUnlockCount("Thrown_Pencil") >= 2)
                 {
                     questItemsReceived.Add(item);
                     item.IsUnlocked = true;
@@ -30,12 +36,12 @@ static class UISwapItemsMenuPatch
             }
             else if (item.name == "Thrown_Pencil_3")
             {
-                if(ArchipelagoManager.GetItemUnlockCount("Thrown_Pencil") >= 3)
+                if (ItemHandling.GetItemUnlockCount("Thrown_Pencil") >= 3)
                 {
                     questItemsReceived.Add(item);
                     item.IsUnlocked = true;
                 }
-            } 
+            }
         }
 
         GameObject QuestItemGrid = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Contents Mask/Tab Contents/Quest Item Grid");

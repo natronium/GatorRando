@@ -1,0 +1,5 @@
+Archipelago Logos (6 orbs in a circle) appearing in:
+* archipelago_sticker_style.png (changed to add white outlines to orbs "sticker-style")
+* quest_item_tab_AP_up.png (changed to add long tab to match Lil Gator Game's inventory unselected tabs)
+* quest_item_tab_AP_down.png (changed to add short tab to match Lil Gator Game's inventory selected tab)
+are © 2022 by Krista Corkos and Christopher Wilson and are licensed under Attribution-NonCommercial 4.0 International. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/

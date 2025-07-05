@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -11,15 +12,15 @@ static class MartinQuestMods
         getPotSequence.beforeSequence.ObliteratePersistentListenerByIndex(0);
         getPotSequence.beforeSequence.AddListener(CollectedPot);
 
-        ArchipelagoManager.RegisterItemListener("POT?", UnlockedPot);
-        ArchipelagoManager.RegisterLocationListener("POT?", CollectedPot);
+        ItemHandling.RegisterItemListener("POT?", UnlockedPot);
+        LocationHandling.RegisterLocationListener("POT?", CollectedPot);
     }
 
     private static void UnlockedPot()
     {
         GameObject martinQuest = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest");
         QuestStates martinQuestQS = martinQuest.GetComponent<QuestStates>();
-        if (martinQuestQS.StateID == 1 && ArchipelagoManager.IsLocationCollected("POT?"))
+        if (martinQuestQS.StateID == 1 && LocationHandling.IsLocationCollected("POT?"))
         {
             martinQuestQS.JustProgressState();
         }

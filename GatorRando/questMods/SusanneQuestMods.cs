@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -13,8 +14,8 @@ static class SusanneQuestMods
         rockSequencer.beforeSequence.ObliteratePersistentListenerByIndex(0);
         rockSequencer.beforeSequence.AddListener(CollectedMagicOre);
 
-        ArchipelagoManager.RegisterItemListener("BEACH ROCK", UnlockedMagicOre);
-        ArchipelagoManager.RegisterLocationListener("BEACH ROCK", CollectedMagicOre);
+        ItemHandling.RegisterItemListener("BEACH ROCK", UnlockedMagicOre);
+        LocationHandling.RegisterLocationListener("BEACH ROCK", CollectedMagicOre);
     }
 
     private static void CollectedMagicOre()
@@ -30,7 +31,7 @@ static class SusanneQuestMods
     {
         GameObject engineerQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer");
         QuestStates engineerQuestQS = engineerQuest.GetComponent<QuestStates>();
-        if (engineerQuestQS.StateID == 1 && ArchipelagoManager.IsLocationCollected("BEACH ROCK"))
+        if (engineerQuestQS.StateID == 1 && LocationHandling.IsLocationCollected("BEACH ROCK"))
         {
             engineerQuestQS.JustProgressState();
         }

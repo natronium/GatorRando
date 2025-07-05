@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -11,13 +12,13 @@ static class EsmeQuestMods
         getIceCreamSeq.afterSequence.ObliteratePersistentListenerByIndex(0);
         getIceCreamSeq.afterSequence.AddListener(CollectedSorbet);
 
-        ArchipelagoManager.RegisterItemListener("ICE CREAM", UnlockedSorbet);
-        ArchipelagoManager.RegisterLocationListener("ICE CREAM", CollectedSorbet);
+        ItemHandling.RegisterItemListener("ICE CREAM", UnlockedSorbet);
+        LocationHandling.RegisterLocationListener("ICE CREAM", CollectedSorbet);
 
         GameObject becomeVampire = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/Become Vampire");
         DSDialogue vampireHat = becomeVampire.GetComponents<DSDialogue>()[1];
         vampireHat.onStart.ObliteratePersistentListenerByIndex(0);
-        vampireHat.onStart.AddListener(() => { ArchipelagoManager.CollectLocationByName("Hat_Vampire"); });
+        vampireHat.onStart.AddListener(() => { LocationHandling.CollectLocationByName("Hat_Vampire"); });
     }
 
     private static void CollectedSorbet()
@@ -30,7 +31,7 @@ static class EsmeQuestMods
     {
         GameObject vampireQuest = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire");
         QuestStates vampireQuestQS = vampireQuest.GetComponent<QuestStates>();
-        if (vampireQuestQS.StateID == 1 && ArchipelagoManager.IsLocationCollected("ICE CREAM"))
+        if (vampireQuestQS.StateID == 1 && LocationHandling.IsLocationCollected("ICE CREAM"))
         {
             vampireQuestQS.JustProgressState();
         }

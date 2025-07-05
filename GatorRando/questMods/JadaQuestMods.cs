@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -13,7 +14,7 @@ static class JadaQuestMods
         // Removing OnProgress() delegate (don't run Got Enough Grass Sequence)
         boarQuestQS.states[2].onProgress.ObliteratePersistentListenerByIndex(0);
 
-        ArchipelagoManager.RegisterItemListener("CLIPPINGS", UnlockedGrassClippings);
+        ItemHandling.RegisterItemListener("CLIPPINGS", UnlockedGrassClippings);
         
         // Jada: Water Bucket Section
         GameObject waterSeq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Sprout/Water Sequence");
@@ -23,14 +24,14 @@ static class JadaQuestMods
         // Removing OnProgress() delegate (don't run Got Enough Water Sequence)
         boarQuestQS.states[4].onProgress.ObliteratePersistentListenerByIndex(0);
 
-        ArchipelagoManager.RegisterItemListener("WATER", UnlockedWater);
+        ItemHandling.RegisterItemListener("WATER", UnlockedWater);
     }
 
     private static void UnlockedGrassClippings()
     {
         GameObject boarQuest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
         QuestStates boarQuestQS = boarQuest.GetComponent<QuestStates>();
-        if (boarQuestQS.StateID == 1 && ArchipelagoManager.IsLocationCollected("CLIPPINGS"))
+        if (boarQuestQS.StateID == 1 && LocationHandling.IsLocationCollected("CLIPPINGS"))
         {
             boarQuestQS.JustProgressState();
         }
@@ -47,7 +48,7 @@ static class JadaQuestMods
     {
         GameObject boarQuest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
         QuestStates boarQuestQS = boarQuest.GetComponent<QuestStates>();
-        if (boarQuestQS.StateID == 3 && ArchipelagoManager.IsLocationCollected("WATER"))
+        if (boarQuestQS.StateID == 3 && LocationHandling.IsLocationCollected("WATER"))
         {
             boarQuestQS.JustProgressState();
         }

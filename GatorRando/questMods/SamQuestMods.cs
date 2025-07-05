@@ -1,4 +1,5 @@
 using System.Linq;
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -14,7 +15,7 @@ static class SamQuestMods
         GameObject[] seqs = [thrownPencil1Seq, thrownPencil2Seq, thrownPencil3Seq];
         string[] itemNames = ["Thrown_Pencil_1", "Thrown_Pencil_2", "Thrown_Pencil_3"];
 
-        ArchipelagoManager.RegisterItemListener("Thrown_Pencil", UpdateSamState);
+        ItemHandling.RegisterItemListener("Thrown_Pencil", UpdateSamState);
 
         foreach ((GameObject seq, string itemName) in seqs.Zip(itemNames, (s, i) => (s, i)))
         {
@@ -31,22 +32,22 @@ static class SamQuestMods
         GameObject jackal = Util.GetByPath("SouthEast (Beach)/Side Quests/Clumsy Quest/Jackal");
         ThrowObjectQuest quest = jackal.GetComponent<ThrowObjectQuest>();
 
-        if (ArchipelagoManager.IsLocationCollected("Thrown_Pencil_1") && ArchipelagoManager.IsLocationCollected("Thrown_Pencil_2") &&
-            ArchipelagoManager.IsLocationCollected("Thrown_Pencil_3") && ArchipelagoManager.GetItemUnlockCount("Thrown_Pencil") == 3)
+        if (LocationHandling.IsLocationCollected("Thrown_Pencil_1") && LocationHandling.IsLocationCollected("Thrown_Pencil_2") &&
+            LocationHandling.IsLocationCollected("Thrown_Pencil_3") && ItemHandling.GetItemUnlockCount("Thrown_Pencil") == 3)
         {
             quest.State = 3;
             quest.chunks[0].IsItemFetched = true;
             quest.chunks[1].IsItemFetched = true;
             quest.chunks[2].IsItemFetched = true;
         }
-        else if (ArchipelagoManager.IsLocationCollected("Thrown_Pencil_1") && ArchipelagoManager.IsLocationCollected("Thrown_Pencil_2") &&
-             ArchipelagoManager.GetItemUnlockCount("Thrown_Pencil") >=2)
+        else if (LocationHandling.IsLocationCollected("Thrown_Pencil_1") && LocationHandling.IsLocationCollected("Thrown_Pencil_2") &&
+             ItemHandling.GetItemUnlockCount("Thrown_Pencil") >=2)
         {
             quest.State = 2;
             quest.chunks[0].IsItemFetched = true;
             quest.chunks[1].IsItemFetched = true;
         }
-        else if (ArchipelagoManager.IsLocationCollected("Thrown_Pencil_1") && ArchipelagoManager.IsItemUnlocked("Thrown_Pencil"))
+        else if (LocationHandling.IsLocationCollected("Thrown_Pencil_1") && ItemHandling.IsItemUnlocked("Thrown_Pencil"))
         {
             quest.State = 1;
             quest.chunks[0].IsItemFetched = true;
