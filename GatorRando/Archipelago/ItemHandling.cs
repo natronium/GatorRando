@@ -108,7 +108,7 @@ public static class ItemHandling
             case Items.ClientItemType.Friend: ItemUtil.GiveFriends((int)item.clientResourceAmount); break;
             case Items.ClientItemType.CraftStuff: ItemUtil.GiveCraftStuff((int)item.clientResourceAmount); break;
             default:
-                throw new Exception($"Item {item.clientNameId} in the item data CSV with an unknown client_item type of {item.clientItemType}");
+                throw new Exception($"Item {item.clientNameId} has an unknown client_item type of {item.clientItemType}");
         }
         ;
 
@@ -116,7 +116,10 @@ public static class ItemHandling
         {
             SpecialItemFunctions[item.clientNameId]();
         }
-        BubbleManager.QueueBubble($"{playerName} sent me {item.name}!", BubbleManager.BubbleType.ItemReceived);
+        if (playerName != GameData.g.gameSaveData.playerName)
+        {
+            BubbleManager.QueueBubble($"{playerName} sent me {item.name}!", BubbleManager.BubbleType.ItemReceived);
+        }
     }
 
     public static void ReceiveUnreceivedItems()

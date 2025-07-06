@@ -100,11 +100,13 @@ public static class LocationHandling
 
     private static void AnnounceLocationChecked(int gatorID)
     {
+        // Plugin.LogDebug($"Announcing id {gatorID}");
         ItemInfo itemInfo = ItemAtLocation(gatorID);
         BubbleManager.QueueBubble(DialogueModifier.GetDialogueStringForItemInfo(itemInfo),BubbleManager.BubbleType.LocationChecked);
     }
     private static void AnnounceLocationChecked(string gatorName)
     {
+        // Plugin.LogDebug($"Announcing gatorName {gatorName}");
         ItemInfo itemInfo = ItemAtLocation(gatorName);
         BubbleManager.QueueBubble(DialogueModifier.GetDialogueStringForItemInfo(itemInfo),BubbleManager.BubbleType.LocationChecked);
     }
@@ -141,8 +143,11 @@ public static class LocationHandling
         }
 
         GameData.g.Write(LocationKeyPrefix + apId.ToString(), true);
-        CollectLocationByAPID(apId);
-        AnnounceLocationChecked(name);
+        if (!IsLocationCollected(name))
+        {
+            CollectLocationByAPID(apId);
+            AnnounceLocationChecked(name);
+        }
         return true;
     }
 

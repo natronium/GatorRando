@@ -51,7 +51,7 @@ public static class BubbleManager
     {
         if (alertBubbleQueue.Count > 0)
         {
-            Plugin.LogDebug("Sent alert");
+            // Plugin.LogDebug("Sent alert");
             DequeueBubble(BubbleType.Alert);
             return true;
         }
