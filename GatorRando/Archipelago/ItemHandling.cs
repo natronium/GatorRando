@@ -47,6 +47,10 @@ public static class ItemHandling
         }
         else
         {
+            if (itemName == "Broken Scooter Board")
+            {
+                itemName = "Shield_ScooterBoardGreen";
+            }
             return ArchipelagoManager.Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApIdFromGatorName(itemName));
         }
     }

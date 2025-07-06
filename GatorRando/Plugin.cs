@@ -48,6 +48,7 @@ public class Plugin : BaseUnityPlugin
             }
             else if (scene.name == "Island")
             {
+                SpriteHandler.LoadSprites();
                 ApplyQuestEdits();
                 ApplyUIEdits();
                 BalloonMods.EditBalloonStamina();

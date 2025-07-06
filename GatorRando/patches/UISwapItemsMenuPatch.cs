@@ -17,9 +17,15 @@ static class UISwapItemsMenuPatch
 
         foreach (ItemObject item in QuestItems.QuestItemObjects)
         {
-            if (item.name == "Archipelago")
+            if (item.name == "Broken Scooter Board")
             {
                 questItemsReceived.Add(item);
+            }
+            else if (item.name == "Archipelago")
+            {
+                //TODO figure out replacement for this item vis-a-vie scrolling
+                questItemsReceived.Add(item);
+                item.IsUnlocked = true;
             }
             else if (item.name != "Thrown_Pencil_2" && item.name != "Thrown_Pencil_3" && ItemHandling.IsItemUnlocked(item.name))
             {
