@@ -15,6 +15,8 @@ public static class BubbleManager
     private static DateTime lastBubbleTime = DateTime.UtcNow;
     private static TimeSpan timeBetweenBubbles = TimeSpan.FromSeconds(3);
     private static readonly int maxItemMessages = 5;
+    private static string lastMessage = "";
+    private static TimeSpan lastMessageExpiration = TimeSpan.FromSeconds(10);
 
     public enum BubbleType
     {
@@ -33,7 +35,14 @@ public static class BubbleManager
         _ => throw new Exception("Somehow we have an invalid BubbleType"),
     };
 
-    public static void QueueBubble(string dialogueString, BubbleType bubbleType) => GetBubbleQueue(bubbleType).Enqueue(dialogueString);
+    public static void QueueBubble(string dialogueString, BubbleType bubbleType)
+    {
+        if (dialogueString != lastMessage)
+        {
+            // Only queue if not a duplicate message
+            GetBubbleQueue(bubbleType).Enqueue(dialogueString);
+        }
+    } 
 
     private static void DequeueBubble(BubbleType bubbleType)
     {
@@ -95,6 +104,11 @@ public static class BubbleManager
                     lastBubbleTime = DateTime.UtcNow;
                 }
             }
+        }
+        if (DateTime.UtcNow - lastBubbleTime > lastMessageExpiration)
+        {
+            // Reset last message after time has elasped
+            lastMessage = "";
         }
     }
 }
