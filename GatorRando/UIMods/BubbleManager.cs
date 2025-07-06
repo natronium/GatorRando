@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace GatorRando.UIMods;
 
@@ -16,7 +13,7 @@ public static class BubbleManager
     private static TimeSpan timeBetweenBubbles = TimeSpan.FromSeconds(3);
     private static readonly int maxItemMessages = 5;
     private static string lastMessage = "";
-    private static TimeSpan lastMessageExpiration = TimeSpan.FromSeconds(10);
+    private static TimeSpan lastMessageExpiration = TimeSpan.FromSeconds(6);
 
     public enum BubbleType
     {
@@ -41,6 +38,7 @@ public static class BubbleManager
         {
             // Only queue if not a duplicate message
             GetBubbleQueue(bubbleType).Enqueue(dialogueString);
+            lastMessage = dialogueString;
         }
     } 
 
