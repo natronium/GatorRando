@@ -1813,43 +1813,55 @@
         "location_id": 100000651,
         "region": "Big Island Breakables",
         "rule_json": {
-            "rule": "Or",
+            "rule": "And",
             "options": [],
             "children": [
                 {
-                    "rule": "HasGroup",
+                    "rule": "Or",
                     "options": [],
-                    "args": {
-                        "item_name_group": "Ranged",
-                        "count": 1
-                    }
-                },
-                {
-                    "rule": "Has",
-                    "options": [],
-                    "args": {
-                        "item_name": "Bracelet",
-                        "count": 1
-                    }
-                },
-                {
-                    "rule": "True_",
-                    "options": [
+                    "children": [
                         {
-                            "option": "worlds.lil_gator_game.options.LockPotsBehindItems",
-                            "value": 0,
-                            "operator": "eq"
+                            "rule": "HasGroup",
+                            "options": [],
+                            "args": {
+                                "item_name_group": "Ranged",
+                                "count": 1
+                            }
+                        },
+                        {
+                            "rule": "Has",
+                            "options": [],
+                            "args": {
+                                "item_name": "Bracelet",
+                                "count": 1
+                            }
                         }
-                    ],
-                    "args": {}
+                    ]
                 },
                 {
-                    "rule": "Has",
+                    "rule": "Or",
                     "options": [],
-                    "args": {
-                        "item_name": "Sleep Mask",
-                        "count": 1
-                    }
+                    "children": [
+                        {
+                            "rule": "True_",
+                            "options": [
+                                {
+                                    "option": "worlds.lil_gator_game.options.LockPotsBehindItems",
+                                    "value": 0,
+                                    "operator": "eq"
+                                }
+                            ],
+                            "args": {}
+                        },
+                        {
+                            "rule": "Has",
+                            "options": [],
+                            "args": {
+                                "item_name": "Sleep Mask",
+                                "count": 1
+                            }
+                        }
+                    ]
                 }
             ]
         }
