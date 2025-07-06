@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using HarmonyLib;
 
 namespace GatorRando.Patches;
@@ -11,7 +12,7 @@ static class FallbackCraftIdeaPatch {
 		{
             if (ArchipelagoManager.IsFullyConnected)
             {
-			    ArchipelagoManager.CollectLocationByName(__instance.craft.name);
+			    LocationHandling.CollectLocationByName(__instance.craft.name);
             }
 		}
         return false;

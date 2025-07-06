@@ -27,7 +27,7 @@ These instructions assume familiarity with command line tools. Please ask for he
 
 ### Recommendations for Better Play Experiences
 - For at least your first few plays, we recommend you set `start_with_checkfinders` to be true and go into the Settings Menu and switch the Checkfinder setting to `Logic`. Using the Megaphone and Texting With Jill in game will then point you towards the nearest locations/people that are in logic (available with the items you currently have)
-- Download [Poptracker](https://poptracker.github.io/) and use the pack available at https://github.com/natronium/GatorPop
+- Download [Universal Tracker](https://github.com/FarisTheAncient/Archipelago/releases) and use it to track which locations are in logic and your position on the map.
 - If you are having trouble finding a specific location, you can search the map available at https://natronium.github.io/GatorMap/ to find all the pots, chests, and races with their locations labeled as they are in the Archipelago.
 - Use the text client (which you can also open from the Archipelago Launcher) alongside your game. Using the text client will allow you to see what items you are sending and receiving, as only some sent items currently display in game
 - If you get stuck somewhere (i.e. without a bracelet), there's a handy "reset position" button in the Settings Menu!

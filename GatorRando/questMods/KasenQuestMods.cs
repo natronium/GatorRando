@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -16,8 +17,8 @@ static class KasenQuestMods
         findDS.afterSequence.ObliteratePersistentListenerByIndex(0);
         scooterPickup.SetActive(true);
 
-        ArchipelagoManager.RegisterItemListener("Shield_ScooterBoardGreen", UnlockedScooter);
-        ArchipelagoManager.RegisterLocationListener("BROKEN WHEELIE THINGY", () => scooterPickup.SetActive(false));
+        ItemHandling.RegisterItemListener("Shield_ScooterBoardGreen", UnlockedScooter);
+        LocationHandling.RegisterLocationListener("BROKEN WHEELIE THINGY", () => scooterPickup.SetActive(false));
     }
 
     private static void UnlockedScooter()

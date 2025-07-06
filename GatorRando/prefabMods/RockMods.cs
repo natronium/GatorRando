@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GatorRando.prefabMods;
+namespace GatorRando.PrefabMods;
 
 static class RockMods
 {

@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using HarmonyLib;
 
 namespace GatorRando.Patches;
@@ -9,7 +10,7 @@ static class QuestRewardCraftsPatch
     [HarmonyPatch("GiveReward")]
     static bool PreGiveReward(QuestRewardCrafts __instance)
     {
-        ArchipelagoManager.CollectLocationByName(__instance.rewards[0].name);
+        LocationHandling.CollectLocationByName(__instance.rewards[0].name);
         return false;
         // TODO: UI for what item you picked up
     }

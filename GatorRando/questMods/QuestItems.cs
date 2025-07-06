@@ -1,5 +1,7 @@
 
 using System.Collections.Generic;
+using GatorRando.UIMods;
+using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
@@ -34,6 +36,27 @@ static class QuestItems
             QuestItemObjects.Add(Util.GenerateItemObject("Thrown_Pencil", pencil.sprite));
             QuestItemObjects.Add(Util.GenerateItemObject("Thrown_Pencil_2", pencil.sprite));
             QuestItemObjects.Add(Util.GenerateItemObject("Thrown_Pencil_3", pencil.sprite));
+
+            // Sprite pencil = SpriteHandler.GetSpriteForItem("Thrown_Pencil");
+            // QuestItemObjects.Add(Util.GenerateItemObject("Thrown_Pencil", pencil));
+            // QuestItemObjects.Add(Util.GenerateItemObject("Thrown_Pencil_2", pencil));
+            // QuestItemObjects.Add(Util.GenerateItemObject("Thrown_Pencil_3", pencil));
+
+            QuestItemObjects.Add(Util.GenerateItemObject("Key", SpriteHandler.GetSpriteForItem("Key")));
+            QuestItemObjects.Add(Util.GenerateItemObject("Flag", SpriteHandler.GetSpriteForItem("Flag")));
+            QuestItemObjects.Add(Util.GenerateItemObject("SleepMask", SpriteHandler.GetSpriteForItem("SleepMask")));
+            QuestItemObjects.Add(Util.GenerateItemObject("Tiger", SpriteHandler.GetSpriteForItem("Tiger")));
+            QuestItemObjects.Add(Util.GenerateItemObject("Socks", SpriteHandler.GetSpriteForItem("Socks")));
+            QuestItemObjects.Add(Util.GenerateItemObject("Guitar", SpriteHandler.GetSpriteForItem("Guitar")));
+            QuestItemObjects.Add(Util.GenerateItemObject("Oar", SpriteHandler.GetSpriteForItem("Oar")));
+
+            QuestItemObjects.Add(Util.GenerateItemObject("Archipelago", SpriteHandler.GetSpriteForItem("Archipelago")));
+
+            // QuestItemObjects.Add(Util.GenerateItemObject("Glider", SpriteHandler.GetSpriteForItem("Glider")));
+            // QuestItemObjects.Add(Util.GenerateItemObject("QuestItem_Retainer", SpriteHandler.GetSpriteForItem("QuestItem_Retainer")));
+            // QuestItemObjects.Add(Util.GenerateItemObject("POT?", SpriteHandler.GetSpriteForItem("POT?")));
+
+            //TODO: Retrieve/Store sprites in a way that does not result in them unloading
         }
     }
 }

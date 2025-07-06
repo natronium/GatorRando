@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using HarmonyLib;
 
 namespace GatorRando.Patches;
@@ -11,7 +12,7 @@ static class InteractItemUnlockPatch
     {
         __instance.gameObject.SetActive(false);
         __instance.SaveTrue();
-        ArchipelagoManager.CollectLocationByName(__instance.itemName);
+        LocationHandling.CollectLocationByName(__instance.itemName);
         return false;
     }
 }
