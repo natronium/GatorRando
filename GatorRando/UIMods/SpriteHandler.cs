@@ -73,12 +73,6 @@ public static class SpriteHandler
         {"Sword_Stick", "Assets/UI/Images/Item Sprites/Itemsprite_sword_stick.png"},
         {"Sword_Wood", "Assets/UI/Images/Item Sprites/Itemsprite_sword_wooden.png"},
         {"Sword_Wrench", "Assets/UI/Images/Item Sprites/Itemsprite_sword_wrench.png"},
-
-        // LOOKING FOR GatorMewhenyouaremyfriend
-        // Itemsprite_quest_icecream
-        // Itemsprite_quest_clippings
-        // Itemsprite_quest_bucketfull
-        // Magic Ore
     };
     private static readonly Dictionary<string, AddedTexture> newSpriteInformation = new()
     {
@@ -100,7 +94,8 @@ public static class SpriteHandler
         {"ICE CREAM", "Itemsprite_quest_icecream"},
         {"CLIPPINGS", "Itemsprite_quest_clippings"},
         {"WATER", "Itemsprite_quest_bucketfull"},
-        {"BEACH ROCK", "Itemsprite_quest_clippings"},
+        {"BEACH ROCK", "Itemsprite_quest_cavemanrock"},
+        {"HALF A CHEESE SANDWICH", "Itemsprite_quest_halfacheesesandwich"},
     };
 
     public readonly struct AddedTexture(string path, int width, int height)
@@ -131,36 +126,42 @@ public static class SpriteHandler
 
     private static void LoadAssetSprites()
     {
-        foreach (string spriteName in existingSpritePaths.Keys)
+        if (loadedAssetSprites.Count == 0)
         {
-            loadedAssetSprites[spriteName] = Addressables.LoadAssetAsync<Sprite>(existingSpritePaths[spriteName]).WaitForCompletion();
+            foreach (string spriteName in existingSpritePaths.Keys)
+            {
+                loadedAssetSprites[spriteName] = Addressables.LoadAssetAsync<Sprite>(existingSpritePaths[spriteName]).WaitForCompletion();
+            }
         }
     }
 
     private static void DuplicateNonAssetLoadSprites()
     {
-        builtinSprites ??= Resources.FindObjectsOfTypeAll<Sprite>();
-        foreach (string itemName in spritesToDuplicateInformation.Keys)
+        if (duplicatedSprites.Count == 0)
         {
-            Sprite existingSprite;
-            try
+            builtinSprites ??= Resources.FindObjectsOfTypeAll<Sprite>();
+            foreach (string itemName in spritesToDuplicateInformation.Keys)
             {
-                existingSprite = builtinSprites.First(sprite => sprite.name == spritesToDuplicateInformation[itemName]);
-            }
-            catch (InvalidOperationException)
-            {
-                Plugin.LogWarn("No sprite found, storing placeholder!");
-                existingSprite = Util.FindItemObjectByName("Placeholder").sprite;
-            }
+                Sprite existingSprite;
+                try
+                {
+                    existingSprite = builtinSprites.First(sprite => sprite.name == spritesToDuplicateInformation[itemName]);
+                }
+                catch (InvalidOperationException)
+                {
+                    Plugin.LogWarn("No sprite found, storing placeholder!");
+                    existingSprite = Util.FindItemObjectByName("Placeholder").sprite;
+                }
 
-            duplicatedSprites[itemName] = DuplicateSprite(existingSprite.texture);
+                duplicatedSprites[itemName] = DuplicateSprite(existingSprite.texture);
+            }
         }
     }
 
     private static Sprite DuplicateSprite(Texture2D originalTexture)
     {
-        Texture2D copyTexture = new(originalTexture.width, originalTexture.height);
-        copyTexture.LoadRawTextureData(originalTexture.GetRawTextureData());
+        Texture2D copyTexture = new(originalTexture.width, originalTexture.height, textureFormat: originalTexture.format, mipCount: originalTexture.mipmapCount, linear: false);
+        Graphics.CopyTexture(originalTexture, copyTexture);
         return Sprite.Create(copyTexture, new Rect(0, 0, originalTexture.width, originalTexture.height), new Vector2(0.5f, 0.5f));
     }
 
