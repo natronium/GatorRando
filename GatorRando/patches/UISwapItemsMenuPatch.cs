@@ -19,7 +19,18 @@ static class UISwapItemsMenuPatch
         {
             if (item.name == "Broken Scooter Board")
             {
-                questItemsReceived.Add(item);
+                if (ItemHandling.IsItemUnlocked(item.name, true))
+                {
+                    questItemsReceived.Add(item);
+                }
+            }
+            else if (item.name == "Glider" && ItemHandling.IsItemUnlocked(item.name, true))
+            {
+                if (ItemHandling.IsItemUnlocked(item.name, true))
+                {
+                    questItemsReceived.Add(item);
+                    item.IsUnlocked = true;
+                }
             }
             else if (item.name == "Archipelago")
             {

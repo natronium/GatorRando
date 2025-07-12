@@ -5095,43 +5095,12 @@
         "location_id": 100002272,
         "region": "Mountain Breakables",
         "rule_json": {
-            "rule": "And",
+            "rule": "HasGroup",
             "options": [],
-            "children": [
-                {
-                    "rule": "HasGroup",
-                    "options": [],
-                    "args": {
-                        "item_name_group": "Cardboard Destroyer",
-                        "count": 1
-                    }
-                },
-                {
-                    "rule": "Or",
-                    "options": [],
-                    "children": [
-                        {
-                            "rule": "True_",
-                            "options": [
-                                {
-                                    "option": "worlds.lil_gator_game.options.LockPotsBehindItems",
-                                    "value": 0,
-                                    "operator": "eq"
-                                }
-                            ],
-                            "args": {}
-                        },
-                        {
-                            "rule": "Has",
-                            "options": [],
-                            "args": {
-                                "item_name": "Sleep Mask",
-                                "count": 1
-                            }
-                        }
-                    ]
-                }
-            ]
+            "args": {
+                "item_name_group": "Cardboard Destroyer",
+                "count": 1
+            }
         }
     },
     {

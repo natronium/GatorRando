@@ -12,7 +12,7 @@ static class QuestItems
     {
         if (QuestItemObjects.Count == 0)
         {
-            QuestItemObjects.Add(Util.GenerateItemObject("Shirt", SpriteHandler.GetSpriteForItem("Shirt")));
+            QuestItemObjects.Add(Util.GenerateItemObject("Glider", SpriteHandler.GetSpriteForItem("Shirt")));
             QuestItemObjects.Add(Util.GenerateItemObject("QuestItem_Retainer", SpriteHandler.GetSpriteForItem("QuestItem_Retainer")));
             QuestItemObjects.Add(Util.GenerateItemObject("Broken Scooter Board", SpriteHandler.GetSpriteForItem("Shield_ScooterBoardGreen")));
 

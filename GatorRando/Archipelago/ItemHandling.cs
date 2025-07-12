@@ -137,6 +137,7 @@ public static class ItemHandling
                 ReceiveItem(GetItemEntryByApId(item.ItemId), item.Player.Alias);
             }
         }
+        PlayerItemManager.p.Refresh(); // Originally only for "Shirt" not usuable on receipt but should result in updated visual for bracelets
 
         while (ArchipelagoManager.Session.Items.Any())
         {
