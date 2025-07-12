@@ -31,12 +31,12 @@ static class DSItemPatch
         }
         if (LocationHandling.CollectLocationByName(name))
         {
-            ItemInfo itemInfo = LocationHandling.ItemAtLocation(name);
+            LocationHandling.ItemAtLocation itemAtLocation = LocationHandling.GetItemAtLocation(name);
             __instance.isRealItem = false;
-            string dialogueString = DialogueModifier.GetDialogueStringForItemInfo(itemInfo);
-            __instance.itemName = DialogueModifier.GetItemNameForItemInfo(itemInfo);
+            string dialogueString = DialogueModifier.GetDialogueStringForItemAtLocation(itemAtLocation);
+            __instance.itemName = DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation);
             __instance.itemName_ID = __instance.itemName;
-            __instance.itemSprite = DialogueModifier.GetSpriteForItemInfo(itemInfo);
+            __instance.itemSprite = DialogueModifier.GetSpriteForItemAtLocation(itemAtLocation);
             __instance.dialogue = dialogueString;
 
             DialogueModifier.AddNewDialogueChunk(__instance.document, dialogueString);

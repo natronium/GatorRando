@@ -68,55 +68,50 @@ public static class DialogueModifier
         DialogueManager.d.Bubble(dialogueString, null, 0f, false, true, true);
     }
 
-    public static string GetDialogueStringForItemInfo(ItemInfo itemInfo)
+    public static string GetDialogueStringForItemAtLocation(LocationHandling.ItemAtLocation itemAtLocation)
     {
         string dialogueString;
-        if (itemInfo.Player.Name == GameData.g.gameSaveData.playerName)
+        if (itemAtLocation.itemPlayer == ConnectionManager.SlotName())
         {
-            dialogueString = $"I found my {itemInfo.ItemName}. why was that here??";
+            dialogueString = $"I found my {itemAtLocation.itemName}. why was that here??";
         }
-        else if (itemInfo.ItemGame == "Lil Gator Game")
+        else if (itemAtLocation.itemGame == "Lil Gator Game")
         {
-            dialogueString = $"I found a {itemInfo.ItemName}, but it's {itemInfo.Player.Name}'s, not mine, I should send it back";
+            dialogueString = $"I found a {itemAtLocation.itemName}, but it's {itemAtLocation.itemPlayer}'s, not mine, I should send it back";
         }
         else
         {
-            dialogueString = $"I found {itemInfo.Player.Name}'s {itemInfo.ItemName}";
-            // Eventually replace itemSprite with AP logo
+            dialogueString = $"I found {itemAtLocation.itemPlayer}'s {itemAtLocation.itemName}";
         }
         return dialogueString;
     }
 
-    public static string GetItemNameForItemInfo(ItemInfo itemInfo)
+    public static string GetItemNameForItemAtLocation(LocationHandling.ItemAtLocation itemAtLocation)
     {
         string itemName;
-        if (itemInfo.Player.Name == GameData.g.gameSaveData.playerName)
+        if (itemAtLocation.itemPlayer == ConnectionManager.SlotName())
         {
-            itemName = itemInfo.ItemName;
-        }
-        else if (itemInfo.ItemGame == "Lil Gator Game")
-        {
-            itemName = itemInfo.Player.Name + "'s " + itemInfo.ItemName;
+            itemName = itemAtLocation.itemName;
         }
         else
         {
-            itemName = itemInfo.Player.Name + "'s " + itemInfo.ItemName;
+            itemName = itemAtLocation.itemPlayer + "'s " + itemAtLocation.itemName;
         }
         return itemName;
     }
 
-    public static Sprite GetSpriteForItemInfo(ItemInfo itemInfo)
+    public static Sprite GetSpriteForItemAtLocation(LocationHandling.ItemAtLocation itemAtLocation)
     {
         Sprite itemSprite;
-        if (itemInfo.ItemGame == "Lil Gator Game")
+        if (itemAtLocation.itemGame == "Lil Gator Game")
         {
-            if (itemInfo.ItemName.Contains("Craft Stuff") || itemInfo.ItemName.Contains("Friend"))
+            if (itemAtLocation.itemName.Contains("Craft Stuff") || itemAtLocation.itemName.Contains("Friend"))
             {
-                itemSprite = SpriteHandler.GetSpriteForItem(itemInfo.ItemName);
+                itemSprite = SpriteHandler.GetSpriteForItem(itemAtLocation.itemName);
             }
             else
             {
-                string clientID = ItemHandling.GetClientIDByAPId(itemInfo.ItemId);
+                string clientID = ItemHandling.GetClientIDByAPId(itemAtLocation.itemId);
                 itemSprite = SpriteHandler.GetSpriteForItem(clientID);
             }
         }

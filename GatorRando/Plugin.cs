@@ -53,7 +53,7 @@ public class Plugin : BaseUnityPlugin
                 ApplyUIEdits();
                 BalloonMods.EditBalloonStamina();
                 RockMods.EditRockLayer();
-                SettingsMods.ForceIntoSettingsMenu();
+                // SettingsMods.ForceIntoSettingsMenu();
                 APConnectedUI.ShowAPQuest();
                 Util.PopulatePotPrefabs();
             }

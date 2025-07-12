@@ -120,7 +120,7 @@ public static class ItemHandling
         {
             SpecialItemFunctions[item.clientNameId]();
         }
-        if (playerName != GameData.g.gameSaveData.playerName)
+        if (playerName != ConnectionManager.SlotName())
         {
             BubbleManager.QueueBubble($"{playerName} sent me {item.name}!", BubbleManager.BubbleType.ItemReceived);
         }

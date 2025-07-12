@@ -9,6 +9,14 @@ namespace GatorRando.Archipelago;
 
 public static class LocationHandling
 {
+    public readonly struct ItemAtLocation(string itemName, long itemId, string itemPlayer, string itemGame)
+    {
+        public readonly string itemName = itemName;
+        public readonly long itemId = itemId;
+        public readonly string itemPlayer = itemPlayer;
+        public readonly string itemGame = itemGame;
+    }
+
     private static readonly Dictionary<long, ItemInfo> LocationLookup = [];
     private static readonly Dictionary<string, Action> SpecialLocationFunctions = [];
     public static void RegisterLocationListener(string locationName, Action listener) => SpecialLocationFunctions[locationName] = listener;
@@ -84,31 +92,31 @@ public static class LocationHandling
     }
 
 
-    public static ItemInfo ItemAtLocation(int gatorID)
+    public static ItemAtLocation GetItemAtLocation(int gatorID)
     {
         long apId = GetLocationApId(gatorID);
-        return LocationLookup[apId];
-        // Fails if invalid gatorID (only use on collected IDs?)
+        return ConnectionManager.ServerData.LocationLookup[apId];
+        // Fails if invalid gatorID (only use on collected IDs)
     }
 
-    public static ItemInfo ItemAtLocation(string gatorName)
+    public static ItemAtLocation GetItemAtLocation(string gatorName)
     {
         long apId = GetLocationApId(gatorName);
-        return LocationLookup[apId];
+        return ConnectionManager.ServerData.LocationLookup[apId];
         // Fails if invalid gatorName (only use on collected IDs?)
     }
 
     private static void AnnounceLocationChecked(int gatorID)
     {
         // Plugin.LogDebug($"Announcing id {gatorID}");
-        ItemInfo itemInfo = ItemAtLocation(gatorID);
-        BubbleManager.QueueBubble(DialogueModifier.GetDialogueStringForItemInfo(itemInfo),BubbleManager.BubbleType.LocationChecked);
+        ItemAtLocation itemAtLocation = GetItemAtLocation(gatorID);
+        BubbleManager.QueueBubble(DialogueModifier.GetDialogueStringForItemAtLocation(itemAtLocation), BubbleManager.BubbleType.LocationChecked);
     }
     private static void AnnounceLocationChecked(string gatorName)
     {
         // Plugin.LogDebug($"Announcing gatorName {gatorName}");
-        ItemInfo itemInfo = ItemAtLocation(gatorName);
-        BubbleManager.QueueBubble(DialogueModifier.GetDialogueStringForItemInfo(itemInfo),BubbleManager.BubbleType.LocationChecked);
+        ItemAtLocation itemAtLocation = GetItemAtLocation(gatorName);
+        BubbleManager.QueueBubble(DialogueModifier.GetDialogueStringForItemAtLocation(itemAtLocation), BubbleManager.BubbleType.LocationChecked);
     }
 
 

@@ -28,31 +28,16 @@ static class JunkShopPatch
         {
             foreach (JunkShop.ShopItem shopItem in __instance.shopItems)
             {
-                ItemInfo itemInfo = LocationHandling.ItemAtLocation(shopItem.item.name);
-                if (itemInfo.ItemGame == "Lil Gator Game")
+                LocationHandling.ItemAtLocation itemAtLocation = LocationHandling.GetItemAtLocation(shopItem.item.name);
+                replacementSprites.Add(shopItem.item.name, DialogueModifier.GetSpriteForItemAtLocation(itemAtLocation));
+                replacementDisplayNames.Add(shopItem.item.name, DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation));
+                if (itemAtLocation.itemPlayer == ConnectionManager.SlotName())
                 {
-                    if (itemInfo.ItemName.Contains("Craft Stuff") || itemInfo.ItemName.Contains("Friend"))
-                    {
-                        replacementSprites.Add(shopItem.item.name, SpriteHandler.GetSpriteForItem(itemInfo.ItemName));
-                    }
-                    else
-                    {
-                        string clientID = ItemHandling.GetClientIDByAPId(itemInfo.ItemId);
-                        replacementSprites.Add(shopItem.item.name, SpriteHandler.GetSpriteForItem(clientID));
-                    }
+                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"I bought my own {itemAtLocation.itemName}"));
                 }
                 else
                 {
-                    replacementSprites.Add(shopItem.item.name, SpriteHandler.GetSpriteForItem("Archipelago"));
-                }
-                replacementDisplayNames.Add(shopItem.item.name, $"{itemInfo.Player.Name}'s {itemInfo.ItemName}");
-                if (itemInfo.Player.Name == GameData.g.gameSaveData.playerName)
-                {
-                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"I bought my own {itemInfo.ItemName}"));
-                }
-                else
-                {
-                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"I bought {itemInfo.Player.Name}'s {itemInfo.ItemName}"));
+                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"I bought {DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation)}"));
                 }
             }
         }
@@ -160,9 +145,10 @@ static class JunkShopPatch
         __result[0] = __instance.document.FetchString(__instance.cancelChoice, Language.Auto);
         for (int i = 0; i < __instance.displayedItemCount; i++)
         {
-            ItemInfo itemInfo = LocationHandling.ItemAtLocation(__instance.shopItems[__instance.displayedItems[i]].item.name);
-            ///TODO: Hint the items that appear in the list!
-            __result[i + 1] = $"{itemInfo.Player.Name}'s {itemInfo.ItemName}";
+            string gatorName = __instance.shopItems[__instance.displayedItems[i]].item.name;
+            LocationHandling.ItemAtLocation itemAtLocation = LocationHandling.GetItemAtLocation(gatorName);
+            __result[i + 1] = DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation);
+            ConnectionManager.HintLocation(LocationHandling.GetLocationApId(gatorName));
         }
         return false;
     }

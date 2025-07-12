@@ -8,8 +8,6 @@ using Archipelago.MultiClient.Net.Models;
 
 namespace GatorRando;
 
-//TODO: Redo items and locations json stuff; figure out how to convey the sending player in item received bubble notification
-
 public static class ArchipelagoManager
 {
     public const string APVersion = "0.6.2";
