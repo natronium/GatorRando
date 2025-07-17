@@ -1,7 +1,5 @@
 using GatorRando.Archipelago;
 using HarmonyLib;
-using UnityEngine;
-using UnityEngine.UIElements.UIR;
 
 namespace GatorRando.Patches;
 

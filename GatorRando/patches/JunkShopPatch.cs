@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
-using Archipelago.MultiClient.Net.Models;
 using GatorRando.Archipelago;
 using GatorRando.QuestMods;
 using GatorRando.UIMods;

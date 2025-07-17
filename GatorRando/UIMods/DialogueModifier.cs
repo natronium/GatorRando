@@ -1,11 +1,7 @@
-using Archipelago.MultiClient.Net.Models;
 using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.UIMods;
-
-// TODO:
-// BubbleNotificationManager
 
 public static class DialogueModifier
 {

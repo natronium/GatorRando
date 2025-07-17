@@ -19,7 +19,7 @@ static class ItemSearchNPCsPatch
         if (additionalActors == null)
         {
             GameObject act1Quests = Util.GetByPath("/NorthWest (Tutorial Island)/Act 1/Quests/");
-            additionalActors = new List<DialogueActor>(act1Quests.GetComponentsInChildren<DialogueActor>(true));
+            additionalActors = [.. act1Quests.GetComponentsInChildren<DialogueActor>(true)];
             GameObject coolKidsQuest = Util.GetByPath("/East (Creeklands)/Cool Kids Quest/");
             additionalActors.AddRange(coolKidsQuest.GetComponentsInChildren<DialogueActor>(true));
             GameObject prepQuest = Util.GetByPath("/West (Forest)/Prep Quest/");

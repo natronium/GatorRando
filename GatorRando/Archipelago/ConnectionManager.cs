@@ -8,7 +8,6 @@ using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.Models;
 using Archipelago.MultiClient.Net.Packets;
-using GatorRando.Data;
 using Newtonsoft.Json.Linq;
 
 namespace GatorRando.Archipelago;

@@ -1,9 +1,4 @@
-using System;
-using GatorRando.UIMods;
 using HarmonyLib;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace GatorRando.Patches;
 

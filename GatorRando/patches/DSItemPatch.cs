@@ -1,4 +1,3 @@
-using Archipelago.MultiClient.Net.Models;
 using GatorRando.Archipelago;
 using GatorRando.UIMods;
 using HarmonyLib;
