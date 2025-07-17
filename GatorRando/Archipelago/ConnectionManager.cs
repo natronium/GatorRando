@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using Archipelago.MultiClient.Net;
@@ -6,6 +8,8 @@ using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.Models;
 using Archipelago.MultiClient.Net.Packets;
+using GatorRando.Data;
+using Newtonsoft.Json.Linq;
 
 namespace GatorRando.Archipelago;
 
@@ -38,15 +42,26 @@ public static class ConnectionManager
         return "Not Authenticated";
     }
 
+    public static string GetSlotDataOption(string optionName)
+    {
+        return ServerData.GetSlotDataOption(optionName);
+    }
+
     //TODO: Save and Load existing server data
 
+    public static void InitiateNewAPSession()
+    {
+        ServerData = new();
+        SaveManager.ReadLastConnectionData();
+        Connect();
+    }
 
 
     /// <summary>
     /// call to connect to an Archipelago session. Connection info should already be set up on ServerData
     /// </summary>
     /// <returns></returns>
-    public static void Connect()
+    private static void Connect()
     {
         if (Authenticated || attemptingConnection) return;
 
@@ -58,6 +73,7 @@ public static class ConnectionManager
         catch (Exception e)
         {
             Plugin.LogError(e.ToString());
+            StateManager.FailedConnection(e.ToString());
         }
 
         TryConnect();
@@ -69,9 +85,19 @@ public static class ConnectionManager
     private static void SetupSession()
     {
         // session.MessageLog.OnMessageReceived += message => ArchipelagoConsole.LogMessage(message.ToString());
-        session.Items.ItemReceived += OnItemReceived;
+        
         session.Socket.ErrorReceived += OnSessionErrorReceived;
         session.Socket.SocketClosed += OnSessionSocketClosed;
+    }
+
+    public static void RegisterItemReceivedListener()
+    {
+        session.Items.ItemReceived += OnItemReceived;
+    }
+
+    public static void UnregisterItemReceivedListener()
+    {
+        session.Items.ItemReceived -= OnItemReceived;
     }
 
     /// <summary>
@@ -92,9 +118,10 @@ public static class ConnectionManager
                         ItemsHandlingFlags.AllItems,
                         version: new Version(APVersion),
                         password: ServerData.Password,
-                        requestSlotData: ServerData.NeedSlotData
+                        requestSlotData: true
                     )));
         }
+        //TODO: Figure out how to cache slotdata
         catch (Exception e)
         {
             Plugin.LogError(e.ToString());
@@ -117,10 +144,8 @@ public static class ConnectionManager
             ServerData.SetupSession(success.SlotData, session.RoomState.Seed);
             Authenticated = true;
 
-            session.Locations.CompleteLocationChecksAsync([.. ServerData.CheckedLocations]);
             outText = $"Successfully connected to {ServerData.Uri} as {ServerData.SlotName}!";
-            // UIMods.MainMenuMod.PostConnect(); // Enable entering the game
-
+            StateManager.SucceededConnection();
             // ArchipelagoConsole.LogMessage(outText);
         }
         else
@@ -130,6 +155,7 @@ public static class ConnectionManager
             outText = failure.Errors.Aggregate(outText, (current, error) => current + $"\n    {error}");
 
             Plugin.LogError(outText);
+            StateManager.FailedConnection(outText);
 
             Authenticated = false;
             Disconnect();
@@ -142,18 +168,32 @@ public static class ConnectionManager
     /// <summary>
     /// something we wrong or we need to properly disconnect from the server. cleanup and re null our session
     /// </summary>
-    private static void Disconnect()
+    public static void Disconnect()
     {
         Plugin.LogDebug("disconnecting from server...");
         session?.Socket.DisconnectAsync();
         session = null;
         Authenticated = false;
-        // UIMods.MainMenuMod.Disconnect();
     }
 
     public static void SendMessage(string message)
     {
         session.Socket.SendPacketAsync(new SayPacket { Text = message });
+    }
+
+    public static void ReceiveUnreceivedItems()
+    {
+        Plugin.LogDebug($"saved lastindex is {ServerData.GetIndex()}, AP's last index is {ItemsReceived().Count}");
+        if (ServerData.GetIndex() < ItemsReceived().Count)
+        {
+            foreach (ItemInfo item in ItemsReceived().Skip(ServerData.GetIndex()))
+            {
+                ItemHandling.EnqueueItem(item.ItemId, item.Player.Name);
+            }
+        }
+
+        ClearItemQueue();
+        ServerData.Index = ItemsReceived().Count;
     }
 
     /// <summary>
@@ -164,9 +204,22 @@ public static class ConnectionManager
     {
         ItemInfo receivedItem = helper.DequeueItem();
 
-        if (helper.Index < ServerData.Index) return; // TODO: Intercept prior items here to populate ItemManager and ActManager HashSets? Or load the client data and use that to populate
+        Plugin.LogDebug(ServerData.GetIndex().ToString());
 
-        // ItemManager.ItemQueue.Enqueue(receivedItem.ItemId);
+        if (helper.Index < ServerData.GetIndex()) return;
+
+        ServerData.Index = helper.Index;
+
+        ItemHandling.EnqueueItem(receivedItem.ItemId, receivedItem.Player.Name);
+    }
+
+    public static void ClearItemQueue()
+    {
+        while (session.Items.Any())
+        {
+            //Clear the queue of all our initial items
+            session.Items.DequeueItem();
+        }
     }
 
 
@@ -186,7 +239,7 @@ public static class ConnectionManager
     private static void OnSessionErrorReceived(Exception e, string message)
     {
         Plugin.LogError(e.ToString());
-        // ArchipelagoConsole.LogMessage(message);
+        StateManager.DisplayError(message);
     }
 
     /// <summary>
@@ -195,8 +248,12 @@ public static class ConnectionManager
     /// <param name="reason"></param>
     private static void OnSessionSocketClosed(string reason)
     {
-        Plugin.LogError($"Connection to Archipelago lost: {reason}");
-        Disconnect();
+        if (reason != "")
+        {
+            Plugin.LogError($"Connection to Archipelago lost: {reason}");
+            StateManager.DisplayError($"Connection to Archipelago lost: {reason}");
+            Disconnect();
+        }
     }
 
     public static void SendGoal()
@@ -209,6 +266,42 @@ public static class ConnectionManager
         session.Locations.ScoutLocationsAsync(HintCreationPolicy.CreateAndAnnounceOnce, [apId]);
     }
 
+    public static Dictionary<long, LocationHandling.ItemAtLocation> ScoutLocations()
+    {
+        Dictionary<long, LocationHandling.ItemAtLocation> locationLookup = [];
+        session.Locations.ScoutLocationsAsync([.. session.Locations.AllLocations]).ContinueWith(locationInfoPacket =>
+        {
+            foreach (ItemInfo itemInfo in locationInfoPacket.Result.Values)
+            {
+                locationLookup.Add(itemInfo.LocationId, new LocationHandling.ItemAtLocation(itemInfo.ItemName, itemInfo.ItemId, itemInfo.Player.Name, itemInfo.Player.Game));
+            }
+        }).Wait(TimeSpan.FromSeconds(5.0f));
+        Plugin.LogInfo("Successfully scouted locations for item placements");
+
+        return locationLookup;
+    }
+
+    public static ReadOnlyCollection<ItemInfo> ItemsReceived()
+    {
+        return session.Items.AllItemsReceived;
+    }
+
+    public static ReadOnlyCollection<long> LocationsCollected()
+    {
+        return session.Locations.AllLocationsChecked;
+    }
+
+    public static void StorePosition(MapManager.PlayerCoords playerCoords)
+    {
+        if (!Authenticated)
+        {
+            return;
+        }
+        session.DataStorage[$"{session.ConnectionInfo.Slot}_{session.ConnectionInfo.Team}_gator_coords"] = JObject.FromObject(playerCoords);
+    }
+
+    public static void SendLocallyCheckedLocations() =>
+        session.Locations.CompleteLocationChecksAsync([.. ServerData.CheckedLocations]);
 
     // Connect on title screen
     // Handle and display errors

@@ -23,9 +23,9 @@ public static class LocationHandling
     public static void TriggerLocationListeners()
     {
         IEnumerable<long> locationsCollected;
-        if (GetCollectBehavior())
+        if (IsCollectCountedAsChecked())
         {
-            locationsCollected = ArchipelagoManager.Session.Locations.AllLocationsChecked;
+            locationsCollected = ConnectionManager.LocationsCollected();
         }
         else
         {
@@ -43,17 +43,17 @@ public static class LocationHandling
 
     private static readonly string LocationKeyPrefix = "AP ID: ";
 
-    private static bool GetCollectBehavior()
+    private static bool IsCollectCountedAsChecked()
     {
         return Settings.s.ReadBool("!collect counts as checked", true);
     }
     public static bool IsLocationCollected(string location)
     {
-        if (GetCollectBehavior())
+        if (IsCollectCountedAsChecked())
         {
             try
             {
-                return ArchipelagoManager.Session.Locations.AllLocationsChecked.Contains(GetLocationApId(location));
+                return ConnectionManager.LocationsCollected().Contains(GetLocationApId(location));
             }
             catch (InvalidOperationException)
             {
@@ -75,7 +75,7 @@ public static class LocationHandling
 
     private static Locations.Location GetLocationEntryByApId(long id) => Locations.locationData.First(entry => entry.apLocationId == id);
 
-    private static void CollectLocationByAPID(long id) => ArchipelagoManager.Session.Locations.CompleteLocationChecks(id);
+    private static void CheckLocationByApId(long id) => ConnectionManager.CheckLocationByApId(id);
 
     public static long? GetLocationApIdById(int id)
     {
@@ -127,7 +127,7 @@ public static class LocationHandling
         if (apId is long apIdValue)
         {
             GameData.g.Write(LocationKeyPrefix + apIdValue.ToString(), true);
-            CollectLocationByAPID(apIdValue);
+            CheckLocationByApId(apIdValue);
             AnnounceLocationChecked(id);
             return true;
         }
@@ -153,7 +153,7 @@ public static class LocationHandling
         GameData.g.Write(LocationKeyPrefix + apId.ToString(), true);
         if (!IsLocationCollected(name))
         {
-            CollectLocationByAPID(apId);
+            CheckLocationByApId(apId);
             AnnounceLocationChecked(name);
         }
         return true;
@@ -161,16 +161,28 @@ public static class LocationHandling
 
     public static bool CollectLocationForNPCs(CharacterProfile[] NPCs)
     {
+        //TODO: Filter out known excluded NPCs like NPC_Theatre_Cow1
+        bool excludedOrFiltered = false;
         foreach (CharacterProfile NPC in NPCs)
         {
+            // if (!LocationAccessibilty.IsNPCinExcludedOrFiltered(NPC.id))
+            // {
             Plugin.LogDebug($"NPC {NPC.id} collected!");
             if (CollectLocationByName(NPC.id))
             {
                 Plugin.LogDebug($"{NPC.id} recognized as valid location");
                 return true;
             }
+            // }
+            // else
+            // {
+            //     excludedOrFiltered = true;
+            // }
         }
-        Plugin.LogWarn("No NPCs in the collected location recognized as a valid AP location. Did the DLC release? :P");
+        if (!excludedOrFiltered)
+        {
+            Plugin.LogWarn("No NPCs in the collected location recognized as a valid AP location. Did the DLC release? :P");
+        }
         return false;
     }
 
@@ -178,25 +190,12 @@ public static class LocationHandling
     {
         foreach (long location in Util.FindBoolKeysByPrefix(LocationKeyPrefix).Select(long.Parse))
         {
-            if (!ArchipelagoManager.Session.Locations.AllLocationsChecked.Contains(location))
+            if (!ConnectionManager.LocationsCollected().Contains(location))
             {
                 Plugin.LogDebug("Collecting Saved Location: " + location.ToString());
-                CollectLocationByAPID(location);
+                CheckLocationByApId(location);
             }
         }
-    }
-
-    // TODO: Cache the scout locations in the save file
-    public static void ScoutLocations()
-    {
-        ArchipelagoManager.Session.Locations.ScoutLocationsAsync([.. ArchipelagoManager.Session.Locations.AllLocations]).ContinueWith(locationInfoPacket =>
-        {
-            foreach (ItemInfo itemInfo in locationInfoPacket.Result.Values)
-            {
-                LocationLookup.Add(itemInfo.LocationId, itemInfo);
-            }
-        }).Wait(TimeSpan.FromSeconds(5.0f));
-        Plugin.LogInfo("Successfully scouted locations for item placements");
     }
 
     public static void OnDisconnect()

@@ -12,9 +12,8 @@ static class DSItemPatch
  
     [HarmonyPrefix]
     [HarmonyPatch("RunItemSequence")]
-    static bool PreRunItemSequence(DSItem __instance)
+    static void PreRunItemSequence(DSItem __instance)
     {
-        //TODO: Don't intercept LITTER
         string name;
         if (__instance.item == null || __instance.itemName == "POT?" || __instance.itemName == "POT LID?")
         {
@@ -24,10 +23,10 @@ static class DSItemPatch
         {
             name = __instance.item.name;
         }
-        if (name == "")
+        if (name == "" || name == "LITTER")
         {
-            // Make sure the first Craft Stuff is not caught by this alteration
-            return true;
+            // Make sure the first Craft Stuff and Litter are not caught by this alteration
+            return;
         }
         if (LocationHandling.CollectLocationByName(name))
         {
@@ -41,6 +40,5 @@ static class DSItemPatch
 
             DialogueModifier.AddNewDialogueChunk(__instance.document, dialogueString);
         }
-        return true;
     }
 }

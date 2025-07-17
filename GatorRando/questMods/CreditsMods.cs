@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -8,7 +9,7 @@ static class CreditsMods
     {
         GameObject credits = Util.GetByPath("Center (Playground)/Story Sequences/Post-Credits");
         DialogueSequencer creditsSeq = credits.GetComponent<DialogueSequencer>();
-        creditsSeq.beforeSequence.RemoveListener(ArchipelagoManager.SendCompletion);
-        creditsSeq.beforeSequence.AddListener(ArchipelagoManager.SendCompletion);
+        creditsSeq.beforeSequence.RemoveListener(ConnectionManager.SendGoal);
+        creditsSeq.beforeSequence.AddListener(ConnectionManager.SendGoal);
     }
 }

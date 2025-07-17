@@ -71,4 +71,8 @@
     <EmbeddedResource Include="Sprites/checkered_flag.png" />
     <EmbeddedResource Include="Sprites/giant_socks.png" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data/postPrologueSave.json" />
+  </ItemGroup>
 </Project>

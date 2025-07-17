@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,76 +8,53 @@ public class SettingInput : MonoBehaviour
 {
 	private void OnValidate()
 	{
-        if (this.inputfield == null)
+        if (inputfield == null)
 		{
-			this.inputfield = this.gameObject.GetComponent<InputField>();
+			inputfield = gameObject.GetComponent<InputField>();
 		}
 	}
 
 	private void OnEnable()
 	{
-        this.inputfield = this.gameObject.GetComponent<InputField>();
-		if (saveToGameData)
+        inputfield = gameObject.GetComponent<InputField>();
+		if (saveAsLastConnection)
 		{
-			if (this.inputfield.contentType == InputField.ContentType.IntegerNumber)
-			{
-				this.inputfield.text = GameData.g.ReadInt(this.key).ToString();
-			}
-			else
-			{
-				string currentPrefixAndValue = Util.FindIntKeyByPrefix(this.key);
-				if (currentPrefixAndValue != "")
-				{
-					this.inputfield.text = currentPrefixAndValue.Remove(0,this.key.Length);
-				}
-				else
-				{
-					this.inputfield.text = "";
-				}
-			}	
+			inputfield.text = SaveManager.DisplayLastConnectionData(key);
 		}
 		else
 		{
-			if (this.inputfield.contentType == InputField.ContentType.IntegerNumber)
+			if (inputfield.contentType == InputField.ContentType.IntegerNumber)
 			{
-				this.inputfield.text = Settings.s.ReadInt(this.key).ToString();
+				inputfield.text = Settings.s.ReadInt(key).ToString();
 			}
 			else
 			{
-				this.inputfield.text = Settings.s.ReadString(this.key);
+				inputfield.text = Settings.s.ReadString(key);
 			}
 		}
-		this.setInitialSetting = true;
+		setInitialSetting = true;
 	}
 
 	public void OnValueChanged(string value)
 	{
-        this.inputfield.textComponent.text = this.inputfield.text;
-		if (!this.setInitialSetting)
+        inputfield.textComponent.text = inputfield.text;
+		if (!setInitialSetting)
 		{
 			return;
 		}
-		if (saveToGameData)
+		if (saveAsLastConnection)
 		{
-			if (this.inputfield.contentType == InputField.ContentType.IntegerNumber)
-			{
-				GameData.g.Write(this.key, int.Parse(this.inputfield.text));
-			}
-			else
-			{
-				Util.RemoveIntKeysByPrefix(this.key);
-				GameData.g.Write(this.key + this.inputfield.text, 0);
-			}
+			SaveManager.UpdateLastConnectionData(key, inputfield.text);
 		}
 		else
 		{
-			if (this.inputfield.contentType == InputField.ContentType.IntegerNumber)
+			if (inputfield.contentType == InputField.ContentType.IntegerNumber)
 			{
-				Settings.s.Write(this.key, int.Parse(this.inputfield.text));
+				Settings.s.Write(key, int.Parse(inputfield.text));
 			}
 			else
 			{
-				Settings.s.Write(this.key, this.inputfield.text);
+				Settings.s.Write(key, inputfield.text);
 			}
 		}
 		Settings.s.LoadSettings();
@@ -88,5 +66,5 @@ public class SettingInput : MonoBehaviour
 
 	private bool setInitialSetting;
 
-	public bool saveToGameData;
+	public bool saveAsLastConnection;
 }

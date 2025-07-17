@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando;
@@ -37,7 +38,7 @@ public static class MapManager
     private static void UpdateCoordinates() {
         var currentTime = Time.time;
         var currentCoords = CurrentCoords();
-        ArchipelagoManager.StorePosition(currentCoords);
+        ConnectionManager.StorePosition(currentCoords);
         lastSentCoords = currentCoords;
         lastSentTime = currentTime;
     }

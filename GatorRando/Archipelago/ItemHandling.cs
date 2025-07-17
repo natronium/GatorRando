@@ -21,7 +21,7 @@ public static class ItemHandling
     public static void RegisterItemListener(string itemName, Action listener) => SpecialItemFunctions[itemName] = listener;
     public static void TriggerItemListeners()
     {
-        foreach (ItemInfo itemInfo in ArchipelagoManager.Session.Items.AllItemsReceived)
+        foreach (ItemInfo itemInfo in ConnectionManager.ItemsReceived())
         {
             Items.Item item = GetItemEntryByApId(itemInfo.ItemId);
             if (item.clientNameId is not null && SpecialItemFunctions.ContainsKey(item.clientNameId))
@@ -43,7 +43,7 @@ public static class ItemHandling
     {
         if (isAPName)
         {
-            return ArchipelagoManager.Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApIdFromAPName(itemName));
+            return ConnectionManager.ItemsReceived().Select(info => info.ItemId).Contains(GetItemApIdFromAPName(itemName));
         }
         else
         {
@@ -51,35 +51,21 @@ public static class ItemHandling
             {
                 itemName = "Shield_ScooterBoardGreen";
             }
-            return ArchipelagoManager.Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApIdFromGatorName(itemName));
+            return ConnectionManager.ItemsReceived().Select(info => info.ItemId).Contains(GetItemApIdFromGatorName(itemName));
         }
     }
-    // =>
-    //  ArchipelagoManager.Session.Items.AllItemsReceived.Select(info => info.ItemId).Contains(GetItemApId(itemName));
+
     public static int GetItemUnlockCount(string itemName, bool isAPName = false)
     {
         if (isAPName)
         {
-            return ArchipelagoManager.Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApIdFromAPName(itemName)).Count();
+            return ConnectionManager.ItemsReceived().Where(itemInfo => itemInfo.ItemId == GetItemApIdFromAPName(itemName)).Count();
         }
         else
         {
-            return ArchipelagoManager.Session.Items.AllItemsReceived.Where(itemInfo => itemInfo.ItemId == GetItemApIdFromGatorName(itemName)).Count();
+            return ConnectionManager.ItemsReceived().Where(itemInfo => itemInfo.ItemId == GetItemApIdFromGatorName(itemName)).Count();
         }
     }
-
-    // public static Dictionary<string, int> GetObtainedItems(bool areAPNames = false)
-    // {
-    //     if (areAPNames)
-    //     {
-    //         return Items.itemData.ToDictionary(item => item.name, item => GetItemUnlockCount(item.name));
-    //     }
-    //     else
-    //     {
-    //         return Items.itemData.ToDictionary(item => item.name, item => GetItemUnlockCount(item.clientNameId));
-    //     }
-    // }
-        
 
     public static void ProcessItemQueue()
     {
@@ -89,6 +75,14 @@ public static class ItemHandling
             LocationAccessibilty.UpdateAccessibleLocations();
             var lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
             GameData.g.Write("LastAPItemIndex", lastIndex + 1);
+        }
+    }
+
+    public static void ClearItemQueue()
+    {
+        while (ItemQueue.TryDequeue(out QueuedItem queuedItem))
+        {
+            
         }
     }
 
@@ -126,32 +120,6 @@ public static class ItemHandling
         }
     }
 
-    public static void ReceiveUnreceivedItems()
-    {
-        int lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
-        Plugin.LogDebug($"saved lastindex is {lastIndex}, AP's last index is {ArchipelagoManager.Session.Items.Index}");
-        if (lastIndex < ArchipelagoManager.Session.Items.Index)
-        {
-            foreach (ItemInfo item in ArchipelagoManager.Session.Items.AllItemsReceived.Skip(lastIndex))
-            {
-                ReceiveItem(GetItemEntryByApId(item.ItemId), item.Player.Alias);
-            }
-        }
-
-        while (ArchipelagoManager.Session.Items.Any())
-        {
-            //Clear the queue of all our initial items
-            ArchipelagoManager.Session.Items.DequeueItem();
-        }
-
-        if (ArchipelagoManager.Session.Items.Index >= lastIndex)
-        {
-            GameData.g.Write("LastAPItemIndex", ArchipelagoManager.Session.Items.Index);
-        }
-        else
-        {
-            Plugin.LogWarn("Current Item Index from Server is earlier than save file---is connection incorrect?");
-        }
-    }
+    
 
 }

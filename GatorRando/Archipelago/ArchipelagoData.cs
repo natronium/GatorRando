@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Archipelago.MultiClient.Net.Models;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace GatorRando.Archipelago;
@@ -19,11 +17,11 @@ public class ArchipelagoData
     /// seed for this archipelago data. Can be used when loading a file to verify the session the player is trying to
     /// load is valid to the room it's connecting to.
     /// </summary>
-    private string seed;
+    public string seed;
 
-    private Dictionary<string, object> slotData;
+    public readonly Dictionary<string, string> slotData = [];
 
-    public bool NeedSlotData => slotData == null;
+    public bool NeedSlotData => true; //TODO: Fix slotdata saving
 
     public ArchipelagoData()
     {
@@ -59,27 +57,31 @@ public class ArchipelagoData
     /// <param name="roomSeed">seed name of this session</param>
     public void SetupSession(Dictionary<string, object> roomSlotData, string roomSeed)
     {
-        slotData = roomSlotData;
+        foreach (string key in roomSlotData.Keys)
+        {
+            slotData[key] = roomSlotData[key].ToString();
+        }
         seed = roomSeed;
+
+        SaveManager.LoadAPSaveData();
+    }
+
+    public void PopulateLocationLookupCache()
+    {
         if (LocationLookup.Count == 0)
         {
-            LocationLookup = ScoutLocations();
+            LocationLookup = ConnectionManager.ScoutLocations();
         }
     }
 
-    private Dictionary<long, LocationHandling.ItemAtLocation> ScoutLocations()
+    public string GetSlotDataOption(string optionName)
     {
-        Dictionary<long, LocationHandling.ItemAtLocation> locationLookup = [];
-        ArchipelagoManager.Session.Locations.ScoutLocationsAsync([.. ArchipelagoManager.Session.Locations.AllLocations]).ContinueWith(locationInfoPacket =>
-        {
-            foreach (ItemInfo itemInfo in locationInfoPacket.Result.Values)
-            {
-                locationLookup.Add(itemInfo.LocationId, new LocationHandling.ItemAtLocation(itemInfo.ItemName, itemInfo.ItemId, itemInfo.Player.Name, itemInfo.Player.Game));
-            }
-        }).Wait(TimeSpan.FromSeconds(5.0f));
-        Plugin.LogInfo("Successfully scouted locations for item placements");
+        return slotData[optionName];
+    }
 
-        return locationLookup;
+    public int GetIndex()
+    {
+        return Index;
     }
 
     /// <summary>
@@ -90,5 +92,6 @@ public class ArchipelagoData
     {
         return JsonConvert.SerializeObject(this);
     }
+
 
 }

@@ -12,11 +12,11 @@ static class ItemSearchObjectsPatch
     [HarmonyPatch("GetList")]
     static void PostGetList(ref PersistentObject[] __result)
     {
-        __result = SettingsMods.GetCheckfinderBehavior() switch
+        __result = RandoSettingsMenu.GetCheckfinderBehavior() switch
         {
-            SettingsMods.CheckfinderBehavior.Logic => Array.FindAll(__result, LocationAccessibilty.IsLocationAccessible),
-            SettingsMods.CheckfinderBehavior.ChecksOnly => Array.FindAll(__result, LocationAccessibilty.IsLocationACheck),
-            SettingsMods.CheckfinderBehavior.Original => __result,
+            RandoSettingsMenu.CheckfinderBehavior.Logic => Array.FindAll(__result, LocationAccessibilty.IsLocationAccessible),
+            RandoSettingsMenu.CheckfinderBehavior.ChecksOnly => Array.FindAll(__result, LocationAccessibilty.IsLocationACheck),
+            RandoSettingsMenu.CheckfinderBehavior.Original => __result,
             _ => throw new Exception("Invalid enum value for CheckfinderBehavior"),
         };
     }

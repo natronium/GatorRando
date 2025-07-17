@@ -24,92 +24,18 @@ public class Plugin : BaseUnityPlugin
 
     private void Update()
     {
-        if (ArchipelagoManager.IsFullyConnected)
-        {
-            ItemHandling.ProcessItemQueue();
-            MapManager.UpdateCoordsIfNeeded();
-            BubbleManager.Update();
-        }
+        StateManager.Update();
     }
 
     void OnEnable()
     {
-        Debug.Log("OnEnable called");
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
-        static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            Debug.Log("OnSceneLoaded: " + scene.name);
-            Debug.Log(mode);
-
-            if (scene.name == "Prologue")
-            {
-                TitleScreenMods.Edits();
-            }
-            else if (scene.name == "Island")
-            {
-                SpriteHandler.LoadSprites();
-                ApplyQuestEdits();
-                ApplyUIEdits();
-                BalloonMods.EditBalloonStamina();
-                RockMods.EditRockLayer();
-                // SettingsMods.ForceIntoSettingsMenu();
-                APConnectedUI.ShowAPQuest();
-                Util.PopulatePotPrefabs();
-            }
-
-            static void ApplyQuestEdits()
-            {
-                //Edits to Martin's Tutorial Quest
-                MartinQuestMods.Edits();
-
-                //Edits to Jada's Quest
-                JadaQuestMods.Edits();
-
-                //Edits to Prep Quest
-                GeneQuestMods.Edits();
-                SusanneQuestMods.Edits();
-                AntoneQuestMods.Edits();
-
-                //Edits to Esme's Quest
-                EsmeQuestMods.Edits();
-
-                //Edits to sidequests
-                KasenQuestMods.Edits();
-                SamQuestMods.Edits();
-
-                //Goal Completion Edits
-                CreditsMods.Edits();
-            }
-
-            static void ApplyUIEdits()
-            {
-                //UI Edits
-                TutorialUIMods.Edits();
-                QuestItems.AddItems();
-                InventoryMods.AddQuestItemTab();
-                SettingsMods.Edits();
-                APConnectedUI.ImplementAPConnectionStatusAsQuest();
-            }
-        }
+        // Debug.Log("OnEnable called");
+        SceneManager.sceneLoaded += StateManager.OnSceneLoaded;
     }
 
     void Destroy()
     {
-        ArchipelagoManager.Disconnect();
-    }
-
-    public static void ApplyAPDependentMods()
-    {
-        //Allow Freeplay
-        if (Options.GetOptionBool(Options.Option.StartWithFreeplay))
-        {
-            TutorialQuestMods.StartWithFreeplay();
-        }
-
-        // Junk4Trash Edits
-        Junk4TrashQuestMods.HideCollectedShopLocations();
-        APConnectedUI.HideAPQuest();
+        StateManager.Disconnect();
     }
 
     public static void LogInfo(string infoMessage)

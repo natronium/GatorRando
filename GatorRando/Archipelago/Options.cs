@@ -10,8 +10,7 @@ public static class Options
     {
         try
         {
-            object optionReturn = ArchipelagoManager.LoginInfo.SlotData[OptionName(option)];
-            return optionReturn.ToString() != "0";
+            return ConnectionManager.GetSlotDataOption(OptionName(option)) != "0";
         }
         catch (KeyNotFoundException)
         {

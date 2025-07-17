@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Reflection.Emit;
 using Archipelago.MultiClient.Net.Models;
 using GatorRando.Archipelago;
+using GatorRando.QuestMods;
 using GatorRando.UIMods;
 using HarmonyLib;
 using UnityEngine;
@@ -19,9 +20,15 @@ static class JunkShopPatch
     static string GetDisplayName(string name) => replacementDisplayNames[name];
     static DialogueChunk GetDialogueChunk(string name) => replacementDialogues[name];
 
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(JunkShop.Start))]
+    static void PostStart()
+    {
+        Junk4TrashQuestMods.HideCollectedShopLocations();
+    }
 
     [HarmonyPrefix]
-    [HarmonyPatch("RunShopDialogueSequence")]
+    [HarmonyPatch(nameof(JunkShop.RunShopDialogueSequence))]
     static void PreRunShopDialogueSequence(JunkShop __instance)
     {
         if (replacementSprites.Keys.Count == 0)
@@ -44,7 +51,7 @@ static class JunkShopPatch
     }
 
     [HarmonyTranspiler]
-    [HarmonyPatch("RunShopDialogueSequence", MethodType.Enumerator)]
+    [HarmonyPatch(nameof(JunkShop.RunShopDialogueSequence), MethodType.Enumerator)]
     static IEnumerable<CodeInstruction> TranspileRunShopDialogueSequence(IEnumerable<CodeInstruction> instructions)
     {
         CodeInstruction nop = new(OpCodes.Nop);
@@ -114,10 +121,10 @@ static class JunkShopPatch
     }
 
     [HarmonyTranspiler]
-    [HarmonyPatch("UpdateInventory")]
+    [HarmonyPatch(nameof(JunkShop.UpdateInventory))]
     static IEnumerable<CodeInstruction> TranspileUpdateInventory(IEnumerable<CodeInstruction> instructions)
     {
-        CodeInstruction nop = new(OpCodes.Nop);
+        // CodeInstruction nop = new(OpCodes.Nop);
         int counter = 1;
         foreach (var instruction in instructions)
         {
@@ -138,8 +145,8 @@ static class JunkShopPatch
     }
 
     [HarmonyPrefix]
-    [HarmonyPatch("GetChoiceList")]
-    static bool GetChoiceList(JunkShop __instance, ref string[] __result)
+    [HarmonyPatch(nameof(JunkShop.GetChoiceList))]
+    static bool PreGetChoiceList(JunkShop __instance, ref string[] __result)
     {
         __result = new string[__instance.displayedItemCount + 1];
         __result[0] = __instance.document.FetchString(__instance.cancelChoice, Language.Auto);

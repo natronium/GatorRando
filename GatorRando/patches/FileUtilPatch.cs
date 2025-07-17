@@ -9,22 +9,63 @@ static class FileUtilPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(FileUtil.Read))]
-    static void PreRead(ref bool forceLocal)
+    static bool PreRead(string path, bool forceLocal, ref string __result)
     {
-        forceLocal = true;
+        if (forceLocal)
+        {
+            return true;
+        }
+        __result = File.ReadAllText(path);
+        return false;
     }
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(FileUtil.Write))]
-    static void PreWrite(ref bool forceLocal)
+    static bool PreWrite(string path, bool forceLocal, string contents)
     {
-        forceLocal = true;
+        if (forceLocal)
+        {
+            return true;
+        }
+        File.WriteAllText(path, contents);
+        return false;
     }
 
     [HarmonyPostfix]
     [HarmonyPatch(nameof(FileUtil.WriteSaveData))]
     static void PostWriteSaveData()
     {
-        SaveManager.SaveAPServerData();        
+        SaveManager.WriteCurrentAPServerData();
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(FileUtil.ReadSaveData))]
+    static void PostReadSaveData()
+    {
+        if (ConnectionManager.Authenticated)
+        {
+            SaveManager.ReadCurrentAPServerData();
+        }
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(FileUtil.EraseGameSaveData))]
+    static void PostEraseSaveData()
+    {
+        SaveManager.EraseCurrentAPServerData();
+    }
+
+    [HarmonyPrefix]
+    [HarmonyPatch(nameof(FileUtil.ReadGameSaveDataInfo))]
+    static bool PreReadGameSaveDataInfo()
+    {
+        return ConnectionManager.Authenticated;
+    }
+
+    [HarmonyPrefix]
+    [HarmonyPatch(nameof(FileUtil.DoesFileExist))]
+    static void PreDoesFileExist(ref bool forceLocal)
+    {
+        forceLocal = true;
     }
 }

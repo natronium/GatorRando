@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -5,8 +6,10 @@ using UnityEngine.UI;
 
 namespace GatorRando.UIMods;
 
-static class SettingsMods
+static class RandoSettingsMenu
 {
+    static UISubMenu newSettingsMenu;
+
     public enum CheckfinderBehavior
     {
         Logic,
@@ -76,50 +79,61 @@ static class SettingsMods
                             4,
                             "Connect To Server",
                             "connect to Archipelago game server using player name, server address, and port set above",
-                            () => ArchipelagoManager.InitiateNewAPSession(() =>
-                            {
-                                ReEnableMenuNavigation();
-                                Plugin.ApplyAPDependentMods();
-                            })
+                            StateManager.AttemptConnection
         );
 
             //Text fields for server address and port
-            CreateStringSetting(viewportContent, 4, "Slot Name", "type in slot name", 16, true, true);
-            CreateStringSetting(viewportContent, 4, "Server Address:Port", "type in Archipelago server address formated as address:port", 999, true, true);
-            CreateStringSetting(viewportContent, 5, "Password", "type in Archipelago server password (if no password, leave blank)", 30, true, true, InputField.ContentType.Password);
+            CreateStringSetting(viewportContent, 4, SaveManager.slotNameString, "type in slot name", 16, true, true);
+            CreateStringSetting(viewportContent, 5, SaveManager.serverString, "type in Archipelago server address formated as address:port", 999, true, true);
+            CreateStringSetting(viewportContent, 6, SaveManager.passwordString, "type in Archipelago server password (if no password, leave blank)", 30, true, true, InputField.ContentType.Password);
+
+            // Add Toggle so that players can choose whether they want !collect-ed locations to count as checked or not
+            CreateSettingsToggle(viewportContent, 8, "!collect counts as Checked", "set before connecting to server. if checked, locations that are !collect-ed by other seeds count as checked for advancing quests." +
+            "if unchecked, uses what locations as saved in the save file.");
+
+            CreateSettingsToggle(viewportContent, 9, "Skip Prologue", "set before starting a new game. If true, will skip the prologue.");
+
+            //Connect button
+            CreateSettingsButton(viewportContent,
+                            11,
+                            "Delete all AP Saves",
+                            "delete all AP saves for Lil Gator Game. useful for cleaning up old runs",
+                            SaveManager.EraseAllAPSaveData
+        );
         }
 
         //Borrow character rename for player name
         // ReworkPlayerRename(viewportContent);
 
-        // Add Toggle so that players can choose whether they want !collect-ed locations to count as checked or not
-        CreateSettingsToggle(viewportContent, 8, "!collect counts as Checked", "set before connecting to server. if checked, locations that are !collect-ed by other seeds count as checked for advancing quests." +
-        "if unchecked, uses what locations as saved in the save file.");
-        CreateSettingsOptions(viewportContent, 9, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
+
+
+        CreateSettingsOptions(viewportContent, 10, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
             "This setting changes how these tools work. \"logic\": use randomizer logic to show only valid checks, \"checks only\": show all possible checks, \"original\": original behavior", ["logic", "checks only", "original"]);
 
-
-
-
-
-        return newMenu.GetComponent<UISubMenu>();
+        newSettingsMenu = newMenu.GetComponent<UISubMenu>();
+        return newSettingsMenu;
     }
 
-
-
-    public static void ForceIntoSettingsMenu()
+    public static void LeaveRandoSettingsMenu()
     {
-        // Force into settings menu
-        UIMenus uIMenus = Util.GetByPath("Canvas").GetComponent<UIMenus>();
-        uIMenus.OnPause();
-        UISubMenu settingsMenu = Util.GetByPath(GetCurrentSettingsPath()).GetComponent<UISubMenu>();
-        settingsMenu.Activate();
+        newSettingsMenu.Deactivate();
     }
-    private static void ReEnableMenuNavigation()
-    {
-        Util.GetByPath(GetCurrentSettingsPath() + "Viewport/Content/Back").SetActive(true);
-        Util.GetByPath(GetCurrentSettingsPath() + "Viewport/Content/Back To Title").SetActive(false);
-    }
+
+
+
+    // public static void ForceIntoSettingsMenu()
+    // {
+    //     // Force into settings menu
+    //     UIMenus uIMenus = Util.GetByPath("Canvas").GetComponent<UIMenus>();
+    //     uIMenus.OnPause();
+    //     UISubMenu settingsMenu = Util.GetByPath(GetCurrentSettingsPath()).GetComponent<UISubMenu>();
+    //     settingsMenu.Activate();
+    // }
+    // private static void ReEnableMenuNavigation()
+    // {
+    //     Util.GetByPath(GetCurrentSettingsPath() + "Viewport/Content/Back").SetActive(true);
+    //     Util.GetByPath(GetCurrentSettingsPath() + "Viewport/Content/Back To Title").SetActive(false);
+    // }
     public static void Edits()
     {
         // //Header for Display, etc. Settings
@@ -185,7 +199,7 @@ static class SettingsMods
     //     playerName.name = "Slot Name";
     // }
 
-    private static void CreateStringSetting(GameObject newParent, int siblingIndex, string name, string description, int charLimit, bool shrinkToFit, bool saveToGameData, InputField.ContentType contentType = InputField.ContentType.Standard)
+    private static void CreateStringSetting(GameObject newParent, int siblingIndex, string name, string description, int charLimit, bool shrinkToFit, bool saveAsLastConnection, InputField.ContentType contentType = InputField.ContentType.Standard)
     {
         GameObject autoname = Util.GetByPath(GetCurrentSettingsPath() + "Viewport/Content/AutoName");
         GameObject field = GameObject.Instantiate(autoname, newParent.transform);
@@ -212,7 +226,7 @@ static class SettingsMods
         inputfield.onValueChanged.AddListener(input.OnValueChanged);
         field.AddComponent<SelectOnHighlight>();
         input.key = name.ToLower();
-        input.saveToGameData = saveToGameData;
+        input.saveAsLastConnection = saveAsLastConnection;
         UIDescription descript = field.GetComponent<UIDescription>();
         descript.document = null;
         descript.descriptionText = description;
@@ -289,4 +303,6 @@ static class SettingsMods
     }
 
     public static CheckfinderBehavior GetCheckfinderBehavior() => (CheckfinderBehavior)Settings.s.ReadInt("megaphone and texting logic?");
+
+    public static bool IsPrologueToBeSkipped() => Settings.s.ReadBool("skip prologue", true);
 }
