@@ -11,5 +11,6 @@ public static class UIEditMod
         QuestItems.AddItems();
         InventoryMods.AddQuestItemTab();
         RandoSettingsMenu.CreateNewSettingsMenu();
+        PauseMenuMods.AddRandoSettingsMenuButton();
     }
 }

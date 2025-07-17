@@ -90,7 +90,7 @@ static class RandoSettingsMenu
             CreateSettingsToggle(viewportContent, 8, "!collect counts as Checked", "set before connecting to server. if checked, locations that are !collect-ed by other seeds count as checked for advancing quests." +
             "if unchecked, uses what locations as saved in the save file.");
 
-            CreateSettingsToggle(viewportContent, 9, "Skip Prologue", "set before starting a new game. If true, will skip the prologue.");
+            CreateSettingsToggle(viewportContent, 9, "Skip Prologue", "set before starting a new game. If true, will skip the prologue and set the player name to the slot name.");
 
             //Connect button
             CreateSettingsButton(viewportContent,
@@ -116,6 +116,11 @@ static class RandoSettingsMenu
     public static void LeaveRandoSettingsMenu()
     {
         newSettingsMenu.Deactivate();
+    }
+
+    public static void EnterRandoSettingsMenu()
+    {
+        newSettingsMenu.Activate();
     }
 
 
