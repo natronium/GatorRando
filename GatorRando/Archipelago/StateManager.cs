@@ -136,14 +136,17 @@ public static class StateManager
         backToTitle.DoLoadScene();
     }
 
-    public static void StartNewGame()
+    public static void StartNewGame(int index)
     {
         if (RandoSettingsMenu.IsPrologueToBeSkipped())
         {
+            //Skip the prologue by loading a built-in post prologue save file
             currentState = State.NewGameSkipPrologue;
+            SaveManager.LoadPostPrologueSaveData(index);
         }
         else
         {
+            //Don't modify game flow if going into prologue
             currentState = State.NewGamePrologue;
         }
     }

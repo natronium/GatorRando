@@ -18,7 +18,7 @@ static class SaveFileScreenPatch
             }
             else
             {
-                StateManager.StartNewGame();
+                StateManager.StartNewGame(index);
             }
         }
     }

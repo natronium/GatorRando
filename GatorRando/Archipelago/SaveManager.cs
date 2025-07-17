@@ -1,4 +1,5 @@
 using System.IO;
+using System.Reflection;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -6,15 +7,6 @@ namespace GatorRando.Archipelago;
 
 public static class SaveManager
 {
-    // Goals:
-    // Create a save or set of saves per seed
-    // Allow you to load an existing save for that seed or start a new one
-    // Cache location scouts in save
-    // Delete all AP saves function
-
-    //TODO: Load last connection info on startup
-
-
     private static readonly string saveFolderPath = Path.Combine(Application.persistentDataPath, "AP_Saves");
 
     private static readonly string[] apServerDataPaths = new string[3];
@@ -57,12 +49,12 @@ public static class SaveManager
     {
         File.WriteAllText(path, ConnectionManager.ServerData.ToString());
     }
-    
+
     private static void WriteLastConnectionData()
     {
         WriteAPServerData(lastConnectionFile);
     }
-    
+
 
     public static void WriteCurrentAPServerData()
     {
@@ -147,7 +139,18 @@ public static class SaveManager
         return "";
     }
 
-    
-
-    
+    public static void LoadPostPrologueSaveData(int index)
+    {
+        string postPrologueSave = "";
+        var assembly = Assembly.GetExecutingAssembly();
+        using (var reader = new StreamReader(assembly.GetManifestResourceStream("GatorRando.Data.postPrologueSave.json")))
+        {
+            postPrologueSave = reader.ReadToEnd();
+        }
+        File.WriteAllText(FileUtil.saveFilePaths[index], postPrologueSave);
+        GameSaveData gameSaveData = FileUtil.ReadSaveData(index);
+        gameSaveData.playerName = ConnectionManager.SlotName();
+        FileUtil.WriteSaveData(gameSaveData, index);
+        FileUtil.UpdateSaveDataInfo(gameSaveData, index);
+    }
 }

@@ -35,14 +35,17 @@ static class FileUtilPatch
     [HarmonyPatch(nameof(FileUtil.WriteSaveData))]
     static void PostWriteSaveData()
     {
-        SaveManager.WriteCurrentAPServerData();
+        if (StateManager.GetCurrentState() != StateManager.State.NewGameSkipPrologue)
+        {
+            SaveManager.WriteCurrentAPServerData();
+        }
     }
 
     [HarmonyPostfix]
     [HarmonyPatch(nameof(FileUtil.ReadSaveData))]
     static void PostReadSaveData()
     {
-        if (ConnectionManager.Authenticated)
+        if (ConnectionManager.Authenticated && StateManager.GetCurrentState() != StateManager.State.NewGameSkipPrologue)
         {
             SaveManager.ReadCurrentAPServerData();
         }
