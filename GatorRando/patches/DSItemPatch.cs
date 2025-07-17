@@ -7,10 +7,8 @@ namespace GatorRando.Patches;
 [HarmonyPatch(typeof(DSItem))]
 static class DSItemPatch
 {
-    
- 
     [HarmonyPrefix]
-    [HarmonyPatch("RunItemSequence")]
+    [HarmonyPatch(nameof(DSItem.RunItemSequence))]
     static void PreRunItemSequence(DSItem __instance)
     {
         string name;
@@ -29,6 +27,7 @@ static class DSItemPatch
         }
         if (LocationHandling.CollectLocationByName(name))
         {
+            DialogueModifier.SetModifiedDialogue(true);
             LocationHandling.ItemAtLocation itemAtLocation = LocationHandling.GetItemAtLocation(name);
             __instance.isRealItem = false;
             string dialogueString = DialogueModifier.GetDialogueStringForItemAtLocation(itemAtLocation);
@@ -40,4 +39,5 @@ static class DSItemPatch
             DialogueModifier.AddNewDialogueChunk(__instance.document, dialogueString);
         }
     }
+
 }

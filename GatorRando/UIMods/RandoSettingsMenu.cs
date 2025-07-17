@@ -94,7 +94,7 @@ static class RandoSettingsMenu
 
             //Connect button
             CreateSettingsButton(viewportContent,
-                            11,
+                            12,
                             "Delete all AP Saves",
                             "delete all AP saves for Lil Gator Game. useful for cleaning up old runs",
                             SaveManager.EraseAllAPSaveData
@@ -105,8 +105,8 @@ static class RandoSettingsMenu
         // ReworkPlayerRename(viewportContent);
 
 
-
-        CreateSettingsOptions(viewportContent, 10, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
+        CreateSettingsToggle(viewportContent, 9, "Pause Speedrun for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
+        CreateSettingsOptions(viewportContent, 11, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
             "This setting changes how these tools work. \"logic\": use randomizer logic to show only valid checks, \"checks only\": show all possible checks, \"original\": original behavior", ["logic", "checks only", "original"]);
 
         newSettingsMenu = newMenu.GetComponent<UISubMenu>();
@@ -309,4 +309,6 @@ static class RandoSettingsMenu
     public static CheckfinderBehavior GetCheckfinderBehavior() => (CheckfinderBehavior)Settings.s.ReadInt("megaphone and texting logic?");
 
     public static bool IsPrologueToBeSkipped() => Settings.s.ReadBool("skip prologue", true);
+
+    public static bool PauseForItemGet() => Settings.s.ReadBool("Pause Speedrun for Item Get Dialogues".ToLower(), true);
 }

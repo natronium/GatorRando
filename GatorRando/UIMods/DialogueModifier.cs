@@ -5,6 +5,12 @@ namespace GatorRando.UIMods;
 
 public static class DialogueModifier
 {
+    public static bool inModifiedDialogue = false;
+    public static void SetModifiedDialogue(bool modified)
+    {
+        inModifiedDialogue = modified;
+    }
+    
     public static DialogueChunk AddNewDialogueChunk(MultilingualTextDocument document, string dialogueString)
     {
         DialogueLine newDialogueLine = new()

@@ -57,6 +57,8 @@ static class JunkShopPatch
         int counter = 1;
 
         List<CodeInstruction> secondPatch = [
+            new CodeInstruction(OpCodes.Ldc_I4_1),
+            CodeInstruction.Call(typeof(DialogueModifier), nameof(DialogueModifier.SetModifiedDialogue),[typeof(bool)]),
             CodeInstruction.Call(typeof(UnityEngine.Object), "get_name"),
             CodeInstruction.Call(typeof(JunkShopPatch), nameof(GetSprite), [typeof(string)]),
             new CodeInstruction(OpCodes.Ldloc_S, 7),
@@ -107,7 +109,6 @@ static class JunkShopPatch
 
                 _ => instruction
             };
-            /// TODO: Come in and swap out displayName
             if (counter == 245){
                 foreach (CodeInstruction instr in secondPatch)
                 {
