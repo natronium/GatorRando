@@ -12,5 +12,7 @@ public static class UIEditMod
         InventoryMods.AddQuestItemTab();
         RandoSettingsMenu.CreateNewSettingsMenu();
         PauseMenuMods.AddRandoSettingsMenuButton();
+        SpeedrunTimerDisplay.OverwriteSpeedrunTimerWithSavedTime();
+        SpeedrunTimerDisplay.ShowOrHideTimer();
     }
 }

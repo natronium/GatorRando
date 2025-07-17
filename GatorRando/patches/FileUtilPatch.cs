@@ -1,5 +1,6 @@
 using System.IO;
 using GatorRando.Archipelago;
+using GatorRando.UIMods;
 using HarmonyLib;
 
 namespace GatorRando.Patches;
@@ -29,6 +30,13 @@ static class FileUtilPatch
         }
         File.WriteAllText(path, contents);
         return false;
+    }
+
+    [HarmonyPrefix]
+    [HarmonyPatch(nameof(FileUtil.WriteSaveData))]
+    static void PreWriteSaveData()
+    {
+        SpeedrunTimerDisplay.AddTimerToSave();
     }
 
     [HarmonyPostfix]

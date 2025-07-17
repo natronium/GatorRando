@@ -94,7 +94,7 @@ static class RandoSettingsMenu
 
             //Connect button
             CreateSettingsButton(viewportContent,
-                            12,
+                            13,
                             "Delete all AP Saves",
                             "delete all AP saves for Lil Gator Game. useful for cleaning up old runs",
                             SaveManager.EraseAllAPSaveData
@@ -105,8 +105,9 @@ static class RandoSettingsMenu
         // ReworkPlayerRename(viewportContent);
 
 
-        CreateSettingsToggle(viewportContent, 9, "Pause Speedrun for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
-        CreateSettingsOptions(viewportContent, 11, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
+        CreateSettingsToggle(viewportContent, 10, "Pause Speedrun for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
+        CreateSettingsToggle(viewportContent, 11, "Hide Speedrun Timer", "Hides the speedrun timer (if you want to skip dialogue, but not see the timer)");
+        CreateSettingsOptions(viewportContent, 12, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
             "This setting changes how these tools work. \"logic\": use randomizer logic to show only valid checks, \"checks only\": show all possible checks, \"original\": original behavior", ["logic", "checks only", "original"]);
 
         newSettingsMenu = newMenu.GetComponent<UISubMenu>();
@@ -122,86 +123,6 @@ static class RandoSettingsMenu
     {
         newSettingsMenu.Activate();
     }
-
-
-
-    // public static void ForceIntoSettingsMenu()
-    // {
-    //     // Force into settings menu
-    //     UIMenus uIMenus = Util.GetByPath("Canvas").GetComponent<UIMenus>();
-    //     uIMenus.OnPause();
-    //     UISubMenu settingsMenu = Util.GetByPath(GetCurrentSettingsPath()).GetComponent<UISubMenu>();
-    //     settingsMenu.Activate();
-    // }
-    // private static void ReEnableMenuNavigation()
-    // {
-    //     Util.GetByPath(GetCurrentSettingsPath() + "Viewport/Content/Back").SetActive(true);
-    //     Util.GetByPath(GetCurrentSettingsPath() + "Viewport/Content/Back To Title").SetActive(false);
-    // }
-    public static void Edits()
-    {
-        // //Header for Display, etc. Settings
-        // CreateSettingsHeader(3, "General Settings");
-
-        // //Header for AP Settings
-        // CreateSettingsHeader(3, "Archipelago");
-
-        // //Connect button
-        // CreateSettingsButton(
-        //                     4,
-        //                     "Connect To Server",
-        //                     "connect to Archipelago game server using player name, server address, and port set above",
-        //                     () => ArchipelagoManager.InitiateNewAPSession(() =>
-        //                     {
-        //                         ReEnableMenuNavigation();
-        //                         Plugin.ApplyAPDependentMods();
-        //                     })
-        // );
-
-        // //Text fields for server address and port
-        // CreateStringSetting(4, "Server Address:Port", "type in Archipelago server address formated as address:port", 999, true, true);
-        // CreateStringSetting(5, "Password", "type in Archipelago server password (if no password, leave blank)", 30, true, true, InputField.ContentType.Password);
-
-        // //Borrow character rename for player name
-        // ReworkPlayerRename();
-
-        // // Disallow players starting gameplay before connecting to server
-        // Util.GetByPath(currentSettingsPath + "Viewport/Content/Back").SetActive(false);
-        // LoadScene backToTitle = Util.GetByPath("Canvas/Pause Menu/Pause Content/Back to Title").GetComponent<LoadScene>();
-        // CreateSettingsButton(
-        //                     2,
-        //                     "Back To Title",
-        //                     "return to title if you are unable to connect to an Archipelago game server (or chose the wrong save file)",
-        //                     backToTitle.DoLoadScene
-        //                     );
-
-        // // Add Disconnect to Back To Title button
-        // Util.GetByPath("Canvas/Pause Menu/Pause Content/Back to Title").GetComponent<Button>().onClick.AddListener(ArchipelagoManager.Disconnect);
-
-        // // Add Toggle so that players can choose whether they want !collect-ed locations to count as checked or not
-        // CreateSettingsToggle(8, "!collect counts as Checked", "set before connecting to server. if checked, locations that are !collect-ed by other seeds count as checked for advancing quests." +
-        //     "if unchecked, uses what locations as saved in the save file.");
-        // CreateSettingsOptions(9, "Megaphone and Texting Logic?","The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
-        //     "This setting changes how these tools work. \"logic\": use randomizer logic to show only valid checks, \"checks only\": show all possible checks, \"original\": original behavior", ["logic","checks only","original"]);
-    }
-
-    // private static void ReworkPlayerRename(GameObject newParent)
-    // {
-    //     GameObject originalPlayerName = Util.GetByPath(GetCurrentSettingsPath() + "Viewport/Content/Rename Character");
-    //     GameObject playerName = GameObject.Instantiate(originalPlayerName, newParent.transform);
-    //     playerName.transform.SetSiblingIndex(4);
-    //     GameObject playerLabel = playerName.transform.Find("Label").gameObject;
-    //     Object.Destroy(playerLabel.GetComponent<MLText>());
-    //     Text playerLabelText = playerLabel.GetComponent<Text>();
-    //     playerLabelText.text = "Set Slot Name: " + GameData.g.gameSaveData.playerName; // Get player name and display it here
-    //     UIDescription playerDescript = playerName.AddComponent(typeof(UIDescription)) as UIDescription;
-    //     playerDescript.descriptionText = "set player name to AP slot name";
-    //     GameObject customizeButton = Util.GetByPath(GetCurrentSettingsPath() + "Viewport/Content/Customize Splits");
-    //     UIDescription descript = customizeButton.GetComponent<UIDescription>();
-    //     playerDescript.prefab = descript.prefab;
-    //     playerName.SetActive(true);
-    //     playerName.name = "Slot Name";
-    // }
 
     private static void CreateStringSetting(GameObject newParent, int siblingIndex, string name, string description, int charLimit, bool shrinkToFit, bool saveAsLastConnection, InputField.ContentType contentType = InputField.ContentType.Standard)
     {
@@ -311,4 +232,5 @@ static class RandoSettingsMenu
     public static bool IsPrologueToBeSkipped() => Settings.s.ReadBool("skip prologue", true);
 
     public static bool PauseForItemGet() => Settings.s.ReadBool("Pause Speedrun for Item Get Dialogues".ToLower(), true);
+    public static bool HideSpeedrunTimer() => Settings.s.ReadBool("hide speedrun timer", true);
 }

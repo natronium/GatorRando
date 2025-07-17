@@ -116,7 +116,7 @@ public static class Util
         {
             return "";
         }
-        return keys[0];
+        return keys[0].Substring(prefix.Length);
     }
 
     public static List<string> FindBoolKeysByPrefix(string prefix)
