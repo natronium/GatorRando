@@ -36,9 +36,9 @@ public static class SpeedrunTimerDisplay
 
     public static void ShowOrHideTimer()
     {
-        GameObject speedrunTimer = SpeedrunTimer.instance.timerDisplay.gameObject;
-        GameObject speedrunIcon = SpeedrunTimer.instance.icon.gameObject;
-        speedrunTimer.SetActive(!RandoSettingsMenu.HideSpeedrunTimer());
-        speedrunIcon.SetActive(!RandoSettingsMenu.HideSpeedrunTimer());
+        if (SpeedrunData.isSpeedrunMode)
+        {
+            SpeedrunTimer.instance.gameObject.SetActive(!RandoSettingsMenu.HideSpeedrunTimer());
+        }
     }
 }
