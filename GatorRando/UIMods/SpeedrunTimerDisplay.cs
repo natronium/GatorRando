@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace GatorRando.UIMods;
@@ -14,7 +15,14 @@ public static class SpeedrunTimerDisplay
 
     private static double ReadTimerFromSave()
     {
-        return double.Parse(Util.FindIntKeyByPrefix(SpeedrunTimerPrefix));
+        try
+        {
+            return double.Parse(Util.FindIntKeyByPrefix(SpeedrunTimerPrefix));
+        }
+        catch (FormatException)
+        {
+            return 0;
+        }
     }
 
     public static void OverwriteSpeedrunTimerWithSavedTime()
