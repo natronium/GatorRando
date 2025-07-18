@@ -83,7 +83,7 @@ public static class ConnectionManager
     /// </summary>
     private static void SetupSession()
     {
-        // session.MessageLog.OnMessageReceived += message => ArchipelagoConsole.LogMessage(message.ToString());
+        session.MessageLog.OnMessageReceived += message => ArchipelagoConsole.LogMessage(message.ToString());
         
         session.Socket.ErrorReceived += OnSessionErrorReceived;
         session.Socket.SocketClosed += OnSessionSocketClosed;
@@ -239,6 +239,7 @@ public static class ConnectionManager
     {
         Plugin.LogError(e.ToString());
         StateManager.DisplayError(message);
+        StateManager.Disconnect();
     }
 
     /// <summary>

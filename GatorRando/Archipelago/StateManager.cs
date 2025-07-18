@@ -90,6 +90,7 @@ public static class StateManager
             Disconnect();
         }
         currentState = State.TitleScreenAttemptingConnection;
+        DisplayMessage("Attempting Connection to server");
         ConnectionManager.InitiateNewAPSession();
     }
 
@@ -99,9 +100,14 @@ public static class StateManager
         DisplayError(error);
     }
 
+    public static void DisplayMessage(string message)
+    {
+        ArchipelagoConsole.LogMessage(message);
+    }
+
     public static void DisplayError(string error)
     {
-        //TODO Error display
+        ArchipelagoConsole.LogError(error);
     }
 
     public static void SucceededConnection()
@@ -132,6 +138,7 @@ public static class StateManager
 
     private static void QuitToTitleScreen()
     {
+        SaveManager.ForceSave();
         LoadScene backToTitle = Util.GetByPath("Canvas/Pause Menu/Pause Content/Back to Title").GetComponent<LoadScene>();
         backToTitle.DoLoadScene();
     }

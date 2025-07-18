@@ -15,12 +15,18 @@ public class Plugin : BaseUnityPlugin
         Instance = this;
         var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
         harmony.PatchAll(); // automatically patch based on harmony attributes
-        Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+        ArchipelagoConsole.Awake();
+        ArchipelagoConsole.LogMessage($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
     }
 
     private void Update()
     {
         StateManager.Update();
+    }
+
+    private void OnGUI()
+    {
+        ArchipelagoConsole.OnGUI();
     }
 
     void OnEnable()

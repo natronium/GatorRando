@@ -153,4 +153,9 @@ public static class SaveManager
         FileUtil.WriteSaveData(gameSaveData, index);
         FileUtil.UpdateSaveDataInfo(gameSaveData, index);
     }
+
+    public static void ForceSave()
+    {
+        GameData.g.WriteToDisk(false);
+    }
 }
