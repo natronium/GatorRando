@@ -14,6 +14,8 @@ public static class BubbleManager
     private static readonly int maxItemMessages = 5;
     private static string lastMessage = "";
     private static TimeSpan lastMessageExpiration = TimeSpan.FromSeconds(6);
+    private static Dictionary<UnimportantMessageType, DateTime> lastUnimportantMessageTime = [];
+    private static TimeSpan unimportantMessageExpiration = TimeSpan.FromMinutes(10);
 
     public enum BubbleType
     {
@@ -21,6 +23,17 @@ public static class BubbleManager
         LocationChecked,
         Alert,
         Unimportant
+    }
+
+    public enum UnimportantMessageType
+    {
+        Race,
+        Chest,
+        MC,
+        WW,
+        LA,
+        OoT,
+        TP,
     }
 
     private static Queue<string> GetBubbleQueue(BubbleType bubbleType) => bubbleType switch
@@ -40,7 +53,21 @@ public static class BubbleManager
             GetBubbleQueue(bubbleType).Enqueue(dialogueString);
             lastMessage = dialogueString;
         }
-    } 
+    }
+
+    public static void QueueUnimportantBubble(string dialogueString, UnimportantMessageType unimportantType)
+    {
+        if (lastUnimportantMessageTime.ContainsKey(unimportantType))
+        {
+            if (DateTime.UtcNow - lastUnimportantMessageTime[unimportantType] <= unimportantMessageExpiration)
+            {
+                // This message has been shown too recently, don't queue it
+                return;
+            }
+        }
+        QueueBubble(dialogueString, BubbleType.Unimportant);
+        lastUnimportantMessageTime[unimportantType] = DateTime.UtcNow;
+    }
 
     private static void DequeueBubble(BubbleType bubbleType)
     {

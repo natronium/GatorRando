@@ -17,14 +17,14 @@ static class BreakableObjectMultiPatch
         {
             if (!ChestManager.CheckIfChestBreakable())
             {
-                BubbleManager.QueueBubble("I need a KEY before I can unlock chests...", BubbleManager.BubbleType.Alert);
+                BubbleManager.QueueUnimportantBubble("I need a KEY before I can unlock chests...", BubbleManager.UnimportantMessageType.Chest);
                 return false;
             }
             else
             {
                 if (Options.GetOptionBool(Options.Option.LockChestsBehindKey))
                 {
-                    BubbleManager.QueueBubble("Keys are reusable, so chests are easy to open!", BubbleManager.BubbleType.Unimportant);
+                    BubbleManager.QueueUnimportantBubble("Keys are reusable, so chests are easy to open!", BubbleManager.UnimportantMessageType.Chest);
                 }
                 else
                 {

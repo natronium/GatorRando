@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GatorRando.Archipelago;
+using GatorRando.UIMods;
 
 namespace GatorRando;
 
@@ -126,5 +127,19 @@ public static class PotManager
             }
         }
         return "Pots are easy to break!";
+    }
+
+    public static BubbleManager.UnimportantMessageType GetPotUnimportantMessageType(int id)
+    {
+        PotType? potType = GetPotType(id);
+        return potType switch
+        {
+            PotType.MC => BubbleManager.UnimportantMessageType.MC,
+            PotType.WW => BubbleManager.UnimportantMessageType.WW,
+            PotType.LA => BubbleManager.UnimportantMessageType.LA,
+            PotType.OoT => BubbleManager.UnimportantMessageType.OoT,
+            PotType.TP => BubbleManager.UnimportantMessageType.TP,
+            _ => throw new System.NotImplementedException(),
+        };
     }
 }

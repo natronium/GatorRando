@@ -23,7 +23,8 @@ static class BreakableObjectPatch
             }
             else
             {
-                BubbleManager.QueueBubble(PotManager.GetPotString(__instance.id), BubbleManager.BubbleType.Unimportant);
+                BubbleManager.UnimportantMessageType unimportantMessageType = PotManager.GetPotUnimportantMessageType(__instance.id);
+                BubbleManager.QueueUnimportantBubble(PotManager.GetPotString(__instance.id), unimportantMessageType);
             }
         }
         return true;
