@@ -35,6 +35,12 @@ public class Plugin : BaseUnityPlugin
         SceneManager.sceneLoaded += StateManager.OnSceneLoaded;
     }
 
+    void OnApplicationQuit()
+    {
+        LogDebug("Application quitting");
+        StateManager.Disconnect();
+    }
+
     void Destroy()
     {
         StateManager.Disconnect();
