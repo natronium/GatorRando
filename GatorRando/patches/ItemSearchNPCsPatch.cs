@@ -46,7 +46,7 @@ static class ItemSearchNPCsPatch
             _ => throw new Exception("Invalid enum value for CheckfinderBehavior"),
         };
 
-        __result =  [.. sideQuestActors, .. filteredMainActors];
+        __result = [.. sideQuestActors, .. filteredMainActors];
 
         // foreach(DialogueActor actor in __result){
         //     Plugin.LogInfo("ID:" + actor.profile.id + ", Parent:" + actor.transform.parent.name);
@@ -55,7 +55,7 @@ static class ItemSearchNPCsPatch
 
     [HarmonyPostfix]
     [HarmonyPatch("IsValid")]
-    static void PostIsValid(DialogueActor item, ref bool __result)
+    static void PostIsValid(ItemSearchNPCs __instance, DialogueActor item, ref bool __result)
     {
         __result = __result && item.gameObject.activeInHierarchy;
         string gatorName = LocationAccessibilty.ConvertDAToGatorName(item);
@@ -64,9 +64,21 @@ static class ItemSearchNPCsPatch
         {
             "Tutorial Avery" => !checks.Select(LocationHandling.IsLocationCollected).All(b => b),
             "Tutorial Stick Jill" => !checks.Select(LocationHandling.IsLocationCollected).All(b => b),
-            "Tutorial End Jill" => !checks.Select(LocationHandling.IsLocationCollected).All(b => b),
+            "Tutorial End Jill" => HandleTutorialEndJill(__instance, checks),
             "Tutorial Martin" => !checks.Select(LocationHandling.IsLocationCollected).All(b => b),
             _ => __result,
         };
+    }
+
+    static bool HandleTutorialEndJill(ItemSearchNPCs thisItemSearchNPCs, string[] checks)
+    {
+        if (thisItemSearchNPCs.GetList().First(da => LocationAccessibilty.ConvertDAToGatorName(da) == "NPC_TutIsland_Duck").gameObject.activeInHierarchy)
+        {
+            return false;
+        }
+        else
+        {
+            return !checks.Select(LocationHandling.IsLocationCollected).All(b => b);
+        }
     }
 }
