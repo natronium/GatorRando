@@ -60,6 +60,13 @@ static class FileUtilPatch
     }
 
     [HarmonyPostfix]
+    [HarmonyPatch(nameof(FileUtil.CopyGameSaveData))]
+    static void PostEraseSaveData(int sourceIndex, int targetIndex)
+    {
+        SaveManager.CopyAPServerData(sourceIndex, targetIndex);
+    }
+
+    [HarmonyPostfix]
     [HarmonyPatch(nameof(FileUtil.EraseGameSaveData))]
     static void PostEraseSaveData()
     {

@@ -61,6 +61,11 @@ public static class SaveManager
         WriteAPServerData(apServerDataPaths[GameData.g.saveFileSlot]);
     }
 
+    public static void CopyAPServerData(int sourceIndex, int targetIndex)
+    {
+        File.Copy(apServerDataPaths[sourceIndex], apServerDataPaths[targetIndex]);
+    }
+
     public static void ReadAPServerData(string path)
     {
         if (File.Exists(path))
