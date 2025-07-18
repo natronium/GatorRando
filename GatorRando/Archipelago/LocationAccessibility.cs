@@ -224,16 +224,17 @@ public static class LocationAccessibilty
     public static bool IsLocationAccessible(PersistentObject gatorObject)
     {
         Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(gatorObject);
-        if (LocationHandling.IsLocationCollected(gatorObject.id))
-        {
-            return false;
-        }
         
         if (persistentObjectType == Util.PersistentObjectType.Pot || persistentObjectType == Util.PersistentObjectType.Chest || persistentObjectType == Util.PersistentObjectType.Race)
         {
+            int gatorID = LocationHandling.ConvertTannerIds(gatorObject.id);
             try
             {
-                return AccessibleLocations.Contains(LocationHandling.GetLocationApId(gatorObject.id));
+                if (LocationHandling.IsLocationCollected(gatorID))
+                {
+                    return false;
+                }
+                return AccessibleLocations.Contains(LocationHandling.GetLocationApId(gatorID));
             }
             catch (InvalidOperationException)
             {
@@ -264,7 +265,7 @@ public static class LocationAccessibilty
         }
         else
         {
-            Plugin.LogWarn($"Tried to check accessibility of location {gatorObject.id}, which is not a Pot, Race, Chest, or a BreakableObject.");
+            Plugin.LogWarn($"Tried to check if location {gatorObject.id} is a check, which is not a Pot, Race, Chest, or a BreakableObject.");
             return false;
         }
     }

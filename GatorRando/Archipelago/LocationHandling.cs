@@ -217,4 +217,16 @@ public static class LocationHandling
     {
         LocationLookup.Clear();
     }
+
+    public static int ConvertTannerIds(int objectId)
+    {
+        // Convert initial Tanner pot ids to their post intro counterparts
+        return objectId switch
+        {
+            1663 => 1712,
+            1638 => 1709,
+            1606 => 1695,
+            _ => objectId,
+        };
+    }
 }
