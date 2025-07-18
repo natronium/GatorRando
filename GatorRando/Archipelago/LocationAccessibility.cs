@@ -224,6 +224,11 @@ public static class LocationAccessibilty
     public static bool IsLocationAccessible(PersistentObject gatorObject)
     {
         Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(gatorObject);
+        if (LocationHandling.IsLocationCollected(gatorObject.id))
+        {
+            return false;
+        }
+        
         if (persistentObjectType == Util.PersistentObjectType.Pot || persistentObjectType == Util.PersistentObjectType.Chest || persistentObjectType == Util.PersistentObjectType.Race)
         {
             try

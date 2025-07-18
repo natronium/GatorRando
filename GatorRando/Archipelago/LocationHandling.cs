@@ -23,7 +23,7 @@ public static class LocationHandling
     public static void TriggerLocationListeners()
     {
         IEnumerable<long> locationsCollected;
-        if (IsCollectCountedAsChecked())
+        if (RandoSettingsMenu.IsCollectCountedAsChecked())
         {
             locationsCollected = ConnectionManager.LocationsCollected();
         }
@@ -42,14 +42,9 @@ public static class LocationHandling
     }
 
     private static readonly string LocationKeyPrefix = "AP ID: ";
-
-    private static bool IsCollectCountedAsChecked()
-    {
-        return Settings.s.ReadBool("!collect counts as checked", true);
-    }
     public static bool IsLocationCollected(string location)
     {
-        if (IsCollectCountedAsChecked())
+        if (RandoSettingsMenu.IsCollectCountedAsChecked())
         {
             try
             {
@@ -65,6 +60,26 @@ public static class LocationHandling
             return CheckIfAPLocationInSave(GetLocationApId(location));
         }
     }
+
+    public static bool IsLocationCollected(int gatorID)
+    {
+        if (RandoSettingsMenu.IsCollectCountedAsChecked())
+        {
+            try
+            {
+                return ConnectionManager.LocationsCollected().Contains(GetLocationApId(gatorID));
+            }
+            catch (InvalidOperationException)
+            {
+                return true;
+            }
+        }
+        else
+        {
+            return CheckIfAPLocationInSave(GetLocationApId(gatorID));
+        }
+    }
+
     public static bool CheckIfAPLocationInSave(long id) => Util.FindBoolKeysByPrefix(LocationKeyPrefix).Contains(id.ToString());
 
     public static long GetLocationApId(int gatorID) =>

@@ -233,4 +233,6 @@ static class RandoSettingsMenu
 
     public static bool PauseForItemGet() => Settings.s.ReadBool("Pause Speedrun for Item Get Dialogues".ToLower(), true);
     public static bool HideSpeedrunTimer() => Settings.s.ReadBool("hide speedrun timer", true);
+
+    public static bool IsCollectCountedAsChecked() => Settings.s.ReadBool("!collect counts as checked", true);
 }
