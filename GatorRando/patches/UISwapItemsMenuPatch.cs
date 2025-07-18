@@ -17,7 +17,7 @@ static class UISwapItemsMenuPatch
 
         foreach (ItemObject item in QuestItems.QuestItemObjects)
         {
-            if (item.name == "Broken Scooter Board")
+            if (item.name == "Broken Scooter Board" && ItemHandling.IsItemUnlocked(item.name))
             {
                 questItemsReceived.Add(item);
             }
