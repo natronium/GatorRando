@@ -119,7 +119,4 @@ public static class ItemHandling
             BubbleManager.QueueBubble($"{playerName} sent me {item.name}!", BubbleManager.BubbleType.ItemReceived);
         }
     }
-
-    
-
 }
