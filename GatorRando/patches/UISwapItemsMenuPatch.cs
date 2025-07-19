@@ -17,14 +17,14 @@ static class UISwapItemsMenuPatch
 
         foreach (ItemObject item in QuestItems.QuestItemObjects)
         {
-            if (item.name == "Broken Scooter Board" && ItemHandling.IsItemUnlocked(item.name))
+            if (item.name == "Broken Scooter Board")
             {
                 if (ItemHandling.IsItemUnlocked(item.name, true))
                 {
                     questItemsReceived.Add(item);
                 }
             }
-            else if (item.name == "Glider" && ItemHandling.IsItemUnlocked(item.name, true))
+            else if (item.name == "Glider")
             {
                 if (ItemHandling.IsItemUnlocked(item.name, true))
                 {
