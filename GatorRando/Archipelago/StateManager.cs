@@ -44,7 +44,7 @@ public static class StateManager
         }
         else if (scene.name == "Island")
         {
-            UIMenus.u.SetGameplayState(false, true);
+            UIMenus.u.SetGameplayState(false, true); // Disable player input
             Plugin.Instance.StartCoroutine(SetupLoadedGame());
         }
     }
@@ -174,7 +174,7 @@ public static class StateManager
 
     public static IEnumerator SetupLoadedGame()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(Plugin.LoadDelay);
         currentState = State.PlayingGameConnected;
         ConnectionManager.RegisterItemReceivedListener();
         SpriteHandler.LoadSprites();
