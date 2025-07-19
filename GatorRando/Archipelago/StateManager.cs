@@ -158,9 +158,15 @@ public static class StateManager
         }
     }
 
-    public static void LoadGame()
+    public static bool LoadGame(int index)
     {
-        currentState = State.LoadingGame;
+        if (!SaveManager.CheckIfSaveAheadOfServer(index))
+        {
+            currentState = State.LoadingGame;
+            return true;
+        }
+        DisplayError("Error: The save file you tried to load is ahead of the server it is connected to. When starting a new room for the same seed, you need to start a new save file.");
+        return false;
     }
 
     public static void SetupLoadedGame()

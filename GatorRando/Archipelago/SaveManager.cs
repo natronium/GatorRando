@@ -16,6 +16,7 @@ public static class SaveManager
     public static readonly string slotNameString = "Slot Name";
     public static readonly string serverString = "Server Address:Port";
     public static readonly string passwordString = "Password";
+    public static readonly string apItemIndexKey = "LastAPItemIndex";
 
     private static string CurrentSavePath()
     {
@@ -162,5 +163,23 @@ public static class SaveManager
     public static void ForceSave()
     {
         GameData.g.WriteToDisk(false);
+    }
+
+    public static bool CheckIfSaveAheadOfServer(int index)
+    {
+        ArchipelagoData tempServerData = JsonConvert.DeserializeObject<ArchipelagoData>(File.ReadAllText(apServerDataPaths[index]));
+        if (tempServerData.Index > ConnectionManager.ItemsReceived().Count)
+        {
+            return true; // Saved server data is ahead of the items received count
+        }
+        GameSaveData tempGameSaveData = FileUtil.ReadSaveData(index);
+        if (tempGameSaveData.ints.TryGetValue(apItemIndexKey, out int savedItemIndex))
+        {
+            if (savedItemIndex > ConnectionManager.ItemsReceived().Count)
+            {
+                return true; // Save file data is ahead of the item received count
+            }
+        }
+        return false; // Saves are not ahead of server
     }
 }
