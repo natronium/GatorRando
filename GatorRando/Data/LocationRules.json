@@ -4,55 +4,52 @@
         "location_id": 100002280,
         "region": "Mountain",
         "rule_json": {
-            "rule": "Or",
+            "rule": "And",
             "options": [],
             "children": [
-                {
-                    "rule": "And",
-                    "options": [],
-                    "children": [
-                        {
-                            "rule": "HasGroup",
-                            "options": [],
-                            "args": {
-                                "item_name_group": "Cardboard Destroyer",
-                                "count": 1
-                            }
-                        },
-                        {
-                            "rule": "Or",
-                            "options": [],
-                            "children": [
-                                {
-                                    "rule": "True_",
-                                    "options": [
-                                        {
-                                            "option": "worlds.lil_gator_game.options.HarderRangedQuests",
-                                            "value": 1,
-                                            "operator": "eq"
-                                        }
-                                    ],
-                                    "args": {}
-                                },
-                                {
-                                    "rule": "Has",
-                                    "options": [],
-                                    "args": {
-                                        "item_name": "Out of Logic Item",
-                                        "count": 1
-                                    }
-                                }
-                            ]
-                        }
-                    ]
-                },
                 {
                     "rule": "HasGroup",
                     "options": [],
                     "args": {
-                        "item_name_group": "Ranged",
+                        "item_name_group": "Cardboard Destroyer",
                         "count": 1
                     }
+                },
+                {
+                    "rule": "Or",
+                    "options": [],
+                    "children": [
+                        {
+                            "rule": "Has",
+                            "options": [
+                                {
+                                    "option": "worlds.lil_gator_game.options.HarderRangedQuests",
+                                    "value": 1,
+                                    "operator": "eq"
+                                }
+                            ],
+                            "args": {
+                                "item_name": "Glider",
+                                "count": 1
+                            }
+                        },
+                        {
+                            "rule": "Has",
+                            "options": [],
+                            "args": {
+                                "item_name": "Out of Logic Item",
+                                "count": 1
+                            }
+                        },
+                        {
+                            "rule": "HasGroup",
+                            "options": [],
+                            "args": {
+                                "item_name_group": "Ranged",
+                                "count": 1
+                            }
+                        }
+                    ]
                 }
             ]
         }
@@ -100,47 +97,38 @@
                     }
                 },
                 {
+                    "rule": "HasGroup",
+                    "options": [],
+                    "args": {
+                        "item_name_group": "Cardboard Destroyer",
+                        "count": 1
+                    }
+                },
+                {
                     "rule": "Or",
                     "options": [],
                     "children": [
                         {
-                            "rule": "And",
-                            "options": [],
-                            "children": [
+                            "rule": "Has",
+                            "options": [
                                 {
-                                    "rule": "HasGroup",
-                                    "options": [],
-                                    "args": {
-                                        "item_name_group": "Cardboard Destroyer",
-                                        "count": 1
-                                    }
-                                },
-                                {
-                                    "rule": "Or",
-                                    "options": [],
-                                    "children": [
-                                        {
-                                            "rule": "True_",
-                                            "options": [
-                                                {
-                                                    "option": "worlds.lil_gator_game.options.HarderRangedQuests",
-                                                    "value": 1,
-                                                    "operator": "eq"
-                                                }
-                                            ],
-                                            "args": {}
-                                        },
-                                        {
-                                            "rule": "Has",
-                                            "options": [],
-                                            "args": {
-                                                "item_name": "Out of Logic Item",
-                                                "count": 1
-                                            }
-                                        }
-                                    ]
+                                    "option": "worlds.lil_gator_game.options.HarderRangedQuests",
+                                    "value": 1,
+                                    "operator": "eq"
                                 }
-                            ]
+                            ],
+                            "args": {
+                                "item_name": "Glider",
+                                "count": 1
+                            }
+                        },
+                        {
+                            "rule": "Has",
+                            "options": [],
+                            "args": {
+                                "item_name": "Out of Logic Item",
+                                "count": 1
+                            }
                         },
                         {
                             "rule": "HasGroup",
@@ -794,9 +782,12 @@
         "location_id": 100002210,
         "region": "Big Island",
         "rule_json": {
-            "rule": "True_",
+            "rule": "Has",
             "options": [],
-            "args": {}
+            "args": {
+                "item_name": "Bracelet",
+                "count": 1
+            }
         }
     },
     {
@@ -1320,26 +1311,12 @@
             "options": [],
             "children": [
                 {
-                    "rule": "Or",
+                    "rule": "Has",
                     "options": [],
-                    "children": [
-                        {
-                            "rule": "HasGroup",
-                            "options": [],
-                            "args": {
-                                "item_name_group": "Ranged",
-                                "count": 1
-                            }
-                        },
-                        {
-                            "rule": "Has",
-                            "options": [],
-                            "args": {
-                                "item_name": "Bracelet",
-                                "count": 1
-                            }
-                        }
-                    ]
+                    "args": {
+                        "item_name": "Bracelet",
+                        "count": 1
+                    }
                 },
                 {
                     "rule": "Or",
