@@ -6,7 +6,7 @@ namespace GatorRando.Patches;
 static class BraceletShopFailsafePatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch("CheckFailsafe")]
+    [HarmonyPatch(nameof(BraceletShopFailsafe.CheckFailsafe))]
     static bool PreCheckFailsafe()
     {
         // Skip the Bracelet Failsafe! Don't run the original code!

@@ -7,7 +7,7 @@ namespace GatorRando.Patches;
 static class SettingsPatch
 {
     [HarmonyPostfix]
-    [HarmonyPatch("LoadSettings")]
+    [HarmonyPatch(nameof(Settings.LoadSettings))]
     static void PostLoadSettings()
     {
         SpeedrunData.autoName = AutoNameFunctionality.Off;

@@ -6,7 +6,7 @@ namespace GatorRando.Patches;
 static class ItemHatBarePatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch("OnRemove")]
+    [HarmonyPatch(nameof(ItemHatBare.OnRemove))]
     static bool PreOnRemove(ItemHatBare __instance)
     {
         // patching to avoid observed error when equipping hats

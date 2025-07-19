@@ -6,7 +6,7 @@ namespace GatorRando.Patches;
 static class TownNPCManagerPatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch("Awake")]
+    [HarmonyPatch(nameof(TownNPCManager.Awake))]
     static void PreAwake(TownNPCManager __instance)
     {
         __instance.populationResource = Util.GenerateItemResource("Dummy_Resource_Population");

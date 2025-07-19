@@ -11,7 +11,7 @@ namespace GatorRando.Patches;
 static class ItemSearchObjectsPatch
 {
     [HarmonyPostfix]
-    [HarmonyPatch("GetList")]
+    [HarmonyPatch(nameof(ItemSearchObjects.GetList))]
     static void PostGetList(ref PersistentObject[] __result)
     {
         __result = [.. __result, .. TannerPots()];

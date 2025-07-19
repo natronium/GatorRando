@@ -8,7 +8,7 @@ namespace GatorRando.Patches;
 static class TimedChallengePatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch("StartRace")]
+    [HarmonyPatch(nameof(TimedChallenge.StartRace))]
     static bool PreStartRace(TimedChallenge __instance)
     {
         if (__instance is Racetrack)
@@ -35,7 +35,7 @@ static class TimedChallengePatch
     }
 
     [HarmonyPrefix]
-    [HarmonyPatch("FinishRace")]
+    [HarmonyPatch(nameof(TimedChallenge.FinishRace))]
     static void PreFinishRace(TimedChallenge __instance)
     {
         if (__instance is Racetrack)

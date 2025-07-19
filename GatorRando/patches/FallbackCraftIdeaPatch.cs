@@ -6,7 +6,7 @@ namespace GatorRando.Patches;
 [HarmonyPatch(typeof(FallbackCraftIdea))]
 static class FallbackCraftIdeaPatch {
     [HarmonyPrefix]
-    [HarmonyPatch("CheckState")]
+    [HarmonyPatch(nameof(FallbackCraftIdea.CheckState))]
     private static bool PreCheckState(FallbackCraftIdea __instance, int stateID) {
         if (stateID >= __instance.minState)
 		{

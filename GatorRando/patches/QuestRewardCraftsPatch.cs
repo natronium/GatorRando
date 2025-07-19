@@ -7,7 +7,7 @@ namespace GatorRando.Patches;
 static class QuestRewardCraftsPatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch("GiveReward")]
+    [HarmonyPatch(nameof(QuestRewardCrafts.GiveReward))]
     static bool PreGiveReward(QuestRewardCrafts __instance)
     {
         LocationHandling.CollectLocationByName(__instance.rewards[0].name);

@@ -8,7 +8,7 @@ namespace GatorRando.Patches;
 static class LogicStatePatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch("LogicCompleted")]
+    [HarmonyPatch(nameof(LogicState.LogicCompleted))]
     static bool PreLogicCompleted(LogicState __instance)
     {
         if (__instance.stateName == "Defeat the slimes")
