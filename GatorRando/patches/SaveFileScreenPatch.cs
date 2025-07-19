@@ -8,18 +8,20 @@ static class SaveFileScreenPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(SaveFileScreen.PressSaveFileButton))]
-    static void PrePressSaveFileButton(SaveFileScreen __instance, int index)
+    static bool PrePressSaveFileButton(SaveFileScreen __instance, int index)
     {
         if (__instance.currentState == SaveFileScreen.State.Standard)
         {
             if (FileUtil.IsSaveFileStarted(index))
             {
-                StateManager.LoadGame();
+                return StateManager.LoadGame(index);
             }
             else
             {
                 StateManager.StartNewGame(index);
+                return true;
             }
         }
+        return true;
     }
 }

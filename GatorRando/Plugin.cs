@@ -1,4 +1,5 @@
 using BepInEx;
+using BepInEx.Configuration;
 using GatorRando.Archipelago;
 using HarmonyLib;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,9 @@ public class Plugin : BaseUnityPlugin
 {
     public static Plugin Instance;
 
+    private static ConfigEntry<float> _loadDelay;
+    public static float LoadDelay => _loadDelay.Value;
+
     private void Awake()
     {
         Instance = this;
@@ -17,6 +21,7 @@ public class Plugin : BaseUnityPlugin
         harmony.PatchAll(); // automatically patch based on harmony attributes
         ArchipelagoConsole.Awake();
         ArchipelagoConsole.LogMessage($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+        _loadDelay = Config.Bind("Settings", "LoadDelay", 1f, "The time the mod will wait after loading in before the mod will finish loading all quest mods. Increase this value if it appears that modications are being applied too soon.");
     }
 
     private void Update()

@@ -30,7 +30,7 @@ public static class QuestEditMod
         //Allow Freeplay
         if (Options.GetOptionBool(Options.Option.StartWithFreeplay))
         {
-            TutorialQuestMods.StartWithFreeplay();
+            TutorialQuestMods.QueueStartWithFreeplay();
         } 
     }
 }

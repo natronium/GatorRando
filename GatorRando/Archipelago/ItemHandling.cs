@@ -73,8 +73,8 @@ public static class ItemHandling
         {
             ReceiveItem(queuedItem.item, queuedItem.sendingPlayerName);
             LocationAccessibilty.UpdateAccessibleLocations();
-            var lastIndex = GameData.g.ReadInt("LastAPItemIndex", 0);
-            GameData.g.Write("LastAPItemIndex", lastIndex + 1);
+            var lastIndex = GameData.g.ReadInt(SaveManager.apItemIndexKey, 0);
+            GameData.g.Write(SaveManager.apItemIndexKey, lastIndex + 1);
         }
     }
 

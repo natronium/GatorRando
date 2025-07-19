@@ -7,9 +7,9 @@ static class CreditsMods
 {
     public static void Edits()
     {
-        GameObject credits = Util.GetByPath("Center (Playground)/Story Sequences/Post-Credits");
-        DialogueSequencer creditsSeq = credits.GetComponent<DialogueSequencer>();
-        creditsSeq.beforeSequence.RemoveListener(ConnectionManager.SendGoal);
-        creditsSeq.beforeSequence.AddListener(ConnectionManager.SendGoal);
+        GameObject sisFlashbacks = Util.GetByPath("Center (Playground)/Story Sequences/Act3 Sis/Sis Flashbacks");
+        DialogueSequencer dialogueSeq = sisFlashbacks.GetComponent<DialogueSequencer>();
+        dialogueSeq.beforeSequence.RemoveListener(ConnectionManager.SendGoal);
+        dialogueSeq.beforeSequence.AddListener(ConnectionManager.SendGoal);
     }
 }

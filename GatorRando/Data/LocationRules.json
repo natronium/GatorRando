@@ -6207,53 +6207,6 @@
                                 "item_name": "Bracelet",
                                 "count": 1
                             }
-                        },
-                        {
-                            "rule": "And",
-                            "options": [],
-                            "children": [
-                                {
-                                    "rule": "Or",
-                                    "options": [],
-                                    "children": [
-                                        {
-                                            "rule": "True_",
-                                            "options": [
-                                                {
-                                                    "option": "worlds.lil_gator_game.options.RequireShieldJump",
-                                                    "value": 1,
-                                                    "operator": "eq"
-                                                }
-                                            ],
-                                            "args": {}
-                                        },
-                                        {
-                                            "rule": "Has",
-                                            "options": [],
-                                            "args": {
-                                                "item_name": "Out of Logic Item",
-                                                "count": 1
-                                            }
-                                        }
-                                    ]
-                                },
-                                {
-                                    "rule": "HasGroup",
-                                    "options": [],
-                                    "args": {
-                                        "item_name_group": "Cardboard Destroyer",
-                                        "count": 1
-                                    }
-                                },
-                                {
-                                    "rule": "HasGroup",
-                                    "options": [],
-                                    "args": {
-                                        "item_name_group": "Shield",
-                                        "count": 1
-                                    }
-                                }
-                            ]
                         }
                     ]
                 },

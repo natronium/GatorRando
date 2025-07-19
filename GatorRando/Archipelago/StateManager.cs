@@ -1,6 +1,8 @@
+using System.Collections;
 using GatorRando.PrefabMods;
 using GatorRando.QuestMods;
 using GatorRando.UIMods;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace GatorRando.Archipelago;
@@ -42,7 +44,8 @@ public static class StateManager
         }
         else if (scene.name == "Island")
         {
-            SetupLoadedGame();
+            UIMenus.u.SetGameplayState(false, true); // Disable player input
+            Plugin.Instance.StartCoroutine(SetupLoadedGame());
         }
     }
 
@@ -158,17 +161,23 @@ public static class StateManager
         }
     }
 
-    public static void LoadGame()
+    public static bool LoadGame(int index)
     {
-        currentState = State.LoadingGame;
+        if (!SaveManager.CheckIfSaveAheadOfServer(index))
+        {
+            currentState = State.LoadingGame;
+            return true;
+        }
+        DisplayError("Error: The save file you tried to load is ahead of the server it is connected to. When starting a new room for the same seed, you need to start a new save file.");
+        return false;
     }
 
-    public static void SetupLoadedGame()
+    public static IEnumerator SetupLoadedGame()
     {
+        yield return new WaitForSeconds(Plugin.LoadDelay);
         currentState = State.PlayingGameConnected;
         ConnectionManager.RegisterItemReceivedListener();
         SpriteHandler.LoadSprites();
-        QuestEditMod.ApplyQuestEdits();
         UIEditMod.ApplyUIEdits();
         BalloonMods.EditBalloonStamina();
         RockMods.EditRockLayer();
@@ -176,8 +185,10 @@ public static class StateManager
         ConnectionManager.ServerData.PopulateLocationLookupCache();
         LocationHandling.SendLocallySavedLocations();
         ConnectionManager.ReceiveUnreceivedItems();
+        QuestEditMod.ApplyQuestEdits();
         ItemHandling.TriggerItemListeners();
         LocationHandling.TriggerLocationListeners();
         LocationAccessibilty.UpdateAccessibleLocations();
+        UIMenus.u.SetGameplayState(true, true);
     }
 }

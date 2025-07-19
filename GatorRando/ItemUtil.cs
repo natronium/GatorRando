@@ -26,6 +26,10 @@ public static class ItemUtil
             UIMenus.craftNotification.LoadItems([itemObject]);
             return;
         }
+        if (item == "Glider")
+        {
+            PlayerItemManager.p.gliderItem.IsUnlocked = true;
+        }
         ItemManager.i.UnlockItem(item);
         PlayerItemManager.p.Refresh(); // Originally only for "Shirt" not usuable on receipt but should result in updated visual for bracelets
     }
