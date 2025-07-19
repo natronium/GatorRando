@@ -39,10 +39,10 @@ static class TutorialQuestMods
     {
         GameObject act1 = Util.GetByPath("NorthWest (Tutorial Island)/Act 1");
         QuestStates act1QuestStates = act1.GetComponent<QuestStates>();
-        if (act1QuestStates.StateID < 2)
+        if (act1QuestStates.StateID <= 2)
         {
-            act1QuestStates.SetState(2);
-            EnableFriendsInCutscene();
+            act1QuestStates.SetState(3);
+            // EnableFriendsInCutscene();
             ReenableTutorialQuests();
         }
     }
