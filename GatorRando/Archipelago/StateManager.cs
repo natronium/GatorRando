@@ -1,6 +1,8 @@
+using System.Collections;
 using GatorRando.PrefabMods;
 using GatorRando.QuestMods;
 using GatorRando.UIMods;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace GatorRando.Archipelago;
@@ -42,7 +44,8 @@ public static class StateManager
         }
         else if (scene.name == "Island")
         {
-            SetupLoadedGame();
+            UIMenus.u.SetGameplayState(false, true);
+            Plugin.Instance.StartCoroutine(SetupLoadedGame());
         }
     }
 
@@ -169,12 +172,12 @@ public static class StateManager
         return false;
     }
 
-    public static void SetupLoadedGame()
+    public static IEnumerator SetupLoadedGame()
     {
+        yield return new WaitForSeconds(1);
         currentState = State.PlayingGameConnected;
         ConnectionManager.RegisterItemReceivedListener();
         SpriteHandler.LoadSprites();
-        QuestEditMod.ApplyQuestEdits();
         UIEditMod.ApplyUIEdits();
         BalloonMods.EditBalloonStamina();
         RockMods.EditRockLayer();
@@ -182,8 +185,10 @@ public static class StateManager
         ConnectionManager.ServerData.PopulateLocationLookupCache();
         LocationHandling.SendLocallySavedLocations();
         ConnectionManager.ReceiveUnreceivedItems();
+        QuestEditMod.ApplyQuestEdits();
         ItemHandling.TriggerItemListeners();
         LocationHandling.TriggerLocationListeners();
         LocationAccessibilty.UpdateAccessibleLocations();
+        UIMenus.u.SetGameplayState(true, true);
     }
 }

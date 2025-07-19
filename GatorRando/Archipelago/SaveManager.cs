@@ -64,16 +64,16 @@ public static class SaveManager
 
     public static void CopyAPServerData(int sourceIndex, int targetIndex)
     {
-        File.Copy(apServerDataPaths[sourceIndex], apServerDataPaths[targetIndex]);
+        File.Copy(apServerDataPaths[sourceIndex], apServerDataPaths[targetIndex], true);
     }
 
-    public static void ReadAPServerData(string path)
+    public static void ReadAPServerData(string path, bool lastConnection = false)
     {
         if (File.Exists(path))
         {
             ConnectionManager.ServerData = JsonConvert.DeserializeObject<ArchipelagoData>(File.ReadAllText(path));
         }
-        else
+        else if (lastConnection)
         {
             ConnectionManager.ServerData = new();
         }
@@ -81,7 +81,7 @@ public static class SaveManager
 
     public static void ReadLastConnectionData()
     {
-        ReadAPServerData(lastConnectionFile);
+        ReadAPServerData(lastConnectionFile, true);
     }
 
 
@@ -167,17 +167,23 @@ public static class SaveManager
 
     public static bool CheckIfSaveAheadOfServer(int index)
     {
-        ArchipelagoData tempServerData = JsonConvert.DeserializeObject<ArchipelagoData>(File.ReadAllText(apServerDataPaths[index]));
-        if (tempServerData.Index > ConnectionManager.ItemsReceived().Count)
+        if (File.Exists(apServerDataPaths[index]))
         {
-            return true; // Saved server data is ahead of the items received count
-        }
-        GameSaveData tempGameSaveData = FileUtil.ReadSaveData(index);
-        if (tempGameSaveData.ints.TryGetValue(apItemIndexKey, out int savedItemIndex))
-        {
-            if (savedItemIndex > ConnectionManager.ItemsReceived().Count)
+            ArchipelagoData tempServerData = JsonConvert.DeserializeObject<ArchipelagoData>(File.ReadAllText(apServerDataPaths[index]));
+            if (tempServerData.Index > ConnectionManager.ItemsReceived().Count)
             {
-                return true; // Save file data is ahead of the item received count
+                return true; // Saved server data is ahead of the items received count
+            }
+        }
+        if (File.Exists(FileUtil.saveFilePaths[index]))
+        {
+            GameSaveData tempGameSaveData = FileUtil.ReadSaveData(index);
+            if (tempGameSaveData.ints.TryGetValue(apItemIndexKey, out int savedItemIndex))
+            {
+                if (savedItemIndex > ConnectionManager.ItemsReceived().Count)
+                {
+                    return true; // Save file data is ahead of the item received count
+                }
             }
         }
         return false; // Saves are not ahead of server
