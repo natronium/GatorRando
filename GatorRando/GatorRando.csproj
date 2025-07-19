@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>GatorRando</AssemblyName>
     <Description>Randomizer for Lil Gator Game</Description>
-    <Version>1.0.6</Version>
+    <Version>1.1.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -70,5 +70,9 @@
     <EmbeddedResource Include="Sprites/archipelago_sticker_style.png" />
     <EmbeddedResource Include="Sprites/checkered_flag.png" />
     <EmbeddedResource Include="Sprites/giant_socks.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data/postPrologueSave.json" />
   </ItemGroup>
 </Project>

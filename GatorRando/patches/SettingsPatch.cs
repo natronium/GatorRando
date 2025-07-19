@@ -1,3 +1,4 @@
+using GatorRando.UIMods;
 using HarmonyLib;
 
 namespace GatorRando.Patches;
@@ -10,5 +11,6 @@ static class SettingsPatch
     static void PostLoadSettings()
     {
         SpeedrunData.autoName = AutoNameFunctionality.Off;
+        SpeedrunTimerDisplay.ShowOrHideTimer(); // Show or hide speedrun timer based on settings
     }
 }

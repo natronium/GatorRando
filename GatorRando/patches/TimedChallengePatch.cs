@@ -17,11 +17,11 @@ static class TimedChallengePatch
             {
                 if (Options.GetOptionBool(Options.Option.LockRacesBehindFlag))
                 {
-                    BubbleManager.QueueBubble("I can run races since I have my Finish Flag!", BubbleManager.BubbleType.Unimportant);
+                    BubbleManager.QueueUnimportantBubble("I can run races since I have my Finish Flag!", BubbleManager.UnimportantMessageType.Race);
                 }
                 else
                 {
-                    BubbleManager.QueueBubble("I'm down for a race any time!", BubbleManager.BubbleType.Unimportant);
+                    BubbleManager.QueueUnimportantBubble("I'm down for a race any time!", BubbleManager.UnimportantMessageType.Race);
                 }
                 return true;
             }

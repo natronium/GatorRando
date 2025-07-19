@@ -39,9 +39,8 @@ static class InventoryMods
         questItemGridIG.scrollToSelected = uIScrollToSelected;
         uIScrollToSelected.scrollRect = scrollRect;
 
+        //TODO: FIGURE OUT SCROLLING ON QUEST ITEM INVENTORY
 
-
-        // TODO: replace sprites for Quest Item Tab---found under Inactive Tab and Active Tab images
 
         // Reposition Tabs and button prompts to accommodate additional tab
         tabs.transform.localPosition += new Vector3(-25,0,0);

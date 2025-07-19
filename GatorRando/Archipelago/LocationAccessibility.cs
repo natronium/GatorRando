@@ -8,14 +8,23 @@ namespace GatorRando.Archipelago;
 public static class LocationAccessibilty
 {
     private static readonly string[] excludedNPCs = ["NPC_LunchSwapCardinal", "NPC_Bee", "NPC_Ninja_Tiger", "NPC_SwimSheep", "Dialogue Actor No Longer Exists"];
+    private static readonly string[] filteredNPCs = ["NPC_WannaBeHawk", "NPC_BigSis", "NPC_Destroy_Elephant", "NPC_Chess_Eagle", "NPC_Warrior_Beaver", "NPC_Obstacle_Ostrich",
+            "NPC_Theatre_Cow1", "NPC_Theatre_Cow2", "NPC_Theatre_Cow3", "NPC_FetchVulture", "NPC_SurfOpossum", "NPC_TripLizard", "Signs"];
+
+    public static bool IsNPCinExcludedOrFiltered(string npcId)
+    {
+        return excludedNPCs.Contains(npcId) || filteredNPCs.Contains(npcId);
+    }
     private static readonly List<long> AccessibleLocations = [];
 
     public static void UpdateAccessibleLocations()
-    {        
+    {
         var inaccessibleIds = Locations.locationData.Where(data => !AccessibleLocations.Contains(data.apLocationId)).Select(data => data.apLocationId);
-        foreach (long inaccessibleId in inaccessibleIds){
-            
-            if (Rules.GatorRules.Rules[inaccessibleId].Evaluate()){
+        foreach (long inaccessibleId in inaccessibleIds)
+        {
+
+            if (Rules.GatorRules.Rules[inaccessibleId].Evaluate())
+            {
                 AccessibleLocations.Add(inaccessibleId);
             }
         }
@@ -152,8 +161,6 @@ public static class LocationAccessibilty
     {
         string gatorName = ConvertDAToGatorName(dialogueActor);
         // filter out non-main quest NPCs from actors pulled to populate the Main Quest list
-        string[] filteredNPCs = ["NPC_WannaBeHawk", "NPC_BigSis", "NPC_Destroy_Elephant", "NPC_Chess_Eagle", "NPC_Warrior_Beaver", "NPC_Obstacle_Ostrich",
-            "NPC_Theatre_Cow1", "NPC_Theatre_Cow2", "NPC_Theatre_Cow3", "NPC_FetchVulture", "NPC_SurfOpossum", "NPC_TripLizard", "Signs"];
         if (gatorName == "" || gatorName.Contains("Unhandled") || filteredNPCs.Contains(gatorName))
         {
             return false;
@@ -217,11 +224,17 @@ public static class LocationAccessibilty
     public static bool IsLocationAccessible(PersistentObject gatorObject)
     {
         Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(gatorObject);
+        
         if (persistentObjectType == Util.PersistentObjectType.Pot || persistentObjectType == Util.PersistentObjectType.Chest || persistentObjectType == Util.PersistentObjectType.Race)
         {
+            int gatorID = LocationHandling.ConvertTannerIds(gatorObject.id);
             try
             {
-                return AccessibleLocations.Contains(LocationHandling.GetLocationApId(gatorObject.id));
+                if (LocationHandling.IsLocationCollected(gatorID))
+                {
+                    return false;
+                }
+                return AccessibleLocations.Contains(LocationHandling.GetLocationApId(gatorID));
             }
             catch (InvalidOperationException)
             {
@@ -252,7 +265,7 @@ public static class LocationAccessibilty
         }
         else
         {
-            Plugin.LogWarn($"Tried to check accessibility of location {gatorObject.id}, which is not a Pot, Race, Chest, or a BreakableObject.");
+            Plugin.LogWarn($"Tried to check if location {gatorObject.id} is a check, which is not a Pot, Race, Chest, or a BreakableObject.");
             return false;
         }
     }

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using GatorRando.Archipelago;
+using GatorRando.UIMods;
 using HarmonyLib;
+using UnityEngine;
 
 namespace GatorRando.Patches;
 
@@ -33,8 +35,8 @@ static class BraceletShopDialoguePatch
 
                 //IL_033A
                 //  Replace call to BraceletShopDialogue::DoBraceletGet() with push null
-                255 => nop, // Do not push "this" onto the stack
-                256 => new(OpCodes.Ldnull), //yield return null
+                // 255 => nop, // Do not push "this" onto the stack
+                256 => CodeInstruction.Call(typeof(BraceletShopDialoguePatch), nameof(GetItemDialogue), [typeof(BraceletShopDialogue)]),
 
                 //IL_0398-IL03A3
                 //  call this.CheckIfAllBraceletShops()
@@ -50,5 +52,16 @@ static class BraceletShopDialoguePatch
             counter++;
             yield return newInstruction;
         }
+    }
+
+    private static Coroutine GetItemDialogue(BraceletShopDialogue thisDialogue)
+    {
+        DialogueModifier.SetModifiedDialogue(true);
+        LocationHandling.ItemAtLocation itemAtLocation = LocationHandling.GetItemAtLocation(thisDialogue.SaveID);
+        string dialogueString = DialogueModifier.GetDialogueStringForItemAtLocation(itemAtLocation);
+        Sprite itemSprite = DialogueModifier.GetSpriteForItemAtLocation(itemAtLocation);
+        string itemName = DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation);
+        DialogueChunk newChunk = DialogueModifier.AddNewDialogueChunk(thisDialogue.document, dialogueString);
+        return thisDialogue.StartCoroutine(thisDialogue.uiItemGet.RunSequence(itemSprite, itemName, newChunk, thisDialogue.actors));
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
-using Archipelago.MultiClient.Net.Models;
 using GatorRando.Archipelago;
+using GatorRando.QuestMods;
 using GatorRando.UIMods;
 using HarmonyLib;
 using UnityEngine;
@@ -19,53 +19,46 @@ static class JunkShopPatch
     static string GetDisplayName(string name) => replacementDisplayNames[name];
     static DialogueChunk GetDialogueChunk(string name) => replacementDialogues[name];
 
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(JunkShop.Start))]
+    static void PostStart()
+    {
+        Junk4TrashQuestMods.HideCollectedShopLocations();
+    }
 
     [HarmonyPrefix]
-    [HarmonyPatch("RunShopDialogueSequence")]
+    [HarmonyPatch(nameof(JunkShop.RunShopDialogueSequence))]
     static void PreRunShopDialogueSequence(JunkShop __instance)
     {
         if (replacementSprites.Keys.Count == 0)
         {
             foreach (JunkShop.ShopItem shopItem in __instance.shopItems)
             {
-                ItemInfo itemInfo = LocationHandling.ItemAtLocation(shopItem.item.name);
-                if (itemInfo.ItemGame == "Lil Gator Game")
+                LocationHandling.ItemAtLocation itemAtLocation = LocationHandling.GetItemAtLocation(shopItem.item.name);
+                replacementSprites.Add(shopItem.item.name, DialogueModifier.GetSpriteForItemAtLocation(itemAtLocation));
+                replacementDisplayNames.Add(shopItem.item.name, DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation));
+                if (itemAtLocation.itemPlayer == ConnectionManager.SlotName())
                 {
-                    if (itemInfo.ItemName.Contains("Craft Stuff") || itemInfo.ItemName.Contains("Friend"))
-                    {
-                        replacementSprites.Add(shopItem.item.name, SpriteHandler.GetSpriteForItem(itemInfo.ItemName));
-                    }
-                    else
-                    {
-                        string clientID = ItemHandling.GetClientIDByAPId(itemInfo.ItemId);
-                        replacementSprites.Add(shopItem.item.name, SpriteHandler.GetSpriteForItem(clientID));
-                    }
+                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"I bought my own {itemAtLocation.itemName}"));
                 }
                 else
                 {
-                    replacementSprites.Add(shopItem.item.name, SpriteHandler.GetSpriteForItem("Archipelago"));
-                }
-                replacementDisplayNames.Add(shopItem.item.name, $"{itemInfo.Player.Name}'s {itemInfo.ItemName}");
-                if (itemInfo.Player.Name == GameData.g.gameSaveData.playerName)
-                {
-                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"I bought my own {itemInfo.ItemName}"));
-                }
-                else
-                {
-                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"I bought {itemInfo.Player.Name}'s {itemInfo.ItemName}"));
+                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"I bought {DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation)}"));
                 }
             }
         }
     }
 
     [HarmonyTranspiler]
-    [HarmonyPatch("RunShopDialogueSequence", MethodType.Enumerator)]
+    [HarmonyPatch(nameof(JunkShop.RunShopDialogueSequence), MethodType.Enumerator)]
     static IEnumerable<CodeInstruction> TranspileRunShopDialogueSequence(IEnumerable<CodeInstruction> instructions)
     {
         CodeInstruction nop = new(OpCodes.Nop);
         int counter = 1;
 
         List<CodeInstruction> secondPatch = [
+            new CodeInstruction(OpCodes.Ldc_I4_1),
+            CodeInstruction.Call(typeof(DialogueModifier), nameof(DialogueModifier.SetModifiedDialogue),[typeof(bool)]),
             CodeInstruction.Call(typeof(UnityEngine.Object), "get_name"),
             CodeInstruction.Call(typeof(JunkShopPatch), nameof(GetSprite), [typeof(string)]),
             new CodeInstruction(OpCodes.Ldloc_S, 7),
@@ -116,7 +109,6 @@ static class JunkShopPatch
 
                 _ => instruction
             };
-            /// TODO: Come in and swap out displayName
             if (counter == 245){
                 foreach (CodeInstruction instr in secondPatch)
                 {
@@ -129,10 +121,10 @@ static class JunkShopPatch
     }
 
     [HarmonyTranspiler]
-    [HarmonyPatch("UpdateInventory")]
+    [HarmonyPatch(nameof(JunkShop.UpdateInventory))]
     static IEnumerable<CodeInstruction> TranspileUpdateInventory(IEnumerable<CodeInstruction> instructions)
     {
-        CodeInstruction nop = new(OpCodes.Nop);
+        // CodeInstruction nop = new(OpCodes.Nop);
         int counter = 1;
         foreach (var instruction in instructions)
         {
@@ -153,16 +145,17 @@ static class JunkShopPatch
     }
 
     [HarmonyPrefix]
-    [HarmonyPatch("GetChoiceList")]
-    static bool GetChoiceList(JunkShop __instance, ref string[] __result)
+    [HarmonyPatch(nameof(JunkShop.GetChoiceList))]
+    static bool PreGetChoiceList(JunkShop __instance, ref string[] __result)
     {
         __result = new string[__instance.displayedItemCount + 1];
         __result[0] = __instance.document.FetchString(__instance.cancelChoice, Language.Auto);
         for (int i = 0; i < __instance.displayedItemCount; i++)
         {
-            ItemInfo itemInfo = LocationHandling.ItemAtLocation(__instance.shopItems[__instance.displayedItems[i]].item.name);
-            ///TODO: Hint the items that appear in the list!
-            __result[i + 1] = $"{itemInfo.Player.Name}'s {itemInfo.ItemName}";
+            string gatorName = __instance.shopItems[__instance.displayedItems[i]].item.name;
+            LocationHandling.ItemAtLocation itemAtLocation = LocationHandling.GetItemAtLocation(gatorName);
+            __result[i + 1] = DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation);
+            ConnectionManager.HintLocation(LocationHandling.GetLocationApId(gatorName));
         }
         return false;
     }

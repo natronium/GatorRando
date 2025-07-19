@@ -10,7 +10,7 @@ static class QuestRewardNPCsPatch
     [HarmonyPatch("GiveReward")]
     static void PreGiveReward(QuestRewardNPCs __instance)
     {
-        if (ArchipelagoManager.IsFullyConnected)
+        if (ConnectionManager.Authenticated)
         {
             LocationHandling.CollectLocationForNPCs(__instance.rewards);
         }

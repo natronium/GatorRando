@@ -14,20 +14,6 @@ namespace GatorRando.Data;
 
 public class Rules
 {
-    // Read in json
-    // process json into rules
-    // split rules into entrance rules and location rules
-    // compose entrance and location rules
-
-    // Rule types
-    // And
-    // Or
-    // Has
-    // HasAny
-    // HasAll
-    // HasGroup
-
-    // OptionFilter
 
     public class RulesJsonConverter : JsonConverter
     {

@@ -19,7 +19,7 @@ static class ItemSearchNPCsPatch
         if (additionalActors == null)
         {
             GameObject act1Quests = Util.GetByPath("/NorthWest (Tutorial Island)/Act 1/Quests/");
-            additionalActors = new List<DialogueActor>(act1Quests.GetComponentsInChildren<DialogueActor>(true));
+            additionalActors = [.. act1Quests.GetComponentsInChildren<DialogueActor>(true)];
             GameObject coolKidsQuest = Util.GetByPath("/East (Creeklands)/Cool Kids Quest/");
             additionalActors.AddRange(coolKidsQuest.GetComponentsInChildren<DialogueActor>(true));
             GameObject prepQuest = Util.GetByPath("/West (Forest)/Prep Quest/");
@@ -30,19 +30,19 @@ static class ItemSearchNPCsPatch
             //TODO: remove extraneous additional actors like signs, and possibly main quest actors with finished (sub)quests? 
         }
 
-        List<DialogueActor> filteredMainActors = SettingsMods.GetCheckfinderBehavior() switch
+        List<DialogueActor> filteredMainActors = RandoSettingsMenu.GetCheckfinderBehavior() switch
         {
-            SettingsMods.CheckfinderBehavior.Logic => additionalActors.FindAll(LocationAccessibilty.IsMainQuestAccessible),
-            SettingsMods.CheckfinderBehavior.ChecksOnly => additionalActors.FindAll(LocationAccessibilty.IsMainQuestACheck),
-            SettingsMods.CheckfinderBehavior.Original => additionalActors,
+            RandoSettingsMenu.CheckfinderBehavior.Logic => additionalActors.FindAll(LocationAccessibilty.IsMainQuestAccessible),
+            RandoSettingsMenu.CheckfinderBehavior.ChecksOnly => additionalActors.FindAll(LocationAccessibilty.IsMainQuestACheck),
+            RandoSettingsMenu.CheckfinderBehavior.Original => additionalActors,
             _ => throw new Exception("Invalid enum value for CheckfinderBehavior"),
         };
 
-        DialogueActor[] sideQuestActors = SettingsMods.GetCheckfinderBehavior() switch
+        DialogueActor[] sideQuestActors = RandoSettingsMenu.GetCheckfinderBehavior() switch
         {
-            SettingsMods.CheckfinderBehavior.Logic => Array.FindAll(__result, LocationAccessibilty.IsNPCAccessible),
-            SettingsMods.CheckfinderBehavior.ChecksOnly => Array.FindAll(__result, LocationAccessibilty.IsNPCACheck),
-            SettingsMods.CheckfinderBehavior.Original => __result,
+            RandoSettingsMenu.CheckfinderBehavior.Logic => Array.FindAll(__result, LocationAccessibilty.IsNPCAccessible),
+            RandoSettingsMenu.CheckfinderBehavior.ChecksOnly => Array.FindAll(__result, LocationAccessibilty.IsNPCACheck),
+            RandoSettingsMenu.CheckfinderBehavior.Original => __result,
             _ => throw new Exception("Invalid enum value for CheckfinderBehavior"),
         };
 
