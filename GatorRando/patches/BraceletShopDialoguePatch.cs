@@ -12,7 +12,7 @@ static class BraceletShopDialoguePatch
 {
 
     [HarmonyTranspiler]
-    [HarmonyPatch("RunShop", MethodType.Enumerator)]
+    [HarmonyPatch(nameof(BraceletShopDialogue.RunShop), MethodType.Enumerator)]
     static IEnumerable<CodeInstruction> TranspileRunShop(IEnumerable<CodeInstruction> instructions)
     {
         CodeInstruction nop = new(OpCodes.Nop);

@@ -7,7 +7,7 @@ namespace GatorRando.Patches;
 static class InteractItemUnlockPatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch("Interact")]
+    [HarmonyPatch(nameof(InteractItemUnlock.Interact))]
     static bool PreInteract(InteractItemUnlock __instance)
     {
         __instance.gameObject.SetActive(false);

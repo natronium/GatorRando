@@ -9,7 +9,7 @@ namespace GatorRando.Patches;
 static class BreakableObjectPatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch("CanBeDestroyed")]
+    [HarmonyPatch(nameof(BreakableObject.CanBeDestroyed))]
     static bool PreCanBeDestroyed(BreakableObject __instance, ref bool __result)
     {
         Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(__instance);
@@ -31,7 +31,7 @@ static class BreakableObjectPatch
     }
 
     [HarmonyPostfix]
-    [HarmonyPatch("Break", [typeof(bool), typeof(Vector3), typeof(bool)])]
+    [HarmonyPatch(nameof(BreakableObject.Break), [typeof(bool), typeof(Vector3), typeof(bool)])]
     static void PostBreak(BreakableObject __instance, bool fromAttachment, Vector3 velocity, bool isHeavy)
     {
         if (__instance.IsBroken)

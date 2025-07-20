@@ -6,7 +6,7 @@ namespace GatorRando.Patches;
 static class ParticlePickupPatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch("Start")]
+    [HarmonyPatch(nameof(ParticlePickup.Start))]
     static void PreStart(ParticlePickup __instance)
     {
         // Check if Pot Confetti for Pots, Confetti for Chests and Racetracks

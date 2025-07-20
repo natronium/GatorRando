@@ -7,7 +7,7 @@ namespace GatorRando.Patches;
 static class QuestRewardNPCsPatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch("GiveReward")]
+    [HarmonyPatch(nameof(QuestRewardNPCs.GiveReward))]
     static void PreGiveReward(QuestRewardNPCs __instance)
     {
         if (ConnectionManager.Authenticated)

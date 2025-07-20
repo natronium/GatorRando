@@ -13,7 +13,7 @@ static class ItemSearchNPCsPatch
 {
     private static List<DialogueActor> additionalActors;
     [HarmonyPostfix]
-    [HarmonyPatch("GetList")]
+    [HarmonyPatch(nameof(ItemSearchNPCs.GetList))]
     static void PostGetList(ref DialogueActor[] __result)
     {
         if (additionalActors == null)
@@ -54,7 +54,7 @@ static class ItemSearchNPCsPatch
     }
 
     [HarmonyPostfix]
-    [HarmonyPatch("IsValid")]
+    [HarmonyPatch(nameof(ItemSearchNPCs.IsValid))]
     static void PostIsValid(ItemSearchNPCs __instance, DialogueActor item, ref bool __result)
     {
         __result = __result && item.gameObject.activeInHierarchy;

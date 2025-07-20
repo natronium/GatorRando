@@ -10,7 +10,7 @@ namespace GatorRando.Patches;
 static class UISwapItemsMenuPatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch("UpdateInventories")]
+    [HarmonyPatch(nameof(UISwapItemsMenu.UpdateInventories))]
     static void PreUpdateInventories()
     {
         List<ItemObject> questItemsReceived = [];
