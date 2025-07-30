@@ -64,6 +64,7 @@ public static class StateManager
             ItemHandling.ProcessItemQueue();
             MapManager.UpdateCoordsIfNeeded();
             BubbleManager.Update();
+            ItemUtil.RefreshPlayerItemManagerIfNeeded();
         }
     }
 
