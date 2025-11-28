@@ -23,6 +23,8 @@ public static class ConnectionManager
     public static ArchipelagoData ServerData = new();
     private static ArchipelagoSession session;
 
+    internal static ArchipelagoSession Session => session;
+
     public static string Seed()
     {
         if (Authenticated)
