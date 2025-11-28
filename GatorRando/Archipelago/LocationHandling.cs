@@ -141,9 +141,12 @@ public static class LocationHandling
         long? apId = GetLocationApIdById(id);
         if (apId is long apIdValue)
         {
+            if (!IsLocationCollected(id))
+            {
+                CheckLocationByApId(apIdValue);
+                AnnounceLocationChecked(id);
+            }
             GameData.g.Write(LocationKeyPrefix + apIdValue.ToString(), true);
-            CheckLocationByApId(apIdValue);
-            AnnounceLocationChecked(id);
             return true;
         }
         else
@@ -164,13 +167,12 @@ public static class LocationHandling
             Plugin.LogWarn($"Tried to collect location with string ID {name}, which does not have an entry in the locations table!");
             return false;
         }
-
-        GameData.g.Write(LocationKeyPrefix + apId.ToString(), true);
         if (!IsLocationCollected(name))
         {
             CheckLocationByApId(apId);
             AnnounceLocationChecked(name);
         }
+        GameData.g.Write(LocationKeyPrefix + apId.ToString(), true);
         return true;
     }
 
