@@ -5,11 +5,11 @@ using HarmonyLib;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(TimedChallenge))]
-static class TimedChallengePatch
+internal static class TimedChallengePatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(TimedChallenge.StartRace))]
-    static bool PreStartRace(TimedChallenge __instance)
+	private static bool PreStartRace(TimedChallenge __instance)
     {
         if (__instance is Racetrack)
         {
@@ -36,7 +36,7 @@ static class TimedChallengePatch
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(TimedChallenge.FinishRace))]
-    static void PreFinishRace(TimedChallenge __instance)
+	private static void PreFinishRace(TimedChallenge __instance)
     {
         if (__instance is Racetrack)
         {
