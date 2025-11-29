@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class SusanneQuestMods
+internal static class SusanneQuestMods
 {
-    public static void Edits()
+    internal static void Edits()
     {
         //Edits to Susanne's Quest
         // Need to remove QuestState.JustProgressState from Rock Get Sequence

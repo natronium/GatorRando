@@ -6,11 +6,11 @@ using UnityEngine;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(BreakableObjectMulti))]
-static class BreakableObjectMultiPatch
+internal static class BreakableObjectMultiPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(BreakableObjectMulti.Break), [typeof(bool), typeof(Vector3), typeof(bool)])]
-    static bool PreBreak(BreakableObject __instance, bool fromAttachment, Vector3 velocity, bool isSturdy)
+	private static bool PreBreak(BreakableObject __instance, bool fromAttachment, Vector3 velocity, bool isSturdy)
     {
         Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(__instance);
         if (persistentObjectType == Util.PersistentObjectType.Chest)
@@ -38,7 +38,7 @@ static class BreakableObjectMultiPatch
 
     [HarmonyPostfix]
     [HarmonyPatch(nameof(BreakableObjectMulti.Break), [typeof(bool), typeof(Vector3), typeof(bool)])]
-    static void PostBreak(BreakableObjectMulti __instance, bool fromAttachment, Vector3 velocity, bool isSturdy)
+	private static void PostBreak(BreakableObjectMulti __instance, bool fromAttachment, Vector3 velocity, bool isSturdy)
     {
         if (__instance.IsBroken)
         {

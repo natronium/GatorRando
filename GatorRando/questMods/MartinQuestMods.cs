@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class MartinQuestMods
+internal static class MartinQuestMods
 {
-    public static void Edits()
+    internal static void Edits()
     {
         GameObject getPotLid = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest/Get Pot Lid");
         DialogueSequencer getPotSequence = getPotLid.GetComponent<DialogueSequencer>();

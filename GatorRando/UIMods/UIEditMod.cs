@@ -8,7 +8,7 @@ public static class UIEditMod
     {
         //UI Edits
         TutorialUIMods.Edits();
-        QuestItems.AddItems();
+        QuestItems.AddAPQuestItems();
         InventoryMods.AddQuestItemTab();
         RandoSettingsMenu.CreateNewSettingsMenu();
         PauseMenuMods.AddRandoSettingsMenuButton();

@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class GeneQuestMods
+internal static class GeneQuestMods
 {
-    public static void Edits()
+    internal static void Edits()
     {
         //Edits to Gene's Quest
         GameObject economistQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist");

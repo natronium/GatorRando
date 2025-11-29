@@ -2,9 +2,9 @@ using GatorRando.Archipelago;
 
 namespace GatorRando.QuestMods;
 
-public static class QuestEditMod
+internal static class QuestEditMod
 {
-    public static void ApplyQuestEdits()
+    internal static void ApplyQuestEdits()
     {
         //Edits to Martin's Tutorial Quest
         MartinQuestMods.Edits();

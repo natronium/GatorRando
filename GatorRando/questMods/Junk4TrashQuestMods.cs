@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class Junk4TrashQuestMods
+internal static class Junk4TrashQuestMods
 {
-    public static void HideCollectedShopLocations()
+    internal static void HideCollectedShopLocations()
     {
         GameObject junkShopObject = Util.GetByPath("East (Creeklands)/Junk Shop/Cool Shop");
         JunkShop junkShop = junkShopObject.GetComponent<JunkShop>();

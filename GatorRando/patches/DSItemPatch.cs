@@ -5,11 +5,11 @@ using HarmonyLib;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(DSItem))]
-static class DSItemPatch
+internal static class DSItemPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(DSItem.RunItemSequence))]
-    static void PreRunItemSequence(DSItem __instance)
+	private static void PreRunItemSequence(DSItem __instance)
     {
         string name;
         if (__instance.item == null || __instance.itemName == "POT?" || __instance.itemName == "POT LID?")

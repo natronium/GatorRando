@@ -8,11 +8,11 @@ using HarmonyLib;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(ItemSearchObjects))]
-static class ItemSearchObjectsPatch
+internal static class ItemSearchObjectsPatch
 {
     [HarmonyPostfix]
     [HarmonyPatch(nameof(ItemSearchObjects.GetList))]
-    static void PostGetList(ref PersistentObject[] __result)
+	private static void PostGetList(ref PersistentObject[] __result)
     {
         __result = [.. __result, .. TannerPots()];
         __result = RandoSettingsMenu.GetCheckfinderBehavior() switch
@@ -24,7 +24,7 @@ static class ItemSearchObjectsPatch
         };
     }
 
-    static List<PersistentObject> TannerPots()
+	private static List<PersistentObject> TannerPots()
     {
         List<PersistentObject> tannerPots = [];
         tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/Intro Objects/Pot (LA) (1)").GetComponent<BreakableObject>());

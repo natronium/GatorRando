@@ -3,11 +3,11 @@ using HarmonyLib;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(ItemHatBare))]
-static class ItemHatBarePatch
+internal static class ItemHatBarePatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(ItemHatBare.OnRemove))]
-    static bool PreOnRemove(ItemHatBare __instance)
+	private static bool PreOnRemove(ItemHatBare __instance)
     {
         // patching to avoid observed error when equipping hats
         // Sometimes the game's refresh fails otherwise
