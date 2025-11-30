@@ -142,6 +142,10 @@ public static class StateManager
     private static void QuitToTitleScreen()
     {
         SaveManager.ForceSave();
+        if (RandoSettingsMenu.IsRagdollDeathLinkOn())
+        {
+            DeathLinkManager.DisableDeathLink();
+        }
         LoadScene backToTitle = Util.GetByPath("Canvas/Pause Menu/Pause Content/Back to Title").GetComponent<LoadScene>();
         backToTitle.DoLoadScene();
     }
@@ -190,5 +194,9 @@ public static class StateManager
         LocationHandling.TriggerLocationListeners();
         LocationAccessibilty.UpdateAccessibleLocations();
         UIMenus.u.SetGameplayState(true, true);
+        if (RandoSettingsMenu.IsRagdollDeathLinkOn())
+        {
+            DeathLinkManager.EnableDeathLink();
+        }
     }
 }
