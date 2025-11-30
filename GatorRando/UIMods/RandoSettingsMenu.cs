@@ -108,8 +108,8 @@ internal static class RandoSettingsMenu
         // ReworkPlayerRename(viewportContent);
 
 
-        CreateSettingsToggle(viewportContent, 11, "Pause Speedrun for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
-        CreateSettingsToggle(viewportContent, 12, "Hide Speedrun Timer", "Hides the speedrun timer (if you want to skip dialogue, but not see the timer)");
+        CreateSettingsToggle(viewportContent, 11, "Pause Speedrun Mode for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
+        CreateSettingsToggle(viewportContent, 12, "Show Speedrun Timer", "Shows the speedrun timer (regardless of whether Speedrun Mode is on)");
         CreateSettingsOptions(viewportContent, 13, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
             "This setting changes how these tools work. \"logic\": use randomizer logic to show only valid checks, \"checks only\": show all possible checks, \"original\": original behavior", ["logic", "checks only", "original"]);
 
@@ -232,8 +232,8 @@ internal static class RandoSettingsMenu
 
     internal static CheckfinderBehavior GetCheckfinderBehavior() => (CheckfinderBehavior)Settings.s.ReadInt("megaphone and texting logic?");
     internal static bool IsPrologueToBeSkipped() => Settings.s.ReadBool("skip prologue", true);
-    internal static bool PauseForItemGet() => Settings.s.ReadBool("Pause Speedrun for Item Get Dialogues".ToLower(), true);
-    internal static bool HideSpeedrunTimer() => Settings.s.ReadBool("hide speedrun timer", true);
+    internal static bool PauseForItemGet() => Settings.s.ReadBool("Pause Speedrun Mode for Item Get Dialogues".ToLower(), true);
+    internal static bool ShowSpeedrunTimer() => Settings.s.ReadBool("show speedrun timer", false);
     internal static bool IsCollectCountedAsChecked() => Settings.s.ReadBool("!collect counts as checked", true);
     internal static bool IsGoalBeforeEpilogue() => Settings.s.ReadBool("goal before epilogue", false);
     internal static bool IsRagdollDeathLinkOn() => Settings.s.ReadBool("ragdoll on deathlink", false);
