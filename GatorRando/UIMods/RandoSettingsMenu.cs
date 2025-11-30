@@ -91,6 +91,7 @@ internal static class RandoSettingsMenu
             "if unchecked, uses what locations as saved in the save file.");
 
             CreateSettingsToggle(viewportContent, 9, "Skip Prologue", "set before starting a new game. If true, will skip the prologue and set the player name to the slot name.");
+            CreateSettingsToggle(viewportContent, 10, "Goal Before Epilogue", "set before loading into a game. If true, goal will trigger on talking to your friends at the Playground when the flashback would start.");
 
             CreateSettingsToggle(viewportContent, 13, "Ragdoll on DeathLink", "When you receive a DeathLink from another game, your character will ragdoll. Note: you cannot send DeathLinks to other players. This option must be toggled on the main menu.");
 
@@ -107,9 +108,9 @@ internal static class RandoSettingsMenu
         // ReworkPlayerRename(viewportContent);
 
 
-        CreateSettingsToggle(viewportContent, 10, "Pause Speedrun for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
-        CreateSettingsToggle(viewportContent, 11, "Hide Speedrun Timer", "Hides the speedrun timer (if you want to skip dialogue, but not see the timer)");
-        CreateSettingsOptions(viewportContent, 12, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
+        CreateSettingsToggle(viewportContent, 11, "Pause Speedrun for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
+        CreateSettingsToggle(viewportContent, 12, "Hide Speedrun Timer", "Hides the speedrun timer (if you want to skip dialogue, but not see the timer)");
+        CreateSettingsOptions(viewportContent, 13, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
             "This setting changes how these tools work. \"logic\": use randomizer logic to show only valid checks, \"checks only\": show all possible checks, \"original\": original behavior", ["logic", "checks only", "original"]);
 
         newSettingsMenu = newMenu.GetComponent<UISubMenu>();
@@ -234,5 +235,6 @@ internal static class RandoSettingsMenu
     internal static bool PauseForItemGet() => Settings.s.ReadBool("Pause Speedrun for Item Get Dialogues".ToLower(), true);
     internal static bool HideSpeedrunTimer() => Settings.s.ReadBool("hide speedrun timer", true);
     internal static bool IsCollectCountedAsChecked() => Settings.s.ReadBool("!collect counts as checked", true);
+    internal static bool IsGoalBeforeEpilogue() => Settings.s.ReadBool("goal before epilogue", false);
     internal static bool IsRagdollDeathLinkOn() => Settings.s.ReadBool("ragdoll on deathlink", false);
 }
