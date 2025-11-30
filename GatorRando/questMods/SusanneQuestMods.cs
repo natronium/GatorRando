@@ -37,10 +37,16 @@ internal static class SusanneQuestMods
         }
         else
         {
-            GameObject rockSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Rock Get Sequence");
-            DialogueSequencer rockSequencer = rockSeq.GetComponent<DialogueSequencer>();
-            rockSequencer.beforeSequence.RemoveListener(engineerQuestQS.JustProgressState);
-            rockSequencer.beforeSequence.AddListener(engineerQuestQS.JustProgressState);
+            if (LocationHandling.IsLocationCollected("BEACH ROCK"))
+            {
+                engineerQuestQS.states[1].onProgress.AddListener(engineerQuestQS.JustProgressState);
+            }
+            else {
+                GameObject rockSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Rock Get Sequence");
+                DialogueSequencer rockSequencer = rockSeq.GetComponent<DialogueSequencer>();
+                rockSequencer.beforeSequence.RemoveListener(engineerQuestQS.JustProgressState);
+                rockSequencer.beforeSequence.AddListener(engineerQuestQS.JustProgressState);
+            }
         }
     }
 }
