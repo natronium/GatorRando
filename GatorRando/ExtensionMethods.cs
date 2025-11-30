@@ -11,7 +11,7 @@ public static class ExtensionMethods
     )]
     public static void ObliteratePersistentListenerByIndex(this UnityEventBase uevent, int eventIndex)
     {
-        var persistentCalls = uevent.m_PersistentCalls;
+        PersistentCallGroup persistentCalls = uevent.m_PersistentCalls;
         persistentCalls.UnregisterPersistentListener(eventIndex);
         persistentCalls.RemoveListener(eventIndex);
     }

@@ -5,11 +5,11 @@ using UnityEngine;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(LogicState))]
-static class LogicStatePatch
+internal static class LogicStatePatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(LogicState.LogicCompleted))]
-    static bool PreLogicCompleted(LogicState __instance)
+	private static bool PreLogicCompleted(LogicState __instance)
     {
         if (__instance.stateName == "Defeat the slimes")
         {

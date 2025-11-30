@@ -4,11 +4,11 @@ using HarmonyLib;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(SaveFileScreen))]
-static class SaveFileScreenPatch
+internal static class SaveFileScreenPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(SaveFileScreen.PressSaveFileButton))]
-    static bool PrePressSaveFileButton(SaveFileScreen __instance, int index)
+	private static bool PrePressSaveFileButton(SaveFileScreen __instance, int index)
     {
         if (__instance.currentState == SaveFileScreen.State.Standard)
         {

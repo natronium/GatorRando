@@ -148,8 +148,8 @@ public static class SaveManager
     public static void LoadPostPrologueSaveData(int index)
     {
         string postPrologueSave = "";
-        var assembly = Assembly.GetExecutingAssembly();
-        using (var reader = new StreamReader(assembly.GetManifestResourceStream("GatorRando.Data.postPrologueSave.json")))
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        using (StreamReader reader = new StreamReader(assembly.GetManifestResourceStream("GatorRando.Data.postPrologueSave.json")))
         {
             postPrologueSave = reader.ReadToEnd();
         }

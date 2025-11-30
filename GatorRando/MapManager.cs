@@ -19,8 +19,8 @@ public static class MapManager
 
     public static void UpdateCoordsIfNeeded()
     {
-        var currentTime = Time.time;
-        var currentCoords = CurrentCoords();
+        float currentTime = Time.time;
+        PlayerCoords currentCoords = CurrentCoords();
         if (currentTime >= lastSentTime + timeDelta) {
             UpdateCoordinates();
         } else if (Vector2.Distance(new(lastSentCoords.X, lastSentCoords.Y), new(currentCoords.X, currentCoords.Y)) > distanceDelta){
@@ -36,8 +36,8 @@ public static class MapManager
     }
 
     private static void UpdateCoordinates() {
-        var currentTime = Time.time;
-        var currentCoords = CurrentCoords();
+        float currentTime = Time.time;
+        PlayerCoords currentCoords = CurrentCoords();
         ConnectionManager.StorePosition(currentCoords);
         lastSentCoords = currentCoords;
         lastSentTime = currentTime;

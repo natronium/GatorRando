@@ -5,11 +5,11 @@ using UnityEngine;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(UIRootMenu))]
-static class UIRootMenuPatch
+internal static class UIRootMenuPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(UIRootMenu.OnCancel))]
-    static bool PreOnCancel(UIRootMenu __instance)
+	private static bool PreOnCancel(UIRootMenu __instance)
     {
         // Prevent backspace in the rando settings menu from exiting the menu
         UISubMenu randoSettingSubMenu = Util.GetByPath(RandoSettingsMenu.GetCurrentRandoSettingsPath()).GetComponent<UISubMenu>();

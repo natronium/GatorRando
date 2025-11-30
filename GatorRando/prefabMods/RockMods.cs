@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace GatorRando.PrefabMods;
 
-static class RockMods
+internal static class RockMods
 {
-    public static void EditRockLayer()
+    internal static void EditRockLayer()
     {
         // Move the thrown rock projectile to the "StaticOnly" physics layer so that it can pass through the tutorial barrier
         // This does not seem to impact any other rock behaviour (e.g. skipping still works),

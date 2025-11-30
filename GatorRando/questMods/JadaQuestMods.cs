@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class JadaQuestMods
+internal static class JadaQuestMods
 {
     //Reference LogicState for additional changes to Jada's Quest
-    public static void Edits()
+    internal static void Edits()
     {
         GameObject boarQuest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
         QuestStates boarQuestQS = boarQuest.GetComponent<QuestStates>();

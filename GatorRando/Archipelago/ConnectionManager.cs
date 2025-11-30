@@ -64,9 +64,12 @@ public static class ConnectionManager
     /// <returns></returns>
     private static void Connect()
     {
-        if (Authenticated || attemptingConnection) return;
+        if (Authenticated || attemptingConnection)
+		{
+			return;
+		}
 
-        try
+		try
         {
             session = ArchipelagoSessionFactory.CreateSession(ServerData.Uri);
             SetupSession();
@@ -140,7 +143,7 @@ public static class ConnectionManager
         string outText;
         if (result.Successful)
         {
-            var success = (LoginSuccessful)result;
+            LoginSuccessful success = (LoginSuccessful)result;
 
             ServerData.SetupSession(success.SlotData, session.RoomState.Seed);
             Authenticated = true;
@@ -151,7 +154,7 @@ public static class ConnectionManager
         }
         else
         {
-            var failure = (LoginFailure)result;
+            LoginFailure failure = (LoginFailure)result;
             outText = $"Failed to connect to {ServerData.Uri} as {ServerData.SlotName}.";
             outText = failure.Errors.Aggregate(outText, (current, error) => current + $"\n    {error}");
 
@@ -207,9 +210,12 @@ public static class ConnectionManager
 
         Plugin.LogDebug(ServerData.GetIndex().ToString());
 
-        if (helper.Index < ServerData.GetIndex()) return;
+        if (helper.Index < ServerData.GetIndex())
+		{
+			return;
+		}
 
-        ServerData.Index = helper.Index;
+		ServerData.Index = helper.Index;
 
         ItemHandling.EnqueueItem(receivedItem.ItemId, receivedItem.Player.Name);
     }

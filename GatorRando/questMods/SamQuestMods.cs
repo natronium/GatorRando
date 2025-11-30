@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class SamQuestMods
+internal static class SamQuestMods
 {
     //Edit Sam's Quest to enable interception of each of the Thrown Pencils as an AP item
-    public static void Edits()
+    internal static void Edits()
     {
         GameObject thrownPencil1Seq = Util.GetByPath("SouthEast (Beach)/Side Quests/Clumsy Quest/Thrown Pencil 1/Sequence");
         GameObject thrownPencil2Seq = Util.GetByPath("SouthEast (Beach)/Side Quests/Clumsy Quest/Thrown Pencil 2/Sequence");
