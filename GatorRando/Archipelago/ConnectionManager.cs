@@ -101,7 +101,14 @@ public static class ConnectionManager
 
     public static void UnregisterItemReceivedListener()
     {
-        session.Items.ItemReceived -= OnItemReceived;
+        try
+        {
+            session.Items.ItemReceived -= OnItemReceived;
+        }
+        catch (NullReferenceException)
+        {
+            Plugin.LogWarn("ItemReceived Listener had not yet been registered");
+        }
     }
 
     /// <summary>
