@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace GatorRando.UIMods;
 
-static class TitleScreenMods
+internal static class TitleScreenMods
 {
     private static GameObject startButton;
 

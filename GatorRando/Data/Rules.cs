@@ -94,13 +94,13 @@ public class Rules
     }
     public class And(List<Rule> children) : Rule
     {
-        readonly List<Rule> Children = children;
+		private readonly List<Rule> Children = children;
 
         public override bool Evaluate() => Children.All(rule => rule.Evaluate()) && EvaluateOptions();
     }
     public class Or(List<Rule> children) : Rule
     {
-        readonly List<Rule> Children = children;
+		private readonly List<Rule> Children = children;
         public override bool Evaluate() => Children.Any(rule => rule.Evaluate()) && EvaluateOptions();
     }
     public class Has : Rule
@@ -146,9 +146,9 @@ public class Rules
             public readonly Items.ItemGroup ItemNameGroup;
             public readonly int Count;
         }
-        readonly Args args;
+		private readonly Args args;
 
-        static List<string> ItemsInItemGroup(Items.ItemGroup itemGroup) =>
+		private static List<string> ItemsInItemGroup(Items.ItemGroup itemGroup) =>
             [.. Items.itemData
                 .Where(item => item.itemGroups.Contains(itemGroup))
                 .Select(item => item.name)];
@@ -216,10 +216,10 @@ public class Rules
 
         static GatorRules()
         {
-            var assembly = Assembly.GetExecutingAssembly();
+            Assembly assembly = Assembly.GetExecutingAssembly();
             List<EntranceRule> entranceRules;
             List<LocationRule> locationRules;
-            var settings = new JsonSerializerSettings()
+            JsonSerializerSettings settings = new JsonSerializerSettings()
             {
                 ContractResolver = new DefaultContractResolver
                 {
@@ -233,12 +233,12 @@ public class Rules
                 ],
             };
 
-            using (var reader = new StreamReader(assembly.GetManifestResourceStream("GatorRando.Data.EntranceRules.json")))
+            using (StreamReader reader = new StreamReader(assembly.GetManifestResourceStream("GatorRando.Data.EntranceRules.json")))
             {
                 entranceRules = JsonConvert.DeserializeObject<List<EntranceRule>>(reader.ReadToEnd(), settings);
             }
 
-            using (var reader = new StreamReader(assembly.GetManifestResourceStream("GatorRando.Data.LocationRules.json")))
+            using (StreamReader reader = new StreamReader(assembly.GetManifestResourceStream("GatorRando.Data.LocationRules.json")))
             {
                 locationRules = JsonConvert.DeserializeObject<List<LocationRule>>(reader.ReadToEnd(), settings);
             }

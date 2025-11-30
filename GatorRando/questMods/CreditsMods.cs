@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class CreditsMods
+internal static class CreditsMods
 {
-    public static void Edits()
+    internal static void Edits()
     {
         GameObject sisFlashbacks = Util.GetByPath("Center (Playground)/Story Sequences/Act3 Sis/Sis Flashbacks");
         DialogueSequencer dialogueSeq = sisFlashbacks.GetComponent<DialogueSequencer>();

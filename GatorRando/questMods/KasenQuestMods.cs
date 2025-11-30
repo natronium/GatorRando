@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class KasenQuestMods
+internal static class KasenQuestMods
 {
-    public static void Edits()
+    internal static void Edits()
     {
         GameObject kasenQuest = Util.GetByPath("NorthEast (Canyoney)/SideQuests/FetchVulture");
         QuestStates kasenQuestQS = kasenQuest.GetComponent<QuestStates>();

@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class EsmeQuestMods
+internal static class EsmeQuestMods
 {
-    public static void Edits()
+    internal static void Edits()
     {
         GameObject getIceCream = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/Get Ice Cream");
         DialogueSequencer getIceCreamSeq = getIceCream.GetComponent<DialogueSequencer>();

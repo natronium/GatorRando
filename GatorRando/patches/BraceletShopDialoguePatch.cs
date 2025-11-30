@@ -8,16 +8,16 @@ using UnityEngine;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(BraceletShopDialogue))]
-static class BraceletShopDialoguePatch
+internal static class BraceletShopDialoguePatch
 {
 
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(BraceletShopDialogue.RunShop), MethodType.Enumerator)]
-    static IEnumerable<CodeInstruction> TranspileRunShop(IEnumerable<CodeInstruction> instructions)
+	private static IEnumerable<CodeInstruction> TranspileRunShop(IEnumerable<CodeInstruction> instructions)
     {
         CodeInstruction nop = new(OpCodes.Nop);
         int counter = 1;
-        foreach (var instruction in instructions)
+        foreach (CodeInstruction instruction in instructions)
         {
 
             //NB: counter is individual instruction count which is different from the IL_ labels (which are byte-based)

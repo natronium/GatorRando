@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GatorRando.UIMods;
 
-static class TutorialUIMods
+internal static class TutorialUIMods
 {
     public static void Edits()
     {

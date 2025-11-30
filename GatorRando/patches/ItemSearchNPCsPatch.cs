@@ -9,12 +9,12 @@ using UnityEngine;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(ItemSearchNPCs))]
-static class ItemSearchNPCsPatch
+internal static class ItemSearchNPCsPatch
 {
     private static List<DialogueActor> additionalActors;
     [HarmonyPostfix]
     [HarmonyPatch(nameof(ItemSearchNPCs.GetList))]
-    static void PostGetList(ref DialogueActor[] __result)
+	private static void PostGetList(ref DialogueActor[] __result)
     {
         if (additionalActors == null)
         {
@@ -55,7 +55,7 @@ static class ItemSearchNPCsPatch
 
     [HarmonyPostfix]
     [HarmonyPatch(nameof(ItemSearchNPCs.IsValid))]
-    static void PostIsValid(ItemSearchNPCs __instance, DialogueActor item, ref bool __result)
+	private static void PostIsValid(ItemSearchNPCs __instance, DialogueActor item, ref bool __result)
     {
         __result = __result && item.gameObject.activeInHierarchy;
         string gatorName = LocationAccessibilty.ConvertDAToGatorName(item);
@@ -70,7 +70,7 @@ static class ItemSearchNPCsPatch
         };
     }
 
-    static bool HandleTutorialEndJill(ItemSearchNPCs thisItemSearchNPCs, string[] checks)
+	private static bool HandleTutorialEndJill(ItemSearchNPCs thisItemSearchNPCs, string[] checks)
     {
         if (thisItemSearchNPCs.GetList().First(da => LocationAccessibilty.ConvertDAToGatorName(da) == "NPC_TutIsland_Duck").gameObject.activeInHierarchy)
         {

@@ -4,11 +4,11 @@ using HarmonyLib;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(QuestRewardNPCs))]
-static class QuestRewardNPCsPatch
+internal static class QuestRewardNPCsPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(QuestRewardNPCs.GiveReward))]
-    static void PreGiveReward(QuestRewardNPCs __instance)
+	private static void PreGiveReward(QuestRewardNPCs __instance)
     {
         if (ConnectionManager.Authenticated)
         {

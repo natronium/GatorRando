@@ -7,11 +7,11 @@ using UnityEngine;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(UISwapItemsMenu))]
-static class UISwapItemsMenuPatch
+internal static class UISwapItemsMenuPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(UISwapItemsMenu.UpdateInventories))]
-    static void PreUpdateInventories()
+	private static void PreUpdateInventories()
     {
         List<ItemObject> questItemsReceived = [];
 

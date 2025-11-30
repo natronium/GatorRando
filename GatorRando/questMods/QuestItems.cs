@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class QuestItems
+public static class QuestItems
 {
     public static readonly List<ItemObject> QuestItemObjects = [];
-    public static void AddItems()
+    internal static void AddAPQuestItems()
     {
         if (QuestItemObjects.Count == 0)
         {

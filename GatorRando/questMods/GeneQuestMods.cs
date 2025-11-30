@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class GeneQuestMods
+internal static class GeneQuestMods
 {
-    public static void Edits()
+    internal static void Edits()
     {
         //Edits to Gene's Quest
         GameObject economistQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist");
@@ -26,10 +26,17 @@ static class GeneQuestMods
         }
         else
         {
-            GameObject lootSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist/Loot Get Sequence");
-            DialogueSequencer lootSequencer = lootSeq.GetComponent<DialogueSequencer>();
-            lootSequencer.afterSequence.RemoveListener(economistQuestQS.JustProgressState);
-            lootSequencer.afterSequence.AddListener(economistQuestQS.JustProgressState);
+            if (LocationHandling.IsLocationCollected("HALF A CHEESE SANDWICH"))
+            {
+                economistQuestQS.states[1].onProgress.AddListener(economistQuestQS.JustProgressState); // If Sandwich collected, skip the sandwich sequence
+            }
+            else
+            {
+                GameObject lootSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist/Loot Get Sequence");
+                DialogueSequencer lootSequencer = lootSeq.GetComponent<DialogueSequencer>();
+                lootSequencer.afterSequence.RemoveListener(economistQuestQS.JustProgressState);
+                lootSequencer.afterSequence.AddListener(economistQuestQS.JustProgressState);
+            }
         }
     }
 

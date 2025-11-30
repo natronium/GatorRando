@@ -19,7 +19,7 @@ public static class LocationAccessibilty
 
     public static void UpdateAccessibleLocations()
     {
-        var inaccessibleIds = Locations.locationData.Where(data => !AccessibleLocations.Contains(data.apLocationId)).Select(data => data.apLocationId);
+        IEnumerable<long> inaccessibleIds = Locations.locationData.Where(data => !AccessibleLocations.Contains(data.apLocationId)).Select(data => data.apLocationId);
         foreach (long inaccessibleId in inaccessibleIds)
         {
 

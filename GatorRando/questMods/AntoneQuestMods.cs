@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class AntoneQuestMods
+internal static class AntoneQuestMods
 {
-    public static void Edits()
+    internal static void Edits()
     {
         //Edits to Antone's Quest
         GameObject entomologistQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Entomologist");

@@ -9,26 +9,26 @@ using UnityEngine;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(JunkShop))]
-static class JunkShopPatch
+internal static class JunkShopPatch
 {
 
     static readonly Dictionary<string, Sprite> replacementSprites = [];
     static readonly Dictionary<string, string> replacementDisplayNames = [];
     static readonly Dictionary<string, DialogueChunk> replacementDialogues = [];
-    static Sprite GetSprite(string name) => replacementSprites[name];
-    static string GetDisplayName(string name) => replacementDisplayNames[name];
-    static DialogueChunk GetDialogueChunk(string name) => replacementDialogues[name];
+	private static Sprite GetSprite(string name) => replacementSprites[name];
+	private static string GetDisplayName(string name) => replacementDisplayNames[name];
+	private static DialogueChunk GetDialogueChunk(string name) => replacementDialogues[name];
 
     [HarmonyPostfix]
     [HarmonyPatch(nameof(JunkShop.Start))]
-    static void PostStart()
+	private static void PostStart()
     {
         Junk4TrashQuestMods.HideCollectedShopLocations();
     }
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(JunkShop.RunShopDialogueSequence))]
-    static void PreRunShopDialogueSequence(JunkShop __instance)
+	private static void PreRunShopDialogueSequence(JunkShop __instance)
     {
         if (replacementSprites.Keys.Count == 0)
         {
@@ -51,7 +51,7 @@ static class JunkShopPatch
 
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(JunkShop.RunShopDialogueSequence), MethodType.Enumerator)]
-    static IEnumerable<CodeInstruction> TranspileRunShopDialogueSequence(IEnumerable<CodeInstruction> instructions)
+	private static IEnumerable<CodeInstruction> TranspileRunShopDialogueSequence(IEnumerable<CodeInstruction> instructions)
     {
         CodeInstruction nop = new(OpCodes.Nop);
         int counter = 1;
@@ -71,7 +71,7 @@ static class JunkShopPatch
             CodeInstruction.Call(typeof(JunkShopPatch), nameof(GetDialogueChunk), [typeof(string)]),
         ];
 
-        foreach (var instruction in instructions)
+        foreach (CodeInstruction instruction in instructions)
         {
 
             //NB: counter is individual instruction count which is different from the IL_ labels (which are byte-based)
@@ -122,11 +122,11 @@ static class JunkShopPatch
 
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(JunkShop.UpdateInventory))]
-    static IEnumerable<CodeInstruction> TranspileUpdateInventory(IEnumerable<CodeInstruction> instructions)
+	private static IEnumerable<CodeInstruction> TranspileUpdateInventory(IEnumerable<CodeInstruction> instructions)
     {
         // CodeInstruction nop = new(OpCodes.Nop);
         int counter = 1;
-        foreach (var instruction in instructions)
+        foreach (CodeInstruction instruction in instructions)
         {
 
             //NB: counter is individual instruction count which is different from the IL_ labels (which are byte-based)
@@ -146,7 +146,7 @@ static class JunkShopPatch
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(JunkShop.GetChoiceList))]
-    static bool PreGetChoiceList(JunkShop __instance, ref string[] __result)
+	private static bool PreGetChoiceList(JunkShop __instance, ref string[] __result)
     {
         __result = new string[__instance.displayedItemCount + 1];
         __result[0] = __instance.document.FetchString(__instance.cancelChoice, Language.Auto);

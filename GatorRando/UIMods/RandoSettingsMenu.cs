@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 namespace GatorRando.UIMods;
 
-static class RandoSettingsMenu
+internal static class RandoSettingsMenu
 {
-    static UISubMenu newSettingsMenu;
+	private static UISubMenu newSettingsMenu;
 
-    public enum CheckfinderBehavior
+    internal enum CheckfinderBehavior
     {
         Logic,
         ChecksOnly,
         Original
     }
 
-    public static string GetCurrentSettingsPath()
+    internal static string GetCurrentSettingsPath()
     {
         string currentSettingsParent;
         if (SceneManager.GetActiveScene().name == "Prologue")
@@ -30,7 +30,7 @@ static class RandoSettingsMenu
         return currentSettingsParent + "Settings/";
     }
 
-    public static string GetCurrentRandoSettingsPath()
+    internal static string GetCurrentRandoSettingsPath()
     {
         return GetCurrentSettingsParent() + "Rando Settings/";
     }
@@ -47,7 +47,7 @@ static class RandoSettingsMenu
         }
     }
 
-    public static UISubMenu CreateNewSettingsMenu()
+    internal static UISubMenu CreateNewSettingsMenu()
     {
         GameObject settingsMenuObject = Util.GetByPath(GetCurrentSettingsPath());
         GameObject parentCanvas = Util.GetByPath(GetCurrentSettingsParent());
@@ -93,7 +93,9 @@ static class RandoSettingsMenu
             CreateSettingsToggle(viewportContent, 9, "Skip Prologue", "set before starting a new game. If true, will skip the prologue and set the player name to the slot name.");
             CreateSettingsToggle(viewportContent, 10, "Goal Before Epilogue", "set before loading into a game. If true, goal will trigger on talking to your friends at the Playground when the flashback would start.");
 
-            //Connect button
+            CreateSettingsToggle(viewportContent, 13, "Ragdoll on DeathLink", "When you receive a DeathLink from another game, your character will ragdoll. Note: you cannot send DeathLinks to other players. This option must be toggled on the main menu.");
+
+            //Delete all saves button
             CreateSettingsButton(viewportContent,
                             14,
                             "Delete all AP Saves",
@@ -115,12 +117,12 @@ static class RandoSettingsMenu
         return newSettingsMenu;
     }
 
-    public static void LeaveRandoSettingsMenu()
+    internal static void LeaveRandoSettingsMenu()
     {
         newSettingsMenu.Deactivate();
     }
 
-    public static void EnterRandoSettingsMenu()
+    internal static void EnterRandoSettingsMenu()
     {
         newSettingsMenu.Activate();
     }
@@ -228,13 +230,11 @@ static class RandoSettingsMenu
         selectOptions.options = options;
     }
 
-    public static CheckfinderBehavior GetCheckfinderBehavior() => (CheckfinderBehavior)Settings.s.ReadInt("megaphone and texting logic?");
-
-    public static bool IsPrologueToBeSkipped() => Settings.s.ReadBool("skip prologue", false);
-
-    public static bool PauseForItemGet() => Settings.s.ReadBool("Pause Speedrun for Item Get Dialogues".ToLower(), true);
-    public static bool HideSpeedrunTimer() => Settings.s.ReadBool("hide speedrun timer", true);
-
-    public static bool IsCollectCountedAsChecked() => Settings.s.ReadBool("!collect counts as checked", true);
-    public static bool IsGoalBeforeEpilogue() => Settings.s.ReadBool("goal before epilogue", false);
+    internal static CheckfinderBehavior GetCheckfinderBehavior() => (CheckfinderBehavior)Settings.s.ReadInt("megaphone and texting logic?");
+    internal static bool IsPrologueToBeSkipped() => Settings.s.ReadBool("skip prologue", true);
+    internal static bool PauseForItemGet() => Settings.s.ReadBool("Pause Speedrun for Item Get Dialogues".ToLower(), true);
+    internal static bool HideSpeedrunTimer() => Settings.s.ReadBool("hide speedrun timer", true);
+    internal static bool IsCollectCountedAsChecked() => Settings.s.ReadBool("!collect counts as checked", true);
+    internal static bool IsGoalBeforeEpilogue() => Settings.s.ReadBool("goal before epilogue", false);
+    internal static bool IsRagdollDeathLinkOn() => Settings.s.ReadBool("ragdoll on deathlink", false);
 }

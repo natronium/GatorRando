@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class SusanneQuestMods
+internal static class SusanneQuestMods
 {
-    public static void Edits()
+    internal static void Edits()
     {
         //Edits to Susanne's Quest
         // Need to remove QuestState.JustProgressState from Rock Get Sequence
@@ -37,10 +37,16 @@ static class SusanneQuestMods
         }
         else
         {
-            GameObject rockSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Rock Get Sequence");
-            DialogueSequencer rockSequencer = rockSeq.GetComponent<DialogueSequencer>();
-            rockSequencer.beforeSequence.RemoveListener(engineerQuestQS.JustProgressState);
-            rockSequencer.beforeSequence.AddListener(engineerQuestQS.JustProgressState);
+            if (LocationHandling.IsLocationCollected("BEACH ROCK"))
+            {
+                engineerQuestQS.states[1].onProgress.AddListener(engineerQuestQS.JustProgressState);
+            }
+            else {
+                GameObject rockSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Rock Get Sequence");
+                DialogueSequencer rockSequencer = rockSeq.GetComponent<DialogueSequencer>();
+                rockSequencer.beforeSequence.RemoveListener(engineerQuestQS.JustProgressState);
+                rockSequencer.beforeSequence.AddListener(engineerQuestQS.JustProgressState);
+            }
         }
     }
 }
