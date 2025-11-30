@@ -108,9 +108,9 @@ public static class SpriteHandler
 
     static Texture2D LoadTextureForName(string name)
     {
-        var assembly = Assembly.GetExecutingAssembly();
+        Assembly assembly = Assembly.GetExecutingAssembly();
         Texture2D texture2D = new(200, 200);
-        using (var memstream = new MemoryStream())
+        using (MemoryStream memstream = new MemoryStream())
         {
             assembly.GetManifestResourceStream(newSpriteInformation[name].path).CopyTo(memstream);
             texture2D.LoadImage(memstream.ToArray());

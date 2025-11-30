@@ -17,7 +17,7 @@ public class Plugin : BaseUnityPlugin
     private void Awake()
     {
         Instance = this;
-        var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+        Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
         harmony.PatchAll(); // automatically patch based on harmony attributes
         ArchipelagoConsole.Awake();
         ArchipelagoConsole.LogMessage($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");

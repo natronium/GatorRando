@@ -15,7 +15,16 @@ These instructions assume familiarity with command line tools. Please ask for he
 1. Download and install [.NET version 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) or higher
 2. In your command line interface of choice, navigate to the directory where you would like to store this project's source files.
 3. `git clone` this repository to that location
-4. Copy Assembly-CSharp.dll, UnityEngine.dll, and UnityEngine.UI.dll from the game's folder in `Lil Gator Game\Lil Gator Game_Data\Managed` into your local copy of GatorRando's `lib` folder
+4. Create a file called `config.targets` in the nested GatorRando folder with the following format:
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <Project>
+      <PropertyGroup>
+        <GameDir>Path\To\Your\Lil Gator Game\Game Directory</GameDir>
+      </PropertyGroup>
+    </Project>
+    ```
+	Replace `Path\To\Your\Lil Gator Game\Game Directory` with the appropriate one for your install location
 5. Navigate into the repository and run the command `dotnet build`
 
 ## Randomizer Details

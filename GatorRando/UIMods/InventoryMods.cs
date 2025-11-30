@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace GatorRando.UIMods;
 
-static class InventoryMods
+internal static class InventoryMods
 {
-    public static void AddQuestItemTab()
+    internal static void AddQuestItemTab()
     {
         // Create a new tab in the inventory screen for Quest Items
         // See UISwapItemsMenuPatch for prefix that populates this new tab

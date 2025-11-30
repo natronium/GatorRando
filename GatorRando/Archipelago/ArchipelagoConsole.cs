@@ -34,9 +34,12 @@ public static class ArchipelagoConsole
 
     public static void LogMessage(string message)
     {
-        if (message.IsNullOrWhiteSpace()) return;
+        if (message.IsNullOrWhiteSpace())
+		{
+			return;
+		}
 
-        if (logLines.Count == MaxLogLines)
+		if (logLines.Count == MaxLogLines)
         {
             logLines.RemoveAt(0);
         }
@@ -48,9 +51,12 @@ public static class ArchipelagoConsole
     
     public static void LogError(string error)
     {
-        if (error.IsNullOrWhiteSpace()) return;
+        if (error.IsNullOrWhiteSpace())
+		{
+			return;
+		}
 
-        if (logLines.Count == MaxLogLines)
+		if (logLines.Count == MaxLogLines)
         {
             logLines.RemoveAt(0);
         }
@@ -62,9 +68,12 @@ public static class ArchipelagoConsole
 
     public static void OnGUI()
     {
-        if (logLines.Count == 0) return;
+        if (logLines.Count == 0)
+		{
+			return;
+		}
 
-        if (!Hidden || Time.time - lastUpdateTime < HideTimeout)
+		if (!Hidden || Time.time - lastUpdateTime < HideTimeout)
         {
             scrollView = GUI.BeginScrollView(window, scrollView, scroll);
             GUI.Box(text, "");
@@ -79,9 +88,12 @@ public static class ArchipelagoConsole
         }
 
         // draw client/server commands entry
-        if (Hidden || !ConnectionManager.Authenticated) return;
+        if (Hidden || !ConnectionManager.Authenticated)
+		{
+			return;
+		}
 
-        CommandText = GUI.TextField(CommandTextRect, CommandText);
+		CommandText = GUI.TextField(CommandTextRect, CommandText);
         if (!CommandText.IsNullOrWhiteSpace() && GUI.Button(SendCommandButton, "Send"))
         {
             ConnectionManager.SendMessage(CommandText);
@@ -102,7 +114,7 @@ public static class ArchipelagoConsole
         }
         else
         {
-            for (var i = 0; i < logLines.Count; i++)
+            for (int i = 0; i < logLines.Count; i++)
             {
                 scrollText += "> ";
                 scrollText += logLines.ElementAt(i);
@@ -113,7 +125,7 @@ public static class ArchipelagoConsole
             }
         }
 
-        var width = (int)(Screen.width * 0.4f);
+        int width = (int)(Screen.width * 0.4f);
         int height;
         int scrollDepth;
         if (Hidden)
@@ -137,23 +149,23 @@ public static class ArchipelagoConsole
         textStyle.normal.textColor = Color.white;
         textStyle.wordWrap = !Hidden;
 
-        var xPadding = (int)(Screen.width * 0.01f);
-        var yPadding = (int)(Screen.height * 0.01f);
+        int xPadding = (int)(Screen.width * 0.01f);
+        int yPadding = (int)(Screen.height * 0.01f);
 
         textStyle.padding = Hidden
             ? new RectOffset(xPadding / 2, xPadding / 2, yPadding / 2, yPadding / 2)
             : new RectOffset(xPadding, xPadding, yPadding, yPadding);
 
-        var buttonWidth = (int)(Screen.width * 0.12f);
-        var buttonHeight = (int)(Screen.height * 0.03f);
+        int buttonWidth = (int)(Screen.width * 0.12f);
+        int buttonHeight = (int)(Screen.height * 0.03f);
 
         hideShowButton = new Rect(Screen.width / 2 + width / 2 + buttonWidth / 3, Screen.height * 0.004f, buttonWidth,
             buttonHeight);
 
         // draw server command text field and button
         width = (int)(Screen.width * 0.4f);
-        var xPos = (int)(Screen.width / 2.0f - width / 2.0f);
-        var yPos = (int)(Screen.height * 0.307f);
+        int xPos = (int)(Screen.width / 2.0f - width / 2.0f);
+        int yPos = (int)(Screen.height * 0.307f);
         height = (int)(Screen.height * 0.022f);
 
         CommandTextRect = new Rect(xPos, yPos, width, height);

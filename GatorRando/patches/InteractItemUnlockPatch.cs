@@ -4,11 +4,11 @@ using HarmonyLib;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(InteractItemUnlock))]
-static class InteractItemUnlockPatch
+internal static class InteractItemUnlockPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(InteractItemUnlock.Interact))]
-    static bool PreInteract(InteractItemUnlock __instance)
+	private static bool PreInteract(InteractItemUnlock __instance)
     {
         __instance.gameObject.SetActive(false);
         __instance.SaveTrue();

@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace GatorRando.QuestMods;
 
-static class TutorialQuestMods
+internal static class TutorialQuestMods
 {
-    public static void QueueStartWithFreeplay()
+    internal static void QueueStartWithFreeplay()
     {
         GameObject act1 = Util.GetByPath("NorthWest (Tutorial Island)/Act 1");
         QuestStates act1QuestStates = act1.GetComponent<QuestStates>();

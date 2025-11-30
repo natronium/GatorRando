@@ -3,11 +3,11 @@ using HarmonyLib;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(ParticlePickup))]
-static class ParticlePickupPatch
+internal static class ParticlePickupPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(ParticlePickup.Start))]
-    static void PreStart(ParticlePickup __instance)
+	private static void PreStart(ParticlePickup __instance)
     {
         // Check if Pot Confetti for Pots, Confetti for Chests and Racetracks
         // Plugin.LogInfo($"ParticlePickup.Start for {__instance.particleSystem.name}");

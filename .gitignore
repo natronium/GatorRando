@@ -6,6 +6,8 @@
 # Personal additions (not from dotnet new gitignore)
 */lib/*.dll
 .vscode
+config.targets
+Build
 
 # dotenv files
 .env

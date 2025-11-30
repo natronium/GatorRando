@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace GatorRando.PrefabMods;
 
-static class BalloonMods
+internal static class BalloonMods
 {
-    public static void EditBalloonStamina()
+    internal static void EditBalloonStamina()
     {
         // Edit the minimum stamina to be negative for the balloon and bubble gum so that they appear and instantly pop with no bracelets
         // Allows them to be used as a cardboard destroyer

@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 namespace GatorRando.UIMods;
 
-public static class PauseMenuMods
+internal static class PauseMenuMods
 {
-    public static void AddRandoSettingsMenuButton()
+    internal static void AddRandoSettingsMenuButton()
     {
         GameObject pauseMenu = Util.GetByPath("Canvas/Pause Menu/Pause Content");
         GameObject settingsButton = Util.GetByPath("Canvas/Pause Menu/Pause Content/Settings");

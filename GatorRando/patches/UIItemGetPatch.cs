@@ -4,11 +4,11 @@ using HarmonyLib;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(UIItemGet))]
-static class UIItemGetPatch
+internal static class UIItemGetPatch
 {
     [HarmonyPostfix]
     [HarmonyPatch(nameof(UIItemGet.Deactivate))]
-    static void PostDeactivate()
+	private static void PostDeactivate()
     {
         DialogueModifier.SetModifiedDialogue(false);
     }

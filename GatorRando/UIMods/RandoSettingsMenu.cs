@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 namespace GatorRando.UIMods;
 
-static class RandoSettingsMenu
+internal static class RandoSettingsMenu
 {
-    static UISubMenu newSettingsMenu;
+	private static UISubMenu newSettingsMenu;
 
-    public enum CheckfinderBehavior
+    internal enum CheckfinderBehavior
     {
         Logic,
         ChecksOnly,
         Original
     }
 
-    public static string GetCurrentSettingsPath()
+    internal static string GetCurrentSettingsPath()
     {
         string currentSettingsParent;
         if (SceneManager.GetActiveScene().name == "Prologue")
@@ -30,7 +30,7 @@ static class RandoSettingsMenu
         return currentSettingsParent + "Settings/";
     }
 
-    public static string GetCurrentRandoSettingsPath()
+    internal static string GetCurrentRandoSettingsPath()
     {
         return GetCurrentSettingsParent() + "Rando Settings/";
     }
@@ -47,7 +47,7 @@ static class RandoSettingsMenu
         }
     }
 
-    public static UISubMenu CreateNewSettingsMenu()
+    internal static UISubMenu CreateNewSettingsMenu()
     {
         GameObject settingsMenuObject = Util.GetByPath(GetCurrentSettingsPath());
         GameObject parentCanvas = Util.GetByPath(GetCurrentSettingsParent());
@@ -91,10 +91,13 @@ static class RandoSettingsMenu
             "if unchecked, uses what locations as saved in the save file.");
 
             CreateSettingsToggle(viewportContent, 9, "Skip Prologue", "set before starting a new game. If true, will skip the prologue and set the player name to the slot name.");
+            CreateSettingsToggle(viewportContent, 10, "Goal Before Epilogue", "set before loading into a game. If true, goal will trigger on talking to your friends at the Playground when the flashback would start.");
 
-            //Connect button
+            CreateSettingsToggle(viewportContent, 13, "Ragdoll on DeathLink", "When you receive a DeathLink from another game, your character will ragdoll. Note: you cannot send DeathLinks to other players. This option must be toggled on the main menu.");
+
+            //Delete all saves button
             CreateSettingsButton(viewportContent,
-                            13,
+                            14,
                             "Delete all AP Saves",
                             "delete all AP saves for Lil Gator Game. useful for cleaning up old runs",
                             SaveManager.EraseAllAPSaveData
@@ -105,21 +108,21 @@ static class RandoSettingsMenu
         // ReworkPlayerRename(viewportContent);
 
 
-        CreateSettingsToggle(viewportContent, 10, "Pause Speedrun Mode for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
-        CreateSettingsToggle(viewportContent, 11, "Show Speedrun Timer", "Shows the speedrun timer (regardless of whether Speedrun Mode is on)");
-        CreateSettingsOptions(viewportContent, 12, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
+        CreateSettingsToggle(viewportContent, 11, "Pause Speedrun Mode for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
+        CreateSettingsToggle(viewportContent, 12, "Show Speedrun Timer", "Shows the speedrun timer (regardless of whether Speedrun Mode is on)");
+        CreateSettingsOptions(viewportContent, 13, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
             "This setting changes how these tools work. \"logic\": use randomizer logic to show only valid checks, \"checks only\": show all possible checks, \"original\": original behavior", ["logic", "checks only", "original"]);
 
         newSettingsMenu = newMenu.GetComponent<UISubMenu>();
         return newSettingsMenu;
     }
 
-    public static void LeaveRandoSettingsMenu()
+    internal static void LeaveRandoSettingsMenu()
     {
         newSettingsMenu.Deactivate();
     }
 
-    public static void EnterRandoSettingsMenu()
+    internal static void EnterRandoSettingsMenu()
     {
         newSettingsMenu.Activate();
     }
@@ -227,12 +230,11 @@ static class RandoSettingsMenu
         selectOptions.options = options;
     }
 
-    public static CheckfinderBehavior GetCheckfinderBehavior() => (CheckfinderBehavior)Settings.s.ReadInt("megaphone and texting logic?");
-
-    public static bool IsPrologueToBeSkipped() => Settings.s.ReadBool("skip prologue", true);
-
-    public static bool PauseForItemGet() => Settings.s.ReadBool("Pause Speedrun Mode for Item Get Dialogues".ToLower(), true);
-    public static bool ShowSpeedrunTimer() => Settings.s.ReadBool("show speedrun timer", false);
-
-    public static bool IsCollectCountedAsChecked() => Settings.s.ReadBool("!collect counts as checked", true);
+    internal static CheckfinderBehavior GetCheckfinderBehavior() => (CheckfinderBehavior)Settings.s.ReadInt("megaphone and texting logic?");
+    internal static bool IsPrologueToBeSkipped() => Settings.s.ReadBool("skip prologue", true);
+    internal static bool PauseForItemGet() => Settings.s.ReadBool("Pause Speedrun Mode for Item Get Dialogues".ToLower(), true);
+    internal static bool ShowSpeedrunTimer() => Settings.s.ReadBool("show speedrun timer", false);
+    internal static bool IsCollectCountedAsChecked() => Settings.s.ReadBool("!collect counts as checked", true);
+    internal static bool IsGoalBeforeEpilogue() => Settings.s.ReadBool("goal before epilogue", false);
+    internal static bool IsRagdollDeathLinkOn() => Settings.s.ReadBool("ragdoll on deathlink", false);
 }

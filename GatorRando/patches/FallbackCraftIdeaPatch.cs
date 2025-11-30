@@ -4,7 +4,7 @@ using HarmonyLib;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(FallbackCraftIdea))]
-static class FallbackCraftIdeaPatch {
+internal static class FallbackCraftIdeaPatch {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(FallbackCraftIdea.CheckState))]
     private static bool PreCheckState(FallbackCraftIdea __instance, int stateID) {

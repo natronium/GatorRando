@@ -10,8 +10,6 @@ namespace GatorRando;
 
 public static class Util
 {
-    
-
     public static IEnumerator WaitThenRunCoroutine(float waitTime, Action action)
     {
         yield return new WaitForSeconds(waitTime);
@@ -37,13 +35,13 @@ public static class Util
 
     public static GameObject GetByPath(string path)
     {
-        var elements = path.Trim('/').Split('/');
-        var activeScene = SceneManager.GetActiveScene();
-        var rootObjects = activeScene.GetRootGameObjects();
+        string[] elements = path.Trim('/').Split('/');
+        Scene activeScene = SceneManager.GetActiveScene();
+        GameObject[] rootObjects = activeScene.GetRootGameObjects();
 
-        var root = rootObjects.First((go) => go.name == elements[0]);
+        GameObject root = rootObjects.First((go) => go.name == elements[0]);
         GameObject current = root;
-        foreach (var element in elements.Skip(1))
+        foreach (string element in elements.Skip(1))
         {
             current = current.transform.Cast<Transform>()
             .First((t) => t.name == element)
