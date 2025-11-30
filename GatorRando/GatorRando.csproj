@@ -4,14 +4,29 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>GatorRando</AssemblyName>
     <Description>Randomizer for Lil Gator Game</Description>
-    <Version>1.1.1</Version>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Version>1.1.2</Version>
     <LangVersion>latest</LangVersion>
+    <OutputPath>$(ProjectDir)Build</OutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
+  <!--
+		Create a file named 'config.targets' in the GatorRando directory.
+		This should contain a 'GameDir' property pointing to your Lil Gator Game directory.
+	-->
+	<Import Project="config.targets" Condition="Exists('config.targets')" />
+
+  <!-- Custom properties -->
+  <PropertyGroup>
+		<ModName>GatorRando</ModName>
+		<ExportDir>$(OutputPath)\Export</ExportDir>
+		<ManagedDir>$(GameDir)\Lil Gator Game_Data\Managed</ManagedDir>
+    <PluginsPath>$(GameDir)\BepInEx\plugins</PluginsPath>
+	</PropertyGroup>
+
   <ItemGroup>
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" PrivateAssets="all" />
     <PackageReference Include="Archipelago.MultiClient.Net" Version="6.6.0" />
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.*" />
@@ -24,34 +39,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>lib/Assembly-CSharp.dll</HintPath>
+    <Reference Include="Assembly-CSharp" Publicize="true">
+      <HintPath>$(ManagedDir)\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>lib/UnityEngine.dll</HintPath>
+      <HintPath>$(ManagedDir)\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>lib/UnityEngine.UI.dll</HintPath>
+      <HintPath>$(ManagedDir)\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>lib/UnityEngine.UI.dll</HintPath>
+      <HintPath>$(ManagedDir)\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Addressables">
-      <HintPath>lib/Unity.Addressables.dll</HintPath>
+      <HintPath>$(ManagedDir)\Unity.Addressables.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ResourceManager">
-      <HintPath>lib/Unity.ResourceManager.dll</HintPath>
+      <HintPath>$(ManagedDir)\Unity.ResourceManager.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" PrivateAssets="all" />
-
-    <!-- Publicize directly when referencing -->
-    <Reference Include="lib/Assembly-CSharp.dll" Publicize="true" />
-
-    <!-- Publicize by assembly name -->
-    <Publicize Include="Assembly-CSharp" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,4 +80,23 @@
   <ItemGroup>
     <EmbeddedResource Include="Data/postPrologueSave.json" />
   </ItemGroup>
+
+  <Target Name="CopyMod" AfterTargets="PostBuildEvent">
+		<RemoveDir Directories="$(ExportDir)/" />
+		<MakeDir Directories="$(ExportDir)/" />
+		<MakeDir Directories="$(ExportDir)/zip/" />
+		<MakeDir Condition="!Exists('$(PluginsPath)/$(ModName)/')" Directories="$(PluginsPath)/$(ModName)/" />
+		<Copy SourceFiles="$(TargetPath);$(TargetDir)/$(TargetName).pdb" DestinationFolder="$(PluginsPath)/$(ModName)/" />
+		<Copy SourceFiles="$(OutputPath)/Archipelago.MultiClient.Net.dll" DestinationFolder="$(PluginsPath)/$(ModName)/" />
+    <Copy SourceFiles="$(OutputPath)/Newtonsoft.Json.dll" DestinationFolder="$(PluginsPath)/$(ModName)/" />
+		<Copy SourceFiles="$(ProjectDir)\..\README.md;$(TargetPath);$(TargetDir)/$(TargetName).pdb" DestinationFolder="$(ExportDir)/zip/" />
+		<Copy SourceFiles="$(OutputPath)/Archipelago.MultiClient.Net.dll" DestinationFolder="$(ExportDir)/zip/" />
+    <Copy SourceFiles="$(OutputPath)/Newtonsoft.Json.dll" DestinationFolder="$(ExportDir)/zip/" />
+		<ZipDirectory SourceDirectory="$(ExportDir)/zip/" DestinationFile="$(ExportDir)/$(ModName).zip" />
+		<RemoveDir Directories="$(ExportDir)/zip/" />
+		<GetFileHash Files="$(ExportDir)/$(ModName).zip" Algorithm="SHA256">
+			<Output TaskParameter="Items" ItemName="FilesWithHashes" />
+		</GetFileHash>
+		<WriteLinesToFile File="$(ExportDir)/SHA.txt" Lines="@(FilesWithHashes->'%(FileHash)')" Overwrite="true" Encoding="UTF-8" />
+	</Target>
 </Project>
