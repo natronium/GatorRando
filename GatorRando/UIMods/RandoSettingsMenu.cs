@@ -92,9 +92,11 @@ static class RandoSettingsMenu
 
             CreateSettingsToggle(viewportContent, 9, "Skip Prologue", "set before starting a new game. If true, will skip the prologue and set the player name to the slot name.");
 
-            //Connect button
+            CreateSettingsToggle(viewportContent, 13, "Ragdoll on DeathLink", "When you receive a DeathLink from another game, your character will ragdoll. Note: you cannot send DeathLinks to other players. This option must be toggled on the main menu.");
+
+            //Delete all saves button
             CreateSettingsButton(viewportContent,
-                            13,
+                            14,
                             "Delete all AP Saves",
                             "delete all AP saves for Lil Gator Game. useful for cleaning up old runs",
                             SaveManager.EraseAllAPSaveData
@@ -235,4 +237,6 @@ static class RandoSettingsMenu
     public static bool HideSpeedrunTimer() => Settings.s.ReadBool("hide speedrun timer", true);
 
     public static bool IsCollectCountedAsChecked() => Settings.s.ReadBool("!collect counts as checked", true);
+
+    public static bool IsRagdollDeathLinkOn() => Settings.s.ReadBool("ragdoll on deathlink", false);
 }
