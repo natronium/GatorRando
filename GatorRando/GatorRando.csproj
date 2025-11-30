@@ -22,7 +22,7 @@
 		<ModName>GatorRando</ModName>
 		<ExportDir>$(OutputPath)\Export</ExportDir>
 		<ManagedDir>$(GameDir)\Lil Gator Game_Data\Managed</ManagedDir>
-    <PluginsPath>G:\SteamLibrary\steamapps\common\Lil Gator Game\BepInEx\plugins</PluginsPath>
+    <PluginsPath>$(GameDir)\BepInEx\plugins</PluginsPath>
 	</PropertyGroup>
 
   <ItemGroup>
