@@ -37,10 +37,17 @@ internal static class JadaQuestMods
         }
         else
         {
-            GameObject grassSeq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Got Enough Grass Sequence");
-            DialogueSequencer grassSequencer = grassSeq.GetComponent<DialogueSequencer>();
-            grassSequencer.afterSequence.RemoveListener(boarQuestQS.JustProgressState);
-            grassSequencer.afterSequence.AddListener(boarQuestQS.JustProgressState);
+            if (LocationHandling.IsLocationCollected("CLIPPINGS"))
+            {
+                boarQuestQS.states[1].onProgress.AddListener(boarQuestQS.JustProgressState); // If Grass collected, skip the get grass sequence
+            }
+            else
+            {
+                GameObject grassSeq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Got Enough Grass Sequence");
+                DialogueSequencer grassSequencer = grassSeq.GetComponent<DialogueSequencer>();
+                grassSequencer.afterSequence.RemoveListener(boarQuestQS.JustProgressState);
+                grassSequencer.afterSequence.AddListener(boarQuestQS.JustProgressState);
+            }
         }
     }
 
@@ -54,10 +61,18 @@ internal static class JadaQuestMods
         }
         else
         {
-            GameObject waterSeq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Got Enough Water Sequence");
-            DialogueSequencer waterSequencer = waterSeq.GetComponent<DialogueSequencer>();
-            waterSequencer.afterSequence.RemoveListener(boarQuestQS.JustProgressState);
-            waterSequencer.afterSequence.AddListener(boarQuestQS.JustProgressState);
+            if (LocationHandling.IsLocationCollected("WATER"))
+            {
+                boarQuestQS.states[3].onProgress.AddListener(boarQuestQS.JustProgressState); // If Water collected, skip the get water sequence
+            }
+            else
+            {
+                GameObject waterSeq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Got Enough Water Sequence");
+                DialogueSequencer waterSequencer = waterSeq.GetComponent<DialogueSequencer>();
+                waterSequencer.afterSequence.RemoveListener(boarQuestQS.JustProgressState);
+                waterSequencer.afterSequence.AddListener(boarQuestQS.JustProgressState);
+
+            }
         }
     }
 }

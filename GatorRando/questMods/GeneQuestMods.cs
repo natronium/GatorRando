@@ -26,10 +26,17 @@ internal static class GeneQuestMods
         }
         else
         {
-            GameObject lootSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist/Loot Get Sequence");
-            DialogueSequencer lootSequencer = lootSeq.GetComponent<DialogueSequencer>();
-            lootSequencer.afterSequence.RemoveListener(economistQuestQS.JustProgressState);
-            lootSequencer.afterSequence.AddListener(economistQuestQS.JustProgressState);
+            if (LocationHandling.IsLocationCollected("HALF A CHEESE SANDWICH"))
+            {
+                economistQuestQS.states[1].onProgress.AddListener(economistQuestQS.JustProgressState); // If Sandwich collected, skip the sandwich sequence
+            }
+            else
+            {
+                GameObject lootSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Economist/Loot Get Sequence");
+                DialogueSequencer lootSequencer = lootSeq.GetComponent<DialogueSequencer>();
+                lootSequencer.afterSequence.RemoveListener(economistQuestQS.JustProgressState);
+                lootSequencer.afterSequence.AddListener(economistQuestQS.JustProgressState);
+            }
         }
     }
 
