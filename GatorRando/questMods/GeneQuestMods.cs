@@ -28,7 +28,7 @@ static class GeneQuestMods
         {
             if (LocationHandling.IsLocationCollected("HALF A CHEESE SANDWICH"))
             {
-                economistQuestQS.states[1].onProgress.AddListener(economistQuestQS.JustProgressState); // If Sandwich collected, skip the get water sequence
+                economistQuestQS.states[1].onProgress.AddListener(economistQuestQS.JustProgressState); // If Sandwich collected, skip the sandwich sequence
             }
             else
             {

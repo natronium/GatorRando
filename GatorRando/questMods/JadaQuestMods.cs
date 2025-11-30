@@ -39,7 +39,7 @@ static class JadaQuestMods
         {
             if (LocationHandling.IsLocationCollected("CLIPPINGS"))
             {
-                boarQuestQS.states[1].onProgress.AddListener(boarQuestQS.JustProgressState); // If Grass collected, skip the get water sequence
+                boarQuestQS.states[1].onProgress.AddListener(boarQuestQS.JustProgressState); // If Grass collected, skip the get grass sequence
             }
             else
             {
