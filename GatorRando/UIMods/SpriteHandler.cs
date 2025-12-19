@@ -86,6 +86,11 @@ public static class SpriteHandler
         {"Archipelago", new AddedTexture("GatorRando.Sprites.archipelago_sticker_style.png", 200, 200)},
         {"Flag", new AddedTexture("GatorRando.Sprites.checkered_flag.png", 200, 200)},
         {"Socks", new AddedTexture("GatorRando.Sprites.giant_socks.png", 200, 200)},
+        {"Map", new AddedTexture("GatorRando.Sprites.map_3.png", 2048, 2048)},
+        {"Red Square", new AddedTexture("GatorRando.Sprites.redsquare.png", 16, 16)},
+        {"Green Square", new AddedTexture("GatorRando.Sprites.greensquare.png", 16, 16)},
+        {"Wood Frame", new AddedTexture("GatorRando.Sprites.woodframe.png", 96, 96)},
+        {"Poster", new AddedTexture("GatorRando.Sprites.poster.png", 32, 32)},
     };
 
     private static readonly Dictionary<string, string> spritesToDuplicateInformation = new()
