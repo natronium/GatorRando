@@ -1,7 +1,7 @@
 using GatorRando.Archipelago;
 using UnityEngine;
 
-namespace GatorRando;
+namespace GatorRando.UIMods;
 
 public static class MapManager
 {
@@ -28,7 +28,7 @@ public static class MapManager
         }
     }
 
-    private static PlayerCoords CurrentCoords() {
+    public static PlayerCoords CurrentCoords() {
         GameObject lilGator = Util.GetByPath("Players/Player/Heroboy");
         float westEast = lilGator.transform.position.x;
         float northSouth = lilGator.transform.position.z; // y is height
