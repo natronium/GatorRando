@@ -196,13 +196,13 @@ internal static class NavigationUI
         {
             List<int> coord = keyValuePair.Key;
             List<long> apIds = keyValuePair.Value;
-            GameObject locSquare = MakeLocationSquare(coord);
+            GameObject locSquare = MakeLocationSquareGameObject(coord);
             locationSquares.Add(new(coord, locSquare, apIds));
         }
         LocationAccessibilty.UpdateAccessibleLocations();
     }
 
-    private static GameObject MakeLocationSquare(List<int> coord)
+    private static GameObject MakeLocationSquareGameObject(List<int> coord)
     {
         GameObject location = new()
         {
