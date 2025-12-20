@@ -35,16 +35,15 @@ internal static class TutorialQuestMods
         }
     }
 
-    private static void AdvanceToEndOfTutorial()
+    internal static void AdvanceToEndOfTutorial()
     {
         GameObject act1 = Util.GetByPath("NorthWest (Tutorial Island)/Act 1");
         QuestStates act1QuestStates = act1.GetComponent<QuestStates>();
         if (act1QuestStates.StateID <= 2)
         {
             act1QuestStates.SetState(3);
-            // EnableFriendsInCutscene();
-            ReenableTutorialQuests();
         }
+        ReenableTutorialQuests();
     }
 
     private static void EnableFriendsInCutscene()

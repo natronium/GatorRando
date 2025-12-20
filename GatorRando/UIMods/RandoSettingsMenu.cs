@@ -1,4 +1,5 @@
 using GatorRando.Archipelago;
+using GatorRando.QuestMods;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -79,7 +80,7 @@ internal static class RandoSettingsMenu
                             "Connect To Server",
                             "connect to Archipelago game server using player name, server address, and port set above",
                             StateManager.AttemptConnection
-        );
+            );
 
             //Text fields for server address and port
             CreateStringSetting(viewportContent, 4, SaveManager.slotNameString, "type in slot name", 16, true, true);
@@ -103,11 +104,20 @@ internal static class RandoSettingsMenu
                             SaveManager.EraseAllAPSaveData
         );
         }
-
-        //Borrow character rename for player name
-        // ReworkPlayerRename(viewportContent);
-
-
+        else
+        {
+            GameObject act1 = Util.GetByPath("NorthWest (Tutorial Island)/Act 1");
+            QuestStates act1QuestStates = act1.GetComponent<QuestStates>();
+            if (act1QuestStates.StateID < 3 && Options.GetOptionBool(Options.Option.StartWithFreeplay))
+            {
+                CreateSettingsButton(viewportContent,
+                                4,
+                                "Retry Applying Freeplay",
+                                "if freeplay is turned on in your yaml, but the barrier didn't fall, use this button to retry lowering the tutorial barrier",
+                                TutorialQuestMods.AdvanceToEndOfTutorial
+                );
+            }
+        }
         CreateSettingsToggle(viewportContent, 11, "Pause Speedrun Mode for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
         CreateSettingsToggle(viewportContent, 12, "Show Speedrun Timer", "Shows the speedrun timer (regardless of whether Speedrun Mode is on)");
         CreateSettingsOptions(viewportContent, 13, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
