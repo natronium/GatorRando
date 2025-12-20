@@ -136,23 +136,18 @@ internal static class NavigationUI
         UpdateMapCoordinates();
         UpdateMapPosition();
         UpdateCompassDirection();
-        arrow.transform.eulerAngles = new(0, 0, compassRotation - 45);
         UpdateGridCoordinates();
     }
 
     private static void UpdateMapCoordinates()
     {
-        float XPosToMapY(float xpos)
+		static float PosToMap(float xpos)
         {
             return (xpos + 165) / 480;
         }
-        float YPosToMapX(float ypos)
-        {
-            return (ypos + 165) / 480;
-        }
-
+        
         MapManager.PlayerCoords playerCoords = MapManager.CurrentCoords();
-        lastMapCoords = new MapCoords(XPosToMapY(playerCoords.X), YPosToMapX(playerCoords.Y));
+        lastMapCoords = new MapCoords(PosToMap(playerCoords.X), PosToMap(playerCoords.Y));
     }
 
     private static void UpdateMapPosition()
@@ -183,6 +178,7 @@ internal static class NavigationUI
         Vector3 direction = lilGator.transform.forward;
         Vector3 north = Vector3.forward;
         compassRotation = 360 - Vector3.SignedAngle(north, direction, Vector3.up);
+        arrow.transform.eulerAngles = new(0, 0, compassRotation - 45);
     }
 
     private static void InitializeLocationPositions()
