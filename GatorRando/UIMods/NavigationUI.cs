@@ -233,7 +233,7 @@ internal static class NavigationUI
         green.maskable = true;
         green.rectTransform.sizeDelta = new(16, 16);
 
-        location.transform.localPosition = new(coord[0] - MAP_PIXEL_SIZE / 2, MAP_PIXEL_SIZE / 2 - coord[1], 0);
+        location.transform.localPosition = new(coord[0] - MAP_PIXEL_SIZE / 2, -1*(coord[1] - MAP_PIXEL_SIZE / 2), 0);
 
         return location;
     }
