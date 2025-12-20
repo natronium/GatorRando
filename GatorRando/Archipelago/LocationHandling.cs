@@ -80,6 +80,32 @@ public static class LocationHandling
         }
     }
 
+    public static bool IsApLocationCollected(long apId)
+    {
+        if (RandoSettingsMenu.IsCollectCountedAsChecked())
+        {
+            try
+            {
+                return ConnectionManager.LocationsCollected().Contains(apId);
+            }
+            catch (InvalidOperationException)
+            {
+                return true;
+            }
+        }
+        else
+        {
+            try
+            {
+                return CheckIfAPLocationInSave(apId);
+            }
+            catch (InvalidOperationException)
+            {
+                return true;
+            }
+        }
+    }
+
     public static bool CheckIfAPLocationInSave(long id) => Util.FindBoolKeysByPrefix(LocationKeyPrefix).Contains(id.ToString());
 
     public static long GetLocationApId(int gatorID) =>
@@ -126,12 +152,14 @@ public static class LocationHandling
         // Plugin.LogDebug($"Announcing id {gatorID}");
         ItemAtLocation itemAtLocation = GetItemAtLocation(gatorID);
         BubbleManager.QueueBubble(DialogueModifier.GetDialogueStringForItemAtLocation(itemAtLocation), BubbleManager.BubbleType.LocationChecked);
+        LocationAccessibilty.UpdateAccessibleLocations();
     }
     private static void AnnounceLocationChecked(string gatorName)
     {
         // Plugin.LogDebug($"Announcing gatorName {gatorName}");
         ItemAtLocation itemAtLocation = GetItemAtLocation(gatorName);
         BubbleManager.QueueBubble(DialogueModifier.GetDialogueStringForItemAtLocation(itemAtLocation), BubbleManager.BubbleType.LocationChecked);
+        LocationAccessibilty.UpdateAccessibleLocations();
     }
 
 

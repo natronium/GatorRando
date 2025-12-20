@@ -7,7 +7,7 @@ namespace GatorRando.UIMods;
 
 internal static class RandoSettingsMenu
 {
-	private static UISubMenu newSettingsMenu;
+    private static UISubMenu newSettingsMenu;
 
     internal enum CheckfinderBehavior
     {
@@ -112,6 +112,7 @@ internal static class RandoSettingsMenu
         CreateSettingsToggle(viewportContent, 12, "Show Speedrun Timer", "Shows the speedrun timer (regardless of whether Speedrun Mode is on)");
         CreateSettingsOptions(viewportContent, 13, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
             "This setting changes how these tools work. \"logic\": use randomizer logic to show only valid checks, \"checks only\": show all possible checks, \"original\": original behavior", ["logic", "checks only", "original"]);
+        CreateSettingsToggle(viewportContent, 14, "Show Minimap", "Shows the minimap and related navigation tools");
 
         newSettingsMenu = newMenu.GetComponent<UISubMenu>();
         return newSettingsMenu;
@@ -237,4 +238,5 @@ internal static class RandoSettingsMenu
     internal static bool IsCollectCountedAsChecked() => Settings.s.ReadBool("!collect counts as checked", true);
     internal static bool IsGoalBeforeEpilogue() => Settings.s.ReadBool("goal before epilogue", false);
     internal static bool IsRagdollDeathLinkOn() => Settings.s.ReadBool("ragdoll on deathlink", false);
+    internal static bool IsNavigationOn() => Settings.s.ReadBool("show minimap", true);
 }

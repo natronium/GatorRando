@@ -72,6 +72,7 @@ public class Rules
         public string LocationName;
         public int LocationId;
         public string Region;
+        public List<List<int>> Coords;
 
         [JsonProperty(PropertyName = "rule_json")]
         public Rule Rule;
@@ -213,6 +214,7 @@ public class Rules
     public static class GatorRules
     {
         public static readonly Dictionary<long, Rule> Rules;
+        public static Dictionary<long, List<List<int>>> LocationCoords = [];
 
         static GatorRules()
         {
@@ -244,6 +246,10 @@ public class Rules
             }
 
             Rules = PrecomputeRules(entranceRules, locationRules);
+            foreach (LocationRule locationRule in locationRules)
+            {
+                LocationCoords[locationRule.LocationId] = locationRule.Coords;
+            }
         }
 
         private static Dictionary<long, Rule> PrecomputeRules(List<EntranceRule> entranceRules, List<LocationRule> locationRules)

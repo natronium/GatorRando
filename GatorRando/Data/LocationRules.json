@@ -3,6 +3,12 @@
         "location_name": "Avery!'s Main Quest - Andromeda (Space Hawk) Quest Completion Item",
         "location_id": 100002280,
         "region": "Mountain",
+        "coords": [
+            [
+                1142,
+                712
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -58,6 +64,12 @@
         "location_name": "Avery!'s Main Quest - Esme (Vampire Bat) Quest Completion NPC",
         "location_id": 100002284,
         "region": "Mountain",
+        "coords": [
+            [
+                1379,
+                551
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -71,6 +83,12 @@
         "location_name": "Avery!'s Main Quest - Nerf Blaster (Andromeda's Quest)",
         "location_id": 100002279,
         "region": "Mountain",
+        "coords": [
+            [
+                1142,
+                712
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -84,6 +102,12 @@
         "location_name": "Avery!'s Main Quest - Avery!'s Main Quest Quest Completion NPCs",
         "location_id": 100002285,
         "region": "Mountain",
+        "coords": [
+            [
+                1166,
+                598
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -147,6 +171,12 @@
         "location_name": "Avery!'s Main Quest - Plastic Fangs (Esme's Quest)",
         "location_id": 100002283,
         "region": "Mountain",
+        "coords": [
+            [
+                1379,
+                551
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -160,6 +190,12 @@
         "location_name": "Avery!'s Main Quest - Sorbet (Esme's Quest)",
         "location_id": 100002282,
         "region": "Mountain",
+        "coords": [
+            [
+                1509,
+                603
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -170,6 +206,12 @@
         "location_name": "Avery!'s Main Quest - Velma (Western Cow) Quest Completion Item",
         "location_id": 100002281,
         "region": "Mountain",
+        "coords": [
+            [
+                923,
+                405
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -180,6 +222,12 @@
         "location_name": "Southeast (Beach) - Cade (Floofy Bull) Quest Completion NPCs",
         "location_id": 100002221,
         "region": "Big Island",
+        "coords": [
+            [
+                1522,
+                1715
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -190,6 +238,12 @@
         "location_name": "Southeast (Beach) - Chest (H9) on north end of Skate Pug's island",
         "location_id": 100000201,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1907,
+                1560
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -220,6 +274,12 @@
         "location_name": "Southeast (Beach) - Joe (Pose Hawk) Quest Completion NPC",
         "location_id": 100002224,
         "region": "Big Island",
+        "coords": [
+            [
+                1503,
+                1498
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -230,6 +290,12 @@
         "location_name": "Southeast (Beach) - Mr. Doddler (No Littering Sloth) Quest Completion Item",
         "location_id": 100002220,
         "region": "Big Island",
+        "coords": [
+            [
+                1501,
+                1571
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -243,6 +309,12 @@
         "location_name": "Southeast (Beach) - Mr. Doddler (No Littering Sloth) Quest Completion NPC",
         "location_id": 100002219,
         "region": "Big Island",
+        "coords": [
+            [
+                1501,
+                1571
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -256,6 +328,12 @@
         "location_name": "Southeast (Beach) - Pot (H8) on taller section northwest of Skate Pug",
         "location_id": 100000082,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1765,
+                1612
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -286,6 +364,12 @@
         "location_name": "Southeast (Beach) - Pot (I6) on small island south of Marlow's deck",
         "location_id": 100000115,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1413,
+                1833
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -316,6 +400,12 @@
         "location_name": "Southeast (Beach) - Pot (I9) on south end of Skate Pug's island (east)",
         "location_id": 100000077,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1920,
+                1782
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -346,6 +436,12 @@
         "location_name": "Southeast (Beach) - Pot (I9) on south end of Skate Pug's island (west)",
         "location_id": 100000069,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1920,
+                1782
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -376,6 +472,12 @@
         "location_name": "Southeast (Beach) - Pot (J6) on small tall island east of Leeland's peninsula",
         "location_id": 100000101,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1371,
+                1931
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -481,6 +583,12 @@
         "location_name": "Southeast (Beach) - Sam (Pencil Jackal) Quest Completion Item",
         "location_id": 100002217,
         "region": "Big Island",
+        "coords": [
+            [
+                1645,
+                1584
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -494,6 +602,12 @@
         "location_name": "Southeast (Beach) - Sam (Pencil Jackal) Quest Completion NPC",
         "location_id": 100002216,
         "region": "Big Island",
+        "coords": [
+            [
+                1645,
+                1584
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -507,6 +621,12 @@
         "location_name": "Southeast (Beach) - Skate Pug (Skate Pug) Quest Completion Item",
         "location_id": 100002223,
         "region": "Big Island",
+        "coords": [
+            [
+                1868,
+                1692
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -520,6 +640,12 @@
         "location_name": "Southeast (Beach) - Skate Pug (Skate Pug) Quest Completion NPCs",
         "location_id": 100002222,
         "region": "Big Island",
+        "coords": [
+            [
+                1868,
+                1692
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -533,6 +659,12 @@
         "location_name": "Southeast (Beach) - Thrown Pencil 1 (Sam's Quest)",
         "location_id": 100002213,
         "region": "Big Island",
+        "coords": [
+            [
+                1645,
+                1584
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -543,6 +675,12 @@
         "location_name": "Southeast (Beach) - Thrown Pencil 2 (Sam's Quest)",
         "location_id": 100002214,
         "region": "Big Island",
+        "coords": [
+            [
+                1645,
+                1584
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -556,6 +694,12 @@
         "location_name": "Southeast (Beach) - Thrown Pencil 3 (Sam's Quest)",
         "location_id": 100002215,
         "region": "Big Island",
+        "coords": [
+            [
+                1645,
+                1584
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -569,6 +713,12 @@
         "location_name": "Southeast (Beach) - Tony (Chess Strategist Eagle) Quest Completion Item",
         "location_id": 100002212,
         "region": "Big Island",
+        "coords": [
+            [
+                1274,
+                1631
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -582,6 +732,12 @@
         "location_name": "Southeast (Beach) - Tony (Chess Strategist Eagle) Quest Completion NPC",
         "location_id": 100002211,
         "region": "Big Island",
+        "coords": [
+            [
+                1274,
+                1631
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -595,6 +751,12 @@
         "location_name": "Southeast (Beach) - Viraj (Hot Shot Elephant) Quest Completion NPC",
         "location_id": 100002218,
         "region": "Big Island",
+        "coords": [
+            [
+                1896,
+                1427
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -608,6 +770,16 @@
         "location_name": "Big Island - Billy (Whale) Quest Completion Item",
         "location_id": 100002288,
         "region": "Big Island",
+        "coords": [
+            [
+                186,
+                1263
+            ],
+            [
+                1838,
+                213
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -618,6 +790,16 @@
         "location_name": "Big Island - Billy (Whale) Quest Completion NPC",
         "location_id": 100002287,
         "region": "Big Island",
+        "coords": [
+            [
+                186,
+                1263
+            ],
+            [
+                1838,
+                213
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -628,6 +810,24 @@
         "location_name": "Big Island - ??? (Bracelet Monkey) All Bracelets NPC",
         "location_id": 100002295,
         "region": "Big Island Bracelet Shops",
+        "coords": [
+            [
+                1088,
+                526
+            ],
+            [
+                1716,
+                1076
+            ],
+            [
+                511,
+                1333
+            ],
+            [
+                461,
+                310
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -638,6 +838,20 @@
         "location_name": "Big Island - Rock (Zhu's Quest)",
         "location_id": 100002289,
         "region": "Big Island",
+        "coords": [
+            [
+                350,
+                1684
+            ],
+            [
+                1470,
+                654
+            ],
+            [
+                895,
+                890
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -648,6 +862,20 @@
         "location_name": "Big Island - Zhu (Skipping Fox) Quest Completion NPC",
         "location_id": 100002290,
         "region": "Big Island",
+        "coords": [
+            [
+                350,
+                1684
+            ],
+            [
+                1470,
+                654
+            ],
+            [
+                895,
+                890
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -661,6 +889,12 @@
         "location_name": "Northeast (Canyon) - Broken Scooter Board Pickup (Kasen's Quest)",
         "location_id": 100002205,
         "region": "Big Island",
+        "coords": [
+            [
+                1694,
+                478
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -671,6 +905,12 @@
         "location_name": "Northeast (Canyon) - Chest (D8) on peak northwest of Jada's pump",
         "location_id": 100001360,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1707,
+                787
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -729,6 +969,12 @@
         "location_name": "Northeast (Canyon) - Darcie (Balloon Owl) Quest Completion Item",
         "location_id": 100002204,
         "region": "Big Island",
+        "coords": [
+            [
+                1515,
+                202
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -742,6 +988,12 @@
         "location_name": "Northeast (Canyon) - Darcie (Balloon Owl) Quest Completion NPC",
         "location_id": 100002203,
         "region": "Big Island",
+        "coords": [
+            [
+                1515,
+                202
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -755,6 +1007,12 @@
         "location_name": "Northeast (Canyon) - Kasen (Scooter Vulture) Quest Completion Item",
         "location_id": 100002207,
         "region": "Big Island",
+        "coords": [
+            [
+                1621,
+                476
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -768,6 +1026,12 @@
         "location_name": "Northeast (Canyon) - Kasen (Scooter Vulture) Quest Completion NPC",
         "location_id": 100002206,
         "region": "Big Island",
+        "coords": [
+            [
+                1621,
+                476
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -781,19 +1045,84 @@
         "location_name": "Northeast (Canyon) - Mochi (Heights Bear) Quest Completion NPC",
         "location_id": 100002210,
         "region": "Big Island",
+        "coords": [
+            [
+                1613,
+                580
+            ]
+        ],
         "rule_json": {
-            "rule": "Has",
+            "rule": "Or",
             "options": [],
-            "args": {
-                "item_name": "Bracelet",
-                "count": 1
-            }
+            "children": [
+                {
+                    "rule": "Has",
+                    "options": [],
+                    "args": {
+                        "item_name": "Bracelet",
+                        "count": 1
+                    }
+                },
+                {
+                    "rule": "And",
+                    "options": [],
+                    "children": [
+                        {
+                            "rule": "Or",
+                            "options": [],
+                            "children": [
+                                {
+                                    "rule": "True_",
+                                    "options": [
+                                        {
+                                            "option": "worlds.lil_gator_game.options.RequireShieldJump",
+                                            "value": 1,
+                                            "operator": "eq"
+                                        }
+                                    ],
+                                    "args": {}
+                                },
+                                {
+                                    "rule": "Has",
+                                    "options": [],
+                                    "args": {
+                                        "item_name": "Out of Logic Item",
+                                        "count": 1
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "rule": "HasGroup",
+                            "options": [],
+                            "args": {
+                                "item_name_group": "Cardboard Destroyer",
+                                "count": 1
+                            }
+                        },
+                        {
+                            "rule": "HasGroup",
+                            "options": [],
+                            "args": {
+                                "item_name_group": "Shield",
+                                "count": 1
+                            }
+                        }
+                    ]
+                }
+            ]
         }
     },
     {
         "location_name": "Northeast (Canyon) - Pot (A8) on north peak accessible from Billy",
         "location_id": 100001463,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1762,
+                179
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -824,6 +1153,12 @@
         "location_name": "Northeast (Canyon) - Pot (A8) on west peak accessible from Billy",
         "location_id": 100001456,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1809,
+                169
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -854,6 +1189,12 @@
         "location_name": "Northeast (Canyon) - Pot (B8) on tall rock southwest from Billy's Canyon location",
         "location_id": 100002070,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1691,
+                309
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -912,6 +1253,12 @@
         "location_name": "Northeast (Canyon) - Pot (C7) on cliffside west of and below Mochi",
         "location_id": 100001350,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1613,
+                580
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -942,6 +1289,12 @@
         "location_name": "Northeast (Canyon) - Pot (C8) on cliffside east of and below Mochi",
         "location_id": 100001351,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1613,
+                580
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -972,6 +1325,12 @@
         "location_name": "Northeast (Canyon) - Pot (C8) at end of Kasen's stone outcropping",
         "location_id": 100001349,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1694,
+                478
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1002,6 +1361,12 @@
         "location_name": "Northeast (Canyon) - Pot (C9) on Ssumantha's island (lower)",
         "location_id": 100002071,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1863,
+                556
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1032,6 +1397,12 @@
         "location_name": "Northeast (Canyon) - Pot (C9) on Ssumantha's island (upper)",
         "location_id": 100002072,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1863,
+                556
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1062,6 +1433,12 @@
         "location_name": "Northeast (Canyon) - Pot (D6) on island in middle of pond northeast of playground",
         "location_id": 100000006,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1317,
+                759
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1092,6 +1469,12 @@
         "location_name": "Northeast (Canyon) - Pot (D7) on peak by ropes north of Splash Pan (north)",
         "location_id": 100001362,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1537,
+                789
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -1199,6 +1582,12 @@
         "location_name": "Northeast (Canyon) - Pot (D7) on peak by ropes north of Splash Pan (south)",
         "location_id": 100001363,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1537,
+                789
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -1306,6 +1695,12 @@
         "location_name": "Northeast (Canyon) - Pot (D8) on peak northwest of Jada's pump",
         "location_id": 100001361,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1665,
+                731
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -1350,6 +1745,12 @@
         "location_name": "Northeast (Canyon) - Race (B6) starting east of waterfall on north side of Mountain",
         "location_id": 100000813,
         "region": "Big Island Races",
+        "coords": [
+            [
+                1383,
+                265
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -1377,6 +1778,12 @@
         "location_name": "Northeast (Canyon) - Race (C7) starting west of Kasen",
         "location_id": 100000753,
         "region": "Big Island Races",
+        "coords": [
+            [
+                1496,
+                473
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -1404,6 +1811,12 @@
         "location_name": "Northeast (Canyon) - Ssumantha (Waders Opposum) Quest Completion Item",
         "location_id": 100002209,
         "region": "Big Island",
+        "coords": [
+            [
+                1863,
+                556
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -1431,6 +1844,12 @@
         "location_name": "Northeast (Canyon) - Ssumantha (Waders Opposum) Quest Completion NPC",
         "location_id": 100002208,
         "region": "Big Island",
+        "coords": [
+            [
+                1863,
+                556
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -1458,6 +1877,12 @@
         "location_name": "East (Creeklands) - Becca (Retainer Shark) Quest Completion NPC",
         "location_id": 100002229,
         "region": "Big Island",
+        "coords": [
+            [
+                1750,
+                1197
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -1471,6 +1896,12 @@
         "location_name": "East (Creeklands) - ??? (Bracelet Monkey) Windmill Bracelet",
         "location_id": 100002292,
         "region": "Big Island Bracelet Shops",
+        "coords": [
+            [
+                1716,
+                1076
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -1481,6 +1912,12 @@
         "location_name": "East (Creeklands) - Chest (G6) north of Junk4Trash",
         "location_id": 100002026,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1383,
+                1269
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1511,6 +1948,12 @@
         "location_name": "East (Creeklands) - Chest (G8) on peak south of Splash Pad",
         "location_id": 100000153,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1680,
+                1319
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1541,6 +1984,12 @@
         "location_name": "East (Creeklands) - Chest (H5) on peak north-northwest of Tony's chessboard",
         "location_id": 100000766,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1187,
+                1448
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -1599,6 +2048,12 @@
         "location_name": "East (Creeklands) - Madeline (Little Thing Mouse) Quest Completion NPC",
         "location_id": 100002225,
         "region": "Big Island",
+        "coords": [
+            [
+                1466,
+                856
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -1609,6 +2064,12 @@
         "location_name": "East (Creeklands) - Pot (D8) northwest of Jada's pump below taller cliffs",
         "location_id": 100000491,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1734,
+                802
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1639,6 +2100,12 @@
         "location_name": "East (Creeklands) - Pot (E7) northwest of Splash Pad below cliff to northeast",
         "location_id": 100000062,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1468,
+                924
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1669,6 +2136,12 @@
         "location_name": "East (Creeklands) - Pot (E7) northwest of Splash Pad on cliff (northwest)",
         "location_id": 100001431,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1468,
+                924
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1699,6 +2172,12 @@
         "location_name": "East (Creeklands) - Pot (E7) northwest of Splash Pad on cliff (southeast)",
         "location_id": 100001444,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1468,
+                924
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1729,6 +2208,12 @@
         "location_name": "East (Creeklands) - Pot (E7) northwest of Splash Pad on cliff (southwest)",
         "location_id": 100000655,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1468,
+                924
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1759,6 +2244,12 @@
         "location_name": "East (Creeklands) - Pot (F7) south of Splash Pad",
         "location_id": 100000117,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1579,
+                1209
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1789,6 +2280,12 @@
         "location_name": "East (Creeklands) - Pot (F9) on peak north of Duke's pump",
         "location_id": 100000651,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1870,
+                1141
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -1847,6 +2344,12 @@
         "location_name": "East (Creeklands) - Pot (G5) west of Junk4Trash in secluded area filled with ninjas and mimics",
         "location_id": 100002012,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1203,
+                1292
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -1877,6 +2380,12 @@
         "location_name": "East (Creeklands) - Pot (H5) on pair of peaks northwest of Tony's chessboard (north)",
         "location_id": 100000722,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1191,
+                1526
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -1935,6 +2444,12 @@
         "location_name": "East (Creeklands) - Pot (H5) on pair of peaks northwest of Tony's chessboard (south)",
         "location_id": 100000721,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                1189,
+                1583
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -1993,6 +2508,12 @@
         "location_name": "East (Creeklands) - Retainer Pickup (Becca's Quest)",
         "location_id": 100002228,
         "region": "Big Island",
+        "coords": [
+            [
+                1810,
+                1388
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -2003,6 +2524,12 @@
         "location_name": "East (Creeklands) - Robin (Scared-to-Look Robin) Quest Completion Item",
         "location_id": 100002227,
         "region": "Big Island",
+        "coords": [
+            [
+                1361,
+                1009
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -2016,6 +2543,12 @@
         "location_name": "East (Creeklands) - Robin (Scared-to-Look Robin) Quest Completion NPC",
         "location_id": 100002226,
         "region": "Big Island",
+        "coords": [
+            [
+                1361,
+                1009
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -2029,6 +2562,12 @@
         "location_name": "West (Forest) - ??? (Bracelet Monkey) Tree Bracelet",
         "location_id": 100002293,
         "region": "Big Island Bracelet Shops",
+        "coords": [
+            [
+                511,
+                1333
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -2039,6 +2578,12 @@
         "location_name": "West (Forest) - Chest (H4) on tallest peak north of Pepperoni's obstacle course",
         "location_id": 100001518,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                914,
+                1558
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -2097,6 +2642,12 @@
         "location_name": "West (Forest) - Eva (Photographer Cat) Quest Completion Item",
         "location_id": 100002259,
         "region": "Big Island",
+        "coords": [
+            [
+                379,
+                1305
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -2110,6 +2661,12 @@
         "location_name": "West (Forest) - Eva (Photographer Cat) Quest Completion NPC",
         "location_id": 100002258,
         "region": "Big Island",
+        "coords": [
+            [
+                379,
+                1305
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -2123,6 +2680,12 @@
         "location_name": "West (Forest) - Gunther (Sidekick Hippo) Quest Completion NPC",
         "location_id": 100002260,
         "region": "Big Island",
+        "coords": [
+            [
+                616,
+                1183
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -2133,6 +2696,12 @@
         "location_name": "West (Forest) - Ninja Clan Quest Completion Item",
         "location_id": 100002250,
         "region": "Big Island",
+        "coords": [
+            [
+                249,
+                1678
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -2174,6 +2743,12 @@
         "location_name": "West (Forest) - Ninja Clan Quest Completion NPCs",
         "location_id": 100002249,
         "region": "Big Island",
+        "coords": [
+            [
+                249,
+                1678
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -2215,6 +2790,12 @@
         "location_name": "West (Forest) - Penelope (Bastion Beaver) Quest Completion Item",
         "location_id": 100002257,
         "region": "Big Island",
+        "coords": [
+            [
+                445,
+                1041
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -2273,6 +2854,12 @@
         "location_name": "West (Forest) - Penelope (Bastion Beaver) Quest Completion NPC",
         "location_id": 100002256,
         "region": "Big Island",
+        "coords": [
+            [
+                445,
+                1041
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -2331,6 +2918,12 @@
         "location_name": "West (Forest) - Pepperoni (Obstacle Ostrich) Quest Completion Item",
         "location_id": 100002252,
         "region": "Big Island",
+        "coords": [
+            [
+                823,
+                1745
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -2358,6 +2951,12 @@
         "location_name": "West (Forest) - Pepperoni (Obstacle Ostrich) Quest Completion NPCs",
         "location_id": 100002251,
         "region": "Big Island",
+        "coords": [
+            [
+                823,
+                1745
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -2385,6 +2984,12 @@
         "location_name": "West (Forest) - Pot (E1) on cliff side west of Penelope's waterfall (east and down the cliff)",
         "location_id": 100001381,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                290,
+                973
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -2415,6 +3020,12 @@
         "location_name": "West (Forest) - Pot (E1) on cliff side west of Penelope's waterfall (east and up the cliff)",
         "location_id": 100001382,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                343,
+                981
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -2445,6 +3056,12 @@
         "location_name": "West (Forest) - Pot (E1) on cliff side west of Penelope's waterfall (west and up the cliff)",
         "location_id": 100001380,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                343,
+                981
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -2475,6 +3092,12 @@
         "location_name": "West (Forest) - Pot (F3) on north cliff edge of pond with dead trees",
         "location_id": 100000025,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                816,
+                1215
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -2505,6 +3128,12 @@
         "location_name": "West (Forest) - Pot (G3) on cliff overlooking pond with dead trees from the west side",
         "location_id": 100001450,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                752,
+                1282
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -2535,6 +3164,12 @@
         "location_name": "West (Forest) - Pot (G3) on west edge of pond with dead trees",
         "location_id": 100000545,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                802,
+                1246
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -2565,6 +3200,12 @@
         "location_name": "West (Forest) - Pot (G4) on south edge of pond with dead trees",
         "location_id": 100000546,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                840,
+                1292
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -2595,6 +3236,12 @@
         "location_name": "West (Forest) - Pot (G4) on tall peak east of pond with dead trees (east)",
         "location_id": 100001540,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                901,
+                1237
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -2653,6 +3300,12 @@
         "location_name": "West (Forest) - Pot (G4) on tall peak east of pond with dead trees (west)",
         "location_id": 100001541,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                901,
+                1237
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -2711,6 +3364,12 @@
         "location_name": "West (Forest) - Pot (G4) south of tall peak east of pond with dead trees",
         "location_id": 100001542,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                883,
+                1279
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -2816,6 +3475,12 @@
         "location_name": "West (Forest) - Pot (H2) above Trish (Invisible Horse)",
         "location_id": 100000094,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                517,
+                1591
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -2846,6 +3511,12 @@
         "location_name": "West (Forest) - Pot (H4) east of tallest peak north of Pepperoni's obstacle course",
         "location_id": 100001520,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                956,
+                1555
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -2904,6 +3575,12 @@
         "location_name": "West (Forest) - Pot (H4) north of tallest peak north of Pepperoni's obstacle course",
         "location_id": 100001532,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                919,
+                1499
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -2962,6 +3639,12 @@
         "location_name": "West (Forest) - Pot (H4) south of tallest peak north of Pepperoni's obstacle course",
         "location_id": 100001517,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                903,
+                1635
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -3020,6 +3703,12 @@
         "location_name": "West (Forest) - Pot (J0) in tidepool in southwest corner of island (northwest)",
         "location_id": 100001593,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                206,
+                1881
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -3050,6 +3739,12 @@
         "location_name": "West (Forest) - Pot (J1) in tidepool in southwest corner of island (southeast)",
         "location_id": 100001596,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                206,
+                1881
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -3080,6 +3775,12 @@
         "location_name": "West (Forest) - Pot (J1) in tidepool in southwest corner of island (southwest)",
         "location_id": 100001594,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                206,
+                1881
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -3110,6 +3811,12 @@
         "location_name": "West (Forest) - Pot (J3) on peninsula with stumps southeast of Ninja Clan (east)",
         "location_id": 100001584,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                639,
+                1938
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -3140,6 +3847,12 @@
         "location_name": "West (Forest) - Pot (J3) on peninsula with stumps southeast of Ninja Clan (west)",
         "location_id": 100001583,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                610,
+                1959
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -3245,6 +3958,12 @@
         "location_name": "West (Forest) - Pot Kid (Eepy Armadillo) Quest Completion NPC",
         "location_id": 100002255,
         "region": "Big Island",
+        "coords": [
+            [
+                720,
+                1588
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -3258,6 +3977,12 @@
         "location_name": "West (Forest) - Race (F4) starting from west path exit from playground",
         "location_id": 100001409,
         "region": "Big Island Races",
+        "coords": [
+            [
+                902,
+                1176
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3268,6 +3993,12 @@
         "location_name": "West (Forest) - Race (G0) starting from island west of Billy's Forest location",
         "location_id": 100000072,
         "region": "Big Island Races",
+        "coords": [
+            [
+                108,
+                1318
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -3295,6 +4026,12 @@
         "location_name": "West (Forest) - Race (H1) starting from southwest of The Tree",
         "location_id": 100001399,
         "region": "Big Island Races",
+        "coords": [
+            [
+                390,
+                1530
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3305,6 +4042,12 @@
         "location_name": "West (Forest) - Romeo (Ninja Anteater) Nunchucks",
         "location_id": 100002248,
         "region": "Big Island",
+        "coords": [
+            [
+                249,
+                1678
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -3346,6 +4089,12 @@
         "location_name": "West (Forest) - Sierra (Origami Crane) Quest Completion Item",
         "location_id": 100002247,
         "region": "Big Island",
+        "coords": [
+            [
+                249,
+                1678
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -3359,6 +4108,12 @@
         "location_name": "West (Forest) - Sierra (Origami Crane) Quest Completion NPC",
         "location_id": 100002246,
         "region": "Big Island",
+        "coords": [
+            [
+                249,
+                1678
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -3372,6 +4127,12 @@
         "location_name": "West (Forest) - Sorin, Roe, Beeritney (Lunch Trio) Quest Completion Item",
         "location_id": 100002254,
         "region": "Big Island",
+        "coords": [
+            [
+                157,
+                899
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3382,6 +4143,12 @@
         "location_name": "West (Forest) - Sorin, Roe, Beeritney (Lunch Trio) Quest Completion NPCs",
         "location_id": 100002253,
         "region": "Big Island",
+        "coords": [
+            [
+                157,
+                899
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3392,6 +4159,12 @@
         "location_name": "West (Forest) - Tiffany (Princess Cat) Quest Completion Item",
         "location_id": 100002263,
         "region": "Big Island",
+        "coords": [
+            [
+                973,
+                1418
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -3405,6 +4178,12 @@
         "location_name": "West (Forest) - Tiffany (Princess Cat) Quest Completion NPCs",
         "location_id": 100002262,
         "region": "Big Island",
+        "coords": [
+            [
+                973,
+                1418
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -3418,6 +4197,12 @@
         "location_name": "West (Forest) - Trish (Invisible Horse) Quest Completion NPC",
         "location_id": 100002261,
         "region": "Big Island",
+        "coords": [
+            [
+                517,
+                1591
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3428,6 +4213,12 @@
         "location_name": "Junk 4 Trash - Grabby Hand Purchase",
         "location_id": 100002242,
         "region": "Junk 4 Trash",
+        "coords": [
+            [
+                1362,
+                1321
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3438,6 +4229,12 @@
         "location_name": "Junk 4 Trash - Paint Gun Purchase",
         "location_id": 100002241,
         "region": "Junk 4 Trash",
+        "coords": [
+            [
+                1362,
+                1321
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3448,6 +4245,12 @@
         "location_name": "Junk 4 Trash - Roy (Trash Raccoon) All Purchases NPC",
         "location_id": 100002243,
         "region": "Junk 4 Trash",
+        "coords": [
+            [
+                1362,
+                1321
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3458,6 +4261,12 @@
         "location_name": "Junk 4 Trash - Sticky Hand Purchase",
         "location_id": 100002237,
         "region": "Junk 4 Trash",
+        "coords": [
+            [
+                1362,
+                1321
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3468,6 +4277,12 @@
         "location_name": "Junk 4 Trash - Trampoline Purchase",
         "location_id": 100002238,
         "region": "Junk 4 Trash",
+        "coords": [
+            [
+                1362,
+                1321
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3478,6 +4293,12 @@
         "location_name": "Junk 4 Trash - Trash Can Lid Purchase",
         "location_id": 100002239,
         "region": "Junk 4 Trash",
+        "coords": [
+            [
+                1362,
+                1321
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3488,6 +4309,12 @@
         "location_name": "Junk 4 Trash - Wrench Purchase",
         "location_id": 100002240,
         "region": "Junk 4 Trash",
+        "coords": [
+            [
+                1362,
+                1321
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3498,6 +4325,12 @@
         "location_name": "South (Jetty) - Leeland (Painting Rabbit) Quest Completion Item",
         "location_id": 100002245,
         "region": "Big Island",
+        "coords": [
+            [
+                1297,
+                1933
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -3511,6 +4344,12 @@
         "location_name": "South (Jetty) - Leeland (Painting Rabbit) Quest Completion NPC",
         "location_id": 100002244,
         "region": "Big Island",
+        "coords": [
+            [
+                1297,
+                1933
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -3524,6 +4363,12 @@
         "location_name": "Jill's Main Quest - Bug Net Gift (Antone's Quest)",
         "location_id": 100002268,
         "region": "Big Island",
+        "coords": [
+            [
+                511,
+                1333
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3534,6 +4379,12 @@
         "location_name": "Jill's Main Quest - Cheese Sandwich Pickup (Gene's Quest)",
         "location_id": 100002266,
         "region": "Big Island",
+        "coords": [
+            [
+                347,
+                1204
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -3547,6 +4398,12 @@
         "location_name": "Jill's Main Quest - Gene (Merchant Beaver) Quest Completion Item",
         "location_id": 100002267,
         "region": "Big Island",
+        "coords": [
+            [
+                511,
+                1333
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -3574,6 +4431,12 @@
         "location_name": "Jill's Main Quest - Magic Ore Pickup (Susanne's Quest)",
         "location_id": 100002264,
         "region": "Big Island",
+        "coords": [
+            [
+                121,
+                1254
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3584,6 +4447,12 @@
         "location_name": "Jill's Main Quest - Jill's Main Quest Completion NPCs",
         "location_id": 100002269,
         "region": "Big Island",
+        "coords": [
+            [
+                572,
+                1354
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -3642,6 +4511,12 @@
         "location_name": "Jill's Main Quest - Susanne (Paleolithic Gazelle) Quest Completion",
         "location_id": 100002265,
         "region": "Big Island",
+        "coords": [
+            [
+                529,
+                1394
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -3697,6 +4572,12 @@
         "location_name": "Martin's Main Quest - Bucket Gift (Jada's Quest)",
         "location_id": 100002232,
         "region": "Big Island",
+        "coords": [
+            [
+                1768,
+                908
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -3732,6 +4613,12 @@
         "location_name": "Martin's Main Quest - Duke (Cool Goose) Quest Completion Item",
         "location_id": 100002235,
         "region": "Big Island",
+        "coords": [
+            [
+                1891,
+                1273
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3742,6 +4629,12 @@
         "location_name": "Martin's Main Quest - Grassing Clippings Collect (Jada's Quest)",
         "location_id": 100002231,
         "region": "Big Island",
+        "coords": [
+            [
+                1768,
+                908
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -3769,6 +4662,12 @@
         "location_name": "Martin's Main Quest - Jada (Cool Boar) Quest Completion Item",
         "location_id": 100002234,
         "region": "Big Island",
+        "coords": [
+            [
+                1768,
+                908
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -3807,6 +4706,12 @@
         "location_name": "Martin's Main Quest - Lucas (Cool Wolf) Quest Completion Item",
         "location_id": 100002230,
         "region": "Big Island",
+        "coords": [
+            [
+                1708,
+                1766
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3817,6 +4722,12 @@
         "location_name": "Martin's Main Quest - Martin's Main Quest Completion NPCs",
         "location_id": 100002236,
         "region": "Big Island",
+        "coords": [
+            [
+                1581,
+                1043
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -3855,6 +4766,12 @@
         "location_name": "Martin's Main Quest - Water Collect (Jada's Quest)",
         "location_id": 100002233,
         "region": "Big Island",
+        "coords": [
+            [
+                1768,
+                908
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -3892,6 +4809,12 @@
         "location_name": "North (Mountain) - Bowling Bomb Gift (Flint's Quest)",
         "location_id": 100002270,
         "region": "Big Island",
+        "coords": [
+            [
+                1019,
+                201
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3902,6 +4825,12 @@
         "location_name": "North (Mountain) - ??? (Bracelet Monkey) Mountain Bracelet",
         "location_id": 100002294,
         "region": "Big Island Bracelet Shops",
+        "coords": [
+            [
+                1088,
+                526
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -3912,6 +4841,12 @@
         "location_name": "North (Mountain) - Chest (B3) on northwest cliffside of Mountain",
         "location_id": 100000493,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                805,
+                337
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -3942,6 +4877,12 @@
         "location_name": "North (Mountain) - Chest (C5) below rope northwest of stage area",
         "location_id": 100001650,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                1046,
+                485
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -3972,6 +4913,12 @@
         "location_name": "North (Mountain) - Flint (BombBowl Mole) Quest Completion NPC",
         "location_id": 100002271,
         "region": "Big Island",
+        "coords": [
+            [
+                1019,
+                201
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -3999,6 +4946,12 @@
         "location_name": "North (Mountain) - Luisa (Tripping Lizard) Quest Completion Item",
         "location_id": 100002278,
         "region": "Mountain",
+        "coords": [
+            [
+                845,
+                468
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -4009,6 +4962,12 @@
         "location_name": "North (Mountain) - Luisa (Tripping Lizard) Quest Completion NPC",
         "location_id": 100002277,
         "region": "Mountain",
+        "coords": [
+            [
+                845,
+                468
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -4019,6 +4978,12 @@
         "location_name": "North (Mountain) - Neil (Peptalk Rat) Quest Completion Item",
         "location_id": 100002275,
         "region": "Mountain",
+        "coords": [
+            [
+                1273,
+                562
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -4032,6 +4997,12 @@
         "location_name": "North (Mountain) - Neil (Peptalk Rat) Quest Completion NPC",
         "location_id": 100002274,
         "region": "Mountain",
+        "coords": [
+            [
+                1273,
+                562
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -4045,6 +5016,12 @@
         "location_name": "North (Mountain) - Pot (B4) on raised area in northwest corner of Mountain (center)",
         "location_id": 100000694,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                822,
+                400
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -4103,6 +5080,12 @@
         "location_name": "North (Mountain) - Pot (B4) on cliffside cutout east of raised area in northwest corner of Mountain (east)",
         "location_id": 100000199,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                914,
+                358
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -4133,6 +5116,12 @@
         "location_name": "North (Mountain) - Pot (B4) on raised area in northwest corner of Mountain (northeast)",
         "location_id": 100000692,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                822,
+                400
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -4191,6 +5180,12 @@
         "location_name": "North (Mountain) - Pot (B4) on cliffside cutout east of raised area in northwest corner of Mountain (west)",
         "location_id": 100000216,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                914,
+                358
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -4221,6 +5216,12 @@
         "location_name": "North (Mountain) - Pot (B5) part of Tanner's Pot Mimic quest (up on rock formation)",
         "location_id": 100001694,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                1183,
+                294
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -4251,6 +5252,12 @@
         "location_name": "North (Mountain) - Pot (B5) part of Tanner's Pot Mimic quest (southwest of Tanner)",
         "location_id": 100001711,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                1183,
+                294
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -4281,6 +5288,12 @@
         "location_name": "North (Mountain) - Pot (B5) part of Tanner's Pot Mimic quest (next to Tanner)",
         "location_id": 100001708,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                1183,
+                294
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -4311,6 +5324,12 @@
         "location_name": "North (Mountain) - Pot (C3) on cliff area across from Martin's deck (next to cliffface)",
         "location_id": 100001166,
         "region": "Pots Shootable from Tutorial Island",
+        "coords": [
+            [
+                815,
+                513
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -4371,6 +5390,12 @@
         "location_name": "North (Mountain) - Pot (C3) on cliff outcropping northwest and down from Twig",
         "location_id": 100001158,
         "region": "Pots Shootable from Tutorial Island",
+        "coords": [
+            [
+                734,
+                603
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -4401,6 +5426,12 @@
         "location_name": "North (Mountain) - Pot (C3) on cliff area across from Martin's deck (on raised section)",
         "location_id": 100001156,
         "region": "Pots Shootable from Tutorial Island",
+        "coords": [
+            [
+                767,
+                488
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -4430,7 +5461,13 @@
     {
         "location_name": "North (Mountain) - Pot (C3) on raised area in northwest corner of Mountain (southwest)",
         "location_id": 100000695,
-        "region": "Pots Shootable from Tutorial Island",
+        "region": "Mountain Breakables",
+        "coords": [
+            [
+                801,
+                442
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -4461,6 +5498,12 @@
         "location_name": "North (Mountain) - Pot (C4) part of Scooter's allergy quest (northeast)",
         "location_id": 100000242,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                995,
+                576
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -4491,6 +5534,12 @@
         "location_name": "North (Mountain) - Pot (C4) on northwest tall peak, north of race",
         "location_id": 100001624,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                879,
+                541
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -4549,6 +5598,12 @@
         "location_name": "North (Mountain) - Pot (C4) part of Scooter's allergy quest (peak northwest, east)",
         "location_id": 100000079,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                995,
+                576
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -4604,67 +5659,15 @@
         }
     },
     {
-        "location_name": "North (Mountain) - Pot (C4) part of Scooter's allergy quest (peak northwest, west)",
-        "location_id": 100000087,
-        "region": "Mountain Breakables",
-        "rule_json": {
-            "rule": "And",
-            "options": [],
-            "children": [
-                {
-                    "rule": "Or",
-                    "options": [],
-                    "children": [
-                        {
-                            "rule": "HasGroup",
-                            "options": [],
-                            "args": {
-                                "item_name_group": "Ranged",
-                                "count": 1
-                            }
-                        },
-                        {
-                            "rule": "Has",
-                            "options": [],
-                            "args": {
-                                "item_name": "Bracelet",
-                                "count": 1
-                            }
-                        }
-                    ]
-                },
-                {
-                    "rule": "Or",
-                    "options": [],
-                    "children": [
-                        {
-                            "rule": "True_",
-                            "options": [
-                                {
-                                    "option": "worlds.lil_gator_game.options.LockPotsBehindItems",
-                                    "value": 0,
-                                    "operator": "eq"
-                                }
-                            ],
-                            "args": {}
-                        },
-                        {
-                            "rule": "Has",
-                            "options": [],
-                            "args": {
-                                "item_name": "Giant Socks",
-                                "count": 1
-                            }
-                        }
-                    ]
-                }
-            ]
-        }
-    },
-    {
         "location_name": "North (Mountain) - Pot (C4) part of Scooter's allergy quest (southwest)",
         "location_id": 100000100,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                995,
+                576
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -4688,6 +5691,53 @@
                                 "item_name": "Bracelet",
                                 "count": 1
                             }
+                        },
+                        {
+                            "rule": "And",
+                            "options": [],
+                            "children": [
+                                {
+                                    "rule": "Or",
+                                    "options": [],
+                                    "children": [
+                                        {
+                                            "rule": "True_",
+                                            "options": [
+                                                {
+                                                    "option": "worlds.lil_gator_game.options.RequireShieldJump",
+                                                    "value": 1,
+                                                    "operator": "eq"
+                                                }
+                                            ],
+                                            "args": {}
+                                        },
+                                        {
+                                            "rule": "Has",
+                                            "options": [],
+                                            "args": {
+                                                "item_name": "Out of Logic Item",
+                                                "count": 1
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "rule": "HasGroup",
+                                    "options": [],
+                                    "args": {
+                                        "item_name_group": "Cardboard Destroyer",
+                                        "count": 1
+                                    }
+                                },
+                                {
+                                    "rule": "HasGroup",
+                                    "options": [],
+                                    "args": {
+                                        "item_name_group": "Shield",
+                                        "count": 1
+                                    }
+                                }
+                            ]
                         }
                     ]
                 },
@@ -4723,6 +5773,12 @@
         "location_name": "North (Mountain) - Pot (C4) part of Scooter's allergy quest (west)",
         "location_id": 100000051,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                995,
+                576
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -4825,9 +5881,79 @@
         }
     },
     {
+        "location_name": "North (Mountain) - Pot (C4) part of Scooter's allergy quest (peak northwest, west)",
+        "location_id": 100000087,
+        "region": "Mountain Breakables",
+        "coords": [
+            [
+                995,
+                576
+            ]
+        ],
+        "rule_json": {
+            "rule": "And",
+            "options": [],
+            "children": [
+                {
+                    "rule": "Or",
+                    "options": [],
+                    "children": [
+                        {
+                            "rule": "HasGroup",
+                            "options": [],
+                            "args": {
+                                "item_name_group": "Ranged",
+                                "count": 1
+                            }
+                        },
+                        {
+                            "rule": "Has",
+                            "options": [],
+                            "args": {
+                                "item_name": "Bracelet",
+                                "count": 1
+                            }
+                        }
+                    ]
+                },
+                {
+                    "rule": "Or",
+                    "options": [],
+                    "children": [
+                        {
+                            "rule": "True_",
+                            "options": [
+                                {
+                                    "option": "worlds.lil_gator_game.options.LockPotsBehindItems",
+                                    "value": 0,
+                                    "operator": "eq"
+                                }
+                            ],
+                            "args": {}
+                        },
+                        {
+                            "rule": "Has",
+                            "options": [],
+                            "args": {
+                                "item_name": "Giant Socks",
+                                "count": 1
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
         "location_name": "North (Mountain) - Pot (C5) west and up from stage",
         "location_id": 100001661,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                1075,
+                594
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -4886,6 +6012,12 @@
         "location_name": "North (Mountain) - Pot (D3) on cliff outcropping west and down from Twig",
         "location_id": 100001194,
         "region": "Pots Shootable from Tutorial Island",
+        "coords": [
+            [
+                758,
+                654
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -4946,6 +6078,12 @@
         "location_name": "North (Mountain) - Race (C4) starting on western peak of the Mountain",
         "location_id": 100000303,
         "region": "Big Island Races",
+        "coords": [
+            [
+                902,
+                590
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -4981,6 +6119,12 @@
         "location_name": "North (Mountain) - Race (D5) starting north of the playground and heading up the Mountain",
         "location_id": 100001745,
         "region": "Big Island Races",
+        "coords": [
+            [
+                1192,
+                779
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -4994,6 +6138,12 @@
         "location_name": "North (Mountain) - Scooter (Ceramic-Allergy Cougar) Quest Completion NPC",
         "location_id": 100002276,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                995,
+                576
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -5071,6 +6221,12 @@
         "location_name": "North (Mountain) - Tanner (Pot Mimic Elk) Quest Completion NPC",
         "location_id": 100002272,
         "region": "Mountain Breakables",
+        "coords": [
+            [
+                1183,
+                294
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -5084,6 +6240,12 @@
         "location_name": "North (Mountain) - Twig (Flip Pomeranian) Quest Completion NPC",
         "location_id": 100002273,
         "region": "Mountain",
+        "coords": [
+            [
+                849,
+                714
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -5111,6 +6273,12 @@
         "location_name": "Central (Ravine) - Chest (E4) under overhang near river",
         "location_id": 100000241,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                843,
+                827
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -5141,6 +6309,12 @@
         "location_name": "Central (Ravine) - Esther (Directions Deer) Quest Completion NPC",
         "location_id": 100002286,
         "region": "Big Island",
+        "coords": [
+            [
+                683,
+                895
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -5151,6 +6325,12 @@
         "location_name": "Central (Ravine) - Pot (E2) on hill on path east from Penelope's waterfall",
         "location_id": 100001123,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                606,
+                1023
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -5181,6 +6361,12 @@
         "location_name": "Central (Ravine) - Pot (E3) south of beach where Esther roams",
         "location_id": 100001126,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                650,
+                942
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -5211,6 +6397,12 @@
         "location_name": "Central (Ravine) - Pot (E3) south of central river east of path south from Esther",
         "location_id": 100001145,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                800,
+                984
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -5241,6 +6433,12 @@
         "location_name": "Central (Ravine) - Pot (E4) on northern tall peak west of playground",
         "location_id": 100002074,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                936,
+                986
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -5299,6 +6497,12 @@
         "location_name": "Central (Ravine) - Pot (F4) on southern tall peak west of playground",
         "location_id": 100002073,
         "region": "Big Island Breakables",
+        "coords": [
+            [
+                875,
+                1107
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -5404,6 +6608,12 @@
         "location_name": "Tutorial Island - Avery! Quest Completion",
         "location_id": 100002193,
         "region": "Tutorial Island",
+        "coords": [
+            [
+                317,
+                218
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -5431,6 +6641,12 @@
         "location_name": "Tutorial Island - Avery! Hat Recipe",
         "location_id": 100002192,
         "region": "Tutorial Island",
+        "coords": [
+            [
+                317,
+                218
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -5441,6 +6657,12 @@
         "location_name": "Tutorial Island - ??? (Bracelet Monkey) Tutorial Bracelet",
         "location_id": 100002291,
         "region": "Tutorial Island",
+        "coords": [
+            [
+                461,
+                310
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -5454,6 +6676,12 @@
         "location_name": "Tutorial Island - Chest (A3) below Gerald to east",
         "location_id": 100000184,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                618,
+                177
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -5484,6 +6712,12 @@
         "location_name": "Tutorial Island - Chest (B1) on mid-cliff outcropping visible from bone path on the west of Tutorial Island",
         "location_id": 100000372,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                176,
+                260
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -5514,6 +6748,12 @@
         "location_name": "Tutorial Island - Chest (B1) on tallest peak of Tutorial Island",
         "location_id": 100000432,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                257,
+                332
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -5558,6 +6798,12 @@
         "location_name": "Tutorial Island - Chest (D1) on small island south of Jill's picnic table",
         "location_id": 100000183,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                280,
+                741
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -5663,6 +6909,12 @@
         "location_name": "Tutorial Island - Franny (Stick Duck) Quest Completion Item",
         "location_id": 100002200,
         "region": "Tutorial Island",
+        "coords": [
+            [
+                180,
+                455
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -5676,6 +6928,12 @@
         "location_name": "Tutorial Island - Franny (Stick Duck) Quest Completion NPC",
         "location_id": 100002199,
         "region": "Tutorial Island",
+        "coords": [
+            [
+                180,
+                455
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -5689,6 +6947,12 @@
         "location_name": "Tutorial Island - Gerald (Slime Giraffe) Quest Completion Item",
         "location_id": 100002202,
         "region": "Tutorial Island",
+        "coords": [
+            [
+                570,
+                174
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -5702,6 +6966,12 @@
         "location_name": "Tutorial Island - Gerald (Slime Giraffe) Quest Completion NPC",
         "location_id": 100002201,
         "region": "Tutorial Island",
+        "coords": [
+            [
+                570,
+                174
+            ]
+        ],
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
@@ -5715,6 +6985,12 @@
         "location_name": "Tutorial Island - Martin Quest Completion",
         "location_id": 100002196,
         "region": "Tutorial Island",
+        "coords": [
+            [
+                630,
+                423
+            ]
+        ],
         "rule_json": {
             "rule": "Has",
             "options": [],
@@ -5728,6 +7004,12 @@
         "location_name": "Tutorial Island - Pot (A1) near highest rope of the three ropes in northwest of Tutorial Island",
         "location_id": 100000561,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                279,
+                213
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -5758,6 +7040,12 @@
         "location_name": "Tutorial Island - Pot (A3) on green outcropping below and east of cliffs east of three ropes",
         "location_id": 100000422,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                450,
+                163
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -5788,6 +7076,12 @@
         "location_name": "Tutorial Island - Pot (A3) on green outcropping within cliffs east of three ropes",
         "location_id": 100000425,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                412,
+                182
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -5818,6 +7112,12 @@
         "location_name": "Tutorial Island - Pot (B0) at the end of the bone path on the west of Tutorial Island",
         "location_id": 100000179,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                115,
+                395
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -5848,6 +7148,12 @@
         "location_name": "Tutorial Island - Pot (B0) southwest of the three ropes in northwest of Tutorial Island",
         "location_id": 100000234,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                183,
+                218
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -5878,6 +7184,12 @@
         "location_name": "Tutorial Island - Pot (B1) near middle rope of the three ropes in northwest of Tutorial Island",
         "location_id": 100000237,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                243,
+                213
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -5908,6 +7220,12 @@
         "location_name": "Tutorial Island - Pot (B1) on peak north of tallest peak on Tutorial Island",
         "location_id": 100000406,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                218,
+                331
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -5966,6 +7284,12 @@
         "location_name": "Tutorial Island - Pot (B1) on peak south of the three ropes in northwest of Tutorial Island",
         "location_id": 100000424,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                279,
+                213
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -6071,6 +7395,12 @@
         "location_name": "Tutorial Island - Pot (B1) between two waterfalls below ???'s Tutorial Island location",
         "location_id": 100000225,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                397,
+                350
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -6101,6 +7431,12 @@
         "location_name": "Tutorial Island - Pot (B1) between two waterfalls on same level as ???'s Tutorial Island location",
         "location_id": 100000167,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                397,
+                350
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -6131,6 +7467,12 @@
         "location_name": "Tutorial Island - Pot (B1) on pillar by waterfalls",
         "location_id": 100000168,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                404,
+                301
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -6161,6 +7503,12 @@
         "location_name": "Tutorial Island - Pot (B1) west of rope to tallest peaks on Tutorial Island",
         "location_id": 100000411,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                250,
+                297
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -6219,6 +7567,12 @@
         "location_name": "Tutorial Island - Pot (B2) below Gerald to the south near water level (eastmost)",
         "location_id": 100000219,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                584,
+                218
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -6249,6 +7603,12 @@
         "location_name": "Tutorial Island - Pot (B2) below Gerald to the south near water level (middle)",
         "location_id": 100000228,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                584,
+                218
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -6279,6 +7639,12 @@
         "location_name": "Tutorial Island - Pot (B2) below Gerald to the south near water level (westmost)",
         "location_id": 100000189,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                584,
+                218
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -6309,6 +7675,12 @@
         "location_name": "Tutorial Island - Pot (B2) on green cliff northwest of Martin's lawn chairs",
         "location_id": 100000202,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                550,
+                314
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -6339,6 +7711,12 @@
         "location_name": "Tutorial Island - Pot (B2) on green cliff east of Simon's starting location",
         "location_id": 100000175,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                531,
+                272
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -6369,6 +7747,12 @@
         "location_name": "Tutorial Island - Pot (B2) on tall peak west of Gerald",
         "location_id": 100000426,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                465,
+                222
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -6427,6 +7811,12 @@
         "location_name": "Tutorial Island - Pot (C1) on hill overlooking Jill's picnic table",
         "location_id": 100000366,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                330,
+                532
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -6457,6 +7847,12 @@
         "location_name": "Tutorial Island - Pot (C1) on rock near Stick pickup location",
         "location_id": 100000365,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                250,
+                427
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -6487,6 +7883,12 @@
         "location_name": "Tutorial Island - Pot (C2) on cliff overlooking rope crossing the waterfall",
         "location_id": 100000371,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                490,
+                429
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -6592,6 +7994,12 @@
         "location_name": "Tutorial Island - Pot (D0) on small peninsula southwest of Jill's picnic table",
         "location_id": 100000190,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                179,
+                715
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -6622,6 +8030,12 @@
         "location_name": "Tutorial Island - Pot (D1) on small island with chest south of Jill's picnic table",
         "location_id": 100000232,
         "region": "Tutorial Island Breakables",
+        "coords": [
+            [
+                280,
+                741
+            ]
+        ],
         "rule_json": {
             "rule": "Or",
             "options": [],
@@ -6652,6 +8066,12 @@
         "location_name": "Tutorial Island - Pot? Pickup",
         "location_id": 100002195,
         "region": "Tutorial Island",
+        "coords": [
+            [
+                606,
+                564
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -6662,6 +8082,12 @@
         "location_name": "Tutorial Island - Race (C2) starting near grassy cliff",
         "location_id": 100000391,
         "region": "Tutorial Island Races",
+        "coords": [
+            [
+                526,
+                414
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -6689,6 +8115,12 @@
         "location_name": "Tutorial Island - Race (C2) starting near Martin's lawn chairs",
         "location_id": 100000382,
         "region": "Tutorial Island Races",
+        "coords": [
+            [
+                630,
+                423
+            ]
+        ],
         "rule_json": {
             "rule": "And",
             "options": [],
@@ -6716,6 +8148,12 @@
         "location_name": "Tutorial Island - Simon (Ragdoll Bear) Quest Completion Item",
         "location_id": 100002198,
         "region": "Tutorial Island",
+        "coords": [
+            [
+                250,
+                297
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -6726,6 +8164,12 @@
         "location_name": "Tutorial Island - Simon (Ragdoll Bear) Quest Completion NPC",
         "location_id": 100002197,
         "region": "Tutorial Island",
+        "coords": [
+            [
+                250,
+                297
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],
@@ -6736,6 +8180,12 @@
         "location_name": "Tutorial Island - Stick Pickup",
         "location_id": 100002194,
         "region": "Tutorial Island",
+        "coords": [
+            [
+                180,
+                455
+            ]
+        ],
         "rule_json": {
             "rule": "True_",
             "options": [],

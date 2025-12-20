@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GatorRando.Data;
+using GatorRando.UIMods;
 
 namespace GatorRando.Archipelago;
 
@@ -22,12 +23,12 @@ public static class LocationAccessibilty
         IEnumerable<long> inaccessibleIds = Locations.locationData.Where(data => !AccessibleLocations.Contains(data.apLocationId)).Select(data => data.apLocationId);
         foreach (long inaccessibleId in inaccessibleIds)
         {
-
             if (Rules.GatorRules.Rules[inaccessibleId].Evaluate())
             {
                 AccessibleLocations.Add(inaccessibleId);
             }
         }
+        NavigationUI.UpdateLocationSquareState();
     }
 
     public static bool IsLocationAccessible(string gatorName)
@@ -224,7 +225,7 @@ public static class LocationAccessibilty
     public static bool IsLocationAccessible(PersistentObject gatorObject)
     {
         Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(gatorObject);
-        
+
         if (persistentObjectType == Util.PersistentObjectType.Pot || persistentObjectType == Util.PersistentObjectType.Chest || persistentObjectType == Util.PersistentObjectType.Race)
         {
             int gatorID = LocationHandling.ConvertTannerIds(gatorObject.id);
@@ -268,6 +269,11 @@ public static class LocationAccessibilty
             Plugin.LogWarn($"Tried to check if location {gatorObject.id} is a check, which is not a Pot, Race, Chest, or a BreakableObject.");
             return false;
         }
+    }
+
+    internal static bool IsApLocationIdAccessible(long apId)
+    {
+        return AccessibleLocations.Contains(apId);
     }
 
     public static string[] ChecksForNPC(string gatorName)

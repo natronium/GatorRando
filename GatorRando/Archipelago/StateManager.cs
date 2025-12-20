@@ -65,6 +65,7 @@ public static class StateManager
             MapManager.UpdateCoordsIfNeeded();
             BubbleManager.Update();
             ItemUtil.RefreshPlayerItemManagerIfNeeded();
+            NavigationUI.UpdateNavigation();
         }
     }
 
@@ -194,6 +195,7 @@ public static class StateManager
         ItemHandling.TriggerItemListeners();
         LocationHandling.TriggerLocationListeners();
         LocationAccessibilty.UpdateAccessibleLocations();
+        NavigationUI.Setup();
         UIMenus.u.SetGameplayState(true, true);
         if (RandoSettingsMenu.IsRagdollDeathLinkOn())
         {
