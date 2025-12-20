@@ -57,7 +57,14 @@ public static class LocationHandling
         }
         else
         {
-            return CheckIfAPLocationInSave(GetLocationApId(location));
+            try
+            {
+                return CheckIfAPLocationInSave(GetLocationApId(location));
+            }
+            catch (InvalidOperationException)
+            {
+                return true;
+            }
         }
     }
 
