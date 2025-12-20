@@ -209,14 +209,12 @@ internal static class NavigationUI
             name = $"X: {coord[0]}, Y: {coord[1]}"
         };
         location.transform.parent = map.transform;
-        // RectTransform locRect = location.AddComponent<RectTransform>();
 
         GameObject redSquare = new()
         {
             name = "Out of Logic"
         };
         redSquare.transform.parent = location.transform;
-        // redSquare.transform.localPosition = new(0,0,0);
         RawImage red = redSquare.AddComponent<RawImage>();
         red.texture = SpriteHandler.GetSpriteForItem("Red Square").texture;
         red.texture.filterMode = FilterMode.Point;
@@ -229,7 +227,6 @@ internal static class NavigationUI
         };
         greenSquare.transform.parent = location.transform;
         greenSquare.SetActive(false);
-        // greenSquare.transform.localPosition = new(0,0,0);
         RawImage green = greenSquare.AddComponent<RawImage>();
         green.texture = SpriteHandler.GetSpriteForItem("Green Square").texture;
         green.texture.filterMode = FilterMode.Point;
