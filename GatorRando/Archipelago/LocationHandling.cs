@@ -95,7 +95,14 @@ public static class LocationHandling
         }
         else
         {
-            return CheckIfAPLocationInSave(apId);
+            try
+            {
+                return CheckIfAPLocationInSave(apId);
+            }
+            catch (InvalidOperationException)
+            {
+                return true;
+            }
         }
     }
 
