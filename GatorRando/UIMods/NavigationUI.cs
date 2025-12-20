@@ -184,17 +184,13 @@ internal static class NavigationUI
     private static void InitializeLocationPositions()
     {
         locationCoords = Rules.GatorRules.LocationCoords;
-        IEnumerable<List<int>> newKeys = locationCoords.Values.SelectMany(v => v).Distinct(new CoordComparator());
         Dictionary<List<int>, List<long>> tempDict = new(new CoordComparator());
 
+        IEnumerable<List<int>> newKeys = locationCoords.Values.SelectMany(v => v).Distinct(new CoordComparator());
         foreach (List<int> nk in newKeys)
         {
-            if (!tempDict.ContainsKey(nk))
-            {
-                tempDict[nk] = [];
-            }
-            IEnumerable<long> vals = locationCoords.Keys.Where(k => locationCoords[k].Contains(nk, new CoordComparator()));
-            tempDict[nk].InsertRange(0, vals);
+            List<long> vals = [.. locationCoords.Keys.Where(k => locationCoords[k].Contains(nk, new CoordComparator()))];
+            tempDict[nk] = vals;
         }
         foreach (KeyValuePair<List<int>, List<long>> keyValuePair in tempDict)
         {
