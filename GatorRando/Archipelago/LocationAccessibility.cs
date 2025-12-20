@@ -100,7 +100,7 @@ public static class LocationAccessibilty
             return dialogueActor.transform.parent.name switch
             {
                 "Martin Quest" => "Tutorial Martin",
-                "Cool CoolKids" => "Cool Kid Martin",
+                "Cool CoolKids" => "Cool Kid Introduction Martin",
                 _ => "Unhandled Martin"
             };
         }
@@ -137,7 +137,8 @@ public static class LocationAccessibilty
                 "Fantasy" => "Tutorial Stick Jill",
                 "Studying" => "Tutorial End Jill",
                 "Intro Actors" => "Prep Introduction Jill",
-                "Sad Jill" => "Prep Finale Jill",
+                "Sad Jill" => "Prep Pre-Finale Jill",
+                "End Actors" => "Prep Finale Jill",
                 _ => "Unhandled Jill"
             };
         }
@@ -309,22 +310,23 @@ public static class LocationAccessibilty
             "Tutorial Stick Jill" => ["Sword_Stick"],
             "Tutorial End Jill" => ["NPC_TutIsland_Duck", "Sword_Wood"],
             "Prep Introduction Jill" => ["BEACH ROCK", "Sword_RockHammer", "HALF A CHEESE SANDWICH", "Shield_Platter", "Sword_Net", "NPC_Tut_Dog"],
+            "Prep Pre-Finale Jill" => ["NPC_Tut_Dog"],
             "Prep Finale Jill" => ["NPC_Tut_Dog"],
-            "NPC_Susanne" => ["BEACH ROCK", "Sword_RockHammer"],
-            "NPC_Gene" => ["HALF A CHEESE SANDWICH", "Shield_Platter"],
-            "NPC_Antone" => ["Sword_Net"],
+            "NPC_Susanne" => ["BEACH ROCK", "Sword_RockHammer","NPC_Tut_Dog"],
+            "NPC_Gene" => ["HALF A CHEESE SANDWICH", "Shield_Platter","NPC_Tut_Dog"],
+            "NPC_Antone" => ["Sword_Net","NPC_Tut_Dog"],
             "Tutorial Avery" => ["Hat_Basic", "Shirt"],
             "Theatre Introduction Avery" => ["NPC_Tut_Frog", "Item_SpaceGun", "Sword_Laser", "Hat_Western", "ICE CREAM", "Hat_Vampire", "NPC_Part-Timer"],
             "Theatre Finale Avery" => ["NPC_Tut_Frog"],
-            "NPC_Theatre_Cowboy" => ["Hat_Western"],
-            "NPC_Theatre_Space" => ["Item_SpaceGun", "Sword_Laser"],
-            "NPC_Theatre_Bat" => ["ICE CREAM", "Hat_Vampire", "NPC_Part-Timer"],
-            "NPC_Part-Timer" => ["ICE CREAM"],
+            "NPC_Theatre_Cowboy" => ["Hat_Western", "NPC_Tut_Frog"],
+            "NPC_Theatre_Space" => ["Item_SpaceGun", "Sword_Laser", "NPC_Tut_Frog"],
+            "NPC_Theatre_Bat" => ["ICE CREAM", "Hat_Vampire", "NPC_Part-Timer", "NPC_Tut_Frog"],
+            "NPC_Part-Timer" => ["ICE CREAM", "NPC_Tut_Frog"],
             "Tutorial Martin" => ["POT?", "Shield_PotLid"],
-            "Cool Kid Martin" => ["NPC_Tut_Horse", "Shield_Martin", "Hat_DetectiveCowl", "CLIPPINGS", "BUCKET", "WATER", "Shield_Leaf"],
-            "NPC_Cool_Goose" => ["Hat_DetectiveCowl"],
-            "NPC_Cool_Boar" => ["CLIPPINGS", "BUCKET", "WATER", "Shield_Leaf"],
-            "NPC_Cool_Wolf" => ["Shield_Martin"],
+            "Cool Kid Introduction Martin" => ["NPC_Tut_Horse", "Shield_Martin", "Hat_DetectiveCowl", "CLIPPINGS", "BUCKET", "WATER", "Shield_Leaf"],
+            "NPC_Cool_Goose" => ["Hat_DetectiveCowl", "NPC_Tut_Horse"],
+            "NPC_Cool_Boar" => ["CLIPPINGS", "BUCKET", "WATER", "Shield_Leaf", "NPC_Tut_Horse"],
+            "NPC_Cool_Wolf" => ["Shield_Martin", "NPC_Tut_Horse"],
             "BraceletShop0" => ["BraceletShop0", "NPC_BraceletMonkey"],
             "BraceletShop1" => ["BraceletShop1", "NPC_BraceletMonkey"],
             "BraceletShop2" => ["BraceletShop2", "NPC_BraceletMonkey"],

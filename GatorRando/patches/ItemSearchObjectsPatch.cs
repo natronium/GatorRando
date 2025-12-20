@@ -10,6 +10,7 @@ namespace GatorRando.Patches;
 [HarmonyPatch(typeof(ItemSearchObjects))]
 internal static class ItemSearchObjectsPatch
 {
+    private static readonly List<PersistentObject> tannerPots = [];
     [HarmonyPostfix]
     [HarmonyPatch(nameof(ItemSearchObjects.GetList))]
 	private static void PostGetList(ref PersistentObject[] __result)
@@ -26,14 +27,15 @@ internal static class ItemSearchObjectsPatch
 
 	private static List<PersistentObject> TannerPots()
     {
-        List<PersistentObject> tannerPots = [];
-        tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/Intro Objects/Pot (LA) (1)").GetComponent<BreakableObject>());
-        tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/Intro Objects/Pot (LA) (2)").GetComponent<BreakableObject>());
-        tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/Intro Objects/Pot (LA) (3)").GetComponent<BreakableObject>());
-        tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/BreakableObjects/Pot (LA) (1)").GetComponent<BreakableObject>());
-        tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/BreakableObjects/Pot (LA) (2)").GetComponent<BreakableObject>());
-        tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/BreakableObjects/Pot (LA) (3)").GetComponent<BreakableObject>());
-
+        if (tannerPots.Count == 0) // cache Tanner Pots list
+        {
+            tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/Intro Objects/Pot (LA) (1)").GetComponent<BreakableObject>());
+            tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/Intro Objects/Pot (LA) (2)").GetComponent<BreakableObject>());
+            tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/Intro Objects/Pot (LA) (3)").GetComponent<BreakableObject>());
+            tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/BreakableObjects/Pot (LA) (1)").GetComponent<BreakableObject>());
+            tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/BreakableObjects/Pot (LA) (2)").GetComponent<BreakableObject>());
+            tannerPots.Add(Util.GetByPath("North (Mountain)/Side Quests/Confused Elk/BreakableObjects/Pot (LA) (3)").GetComponent<BreakableObject>());
+        }
         return tannerPots;
     }
 }
