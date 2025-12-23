@@ -74,18 +74,17 @@ internal static class RandoSettingsMenu
 
         if (SceneManager.GetActiveScene().name == "Prologue")
         {
-            //Connect button
-            CreateSettingsButton(viewportContent,
-                            4,
-                            "Connect To Server",
-                            "connect to Archipelago game server using player name, server address, and port set above",
-                            StateManager.AttemptConnection
-            );
-
             //Text fields for server address and port
             CreateStringSetting(viewportContent, 4, SaveManager.slotNameString, "type in slot name", 16, true, true);
             CreateStringSetting(viewportContent, 5, SaveManager.serverString, "type in Archipelago server address formated as address:port", 999, true, true);
             CreateStringSetting(viewportContent, 6, SaveManager.passwordString, "type in Archipelago server password (if no password, leave blank)", 30, true, true, InputField.ContentType.Password);
+            //Connect button
+            CreateSettingsButton(viewportContent,
+                            7,
+                            "Connect To Server",
+                            "connect to Archipelago game server using player name, server address, and port set above",
+                            StateManager.AttemptConnection
+            );
 
             // Add Toggle so that players can choose whether they want !collect-ed locations to count as checked or not
             CreateSettingsToggle(viewportContent, 8, "!collect counts as Checked", "set before connecting to server. if checked, locations that are !collect-ed by other seeds count as checked for advancing quests." +
@@ -94,15 +93,17 @@ internal static class RandoSettingsMenu
             CreateSettingsToggle(viewportContent, 9, "Skip Prologue", "set before starting a new game. If true, will skip the prologue and set the player name to the slot name.");
             CreateSettingsToggle(viewportContent, 10, "Goal Before Epilogue", "set before loading into a game. If true, goal will trigger on talking to your friends at the Playground when the flashback would start.");
 
-            CreateSettingsToggle(viewportContent, 13, "Ragdoll on DeathLink", "When you receive a DeathLink from another game, your character will ragdoll. Note: you cannot send DeathLinks to other players. This option must be toggled on the main menu.");
+            CreateSettingsToggle(viewportContent, 11, "Ragdoll on DeathLink", "When you receive a DeathLink from another game, your character will ragdoll. Note: you cannot send DeathLinks to other players. This option must be toggled on the main menu.");
+
+            CreateSettingsToggle(viewportContent, 12, "TrapLink", "Send and receive linkable traps. This option must be toggled on the main menu.");
 
             //Delete all saves button
             CreateSettingsButton(viewportContent,
-                            14,
+                            40,
                             "Delete all AP Saves",
                             "delete all AP saves for Lil Gator Game. useful for cleaning up old runs",
                             SaveManager.EraseAllAPSaveData
-        );
+            );
         }
         else
         {
@@ -118,11 +119,11 @@ internal static class RandoSettingsMenu
                 );
             }
         }
-        CreateSettingsToggle(viewportContent, 11, "Pause Speedrun Mode for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
-        CreateSettingsToggle(viewportContent, 12, "Show Speedrun Timer", "Shows the speedrun timer (regardless of whether Speedrun Mode is on)");
-        CreateSettingsOptions(viewportContent, 13, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
+        CreateSettingsToggle(viewportContent, 13, "Pause Speedrun Mode for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
+        CreateSettingsToggle(viewportContent, 14, "Show Speedrun Timer", "Shows the speedrun timer (regardless of whether Speedrun Mode is on)");
+        CreateSettingsOptions(viewportContent, 15, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
             "This setting changes how these tools work. \"logic\": use randomizer logic to show only valid checks, \"checks only\": show all possible checks, \"original\": original behavior", ["logic", "checks only", "original"]);
-        CreateSettingsToggle(viewportContent, 14, "Show Minimap", "Shows the minimap and related navigation tools");
+        CreateSettingsToggle(viewportContent, 16, "Show Minimap", "Shows the minimap and related navigation tools");
 
         newSettingsMenu = newMenu.GetComponent<UISubMenu>();
         return newSettingsMenu;
@@ -248,5 +249,6 @@ internal static class RandoSettingsMenu
     internal static bool IsCollectCountedAsChecked() => Settings.s.ReadBool("!collect counts as checked", true);
     internal static bool IsGoalBeforeEpilogue() => Settings.s.ReadBool("goal before epilogue", false);
     internal static bool IsRagdollDeathLinkOn() => Settings.s.ReadBool("ragdoll on deathlink", false);
+    internal static bool IsTrapLinkOn() => Settings.s.ReadBool("traplink", false);
     internal static bool IsNavigationOn() => Settings.s.ReadBool("show minimap", true);
 }

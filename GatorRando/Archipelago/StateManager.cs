@@ -66,6 +66,7 @@ public static class StateManager
             BubbleManager.Update();
             ItemUtil.RefreshPlayerItemManagerIfNeeded();
             NavigationUI.UpdateNavigation();
+            TrapManager.trapHandler.MoveNext();
         }
     }
 
@@ -201,5 +202,6 @@ public static class StateManager
         {
             DeathLinkManager.EnableDeathLink();
         }
+        TrapManager.Setup();
     }
 }

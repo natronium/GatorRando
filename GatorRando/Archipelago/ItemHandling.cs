@@ -105,6 +105,7 @@ public static class ItemHandling
             case Items.ClientItemType.Craft: ItemUtil.GiveCraft(item.clientNameId); break;
             case Items.ClientItemType.Friend: ItemUtil.GiveFriends((int)item.clientResourceAmount); break;
             case Items.ClientItemType.CraftStuff: ItemUtil.GiveCraftStuff((int)item.clientResourceAmount); break;
+            case Items.ClientItemType.Trap: TrapManager.QueueTrap(item.clientNameId); break;
             default:
                 throw new Exception($"Item {item.clientNameId} has an unknown client_item type of {item.clientItemType}");
         }

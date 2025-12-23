@@ -8,9 +8,9 @@ public static class Items
     {
         Friend,
         CraftStuff,
-        Bracelet,
         Item,
         Craft,
+        Trap,
     }
 
     public enum ItemGroup
@@ -26,7 +26,8 @@ public static class Items
         Craft,
         Item,
         CardboardDestroyer,
-        Unlock
+        Unlock,
+        Trap
     }
 
     public static string GetItemGroupName(ItemGroup group) => group switch
@@ -43,6 +44,7 @@ public static class Items
         ItemGroup.Item => "Item",
         ItemGroup.CardboardDestroyer => "Cardboard Destroyer",
         ItemGroup.Unlock => "Unlock",
+        ItemGroup.Trap => "Trap",
         _ => throw new System.NotImplementedException(),
     };
 
@@ -134,7 +136,12 @@ public static class Items
         new Item("Guitar of Space", 100000069, "Guitar", null, ClientItemType.Item, [ItemGroup.Unlock]),
         new Item("Key", 100000070, "Key", null, ClientItemType.Item, [ItemGroup.Unlock]),
         new Item("Finish Flag", 100000071, "Flag", null, ClientItemType.Item, [ItemGroup.Unlock]),
+        new Item("Stumble Trap", 100000171, "Stumble Trap", null, ClientItemType.Trap, [ItemGroup.Trap]),
+        new Item("Dialogue Trap", 100000172, "Dialogue Trap", null, ClientItemType.Trap, [ItemGroup.Trap]),
+        new Item("Float Trap", 100000173, "Float Trap", null, ClientItemType.Trap, [ItemGroup.Trap]),
+        new Item("Sneak Trap", 100000174, "Sneak Trap", null, ClientItemType.Trap, [ItemGroup.Trap]),
+        new Item("Pixel Trap", 100000175, "Pixel Trap", null, ClientItemType.Trap, [ItemGroup.Trap]),
         new Item("Out of Logic Item", 999999999, "ool", null, ClientItemType.Item, []),
         ];
-        
+
 }

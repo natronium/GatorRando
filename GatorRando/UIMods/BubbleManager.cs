@@ -9,6 +9,7 @@ public static class BubbleManager
     private static readonly Queue<string> locationCheckedBubbleQueue = new();
     private static readonly Queue<string> alertBubbleQueue = new();
     private static readonly Queue<string> unimportantBubbleQueue = new();
+    private static readonly Queue<string> trapBubbleQueue = new();
     private static DateTime lastBubbleTime = DateTime.UtcNow;
     private static TimeSpan timeBetweenBubbles = TimeSpan.FromSeconds(3);
     private static readonly int maxItemMessages = 5;
@@ -22,7 +23,8 @@ public static class BubbleManager
         ItemReceived,
         LocationChecked,
         Alert,
-        Unimportant
+        Unimportant,
+        Trap,
     }
 
     public enum UnimportantMessageType
@@ -42,6 +44,7 @@ public static class BubbleManager
         BubbleType.LocationChecked => locationCheckedBubbleQueue,
         BubbleType.Alert => alertBubbleQueue,
         BubbleType.Unimportant => unimportantBubbleQueue,
+        BubbleType.Trap => trapBubbleQueue,
         _ => throw new Exception("Somehow we have an invalid BubbleType"),
     };
 
@@ -83,7 +86,13 @@ public static class BubbleManager
 
     private static bool DequeuedImportantBubble()
     {
-        if (alertBubbleQueue.Count > 0)
+        if (trapBubbleQueue.Count > 0)
+        {
+            // Trap messages first
+            DequeueBubble(BubbleType.Trap);
+            return true;
+        }
+        else if (alertBubbleQueue.Count > 0)
         {
             // Plugin.LogDebug("Sent alert");
             DequeueBubble(BubbleType.Alert);
