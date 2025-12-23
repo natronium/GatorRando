@@ -91,10 +91,12 @@
 		<MakeDir Directories="$(ExportDir)/" />
 		<MakeDir Directories="$(ExportDir)/zip/" />
 		<MakeDir Condition="!Exists('$(PluginsPath)/$(ModName)/')" Directories="$(PluginsPath)/$(ModName)/" />
-		<Copy SourceFiles="$(TargetPath);$(TargetDir)/$(TargetName).pdb" DestinationFolder="$(PluginsPath)/$(ModName)/" />
+		<!-- <Copy SourceFiles="$(TargetPath);$(TargetDir)/$(TargetName).pdb" DestinationFolder="$(PluginsPath)/$(ModName)/" /> -->
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(PluginsPath)/$(ModName)/" />
 		<Copy SourceFiles="$(OutputPath)/Archipelago.MultiClient.Net.dll" DestinationFolder="$(PluginsPath)/$(ModName)/" />
     <Copy SourceFiles="$(OutputPath)/Newtonsoft.Json.dll" DestinationFolder="$(PluginsPath)/$(ModName)/" />
-		<Copy SourceFiles="$(ProjectDir)\..\README.md;$(TargetPath);$(TargetDir)/$(TargetName).pdb" DestinationFolder="$(ExportDir)/zip/" />
+		<!-- <Copy SourceFiles="$(ProjectDir)\..\README.md;$(TargetPath);$(TargetDir)/$(TargetName).pdb" DestinationFolder="$(ExportDir)/zip/" /> -->
+    <Copy SourceFiles="$(ProjectDir)\..\README.md" DestinationFolder="$(ExportDir)/zip/" />
 		<Copy SourceFiles="$(OutputPath)/Archipelago.MultiClient.Net.dll" DestinationFolder="$(ExportDir)/zip/" />
     <Copy SourceFiles="$(OutputPath)/Newtonsoft.Json.dll" DestinationFolder="$(ExportDir)/zip/" />
 		<ZipDirectory SourceDirectory="$(ExportDir)/zip/" DestinationFile="$(ExportDir)/$(ModName).zip" />
