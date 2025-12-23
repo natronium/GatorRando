@@ -11,7 +11,7 @@ public static class DialogueModifier
         inModifiedDialogue = modified;
     }
     
-    public static DialogueChunk AddNewDialogueChunk(MultilingualTextDocument document, string dialogueString)
+    public static DialogueChunk AddNewDialogueChunk(string dialogueString, MultilingualTextDocument document = null)
     {
         DialogueLine newDialogueLine = new()
         {
