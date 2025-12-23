@@ -17,8 +17,9 @@ internal static class DeathLinkManager
 
     private static void OnDeathReceived(DeathLink deathLink)
 	{
-        if (deathLinkEnabled)
+        if (deathLinkEnabled && Game.State == GameState.Play)
         {
+            // Only ragdoll during play, to hopefully avoid glitches
 		    Player.movement.Ragdoll();
         }
 	}
