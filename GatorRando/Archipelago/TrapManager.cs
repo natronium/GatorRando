@@ -124,20 +124,23 @@ public static class TrapManager
 
     private static IEnumerator TrapHandler()
     {
-        static bool CheckPaused()
+        static bool InPlay()
         {
-            return Game.State != GameState.Play;
+            return Game.State == GameState.Play;
         }
 
         while (ConnectionManager.Authenticated)
         {
+            if (!InPlay() || DialogueModifier.inTrapDialogue)
+            {
+                yield return true;
+                continue;
+            }
             if (!trapQueue.TryPeek(out TrapType trap))
             {
                 yield return true;
                 continue;
             }
-
-            yield return new WaitWhile(CheckPaused);
 
             switch (trap)
             {
