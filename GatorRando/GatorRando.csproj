@@ -57,6 +57,9 @@
     <Reference Include="Unity.ResourceManager">
       <HintPath>$(ManagedDir)\Unity.ResourceManager.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>$(ManagedDir)\Cinemachine.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
