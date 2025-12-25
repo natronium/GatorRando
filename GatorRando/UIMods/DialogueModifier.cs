@@ -1,7 +1,6 @@
 using GatorRando.Archipelago;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace GatorRando.UIMods;
@@ -9,11 +8,26 @@ namespace GatorRando.UIMods;
 public static class DialogueModifier
 {
     public static bool inModifiedDialogue = false;
+    public static bool inTrapDialogue = false;
     public static void SetModifiedDialogue(bool modified)
     {
         inModifiedDialogue = modified;
     }
-    
+
+    public static void SetTrapDialogue(bool trap)
+    {
+        inTrapDialogue = trap;
+    }
+    private static DialogueTraps dialogueTraps = null;
+    internal static void CleanUp()
+    {
+        dialogueTraps = null;
+        SetTrapDialogue(false);
+        SetModifiedDialogue(false);
+    }
+
+
+
     public static DialogueChunk AddNewDialogueChunk(string dialogueString, MultilingualTextDocument document = null)
     {
         DialogueLine newDialogueLine = new()
@@ -47,20 +61,20 @@ public static class DialogueModifier
         return newDialogueChunk;
     }
 
-    public static DialogueChunk AddNewMultiLineDialogueChunk(List<string> dialogueStrings, List<int> actors)
+    public static DialogueChunk AddNewMultiLineDialogueChunk(string dialogueName, List<string> dialogueStrings, List<int> actors, List<int> emotes)
     {
         int i = 0;
         List<DialogueLine> dialogueLines = [];
-        if (dialogueStrings.Count != actors.Count)
+        if (dialogueStrings.Count != actors.Count || emotes.Count != actors.Count)
         {
-            throw new System.Exception("Mismatched actors and lines");
+            throw new System.Exception("Mismatched actors, emotes and/or lines");
         }
         foreach (string dialogueString in dialogueStrings)
         {
             dialogueLines.Add(new()
             {
                 actorIndex = actors[i],
-                emote = 0,
+                emote = emotes[i],
                 english = [dialogueString],
                 position = 0,
                 holdEmote = false,
@@ -73,14 +87,86 @@ public static class DialogueModifier
         }
         DialogueChunk newDialogueChunk = new()
         {
-            name = dialogueStrings[0],
-            id = Animator.StringToHash(dialogueStrings[0]),
+            name = dialogueName,
+            id = Animator.StringToHash(dialogueName),
             lines = [.. dialogueLines],
             options = [],
             mlOptions = [],
         };
-        DialogueManager.d.chunkDic[dialogueStrings[0]] = newDialogueChunk;
+        DialogueManager.d.chunkDic[dialogueName] = newDialogueChunk;
         return newDialogueChunk;
+    }
+
+    public static void AddChoiceQuest(GameObject gameObject, List<DialogueActor> actors, List<ChoiceQuest.Prompt.Choice> choices, string promptText, string rewardText)
+    {
+        List<string> choiceText = [];
+        List<MultilingualString> multilingualStrings = [];
+        foreach (ChoiceQuest.Prompt.Choice choice in choices)
+        {
+            choiceText.Add(choice.response);
+            MultilingualString multilingualString = new()
+            {
+                english = [choice.response],
+            };
+            multilingualStrings.Add(multilingualString);
+        }
+
+        ChoiceQuest.Prompt prompt = new()
+        {
+            text = promptText,
+            choices = [.. choices],
+        };
+        ChoiceQuest choiceQuest = gameObject.AddComponent<ChoiceQuest>();
+        choiceQuest.actors = [.. actors];
+        choiceQuest.prompts = [prompt];
+        choiceQuest.id = "trap";
+        choiceQuest.rewardText = rewardText;
+        choiceQuest.onReward = new();
+
+        DialogueLine promptLine = new()
+        {
+            actorIndex = 1,
+            emote = 0,
+            english = [promptText],
+            position = 0,
+            holdEmote = false,
+            cue = false,
+            noInput = false,
+            lookTarget = 0,
+            state = -1,
+        };
+
+        DialogueChunk promptChunk = new()
+        {
+            name = promptText,
+            id = Animator.StringToHash(promptText),
+            lines = [promptLine],
+            options = [.. choiceText],
+            mlOptions = [.. multilingualStrings],
+        };
+        DialogueManager.d.chunkDic[promptText] = promptChunk;
+
+        DialogueLine rewardLine = new()
+        {
+            actorIndex = 1,
+            emote = 0,
+            english = [rewardText],
+            position = 0,
+            holdEmote = false,
+            cue = false,
+            noInput = false,
+            lookTarget = 0,
+            state = -1,
+        };
+        DialogueChunk rewardChunk = new()
+        {
+            name = rewardText,
+            id = Animator.StringToHash(rewardText),
+            lines = [rewardLine],
+            options = [],
+            mlOptions = [],
+        };
+        DialogueManager.d.chunkDic[rewardText] = rewardChunk;
     }
 
     public static void GatorBubble(string dialogueString)
@@ -145,34 +231,22 @@ public static class DialogueModifier
 
     public static void DialogueTrap()
     {
-        DSDialogue trapDialogue;
-        BraceletShopDialogue braceletShopDialogue;
+        dialogueTraps ??= new();
 
-		IEnumerator RunDialogueTrap()
+		static IEnumerator RunDialogueTrap()
         {
-            SetModifiedDialogue(true);
-            braceletShopDialogue.gameObject.SetActive(true);
-            braceletShopDialogue.gameObject.transform.position = Player.RawPosition + Player.transform.rotation * new Vector3(0,0,2);
-            braceletShopDialogue.gameObject.transform.rotation = Player.transform.rotation;
-            braceletShopDialogue.gameObject.transform.Rotate(new Vector3(0,180,0)); // Face the player
-            yield return trapDialogue.Run();
-            yield return braceletShopDialogue.Poof();
-            SetModifiedDialogue(false);
+            int choice = Random.Range(0,3);
+            yield return choice switch
+            {
+                0 => dialogueTraps.RunMonkeyTrap(),
+                1 => dialogueTraps.RunCourtroomTrap(),
+                2 => dialogueTraps.RunTrishTrap(),
+                _ => null, // Shouldn't happen
+            };
         }
 
-        List<string> dialogueStrings = ["This is a dialogue trap", "with", "multiple", "lines"];
-        // Eventually randomize sets of lines
-        AddNewMultiLineDialogueChunk(dialogueStrings, [.. Enumerable.Repeat(1,dialogueStrings.Count)]);
-        GameObject monkey = Util.GetByPath("NorthWest (Tutorial Island)/Side/Monkey Quest/Monkey");
-        GameObject newMonkey = Object.Instantiate(monkey);
-        braceletShopDialogue = newMonkey.GetComponent<BraceletShopDialogue>();
-        braceletShopDialogue.onExit = null;
-        trapDialogue = new()
-        {
-            dialogue = dialogueStrings[0],
-            actors = [braceletShopDialogue.actors[0]],
-        };
-
-        trapDialogue.actors[0].StartCoroutine(RunDialogueTrap());
+        Player.actor.StartCoroutine(RunDialogueTrap());
     }
 }
+
+// Looking around emote: 485016557 ?
