@@ -87,6 +87,7 @@ public static class StateManager
         ItemHandling.ClearItemQueue();
         ConnectionManager.Disconnect();
         TitleScreenMods.DisableStartButton();
+        DialogueModifier.CleanUp();
     }
 
     public static void AttemptConnection()
