@@ -66,15 +66,25 @@ internal class DialogueTraps
     }
 
     private readonly List<string> products = [
-        "1 whole hylian rupee",
-        "the fourth wall",
-        "world peace",
+        "1 WHOLE HYLIAN RUPEE",
+        "THE FOURTH WALL",
+        "WORLD PEACE",
+        "THE GAME MANUAL",
+        "HERO'S LAURELS",
+        "A SENSE OF ACCOMPLISHMENT",
+        "HAPPINESS",
+        "A RANDOMIZER FOR YOUR FAVORITE GAME",
     ];
     private readonly List<string> costs = [
         "YOUR SOUL. MUHAHAHAHAHA!",
-        "5 whole hylian rupees.",
-        "a defense offering.",
-        "10 bajillion currency."
+        "5 WHOLE HYLIAN RUPEES.",
+        "A DEFENSE OFFERING.",
+        "10 BAJILLION CURRENCY.",
+        "42 LINES OF CODE",
+        "5 RINGS",
+        "TRUE FRIENDSHIP",
+        "A STRAWBERRY",
+        "A RANDOMIZER FOR MY FAVORITE GAME",
     ];
 
     private GameObject newMonkey;
@@ -94,14 +104,14 @@ internal class DialogueTraps
             {
                 string dialogueName = product + " " + cost;
                 List<string> dialogueStrings = [
-                    "good evening, good gentlegator!",
-                        "it's clearly midday??",
-                        "no matter, i am here to present to you the finest in synergistic and naturally intelligent purchases.",
-                        product,
-                        "how much does it cost?",
-                        "it can be yours for the low, low price of ",
-                        cost,
-                    ];
+                    "GOOD EVENING, GOOD GENTLEGATOR!",
+                    "it's clearly midday??",
+                    "NO MATTER, I AM HERE TO PRESENT TO YOU THE FINEST IN SYNERGISTIC AND NATURALLY INTELLIGENT PURCHASES.",
+                    product,
+                    "how much does it cost?",
+                    "IT CAN BE YOURS FOR THE LOW, LOW PRICE OF ",
+                    cost,
+                ];
                 DialogueModifier.AddNewMultiLineDialogueChunk(dialogueName, dialogueStrings, firstDiagActors, firstEmotes);
             }
         }
@@ -113,7 +123,7 @@ internal class DialogueTraps
         };
         List<string> yesLines = [
             yesResponse,
-                "i don't believe you. convince me.",
+                "I DON'T BELIEVE YOU. CONVINCE ME.",
             ];
         DialogueModifier.AddNewMultiLineDialogueChunk(yesResponse, yesLines, [0, 1], [0, 0]);
         string noResponse = "no, thank you";
@@ -126,7 +136,7 @@ internal class DialogueTraps
             noResponse,
             ];
         DialogueModifier.AddNewMultiLineDialogueChunk(noResponse, noLines, [0], [0]);
-        DialogueModifier.AddChoiceQuest(newMonkey, [monkeyActor], [yes, no], "Would you like to make a purchase?", "cheapskate. you don't appreciate true value!");
+        DialogueModifier.AddChoiceQuest(newMonkey, [monkeyActor], [yes, no], "WOULD YOU LIKE TO MAKE A PURCHASE?", "CHEAPSKATE. YOU DON'T APPRECIATE TRUE VALUE!");
     }
 
     internal IEnumerator RunMonkeyTrap()

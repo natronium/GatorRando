@@ -235,18 +235,15 @@ public static class DialogueModifier
 
 		static IEnumerator RunDialogueTrap()
         {
-            int choice = Random.Range(0,3);
+            int choice = Random.Range(0,100);
             yield return choice switch
             {
-                0 => dialogueTraps.RunMonkeyTrap(),
-                1 => dialogueTraps.RunCourtroomTrap(),
-                2 => dialogueTraps.RunTrishTrap(),
-                _ => null, // Shouldn't happen
+                int x when x > 50 => dialogueTraps.RunMonkeyTrap(),
+                int x when x < 5 => dialogueTraps.RunCourtroomTrap(),
+                _ => dialogueTraps.RunTrishTrap(),
             };
         }
 
         Player.actor.StartCoroutine(RunDialogueTrap());
     }
 }
-
-// Looking around emote: 485016557 ?
