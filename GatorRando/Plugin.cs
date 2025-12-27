@@ -3,6 +3,7 @@ using BepInEx.Configuration;
 using GatorRando.Archipelago;
 using HarmonyLib;
 using UnityEngine.SceneManagement;
+using MC = Archipelago.MultiClient.Net;
 
 namespace GatorRando;
 
@@ -13,6 +14,8 @@ public class Plugin : BaseUnityPlugin
 
     private static ConfigEntry<float> _loadDelay;
     public static float LoadDelay => _loadDelay.Value;
+
+    public bool quitting = false;
 
     private void Awake()
     {
@@ -34,21 +37,35 @@ public class Plugin : BaseUnityPlugin
         ArchipelagoConsole.OnGUI();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         // Debug.Log("OnEnable called");
         SceneManager.sceneLoaded += StateManager.OnSceneLoaded;
     }
 
-    void OnApplicationQuit()
+    private void OnApplicationQuit()
     {
         LogDebug("Application quitting");
-        StateManager.Disconnect();
+        quitting = true;
+        if (ConnectionManager.Authenticated)
+        {
+            try
+            {
+                StateManager.Disconnect();
+            }
+            catch (MC.Exceptions.ArchipelagoSocketClosedException)
+            {
+                // Do nothing
+            }
+        }
     }
 
-    void Destroy()
+    private void Destroy()
     {
-        StateManager.Disconnect();
+        if (ConnectionManager.Authenticated)
+        {
+            StateManager.Disconnect();
+        }
     }
 
     public static void LogInfo(string infoMessage)
