@@ -116,10 +116,6 @@ public static class TrapManager
         {
             trapQueue.Enqueue(traps[trapName]);
         }
-        else
-        {
-            return;
-        }
     }
 
     private static IEnumerator TrapHandler()
@@ -145,15 +141,15 @@ public static class TrapManager
             switch (trap)
             {
                 case TrapType.Ragdoll:
-                    RagdollTrap(); break;
+                    ActivateRagdollTrap(); break;
                 case TrapType.Dialogue:
-                    DialogueTrap(); break;
+                    ActivateDialogueTrap(); break;
                 case TrapType.Float:
-                    FloatTrap(); break;
+                    ActivateFloatTrap(); break;
                 case TrapType.Sneak:
-                    SneakTrap(); break;
+                    ActivateSneakTrap(); break;
                 case TrapType.Pixel:
-                    PixelTrap(); break;
+                    ActivatePixelTrap(); break;
             }
             trapQueue.TryDequeue(out _);
             // Add delay between each trap
@@ -165,30 +161,30 @@ public static class TrapManager
         }
     }
 
-    private static void RagdollTrap()
+    private static void ActivateRagdollTrap()
     {
         BubbleManager.QueueBubble("Oops, I stumbled!", BubbleManager.BubbleType.Trap);
         Player.movement.Ragdoll();
     }
 
-    private static void DialogueTrap()
+    private static void ActivateDialogueTrap()
     {
         BubbleManager.QueueBubble("Oh, no! I have to talk to people", BubbleManager.BubbleType.Trap);
         DialogueModifier.DialogueTrap();
     }
 
-    private static void FloatTrap()
+    private static void ActivateFloatTrap()
     {
         BubbleManager.QueueBubble("Oh dear, not again...", BubbleManager.BubbleType.Trap);
         bool startRoutine = BalloonMods.floatTimer <= 0f;
         BalloonMods.floatTimer += floatTime;
         if (startRoutine)
         {
-            Player.actor.StartCoroutine(BalloonMods.FloatTrap());
+            Player.actor.StartCoroutine(BalloonMods.Floating());
         }
     }
 
-    private static void SneakTrap()
+    private static void ActivateSneakTrap()
     {
 		static IEnumerator Sneaking()
         {
@@ -218,7 +214,7 @@ public static class TrapManager
         }
     }
 
-    private static void PixelTrap()
+    private static void ActivatePixelTrap()
     {
         static IEnumerator Pixelizing()
         {
@@ -291,10 +287,6 @@ public static class TrapManager
             {
                 Plugin.LogInfo($"Received TrapLink {trapName} from {source}");
                 trapQueue.Enqueue(TrapNameToType[trapName]);
-            }
-            else
-            {
-                return;
             }
         }
     }

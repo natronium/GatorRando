@@ -36,7 +36,7 @@ internal static class BalloonMods
         }
     }
     
-    internal static IEnumerator FloatTrap()
+    internal static IEnumerator Floating()
     {
         DSItem floater;
         float choice = UnityEngine.Random.value;

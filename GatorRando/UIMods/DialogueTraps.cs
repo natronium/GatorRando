@@ -6,8 +6,9 @@ namespace GatorRando.UIMods;
 
 internal class DialogueTraps
 {
-    private void PositionGameObjectToPlayer(GameObject gameObject)
+    private void PlaceGameObjectInFrontOfPlayer(GameObject gameObject)
     {
+        // Place the GameObject 2 units in front of the player
         gameObject.transform.position = Player.RawPosition + Player.transform.rotation * new Vector3(0, 0, 2);
         gameObject.transform.rotation = Player.transform.rotation;
         gameObject.transform.Rotate(new Vector3(0, 180, 0)); // Face the player
@@ -22,7 +23,7 @@ internal class DialogueTraps
             yield return SetupCourtroom();
         }
         DialogueModifier.SetTrapDialogue(true);
-        PositionGameObjectToPlayer(gooseCopy);
+        PlaceGameObjectInFrontOfPlayer(gooseCopy);
         gooseCopy.transform.GetChild(0).gameObject.SetActive(true);
         gooseCopy.transform.GetChild(1).gameObject.SetActive(true);
         yield return courtroomSequence.StartSequence();
@@ -31,12 +32,13 @@ internal class DialogueTraps
 
     private IEnumerator SetupCourtroom()
     {
+        // N.B. The yield return null lines were determined empirically to make sure changes are applied before continuing
         GameObject gooseQuest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Goose Quest/");
         bool temp = gooseQuest.activeSelf;
         gooseQuest.SetActive(false);
         gooseCopy = Object.Instantiate(gooseQuest);
         gooseQuest.SetActive(temp);
-        PositionGameObjectToPlayer(gooseCopy);
+        PlaceGameObjectInFrontOfPlayer(gooseCopy);
         Object.Destroy(gooseCopy.GetComponent<SyncQuestStates>());
         yield return null;
         Object.Destroy(gooseCopy.GetComponent<SyncQuestStates>());
@@ -49,10 +51,10 @@ internal class DialogueTraps
         GameObject cameras = gooseCopy.transform.GetChild(2).gameObject;
         GameObject courtroom = gooseCopy.transform.GetChild(3).gameObject;
         Vector3 cameraMinusCourtroom = cameras.transform.position - courtroom.transform.position;
-        PositionGameObjectToPlayer(courtroom);
+        PlaceGameObjectInFrontOfPlayer(courtroom);
         cameras.transform.position = courtroom.transform.position + cameraMinusCourtroom;
         yield return null;
-        PositionGameObjectToPlayer(courtroom.transform.GetChild(0).gameObject);
+        PlaceGameObjectInFrontOfPlayer(courtroom.transform.GetChild(0).gameObject);
         yield return null;
         gooseCopy.SetActive(true);
         foreach (DSDialogue dialogue in courtroom.GetComponents<DSDialogue>())
@@ -155,7 +157,7 @@ internal class DialogueTraps
             actors = [monkeyActor],
         };
         yield return null;
-        PositionGameObjectToPlayer(newMonkey);
+        PlaceGameObjectInFrontOfPlayer(newMonkey);
         newMonkey.GetComponentInChildren<PoofObject>().destroyObject = new();
         newMonkey.gameObject.SetActive(true);
         DialogueModifier.SetTrapDialogue(true);
@@ -175,6 +177,7 @@ internal class DialogueTraps
 
 	private DialogueActor trishActor;
 
+	private const int lookAroundEmote = 485016557;
     private void SetupTrish()
     {
         List<string> lines = [
@@ -187,7 +190,7 @@ internal class DialogueTraps
         ];
         GameObject trish = Util.GetByPath("West (Forest)/Side Quests/Invisibile Horse Quest/Invisible Horse");
         trishActor = trish.GetComponent<DialogueActor>();
-        DialogueModifier.AddNewMultiLineDialogueChunk("trish", lines, [1, 0, 1, 0, 1, 0], [0, 485016557, 0, 485016557, 0, 0]);
+        DialogueModifier.AddNewMultiLineDialogueChunk("trish", lines, [1, 0, 1, 0, 1, 0], [0, lookAroundEmote, 0, lookAroundEmote, 0, 0]);
     }
 
     internal IEnumerator RunTrishTrap()
