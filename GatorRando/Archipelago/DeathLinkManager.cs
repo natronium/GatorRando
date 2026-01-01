@@ -1,4 +1,5 @@
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
+using GatorRando.UIMods;
 
 namespace GatorRando.Archipelago;
 
@@ -17,10 +18,11 @@ internal static class DeathLinkManager
 
     private static void OnDeathReceived(DeathLink deathLink)
 	{
-        if (deathLinkEnabled && Game.State == GameState.Play)
+        if (deathLinkEnabled)
         {
-            // Only ragdoll during play, to hopefully avoid glitches
-		    Player.movement.Ragdoll();
+            BubbleManager.QueueBubble($"I'm about to stumble because {deathLink.Cause}", BubbleManager.BubbleType.Trap);
+            // Queue a stumble trap (instead of immediate ragdoll)
+		    TrapManager.QueueTrap("Stumble Trap");
         }
 	}
 

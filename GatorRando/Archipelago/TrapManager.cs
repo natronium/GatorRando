@@ -164,7 +164,10 @@ public static class TrapManager
     private static void ActivateRagdollTrap()
     {
         BubbleManager.QueueBubble("Oops, I stumbled!", BubbleManager.BubbleType.Trap);
-        Player.movement.Ragdoll();
+        if (!Player.movement.isRagdolling)
+        {
+            Player.movement.Ragdoll();
+        }
     }
 
     private static void ActivateDialogueTrap()
@@ -186,7 +189,7 @@ public static class TrapManager
 
     private static void ActivateSneakTrap()
     {
-		static IEnumerator Sneaking()
+        static IEnumerator Sneaking()
         {
             float startingMaxSpeed = Player.movement.maxSpeed;
 
@@ -200,7 +203,7 @@ public static class TrapManager
 
             // At this point, timer has ran out
 
-		    sneakTimer = 0f;
+            sneakTimer = 0f;
 
             Player.movement.maxSpeed = startingMaxSpeed;
         }
@@ -224,8 +227,8 @@ public static class TrapManager
             int refResolutionY = p.refResolutionY;
 
             p.enabled = true;
-            p.refResolutionX = refResolutionX/6;
-            p.refResolutionY = refResolutionY/6;
+            p.refResolutionX = refResolutionX / 6;
+            p.refResolutionY = refResolutionY / 6;
 
             // Lower timer
             while (pixelTimer > 0)
@@ -236,7 +239,7 @@ public static class TrapManager
 
             // At this point, timer has ran out
 
-		    pixelTimer = 0f;
+            pixelTimer = 0f;
 
             p.enabled = startingEnabled;
             p.refResolutionX = refResolutionX;
