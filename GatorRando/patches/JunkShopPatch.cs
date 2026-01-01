@@ -39,11 +39,11 @@ internal static class JunkShopPatch
                 replacementDisplayNames.Add(shopItem.item.name, DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation));
                 if (itemAtLocation.itemPlayer == ConnectionManager.SlotName())
                 {
-                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"I bought my own {itemAtLocation.itemName}"));
+                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk($"I bought my own {itemAtLocation.itemName}", __instance.document));
                 }
                 else
                 {
-                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk(__instance.document, $"I bought {DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation)}"));
+                    replacementDialogues.Add(shopItem.item.name, DialogueModifier.AddNewDialogueChunk( $"I bought {DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation)}", __instance.document));
                 }
             }
         }

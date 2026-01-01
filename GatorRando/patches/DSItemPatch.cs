@@ -36,7 +36,7 @@ internal static class DSItemPatch
             __instance.itemSprite = DialogueModifier.GetSpriteForItemAtLocation(itemAtLocation);
             __instance.dialogue = dialogueString;
 
-            DialogueModifier.AddNewDialogueChunk(__instance.document, dialogueString);
+            DialogueModifier.AddNewDialogueChunk(dialogueString, __instance.document);
         }
     }
 

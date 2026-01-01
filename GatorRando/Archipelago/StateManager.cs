@@ -66,13 +66,17 @@ public static class StateManager
             BubbleManager.Update();
             ItemUtil.RefreshPlayerItemManagerIfNeeded();
             NavigationUI.UpdateNavigation();
+            TrapManager.trapHandler.MoveNext();
         }
     }
 
     public static void Disconnect()
     {
-        ConnectionManager.UnregisterItemReceivedListener();
         //TODO TEST QUIT TO TITLE SCREEN
+        ConnectionManager.UnregisterItemReceivedListener();
+        ItemHandling.ClearItemQueue();
+        ConnectionManager.Disconnect();
+        DialogueModifier.CleanUp();
         switch (GetCurrentState())
         {
             case State.NewGamePrologue:
@@ -83,16 +87,15 @@ public static class StateManager
                 QuitToTitleScreen();
                 break;
         }
-        ItemHandling.ClearItemQueue();
-        ConnectionManager.Disconnect();
-        TitleScreenMods.DisableStartButton();
     }
 
     public static void AttemptConnection()
     {
         if (GetCurrentState() == State.TitleScreenConnectionSucceeded)
         {
-            Disconnect();
+            ConnectionManager.UnregisterItemReceivedListener();
+            ItemHandling.ClearItemQueue();
+            TitleScreenMods.DisableStartButton();
         }
         currentState = State.TitleScreenAttemptingConnection;
         DisplayMessage("Attempting Connection to server");
@@ -144,12 +147,17 @@ public static class StateManager
     private static void QuitToTitleScreen()
     {
         SaveManager.ForceSave();
-        if (RandoSettingsMenu.IsRagdollDeathLinkOn())
+        if (RandoSettingsMenu.IsRagdollDeathLinkOn() && !Plugin.Instance.quitting)
         {
             DeathLinkManager.DisableDeathLink();
         }
+        if (RandoSettingsMenu.IsTrapLinkOn() && !Plugin.Instance.quitting)
+        {
+            TrapManager.DisableTrapLink();
+        }
         LoadScene backToTitle = Util.GetByPath("Canvas/Pause Menu/Pause Content/Back to Title").GetComponent<LoadScene>();
         backToTitle.DoLoadScene();
+        currentState = State.TitleScreenPreConnect;
     }
 
     public static void StartNewGame(int index)
@@ -201,5 +209,7 @@ public static class StateManager
         {
             DeathLinkManager.EnableDeathLink();
         }
+        TrapManager.Setup();
+        DialogueModifier.CleanUp();
     }
 }

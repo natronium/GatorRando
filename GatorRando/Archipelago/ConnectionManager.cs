@@ -108,7 +108,7 @@ public static class ConnectionManager
         }
         catch (NullReferenceException)
         {
-            Plugin.LogWarn("ItemReceived Listener had not yet been registered");
+            // Plugin.LogWarn("ItemReceived Listener had not yet been registered");
         }
     }
 
@@ -121,7 +121,7 @@ public static class ConnectionManager
         try
         {
             // it's safe to thread this function call but unity notoriously hates threading so do not use excessively
-            // TODO: UUID, Tags?
+            // TODO: UUID
             ThreadPool.QueueUserWorkItem(
                 _ => HandleConnectResult(
                     session.TryConnectAndLogin(
@@ -158,7 +158,6 @@ public static class ConnectionManager
 
             outText = $"Successfully connected to {ServerData.Uri} as {ServerData.SlotName}!";
             StateManager.SucceededConnection();
-            // ArchipelagoConsole.LogMessage(outText);
         }
         else
         {
@@ -172,8 +171,6 @@ public static class ConnectionManager
             Authenticated = false;
             Disconnect();
         }
-
-        // ArchipelagoConsole.LogMessage(outText);
         attemptingConnection = false;
     }
 
@@ -238,12 +235,12 @@ public static class ConnectionManager
     }
 
 
-    // public static void CheckLocationByApId(long apId) => session.Locations.CompleteLocationChecks(apId);
-    public static void CheckLocationByApId(long apId)
-    {
-        session.Locations.CompleteLocationChecks(apId);
-        Plugin.LogDebug($"Checking {apId}");
-    }
+    public static void CheckLocationByApId(long apId) => session.Locations.CompleteLocationChecks(apId);
+    // public static void CheckLocationByApId(long apId)
+    // {
+    //     session.Locations.CompleteLocationChecks(apId);
+    //     Plugin.LogDebug($"Checking {apId}");
+    // }
     public static bool IsLocationCollected(long apId) => session.Locations.AllLocationsChecked.Any(i => i == apId);
 
     /// <summary>
@@ -318,14 +315,4 @@ public static class ConnectionManager
 
     public static void SendLocallyCheckedLocations() =>
         session.Locations.CompleteLocationChecksAsync([.. ServerData.CheckedLocations]);
-
-    // Connect on title screen
-    // Handle and display errors
-    // --Wrong slot name
-    // --room not open
-    // --mismatched index
-
-    // Display in game that have become disconnected from server
-    // 
-
 }

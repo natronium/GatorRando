@@ -18,6 +18,11 @@ internal static class DebugButtonsPatch
                 return false;
             }
         }
+        if (DialogueModifier.inTrapDialogue)
+            {
+                __result = false;
+                return false;
+            }
         return true;
     }
 }
