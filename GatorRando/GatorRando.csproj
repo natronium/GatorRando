@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>GatorRando</AssemblyName>
     <Description>Randomizer for Lil Gator Game</Description>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <LangVersion>latest</LangVersion>
     <OutputPath>$(ProjectDir)Build</OutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
