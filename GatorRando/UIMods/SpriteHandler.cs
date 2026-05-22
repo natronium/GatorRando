@@ -154,7 +154,7 @@ public static class SpriteHandler
                 }
                 catch (InvalidOperationException)
                 {
-                    Plugin.LogWarn("No sprite found, storing placeholder!");
+                    Plugin.LogWarn($"No sprite found for {itemName}, storing placeholder!");
                     existingSprite = Util.FindItemObjectByName("Placeholder").sprite;
                 }
 
