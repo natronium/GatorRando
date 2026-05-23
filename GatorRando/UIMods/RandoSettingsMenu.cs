@@ -180,6 +180,7 @@ internal static class RandoSettingsMenu
     {
         GameObject customizeButton = Util.GetByPath(GetCurrentSettingsPath() + "Viewport/Content/Customize Splits");
         GameObject button = GameObject.Instantiate(customizeButton, newParent.transform);
+        button.SetActive(true);
         button.transform.SetSiblingIndex(siblingIndex);
         button.name = name;
         GameObject label = button.transform.Find("Label").gameObject;
