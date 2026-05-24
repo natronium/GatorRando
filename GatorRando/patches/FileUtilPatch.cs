@@ -1,4 +1,4 @@
-using System.IO;
+using System;
 using GatorRando.Archipelago;
 using GatorRando.UIMods;
 using HarmonyLib;
@@ -10,67 +10,52 @@ internal static class FileUtilPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(FileUtil.Read))]
-	private static bool PreRead(string path, bool forceLocal, ref string __result)
+    private static void PreRead(ref bool forceLocal)
     {
-        if (forceLocal)
-        {
-            return true;
+        forceLocal = true;
+    }
+
+    [HarmonyPrefix]
+    [HarmonyPatch(nameof(FileUtil.ReadSaveData))]
+    private static void PreReadSaveData(ref Action<GameSaveData> onComplete)
+    {
+		static void readServer(GameSaveData _) {
+            if (ConnectionManager.Authenticated)
+            {
+                SaveManager.ReadCurrentAPServerData();
+            }
         }
-        __result = File.ReadAllText(path);
-        return false;
+
+        onComplete += readServer;
     }
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(FileUtil.Write))]
-	private static bool PreWrite(string path, bool forceLocal, string contents)
+    private static void PreWrite(ref bool forceLocal)
     {
-        if (forceLocal)
-        {
-            return true;
-        }
-        File.WriteAllText(path, contents);
-        return false;
+        forceLocal = true;
     }
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(FileUtil.WriteSaveData))]
-	private static void PreWriteSaveData()
+    private static void PreWriteSaveData(ref Action onComplete)
     {
         SpeedrunTimerDisplay.AddTimerToSave();
+        onComplete += SaveManager.WriteCurrentAPServerData;
     }
 
-    [HarmonyPostfix]
-    [HarmonyPatch(nameof(FileUtil.WriteSaveData))]
-	private static void PostWriteSaveData()
-    {
-        if (StateManager.GetCurrentState() != StateManager.State.NewGameSkipPrologue)
-        {
-            SaveManager.WriteCurrentAPServerData();
-        }
-    }
-
-    [HarmonyPostfix]
-    [HarmonyPatch(nameof(FileUtil.ReadSaveData))]
-	private static void PostReadSaveData()
-    {
-        if (ConnectionManager.Authenticated && StateManager.GetCurrentState() != StateManager.State.NewGameSkipPrologue)
-        {
-            SaveManager.ReadCurrentAPServerData();
-        }
-    }
-
-    [HarmonyPostfix]
+    [HarmonyPrefix]
     [HarmonyPatch(nameof(FileUtil.CopyGameSaveData))]
-	private static void PostEraseSaveData(int sourceIndex, int targetIndex)
+	private static void PreCopySaveData(int sourceIndex, int targetIndex, ref Action onComplete)
     {
-        SaveManager.CopyAPServerData(sourceIndex, targetIndex);
+        onComplete += () => SaveManager.CopyAPServerData(sourceIndex, targetIndex);
     }
 
-    [HarmonyPostfix]
+    [HarmonyPrefix]
     [HarmonyPatch(nameof(FileUtil.EraseGameSaveData))]
-	private static void PostEraseSaveData()
+	private static void PreEraseSaveData(ref Action onComplete)
     {
-        SaveManager.EraseCurrentAPServerData();
+        onComplete += () => SaveManager.EraseCurrentAPServerData();
     }
 
     [HarmonyPrefix]
@@ -81,8 +66,8 @@ internal static class FileUtilPatch
     }
 
     [HarmonyPrefix]
-    [HarmonyPatch(nameof(FileUtil.DoesFileExist))]
-	private static void PreDoesFileExist(ref bool forceLocal)
+    [HarmonyPatch(nameof(FileUtil.DoesFileExistCoroutine))]
+    private static void PreDoesFileExistCoroutine(ref bool forceLocal)
     {
         forceLocal = true;
     }
