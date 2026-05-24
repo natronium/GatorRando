@@ -36,7 +36,7 @@ internal class DialogueTraps
         GameObject gooseQuest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Goose Quest/");
         bool temp = gooseQuest.activeSelf;
         gooseQuest.SetActive(false);
-        gooseCopy = Object.Instantiate(gooseQuest);
+        gooseCopy = Object.Instantiate(gooseQuest, Util.GetByPath("East (Creeklands)").transform);
         gooseQuest.SetActive(temp);
         PlaceGameObjectInFrontOfPlayer(gooseCopy);
         Object.Destroy(gooseCopy.GetComponent<SyncQuestStates>());
@@ -95,7 +95,7 @@ internal class DialogueTraps
     {
 
         GameObject monkeyObject = Util.GetByPath("NorthWest (Tutorial Island)/Side/Monkey Quest/Monkey");
-        newMonkey = Object.Instantiate(monkeyObject);
+        newMonkey = Object.Instantiate(monkeyObject,Util.GetByPath("NorthWest (Tutorial Island)").transform);
         newMonkey.gameObject.SetActive(false);
         DialogueActor monkeyActor = newMonkey.GetComponent<DialogueActor>();
         List<int> firstDiagActors = [1, 0, 1, 1, 0, 1, 1];
@@ -159,8 +159,9 @@ internal class DialogueTraps
         yield return null;
         PlaceGameObjectInFrontOfPlayer(newMonkey);
         newMonkey.GetComponentInChildren<PoofObject>().destroyObject = new();
-        newMonkey.gameObject.SetActive(true);
         DialogueModifier.SetTrapDialogue(true);
+        yield return null;
+        newMonkey.gameObject.SetActive(true);
         yield return trapDialogue.Run();
         newMonkey.GetComponent<ChoiceQuest>().State = false;
         while (!newMonkey.GetComponent<ChoiceQuest>().State)

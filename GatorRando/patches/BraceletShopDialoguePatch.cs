@@ -10,10 +10,21 @@ namespace GatorRando.Patches;
 [HarmonyPatch(typeof(BraceletShopDialogue))]
 internal static class BraceletShopDialoguePatch
 {
+    [HarmonyPrefix]
+    [HarmonyPatch(nameof(BraceletShopDialogue.OnEnable))]
+    private static bool PreOnEnable(BraceletShopDialogue __instance)
+    {
+        Plugin.LogInfo("Running BraceletShopDialogue OnEnable");
+        if (DialogueModifier.inTrapDialogue || !LocationHandling.IsLocationCollected(__instance.SaveID))
+        {
+           return false;
+        }
+        return true;
+    }
 
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(BraceletShopDialogue.RunShop), MethodType.Enumerator)]
-	private static IEnumerable<CodeInstruction> TranspileRunShop(IEnumerable<CodeInstruction> instructions)
+    private static IEnumerable<CodeInstruction> TranspileRunShop(IEnumerable<CodeInstruction> instructions)
     {
         CodeInstruction nop = new(OpCodes.Nop);
         int counter = 1;
