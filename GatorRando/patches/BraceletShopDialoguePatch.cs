@@ -62,6 +62,6 @@ internal static class BraceletShopDialoguePatch
         Sprite itemSprite = DialogueModifier.GetSpriteForItemAtLocation(itemAtLocation);
         string itemName = DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation);
         DialogueChunk newChunk = DialogueModifier.AddNewDialogueChunk(dialogueString, thisDialogue.document);
-        return thisDialogue.StartCoroutine(thisDialogue.uiItemGet.RunSequence(itemSprite, itemName, newChunk, thisDialogue.actors));
+        return thisDialogue.StartCoroutine(UIItemGet.U.RunSequence(itemSprite, itemName, newChunk, thisDialogue.actors));
     }
 }
