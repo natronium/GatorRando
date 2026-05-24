@@ -1,4 +1,5 @@
 using System.Collections;
+using GatorRando.Patches;
 using GatorRando.PrefabMods;
 using GatorRando.QuestMods;
 using GatorRando.UIMods;
@@ -123,8 +124,8 @@ public static class StateManager
         if (GetCurrentState() == State.TitleScreenAttemptingConnection)
         {
             currentState = State.TitleScreenConnectionSucceeded;
-            PostConnectTitleScreen();
-            //TODO take connection succeeded actions
+            Plugin.Instance.StartCoroutine(PostConnectTitleScreen());
+            //TODO take connection succeeded actions // Unsure what I meant here?
         }
         else if (GetCurrentState() == State.PlayingGameRetryingConnection)
         {
@@ -137,9 +138,9 @@ public static class StateManager
         }
     }
 
-    private static void PostConnectTitleScreen()
+    private static IEnumerator PostConnectTitleScreen()
     {
-        SaveManager.LoadAPSaveData();
+        yield return SaveManager.LoadAPSaveData();
         TitleScreenMods.EnableStartButton();
         RandoSettingsMenu.LeaveRandoSettingsMenu();
     }
@@ -160,23 +161,27 @@ public static class StateManager
         currentState = State.TitleScreenPreConnect;
     }
 
-    public static void StartNewGame(int index)
+    public static bool StartNewGame(int index)
     {
         if (RandoSettingsMenu.IsPrologueToBeSkipped())
         {
             //Skip the prologue by loading a built-in post prologue save file
             currentState = State.NewGameSkipPrologue;
-            SaveManager.LoadPostPrologueSaveData(index);
+            Plugin.Instance.StartCoroutine(SaveManager.LoadPostPrologueSaveData(index));
+            return false;
         }
         else
         {
             //Don't modify game flow if going into prologue
             currentState = State.NewGamePrologue;
+            SaveFileScreenPatch.startingLoad = false;
+            return true;
         }
     }
 
     public static bool LoadGame(int index)
     {
+        SaveFileScreenPatch.startingLoad = false;
         if (!SaveManager.CheckIfSaveAheadOfServer(index))
         {
             currentState = State.LoadingGame;
