@@ -14,7 +14,6 @@ internal static class BraceletShopDialoguePatch
     [HarmonyPatch(nameof(BraceletShopDialogue.OnEnable))]
     private static bool PreOnEnable(BraceletShopDialogue __instance)
     {
-        Plugin.LogInfo("Running BraceletShopDialogue OnEnable");
         if (DialogueModifier.inTrapDialogue || !LocationHandling.IsLocationCollected(__instance.SaveID))
         {
            return false;
