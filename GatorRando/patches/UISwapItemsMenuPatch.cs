@@ -32,12 +32,6 @@ internal static class UISwapItemsMenuPatch
                     item.IsUnlocked = true;
                 }
             }
-            else if (item.name == "Archipelago")
-            {
-                //TODO figure out replacement for this item vis-a-vie scrolling
-                questItemsReceived.Add(item);
-                item.IsUnlocked = true;
-            }
             else if (item.name != "Thrown_Pencil_2" && item.name != "Thrown_Pencil_3" && ItemHandling.IsItemUnlocked(item.name))
             {
                 questItemsReceived.Add(item);
@@ -61,7 +55,7 @@ internal static class UISwapItemsMenuPatch
             }
         }
 
-        GameObject QuestItemGrid = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Contents Mask/Tab Contents/Quest Item Grid");
+        GameObject QuestItemGrid = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Contents Mask/Tab Contents/Quest Item Scroll Area/Item Viewport/Quest Grid");
         QuestItemGrid?.GetComponent<ItemGrid>().LoadElements([.. questItemsReceived]);
     }
 }
