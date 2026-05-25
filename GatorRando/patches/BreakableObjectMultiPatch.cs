@@ -9,8 +9,8 @@ namespace GatorRando.Patches;
 internal static class BreakableObjectMultiPatch
 {
     [HarmonyPrefix]
-    [HarmonyPatch(nameof(BreakableObjectMulti.Break), [typeof(bool), typeof(Vector3), typeof(bool)])]
-	private static bool PreBreak(BreakableObject __instance, bool fromAttachment, Vector3 velocity, bool isSturdy)
+    [HarmonyPatch(nameof(BreakableObjectMulti.Break))]
+	private static bool PreBreak(BreakableObject __instance)
     {
         Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(__instance);
         if (persistentObjectType == Util.PersistentObjectType.Chest)
@@ -37,8 +37,8 @@ internal static class BreakableObjectMultiPatch
     }
 
     [HarmonyPostfix]
-    [HarmonyPatch(nameof(BreakableObjectMulti.Break), [typeof(bool), typeof(Vector3), typeof(bool)])]
-	private static void PostBreak(BreakableObjectMulti __instance, bool fromAttachment, Vector3 velocity, bool isSturdy)
+    [HarmonyPatch(nameof(BreakableObjectMulti.Break))]
+	private static void PostBreak(BreakableObjectMulti __instance)
     {
         if (__instance.IsBroken)
         {

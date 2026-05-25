@@ -31,8 +31,8 @@ internal static class BreakableObjectPatch
     }
 
     [HarmonyPostfix]
-    [HarmonyPatch(nameof(BreakableObject.Break), [typeof(bool), typeof(Vector3), typeof(bool)])]
-	private static void PostBreak(BreakableObject __instance, bool fromAttachment, Vector3 velocity, bool isHeavy)
+    [HarmonyPatch(nameof(BreakableObject.Break), [typeof(bool), typeof(Vector3), typeof(bool), typeof(bool), typeof(bool)])]
+	private static void PostBreak(BreakableObject __instance)
     {
         if (__instance.IsBroken)
         {

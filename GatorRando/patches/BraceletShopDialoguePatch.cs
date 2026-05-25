@@ -10,10 +10,20 @@ namespace GatorRando.Patches;
 [HarmonyPatch(typeof(BraceletShopDialogue))]
 internal static class BraceletShopDialoguePatch
 {
+    [HarmonyPrefix]
+    [HarmonyPatch(nameof(BraceletShopDialogue.OnEnable))]
+    private static bool PreOnEnable(BraceletShopDialogue __instance)
+    {
+        if (DialogueModifier.inTrapDialogue || !LocationHandling.IsLocationCollected(__instance.SaveID))
+        {
+           return false;
+        }
+        return true;
+    }
 
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(BraceletShopDialogue.RunShop), MethodType.Enumerator)]
-	private static IEnumerable<CodeInstruction> TranspileRunShop(IEnumerable<CodeInstruction> instructions)
+    private static IEnumerable<CodeInstruction> TranspileRunShop(IEnumerable<CodeInstruction> instructions)
     {
         CodeInstruction nop = new(OpCodes.Nop);
         int counter = 1;
@@ -62,6 +72,6 @@ internal static class BraceletShopDialoguePatch
         Sprite itemSprite = DialogueModifier.GetSpriteForItemAtLocation(itemAtLocation);
         string itemName = DialogueModifier.GetItemNameForItemAtLocation(itemAtLocation);
         DialogueChunk newChunk = DialogueModifier.AddNewDialogueChunk(dialogueString, thisDialogue.document);
-        return thisDialogue.StartCoroutine(thisDialogue.uiItemGet.RunSequence(itemSprite, itemName, newChunk, thisDialogue.actors));
+        return thisDialogue.StartCoroutine(UIItemGet.U.RunSequence(itemSprite, itemName, newChunk, thisDialogue.actors));
     }
 }

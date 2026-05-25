@@ -1,5 +1,7 @@
+using System.Collections;
 using System.IO;
 using System.Reflection;
+using GatorRando.Patches;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -16,7 +18,6 @@ public static class SaveManager
     public static readonly string slotNameString = "Slot Name";
     public static readonly string serverString = "Server Address:Port";
     public static readonly string passwordString = "Password";
-    public static readonly string apItemIndexKey = "LastAPItemIndex";
 
     private static string CurrentSavePath()
     {
@@ -28,7 +29,7 @@ public static class SaveManager
         Directory.CreateDirectory(saveFolderPath);
     }
 
-    public static void LoadAPSaveData()
+    public static IEnumerator LoadAPSaveData()
     {
         FileUtil.saveFilePaths[0] = CurrentSavePath() + "_0";
         FileUtil.saveFilePaths[1] = CurrentSavePath() + "_1";
@@ -39,9 +40,9 @@ public static class SaveManager
         apServerDataPaths[0] = CurrentSavePath() + "_server_0";
         apServerDataPaths[1] = CurrentSavePath() + "_server_1";
         apServerDataPaths[2] = CurrentSavePath() + "_server_2";
-        FileUtil.ReadGameSaveDataInfo(0);
-        FileUtil.ReadGameSaveDataInfo(1);
-        FileUtil.ReadGameSaveDataInfo(2);
+        yield return FileUtil.ReadGameSaveDataInfo(0);
+        yield return FileUtil.ReadGameSaveDataInfo(1);
+        yield return FileUtil.ReadGameSaveDataInfo(2);
         SaveFileScreen saveFileScreen = Util.GetByPath("Main Menu/Main Menu Canvas/Load File Screen").GetComponent<SaveFileScreen>();
         saveFileScreen.UpdateState();
     }
@@ -145,7 +146,7 @@ public static class SaveManager
         return "";
     }
 
-    public static void LoadPostPrologueSaveData(int index)
+    public static IEnumerator LoadPostPrologueSaveData(int index)
     {
         string postPrologueSave = "";
         Assembly assembly = Assembly.GetExecutingAssembly();
@@ -153,11 +154,13 @@ public static class SaveManager
         {
             postPrologueSave = reader.ReadToEnd();
         }
-        File.WriteAllText(FileUtil.saveFilePaths[index], postPrologueSave);
-        GameSaveData gameSaveData = FileUtil.ReadSaveData(index);
-        gameSaveData.playerName = ConnectionManager.SlotName();
-        FileUtil.WriteSaveData(gameSaveData, index);
-        FileUtil.UpdateSaveDataInfo(gameSaveData, index);
+        GameSaveData postPrologue = JsonUtility.FromJson<GameSaveData>(postPrologueSave);
+        postPrologue.playerName = ConnectionManager.SlotName();
+        yield return FileUtil.WriteSaveDataCoroutine(postPrologue, index, null);
+        yield return FileUtil.ReadGameSaveDataInfo(index);
+        SaveFileScreen saveFileScreen = Util.GetByPath("Main Menu/Main Menu Canvas/Load File Screen").GetComponent<SaveFileScreen>();
+        saveFileScreen.UpdateState();
+        SaveFileScreenPatch.startingLoad = false;
     }
 
     public static void ForceSave()
@@ -173,17 +176,6 @@ public static class SaveManager
             if (tempServerData.Index > ConnectionManager.ItemsReceived().Count)
             {
                 return true; // Saved server data is ahead of the items received count
-            }
-        }
-        if (File.Exists(FileUtil.saveFilePaths[index]))
-        {
-            GameSaveData tempGameSaveData = FileUtil.ReadSaveData(index);
-            if (tempGameSaveData.ints.TryGetValue(apItemIndexKey, out int savedItemIndex))
-            {
-                if (savedItemIndex > ConnectionManager.ItemsReceived().Count)
-                {
-                    return true; // Save file data is ahead of the item received count
-                }
             }
         }
         return false; // Saves are not ahead of server

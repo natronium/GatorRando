@@ -16,6 +16,7 @@ namespace GatorRando.Archipelago;
 
 public static class TrapManager
 {
+    // TODO: Give traps sprites
     internal static IEnumerator trapHandler;
     internal static ConcurrentQueue<TrapType> trapQueue;
     private static readonly float trapDelay = 3f;
