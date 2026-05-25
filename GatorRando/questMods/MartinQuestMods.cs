@@ -39,6 +39,6 @@ internal static class MartinQuestMods
         QuestStates martinQuestQS = martinQuest.GetComponent<QuestStates>();
         GameObject potPickup = Util.GetByPath("NorthWest (Tutorial Island)/Act 1/Quests/Martin Quest/Pickup");
         martinQuestQS.states[2].stateObjects = martinQuestQS.states[2].stateObjects.Remove(potPickup);
-        potPickup.SetActive(false);
+        potPickup.SetActive(false); //TODO: Make sure this works on reload
     }
 }
