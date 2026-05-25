@@ -56,6 +56,7 @@ public static class StateManager
         TitleScreenMods.Edits();
         TitleScreenMods.DisableStartButton();
         SaveManager.CreateSaveDirectory();
+        SpriteHandler.StoreFriendIconsFromTitleScreen();
     }
 
     public static void Update()

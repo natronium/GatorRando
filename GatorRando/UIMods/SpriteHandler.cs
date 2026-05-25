@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 namespace GatorRando.UIMods;
 
@@ -14,6 +15,7 @@ public static class SpriteHandler
     private static readonly List<Sprite> newSprites = [];
     private static readonly Dictionary<string, Sprite> loadedAssetSprites = [];
     private static readonly Dictionary<string, Sprite> duplicatedSprites = [];
+    private static readonly Dictionary<string, Sprite> duplicatedTitleScreenSprites = [];
     private static readonly Dictionary<string, string> existingSpritePaths = new()
     {
         {"Bracelet", "Assets/UI/Images/Item Sprites/Itemsprite_core_bracelet_blue.png"},
@@ -95,12 +97,16 @@ public static class SpriteHandler
 
     private static readonly Dictionary<string, string> spritesToDuplicateInformation = new()
     {
-        {"Friend", "GatorMewhenyouaremyfriend"},
         {"ICE CREAM", "Itemsprite_quest_icecream"},
         {"CLIPPINGS", "Itemsprite_quest_clippings"},
         {"WATER", "Itemsprite_quest_bucketfull"},
         {"BEACH ROCK", "Itemsprite_quest_cavemanrock"},
         {"HALF A CHEESE SANDWICH", "Itemsprite_quest_halfacheesesandwich"},
+    };
+
+    private static readonly Dictionary<string, string> spritesFromTitleScreen = new()
+    {
+        {"Friend", "Main Menu/Main Menu Canvas/Load File Screen/Buttons/Load File 1/Anchor/Existing File (ITD)/Population/Population Icon"},
     };
 
     public readonly struct AddedTexture(string path, int width, int height)
@@ -110,8 +116,30 @@ public static class SpriteHandler
         public readonly int height = height;
     }
 
+    internal static void StoreFriendIconsFromTitleScreen()
+    {
+        if (duplicatedTitleScreenSprites.Count == 0)
+        {
+            foreach (string spriteName in spritesFromTitleScreen.Keys)
+            {
+                Sprite existingSprite;
+                try
+                {
+                    existingSprite = Util.GetByPath(spritesFromTitleScreen[spriteName]).GetComponent<Image>().sprite;
+                }
+                catch (InvalidOperationException)
+                {
+                    Plugin.LogWarn($"No sprite found for {spriteName}, storing placeholder!");
+                    existingSprite = Util.FindItemObjectByName("Placeholder").sprite;
+                }
 
-    static Texture2D LoadTextureForName(string name)
+                duplicatedTitleScreenSprites[spriteName] = DuplicateSprite(existingSprite.texture);
+            }
+        }
+    }
+
+
+    private static Texture2D LoadTextureForName(string name)
     {
         Assembly assembly = Assembly.GetExecutingAssembly();
         Texture2D texture2D = new(200, 200);
@@ -172,10 +200,17 @@ public static class SpriteHandler
 
     public static Sprite GetSpriteForItem(string name)
     {
+        if (name.Contains("Friend"))
+        {
+            name = "Friend";
+        }
+        if (name.Contains("Trap"))
+        {
+            name = "Archipelago";
+        }
         // Plugin.LogDebug($"Looking for sprite for {name}");
         if (newSpriteInformation.ContainsKey(name))
         {
-            // Plugin.LogDebug($"This sprite should be at {texturePaths[name]}");
             if (newSprites.Any(sprite => sprite.name == name))
             {
                 return newSprites.First(sprite => sprite.name == name);
@@ -188,17 +223,12 @@ public static class SpriteHandler
                 newSprites.Add(sprite);
                 return sprite;
             }
-
         }
         else
         {
             if (name.Contains("Craft Stuff"))
             {
                 name = "Craft Stuff";
-            }
-            else if (name.Contains("Friend"))
-            {
-                name = "Friend";
             }
             else if (name.Contains("Thrown_Pencil"))
             {
@@ -213,9 +243,13 @@ public static class SpriteHandler
             {
                 return loadedAssetSprites[name];
             }
+            else if (spritesFromTitleScreen.ContainsKey(name))
+            {
+                return duplicatedTitleScreenSprites[name];
+            }
             else
             {
-                Plugin.LogWarn("No sprite found, using placeholder!");
+                Plugin.LogWarn($"No sprite found, using placeholder for {name}!");
                 return Util.FindItemObjectByName("Placeholder").sprite; // Should not appear
             }
         }
