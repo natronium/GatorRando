@@ -199,8 +199,7 @@ public static class StateManager
         ConnectionManager.RegisterItemReceivedListener();
         SpriteHandler.LoadSprites();
         UIEditMod.ApplyUIEdits();
-        BalloonMods.EditBalloonStamina();
-        RockMods.EditRockLayer();
+        SkippingRockMods.EditRockLayer();
         Util.PopulatePotPrefabs();
         ConnectionManager.ServerData.PopulateLocationLookupCache();
         LocationHandling.SendLocallySavedLocations();

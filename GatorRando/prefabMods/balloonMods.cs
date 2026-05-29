@@ -2,55 +2,29 @@ using GatorRando.Patches;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace GatorRando.PrefabMods;
 
 internal static class BalloonMods
 {
     internal static float floatTimer;
-    internal static void EditBalloonStamina()
-    {
-        // Edit the minimum stamina to be negative for the balloon and bubble gum so that they appear and instantly pop with no bracelets
-        // Allows them to be used as a cardboard destroyer
-        DSItem bubblegum = Util.GetByPath("SouthEast (Beach)/Side Quests/Old Man Quest/End Sequence").GetComponent<DSItem>();
-        bubblegum.item.prefab.GetComponent<ItemSpawnObject>().minimumStamina = -1;
-        DSItem balloon = Util.GetByPath("NorthEast (Canyoney)/SideQuests/Balloon Owl/End Sequence").GetComponent<DSItem>();
-        balloon.item.prefab.GetComponent<ItemSpawnObject>().minimumStamina = -1;
-        string basePath = "Players/Player/Heroboy/Heroboy/Hips/";
-        string[] anchors = ["HipAnchor/", "HipAnchor (R)/"];
-        string[] items = ["Bubble Gum Balloon Item(Clone)", "Balloon Item(Clone)"];
-        foreach (string anchor in anchors)
-        {
-            foreach (string item in items)
-            {
-                try
-                {
-                    GameObject itemInUse = Util.GetByPath(basePath + anchor + item);
-                    itemInUse.GetComponent<ItemSpawnObject>().minimumStamina = -1;
-                }
-                catch(InvalidOperationException)
-                {
-                    // Balloon-type item is not at that location, so we don't need to modify it
-                }
-            }
-        }
-    }
     
     internal static IEnumerator Floating()
     {
-        DSItem floater;
+        GameObject floaterPrefab;
         float choice = UnityEngine.Random.value;
         if (choice >= 0.5)
         {
-            floater = Util.GetByPath("NorthEast (Canyoney)/SideQuests/Balloon Owl/End Sequence").GetComponent<DSItem>();
+            floaterPrefab = Addressables.LoadAssetAsync<GameObject>("Assets/Prefabs/Player/Physics Items/Bubble Gum Balloon Item.prefab").WaitForCompletion();
         }
         else
         {
-            floater = Util.GetByPath("SouthEast (Beach)/Side Quests/Old Man Quest/End Sequence").GetComponent<DSItem>();
+            floaterPrefab = Addressables.LoadAssetAsync<GameObject>("Assets/Prefabs/Player/Physics Items/Balloon Item.prefab").WaitForCompletion();
         }
         RagdollControllerPatch.floatTrap = true;
 
-        GameObject originalPrefab = floater.item.prefab.GetComponent<ItemSpawnObject>().spawnedObjectPrefab;
+        GameObject originalPrefab = floaterPrefab.GetComponent<ItemSpawnObject>().spawnedObjectPrefab;
         GameObject spawnedObject = UnityEngine.Object.Instantiate(originalPrefab, Player.RawPosition + Player.transform.rotation * new Vector3(-.25f, 1.5f, 0.25f), Player.transform.rotation);
         spawnedObject.GetComponent<StaminaDrainItem>().drainSpeed = 0;
         Player.movement.isModified = true;
