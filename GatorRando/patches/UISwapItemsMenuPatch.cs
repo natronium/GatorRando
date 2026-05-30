@@ -55,7 +55,7 @@ internal static class UISwapItemsMenuPatch
             }
         }
 
-        GameObject QuestItemGrid = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Contents Mask/Tab Contents/Quest Item Scroll Area/Item Viewport/Quest Grid");
-        QuestItemGrid?.GetComponent<ItemGrid>().LoadElements([.. questItemsReceived]);
+        GameObject questItemGrid = Util.GetByPath("Canvas/Items Menu (Tabs)/LeftArea/Tab Contents Mask/Tab Contents/Quest Item Scroll Area/Item Viewport/Quest Grid");
+        questItemGrid?.GetComponent<ItemGrid>().LoadElements([.. questItemsReceived]);
     }
 }
