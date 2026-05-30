@@ -48,6 +48,11 @@ internal static class RandoSettingsMenu
         }
     }
 
+    internal static UISettings GetUISettings()
+    {
+        return newSettingsMenu.gameObject.GetComponent<UISettings>();
+    }
+
     internal static UISubMenu CreateNewSettingsMenu()
     {
         GameObject settingsMenuObject = Util.GetByPath(GetCurrentSettingsPath());
@@ -105,7 +110,7 @@ internal static class RandoSettingsMenu
                             SaveManager.EraseAllAPSaveData
             );
         }
-        else
+        else if (SceneManager.GetActiveScene().name == "Island")
         {
             GameObject act1 = Util.GetByPath("NorthWest (Tutorial Island)/Act 1");
             QuestStates act1QuestStates = act1.GetComponent<QuestStates>();
