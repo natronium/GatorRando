@@ -2,6 +2,7 @@ using GatorRando.Archipelago;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GatorRando.UIMods;
 
@@ -236,12 +237,19 @@ public static class DialogueModifier
 		static IEnumerator RunDialogueTrap()
         {
             int choice = Random.Range(0,100);
-            yield return choice switch
+            if (SceneManager.GetActiveScene().name == "Island")
             {
-                int x when x > 50 => dialogueTraps.RunMonkeyTrap(),
-                int x when x < 5 => dialogueTraps.RunCourtroomTrap(),
-                _ => dialogueTraps.RunTrishTrap(),
-            };
+                yield return choice switch
+                {
+                    int x when x > 50 => dialogueTraps.RunMonkeyTrap(),
+                    int x when x < 5 => dialogueTraps.RunCourtroomTrap(),
+                    _ => dialogueTraps.RunTrishTrap(),
+                };
+            }
+            else
+            {
+                yield return null; // Until Underground dialogue traps are set up
+            }
         }
 
         Player.actor.StartCoroutine(RunDialogueTrap());
