@@ -75,13 +75,16 @@ public static class Util
         return null;
     }
 
-    public static ItemObject GenerateItemObject(string name, Sprite sprite)
+    public static ItemObject GenerateItemObject(string name, Sprite sprite, string realName = "", string description = "")
     {
         ItemObject itemObj = ScriptableObject.CreateInstance<ItemObject>();
         itemObj.id = name;
         itemObj.name = name;
+        itemObj.nameID = realName.ToUpper();
         itemObj.sprite = sprite;
         itemObj.document = ScriptableObject.CreateInstance<MultilingualTextDocument>(); // To avoid a NullReferenceException when speedrun mode is enabled
+        itemObj.document.mlStrings = [];
+        itemObj.descriptionID = description.ToLower();
         return itemObj;
     }
     public static ItemResource GenerateItemResource(string name)

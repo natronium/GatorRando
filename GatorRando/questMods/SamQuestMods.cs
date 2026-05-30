@@ -16,6 +16,8 @@ internal static class SamQuestMods
         string[] itemNames = ["Thrown_Pencil_1", "Thrown_Pencil_2", "Thrown_Pencil_3"];
 
         ItemHandling.RegisterItemListener("Thrown_Pencil", UpdateSamState);
+        string pencilName = "Thrown Pencil";
+        string pencilDescription = "i should give Sam back his thrown pencils";
 
         foreach ((GameObject seq, string itemName) in seqs.Zip(itemNames, (s, i) => (s, i)))
         {
@@ -23,7 +25,7 @@ internal static class SamQuestMods
             sequencer.afterSequence.ObliteratePersistentListenerByIndex(0);
             sequencer.afterSequence.AddListener(UpdateSamState);
             DSItem item = seq.GetComponent<DSItem>();
-            item.item = Util.GenerateItemObject(itemName, item.item.sprite);
+            item.item = Util.GenerateItemObject(itemName, item.item.sprite, pencilName, pencilDescription);
         }
     }
 
