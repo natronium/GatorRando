@@ -141,11 +141,11 @@ internal static class NavigationUI
 
     private static void UpdateMapCoordinates()
     {
-		static float PosToMap(float xpos)
+        static float PosToMap(float xpos)
         {
             return (xpos + 165) / 480;
         }
-        
+
         MapManager.PlayerCoords playerCoords = MapManager.CurrentCoords();
         lastMapCoords = new MapCoords(PosToMap(playerCoords.X), PosToMap(playerCoords.Y));
     }
@@ -233,7 +233,7 @@ internal static class NavigationUI
         green.maskable = true;
         green.rectTransform.sizeDelta = new(16, 16);
 
-        location.transform.localPosition = new(coord[0] - MAP_PIXEL_SIZE / 2, -1*(coord[1] - MAP_PIXEL_SIZE / 2), 0);
+        location.transform.localPosition = new(coord[0] - MAP_PIXEL_SIZE / 2, -1 * (coord[1] - MAP_PIXEL_SIZE / 2), 0);
 
         return location;
     }
