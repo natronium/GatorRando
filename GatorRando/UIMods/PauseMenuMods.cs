@@ -12,12 +12,22 @@ internal static class PauseMenuMods
         GameObject randoSettingsButton = GameObject.Instantiate(settingsButton, pauseMenu.transform);
         randoSettingsButton.transform.SetSiblingIndex(3);
         randoSettingsButton.name = "Rando Settings";
-        GameObject label = randoSettingsButton.transform.Find("Text").gameObject;
-        Object.Destroy(label.GetComponent<MLText>());
-        Text labelText = label.GetComponent<Text>();
-        labelText.text = "Rando Settings".ToLower();
-        Button buttonButton = randoSettingsButton.GetComponent<Button>();
-        buttonButton.onClick.ObliteratePersistentListenerByIndex(0);
-        buttonButton.onClick.AddListener(RandoSettingsMenu.EnterRandoSettingsMenu);
+        GameObject randoLabel = randoSettingsButton.transform.Find("Text").gameObject;
+        Object.Destroy(randoLabel.GetComponent<MLText>());
+        Text randoLabelText = randoLabel.GetComponent<Text>();
+        randoLabelText.text = "Rando Settings".ToLower();
+        Button randoButtonButton = randoSettingsButton.GetComponent<Button>();
+        randoButtonButton.onClick.ObliteratePersistentListenerByIndex(0);
+        randoButtonButton.onClick.AddListener(RandoSettingsMenu.EnterRandoSettingsMenu);
+        GameObject resetPosition = GameObject.Instantiate(settingsButton, pauseMenu.transform);
+        resetPosition.transform.SetSiblingIndex(3);
+        resetPosition.name = "Reset Position";
+        GameObject resetLabel = resetPosition.transform.Find("Text").gameObject;
+        Object.Destroy(resetLabel.GetComponent<MLText>());
+        Text resetLabelText = resetLabel.GetComponent<Text>();
+        resetLabelText.text = "reset position".ToLower();
+        Button resetButtonButton = resetPosition.GetComponent<Button>();
+        resetButtonButton.onClick.ObliteratePersistentListenerByIndex(0);
+        resetButtonButton.onClick.AddListener(RandoSettingsMenu.GetUISettings().ResetPlayerPosition);
     }
 }
