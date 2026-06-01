@@ -17,10 +17,37 @@ internal static class TutorialQuestMods
         if (act1QuestStates.StateID >= 2)
         {
             ReenableTutorialQuests();
+            ActivateUnderground();
         }
     }
 
-    private static void Act1QuestHandler(int stateID)
+	private static void ActivateUnderground()
+	{
+        // Guard activating the underground by the player owning the DLC
+        if (DLC.inTheDark == true) //TODO: Guard by option as well
+        {
+            GameObject act3 = Util.GetByPath("In The Dark DLC Content/In the dark quest");
+            QuestStates act3QuestStates = act3.GetComponent<QuestStates>();
+            act3QuestStates.ProgressToState(3);
+        }
+	}
+
+    internal static void QueueUndergroundOpening()
+    {
+        static void UndergroundOnFinishAct1(int stateID)
+        {
+            if (stateID == 3)
+            {
+                ActivateUnderground();
+            }
+        }
+        GameObject act1 = Util.GetByPath("NorthWest (Tutorial Island)/Act 1");
+        QuestStates act1QuestStates = act1.GetComponent<QuestStates>();
+        act1QuestStates.onStateChange.RemoveListener(UndergroundOnFinishAct1);
+        act1QuestStates.onStateChange.AddListener(UndergroundOnFinishAct1);
+    }
+
+	private static void Act1QuestHandler(int stateID)
     {
         switch (stateID)
         {
@@ -31,7 +58,7 @@ internal static class TutorialQuestMods
             case 2:
                 ReenableTutorialQuests(); EnableFriendsInCutscene(); break;
             case 3:
-                ReenableTutorialQuests(); break;
+                ReenableTutorialQuests(); ActivateUnderground(); break;
         }
     }
 

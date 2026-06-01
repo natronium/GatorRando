@@ -1,10 +1,23 @@
 using GatorRando.Archipelago;
+using UnityEngine.SceneManagement;
 
 namespace GatorRando.QuestMods;
 
 internal static class QuestEditMod
 {
     internal static void ApplyQuestEdits()
+    {
+        if (SceneManager.GetActiveScene().name == "Island")
+        {
+            ApplySurfaceQuestEdits();
+        }
+        else
+        {
+            ApplyUndergroundQuestEdits();         
+        }
+    }
+
+    private static void ApplySurfaceQuestEdits()
     {
         //Edits to Martin's Tutorial Quest
         MartinQuestMods.Edits();
@@ -31,6 +44,19 @@ internal static class QuestEditMod
         if (Options.GetOptionBool(Options.Option.StartWithFreeplay))
         {
             TutorialQuestMods.QueueStartWithFreeplay();
-        } 
+        }
+        else
+        {
+            // If freeplay is off,
+            // queue open underground once tutorial item is complete if DLC is installed
+            // TODO: Add check for DLC option in slot data
+            TutorialQuestMods.QueueUndergroundOpening();
+        }
+    }
+
+    private static void ApplyUndergroundQuestEdits()
+    {
+        Util.GetByPath("Tutorial Region/Act 1 UG/Intro Sequence/Enemies").SetActive(false);
+        QueenQuestMods.SetupQueenDialogue();
     }
 }
