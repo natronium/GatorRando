@@ -89,15 +89,20 @@ public static class Util
     }
     public static ItemResource GenerateItemResource(string name)
     {
-        ItemResource itemRes = ScriptableObject.CreateInstance<ItemResource>();
-        itemRes.id = name;
-        itemRes.name = name;
-        itemRes.itemGetID = name;
-        itemRes.showItemGet = false;
-        itemRes.onAmountChanged = new UnityEvent<int>();
+        ItemResource itemRes;
+        itemRes = FindItemResourceByName(name);
+        if (itemRes == null)
+        {
+            itemRes = ScriptableObject.CreateInstance<ItemResource>();
+            itemRes.id = name;
+            itemRes.name = name;
+            itemRes.itemGetID = name;
+            itemRes.showItemGet = false;
+            itemRes.onAmountChanged = new UnityEvent<int>();
+        }
         return itemRes;
     }
-    
+
 
     public static string FindIntKeyByPrefix(string prefix)
     {
