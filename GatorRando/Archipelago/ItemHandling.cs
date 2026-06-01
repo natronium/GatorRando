@@ -59,11 +59,11 @@ public static class ItemHandling
     {
         if (isAPName)
         {
-            return ConnectionManager.ItemsReceived().Where(itemInfo => itemInfo.ItemId == GetItemApIdFromAPName(itemName)).Count();
+            return ConnectionManager.ItemsReceived().Count(itemInfo => itemInfo.ItemId == GetItemApIdFromAPName(itemName));
         }
         else
         {
-            return ConnectionManager.ItemsReceived().Where(itemInfo => itemInfo.ItemId == GetItemApIdFromGatorName(itemName)).Count();
+            return ConnectionManager.ItemsReceived().Count(itemInfo => itemInfo.ItemId == GetItemApIdFromGatorName(itemName));
         }
     }
 
@@ -80,7 +80,7 @@ public static class ItemHandling
     {
         while (ItemQueue.TryDequeue(out QueuedItem queuedItem))
         {
-            
+
         }
     }
 
@@ -101,9 +101,13 @@ public static class ItemHandling
         {
             case Items.ClientItemType.Item: ItemUtil.GiveItem(item.clientNameId); break;
             case Items.ClientItemType.Craft: ItemUtil.GiveCraft(item.clientNameId); break;
-            case Items.ClientItemType.Friend: ItemUtil.GiveFriends((int)item.clientResourceAmount); break;
+            case Items.ClientItemType.SurfaceFriend: ItemUtil.GiveFriends((int)item.clientResourceAmount, ItemUtil.FriendType.Surface); break;
+            case Items.ClientItemType.MineFriend: ItemUtil.GiveFriends((int)item.clientResourceAmount, ItemUtil.FriendType.Mines); break;
+            case Items.ClientItemType.RootsFriend: ItemUtil.GiveFriends((int)item.clientResourceAmount, ItemUtil.FriendType.Roots); break;
+            case Items.ClientItemType.DripFriend: ItemUtil.GiveFriends((int)item.clientResourceAmount, ItemUtil.FriendType.Drip); break;
             case Items.ClientItemType.CraftStuff: ItemUtil.GiveCraftStuff((int)item.clientResourceAmount); break;
             case Items.ClientItemType.Trap: TrapManager.QueueTrap(item.clientNameId); break;
+            case Items.ClientItemType.Cryptid: ItemUtil.GiveCryptid(item.clientNameId); break;
             default:
                 throw new Exception($"Item {item.clientNameId} has an unknown client_item type of {item.clientItemType}");
         }
