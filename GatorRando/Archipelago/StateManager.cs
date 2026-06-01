@@ -30,11 +30,17 @@ public static class StateManager
         return currentState;
     }
 
-    public static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public static void OnSceneLoaded(Scene scene, LoadSceneMode _)
     {
-        Plugin.LogDebug("OnSceneLoaded: " + scene.name);
-
-        if (scene.name == "Prologue")
+        // Plugin.LogDebug("OnSceneLoaded: " + scene.name);
+        if (Plugin.Instance.firstLoad == true)
+        {
+            if (scene.name == "Prologue")
+            {
+                SpriteHandler.LoadSprites();
+            }
+        }
+        else
         {
             if (GetCurrentState() != State.TitleScreenPreConnect)
             {
