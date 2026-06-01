@@ -6,6 +6,7 @@ namespace GatorRando.UIMods;
 internal static class TitleScreenMods
 {
     private static GameObject startButton;
+    private static GameObject newButton;
 
     public static void Edits()
     {
@@ -19,7 +20,7 @@ internal static class TitleScreenMods
 
         GameObject settingsButton = Util.GetByPath("Main Menu/Main Menu Canvas/Title Screen/Buttons/Settings");
         GameObject titleMenuButtons = Util.GetByPath("Main Menu/Main Menu Canvas/Title Screen/Buttons/");
-        GameObject newButton = GameObject.Instantiate(settingsButton, titleMenuButtons.transform);
+        newButton = Object.Instantiate(settingsButton, titleMenuButtons.transform);
         newButton.transform.SetSiblingIndex(1);
         GameObject newButtonLabel = newButton.transform.Find("Text").gameObject;
         Object.Destroy(newButtonLabel.GetComponent<MLText>());
@@ -49,6 +50,9 @@ internal static class TitleScreenMods
         startButton.SetActive(false);
     }
 
-
+    internal static bool CheckIfEditsApplied()
+    {
+        return newButton != null;
+    }
 
 }
