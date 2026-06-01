@@ -15,7 +15,7 @@ namespace GatorRando.Archipelago;
 
 public static class ConnectionManager
 {
-    public const string APVersion = "0.6.2";
+    public const string APVersion = "0.6.7";
     private const string Game = "Lil Gator Game";
 
     public static bool Authenticated;
@@ -66,11 +66,11 @@ public static class ConnectionManager
     private static void Connect()
     {
         if (Authenticated || attemptingConnection)
-		{
-			return;
-		}
+        {
+            return;
+        }
 
-		try
+        try
         {
             session = ArchipelagoSessionFactory.CreateSession(ServerData.Uri);
             SetupSession();
@@ -90,7 +90,7 @@ public static class ConnectionManager
     private static void SetupSession()
     {
         session.MessageLog.OnMessageReceived += message => ArchipelagoConsole.LogMessage(message.ToString());
-        
+
         session.Socket.ErrorReceived += OnSessionErrorReceived;
         session.Socket.SocketClosed += OnSessionSocketClosed;
     }
@@ -115,7 +115,7 @@ public static class ConnectionManager
     /// <summary>
     /// attempt to connect to the server with our connection info
     /// </summary>
-    private static void TryConnect()
+    private static void TryConnect() //TODO: Reject connection if connecting to DLC slot without DLC installed
     {
         attemptingConnection = true;
         try
@@ -213,14 +213,13 @@ public static class ConnectionManager
     {
         ItemInfo receivedItem = helper.DequeueItem();
 
-        Plugin.LogDebug(ServerData.GetIndex().ToString());
 
         if (helper.Index < ServerData.GetIndex())
-		{
-			return;
-		}
+        {
+            return;
+        }
 
-		ServerData.Index = helper.Index;
+        ServerData.Index = helper.Index;
 
         ItemHandling.EnqueueItem(receivedItem.ItemId, receivedItem.Player.Name);
     }
