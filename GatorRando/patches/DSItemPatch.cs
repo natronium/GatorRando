@@ -14,7 +14,14 @@ internal static class DSItemPatch
         string name;
         if (__instance.item == null || __instance.itemName == "POT?" || __instance.itemName == "POT LID?")
         {
-            name = __instance.itemName;
+            if (__instance.itemName == "")
+            {
+                name = __instance.itemName_ID; //DLC added some items that only have this field...
+            }
+            else
+            {
+                name = __instance.itemName;
+            }
         }
         else
         {
