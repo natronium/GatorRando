@@ -22,7 +22,8 @@ public static class StateManager
         NewGameSkipPrologue,
         LoadingGame,
         PlayingGameConnected,
-        PlayingGameRetryingConnection
+        PlayingGameRetryingConnection,
+        SwitchingScenes,
     }
 
     public static State GetCurrentState()
@@ -42,32 +43,44 @@ public static class StateManager
         }
         else
         {
-            if (GetCurrentState() != State.TitleScreenPreConnect)
+            if (scene.name == "Prologue")
             {
-                ConnectionManager.Disconnect();
+                StartUp();
             }
-            StartUp();
-
-        }
-        else if (scene.name == "Island")
-        {
-            UIMenus.u.SetGameplayState(false, true); // Disable player input
-            Plugin.Instance.StartCoroutine(SetupLoadedGame());
+            else if (scene.name == "Island" || scene.name == "Underground")
+            {
+                if (currentState == State.PlayingGameConnected)
+                {
+                    currentState = State.SwitchingScenes;
+                    Plugin.Instance.StartCoroutine(SetupLoadedScene());
+                }
+                else
+                {
+                    Plugin.Instance.StartCoroutine(SetupLoadedGame());
+                }
+                UIMenus.u.SetGameplayState(false, true); // Disable player input
+            }
         }
     }
 
     public static void StartUp()
     {
+        if (GetCurrentState() != State.TitleScreenPreConnect)
+        {
+            ConnectionManager.Disconnect();
+        }
         currentState = State.TitleScreenPreConnect;
-        TitleScreenMods.Edits();
+        if (!TitleScreenMods.CheckIfEditsApplied())
+        {
+            TitleScreenMods.Edits();
+        }
         TitleScreenMods.DisableStartButton();
-        SaveManager.CreateSaveDirectory();
-        SpriteHandler.StoreFriendIconsFromTitleScreen();
+        
     }
 
     public static void Update()
     {
-        if (currentState == State.PlayingGameConnected && ConnectionManager.Authenticated && SceneManager.GetActiveScene().name == "Island")
+        if (currentState == State.PlayingGameConnected && ConnectionManager.Authenticated && (SceneManager.GetActiveScene().name == "Island" || SceneManager.GetActiveScene().name == "Underground"))
         {
             ItemHandling.ProcessItemQueue();
             MapManager.UpdateCoordsIfNeeded();
@@ -80,7 +93,6 @@ public static class StateManager
 
     public static void Disconnect()
     {
-        //TODO TEST QUIT TO TITLE SCREEN
         ConnectionManager.UnregisterItemReceivedListener();
         ItemHandling.ClearItemQueue();
         ConnectionManager.Disconnect();
@@ -200,27 +212,55 @@ public static class StateManager
 
     public static IEnumerator SetupLoadedGame()
     {
-        yield return new WaitForSeconds(Plugin.LoadDelay);
-        currentState = State.PlayingGameConnected;
+        // Tasks that should be done once per loading a save file
         ConnectionManager.RegisterItemReceivedListener();
-        SpriteHandler.LoadSprites();
-        UIEditMod.ApplyUIEdits();
-        SkippingRockMods.EditRockLayer();
-        Util.PopulatePotPrefabs();
         ConnectionManager.ServerData.PopulateLocationLookupCache();
         LocationHandling.SendLocallySavedLocations();
         ConnectionManager.ReceiveUnreceivedItems();
-        QuestEditMod.ApplyQuestEdits();
-        ItemHandling.TriggerItemListeners();
-        LocationHandling.TriggerLocationListeners();
         LocationAccessibilty.UpdateAccessibleLocations();
-        NavigationUI.Setup();
-        UIMenus.u.SetGameplayState(true, true);
         if (RandoSettingsMenu.IsRagdollDeathLinkOn())
         {
             DeathLinkManager.EnableDeathLink();
         }
         TrapManager.Setup();
+        yield return SetupLoadedScene();
+    }
+
+    public static IEnumerator SetupLoadedScene()
+    {
+        // Tasks that should happen everytime Island or Underground are loaded (transient changes to scene hierarchy)
+        yield return new WaitForSeconds(Plugin.LoadDelay);
+        SkippingRockMods.EditRockLayer();
+        Util.PopulatePotPrefabs();
+        UIEditMod.ApplyUIEdits();
+        QuestEditMod.ApplyQuestEdits();
+        ItemHandling.TriggerItemListeners();
+        LocationHandling.TriggerLocationListeners();
+        NavigationUI.Setup();
         DialogueModifier.CleanUp();
+        UIMenus.u.SetGameplayState(true, true);
+        currentState = State.PlayingGameConnected;
+    }
+
+    internal static void OpenUnderground()
+    {
+        static void IsTutorialComplete(int stateID)
+        {
+            if (stateID >= 3)
+            {
+                OpenUnderground();
+            }
+        }
+        GameObject act1 = Util.GetByPath("NorthWest (Tutorial Island)/Act 1");
+        QuestStates act1QuestStates = act1.GetComponent<QuestStates>();
+        if (Options.GetOptionBool(Options.Option.StartWithFreeplay) == true || act1QuestStates.StateID >= 3)
+        {
+            QuestStates ITD = Util.GetByPath("In The Dark DLC Content/In the dark quest").GetComponent<QuestStates>();
+            ITD.ProgressToState(3);
+        }
+        else
+        {
+            act1QuestStates.onStateChange.AddListener(IsTutorialComplete);
+        }
     }
 }
