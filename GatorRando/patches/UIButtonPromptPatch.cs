@@ -1,4 +1,3 @@
-using GatorRando.UIMods;
 using HarmonyLib;
 
 namespace GatorRando.Patches;
@@ -6,19 +5,6 @@ namespace GatorRando.Patches;
 [HarmonyPatch(typeof(UIButtonPrompt))]
 internal static class UIButtonPromptPatch
 {
-    // [HarmonyPrefix]
-    // [HarmonyPatch(nameof(UIButtonPrompt.Awake))]
-    // private static void PreAwake(UIButtonPrompt __instance)
-    // {
-    //     if (__instance.allowSkip)
-    //     {
-    //         if ((RandoSettingsMenu.PauseForItemGet() && DialogueModifier.inModifiedDialogue) || DialogueModifier.inTrapDialogue)
-    //         {
-    //             __instance.allowSkip = false;
-    //         }
-    //     }
-    // }
-
     [HarmonyPostfix]
     [HarmonyPatch(nameof(UIButtonPrompt.Awake))]
     private static void PostAwake(UIButtonPrompt __instance)
