@@ -140,6 +140,7 @@ public static class SpriteHandler
         {"Flag", new AddedTexture("GatorRando.Sprites.checkered_flag.png", 200, 200)},
         {"Socks", new AddedTexture("GatorRando.Sprites.giant_socks.png", 200, 200)},
         {"Map", new AddedTexture("GatorRando.Sprites.map_3.png", 2048, 2048)},
+        {"UG Map", new AddedTexture("GatorRando.Sprites.ug_map_3.png", 2048, 2048)},
         {"Red Square", new AddedTexture("GatorRando.Sprites.redsquare.png", 16, 16)},
         {"Green Square", new AddedTexture("GatorRando.Sprites.greensquare.png", 16, 16)},
         {"Wood Frame", new AddedTexture("GatorRando.Sprites.woodframe.png", 96, 96)},
