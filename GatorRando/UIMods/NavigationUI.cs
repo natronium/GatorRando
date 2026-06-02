@@ -2,13 +2,16 @@ using GatorRando.Archipelago;
 using GatorRando.Data;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Curl;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace GatorRando.UIMods;
 
 internal static class NavigationUI
 {
+    private static string currentSceneName;
     private static GameObject mapDisplay;
     private static Text gridCoordText;
 
@@ -22,7 +25,6 @@ internal static class NavigationUI
     private static float compassRotation;
     private static GameObject arrow;
     private static GameObject map;
-    private static Dictionary<long, List<List<int>>> locationCoords;
     private static List<LocationSquare> locationSquares = [];
     private static float mapBottomY = 0;
     private static float mapLeftX = 0;
@@ -76,7 +78,15 @@ internal static class NavigationUI
         map.transform.parent = mapContainer.transform;
         RawImage mapImage = map.AddComponent<RawImage>();
         mapImage.maskable = true;
+        currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName == "Island")
+        {
         mapImage.texture = SpriteHandler.GetSpriteForItem("Map").texture;
+        }
+        else // Underground
+        {
+            mapImage.texture = SpriteHandler.GetSpriteForItem("UG Map").texture;
+        }
         mapImage.texture.filterMode = FilterMode.Point;
         map.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 2048);
         map.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 2048);
@@ -141,13 +151,25 @@ internal static class NavigationUI
 
     private static void UpdateMapCoordinates()
     {
-        static float PosToMap(float xpos)
+        static float XPosToMap(float coord)
         {
-            return (xpos + 165) / 480;
+            if (currentSceneName == "Island")
+            {
+                return (coord + 165) / 480;
+            }
+            else
+            {
+                return (coord + 165 + 5000) / 480; // underground is -5000 in x away from island
+            }
+        }
+
+        static float YPosToMap(float coord)
+        {
+            return (coord + 165) / 480;
         }
 
         MapManager.PlayerCoords playerCoords = MapManager.CurrentCoords();
-        lastMapCoords = new MapCoords(PosToMap(playerCoords.X), PosToMap(playerCoords.Y));
+        lastMapCoords = new MapCoords(XPosToMap(playerCoords.X), YPosToMap(playerCoords.Y));
     }
 
     private static void UpdateMapPosition()
@@ -183,7 +205,19 @@ internal static class NavigationUI
 
     private static void InitializeLocationPositions()
     {
-        locationCoords = Rules.GatorRules.LocationCoords;
+        Dictionary<long, List<List<int>>> locationCoords = Rules.GatorRules.LocationCoords;
+        // Filter locationCoords to only ids that are on the relevant map
+        Locations.Level level;
+        if (currentSceneName == "Island")
+        {
+            level = Locations.Level.Surface;
+        }
+        else // Underground
+        {
+            level = Locations.Level.Underground;
+        }
+        locationCoords = locationCoords.Where(coordEntry => Locations.locationData.First(loc => loc.apLocationId == coordEntry.Key).level == level).ToDictionary(i => i.Key, i => i.Value);
+
         Dictionary<List<int>, List<long>> tempDict = new(new CoordComparator());
 
         IEnumerable<List<int>> newKeys = locationCoords.Values.SelectMany(v => v).Distinct(new CoordComparator());

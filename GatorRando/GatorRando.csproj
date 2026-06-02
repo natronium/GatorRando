@@ -79,6 +79,7 @@
     <EmbeddedResource Include="Sprites/checkered_flag.png" />
     <EmbeddedResource Include="Sprites/giant_socks.png" />
     <EmbeddedResource Include="Sprites/map_3.png" />
+    <EmbeddedResource Include="Sprites/ug_map_3.png" />
     <EmbeddedResource Include="Sprites/redsquare.png" />
     <EmbeddedResource Include="Sprites/greensquare.png" />
     <EmbeddedResource Include="Sprites/woodframe.png" />
