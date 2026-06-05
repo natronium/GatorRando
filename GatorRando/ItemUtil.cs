@@ -102,7 +102,7 @@ public static class ItemUtil
         {
             if (ItemHandling.IsItemUnlocked("Shirt"))
             {
-                ItemManager.i.SetUnlocked("Glider");
+                PlayerItemManager.p.gliderItem.IsUnlocked = true;
             }
             PlayerItemManager.p.Refresh();
             refreshQueued = false;
