@@ -68,13 +68,13 @@ public static class LocationHandling
         }
     }
 
-    public static bool IsLocationCollected(int gatorID)
+    public static bool IsLocationCollected(int gatorID, Locations.Level level)
     {
         if (RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.Collect))
         {
             try
             {
-                return ConnectionManager.LocationsCollected().Contains(GetLocationApId(gatorID));
+                return ConnectionManager.LocationsCollected().Contains(GetLocationApId(gatorID, level));
             }
             catch (InvalidOperationException)
             {
@@ -83,7 +83,7 @@ public static class LocationHandling
         }
         else
         {
-            return CheckIfAPLocationInSave(GetLocationApId(gatorID));
+            return CheckIfAPLocationInSave(GetLocationApId(gatorID, level));
         }
     }
 
@@ -115,8 +115,8 @@ public static class LocationHandling
 
     public static bool CheckIfAPLocationInSave(long id) => Util.FindBoolKeysByPrefix(LocationKeyPrefix).Contains(id.ToString());
 
-    public static long GetLocationApId(int gatorID) =>
-        Locations.locationData.First(entry => entry.clientId == gatorID).apLocationId;
+    public static long GetLocationApId(int gatorID, Locations.Level level) =>
+        Locations.locationData.First(entry => entry.clientId == gatorID && entry.level == level).apLocationId;
 
     public static long GetLocationApId(string gatorName) =>
         Locations.locationData.First(entry => entry.clientNameId == gatorName).apLocationId;
@@ -125,16 +125,17 @@ public static class LocationHandling
 
     private static void CheckLocationByApId(long id) => ConnectionManager.CheckLocationByApId(id);
 
-    public static long? GetLocationApIdById(int id)
+    public static long? GetLocationApIdById(int id, Locations.Level level)
     {
         long apId;
         try
         {
-            apId = GetLocationApId(id);
+            apId = GetLocationApId(id, level);
             return apId;
         }
         catch (InvalidOperationException)
         {
+            Plugin.LogDebug($"Tried to get location apId for id {id}");
             return null;
         }
     }
@@ -142,16 +143,31 @@ public static class LocationHandling
 
     public static ItemAtLocation GetItemAtLocation(int gatorID)
     {
-        long apId = GetLocationApId(gatorID);
-        return ConnectionManager.ServerData.LocationLookup[apId];
+        long apId = GetLocationApId(gatorID, NavigationUI.currentLevel);
         // Fails if invalid gatorID (only use on collected IDs)
+        try
+        {
+            return ConnectionManager.ServerData.LocationLookup[apId];
+        }
+        catch (KeyNotFoundException)
+        {
+            return new ItemAtLocation("Location not in the multiworld", 0, "","");
+        }
     }
 
     public static ItemAtLocation GetItemAtLocation(string gatorName)
     {
         long apId = GetLocationApId(gatorName);
-        return ConnectionManager.ServerData.LocationLookup[apId];
-        // Fails if invalid gatorName (only use on collected IDs?)
+        // Fails if invalid gatorName (only use on collected IDs)
+
+        try
+        {
+            return ConnectionManager.ServerData.LocationLookup[apId];
+        }
+        catch (KeyNotFoundException)
+        {
+            return new ItemAtLocation("Location not in the multiworld", 0, "","");
+        }
     }
 
     private static void AnnounceLocationChecked(int gatorID)
@@ -172,11 +188,11 @@ public static class LocationHandling
 
     public static bool CollectLocationByID(int id)
     {
-
-        long? apId = GetLocationApIdById(id);
+        Locations.Level level = NavigationUI.currentLevel;
+        long? apId = GetLocationApIdById(id, NavigationUI.currentLevel);
         if (apId is long apIdValue)
         {
-            if (!IsLocationCollected(id))
+            if (!IsLocationCollected(id, level))
             {
                 CheckLocationByApId(apIdValue);
                 AnnounceLocationChecked(id);
