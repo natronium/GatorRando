@@ -5,14 +5,14 @@ namespace GatorRando.Patches;
 [HarmonyPatch(typeof(UGNPCManager))]
 internal static class UGNPCManagerPatch
 {
-    [HarmonyPostfix]
+    [HarmonyPrefix]
     [HarmonyPatch(nameof(UGNPCManager.RewardNPCs))]
 	private static void PreRewardNPCs(UGNPCManager __instance)
     {
         ReplaceItemResources(__instance);
     }
 
-    [HarmonyPostfix]
+    [HarmonyPrefix]
     [HarmonyPatch(nameof(UGNPCManager.RewardNPCsSilently))]
 	private static void PreRewardNPCsSilently(UGNPCManager __instance)
     {
