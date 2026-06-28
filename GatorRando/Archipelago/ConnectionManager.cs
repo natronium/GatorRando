@@ -312,6 +312,15 @@ public static class ConnectionManager
         session.DataStorage[$"{session.ConnectionInfo.Slot}_{session.ConnectionInfo.Team}_gator_coords"] = JObject.FromObject(playerCoords);
     }
 
+    public static void StoreMap(string mapName)
+    {
+        if (!Authenticated)
+        {
+            return;
+        }
+        session.DataStorage[$"{session.ConnectionInfo.Slot}_{session.ConnectionInfo.Team}_gator_map"] = mapName;
+    }
+
     public static void SendLocallyCheckedLocations() =>
         session.Locations.CompleteLocationChecksAsync([.. ServerData.CheckedLocations]);
 }
