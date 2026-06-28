@@ -166,7 +166,8 @@ public static class Util
 
     public static PersistentObjectType GetPersistentObjectType(PersistentObject persistentObject) => persistentObject switch
     {
-        BreakableObjectMulti _ => PersistentObjectType.Chest,
+        BreakableObjectMulti multi when !multi.name.Contains("Voltage") => PersistentObjectType.Chest,
+        BatchedBreakableObjects _ => PersistentObjectType.Wall,
         Racetrack _ => PersistentObjectType.Race,
         PositionChallenge _ => PersistentObjectType.Challenge,
         TimedBreakables _ => PersistentObjectType.Challenge,
@@ -182,6 +183,7 @@ public static class Util
         Race,
         Cardboard,
         Challenge,
+        Wall,
         Other,
     }
 
