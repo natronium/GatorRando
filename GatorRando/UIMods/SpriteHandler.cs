@@ -171,10 +171,6 @@ public static class SpriteHandler
         {"Looky","Cryptids_Sketch_CB_8"},
         {"Clam","Itemsprite_clam"},
     };
-    private static readonly List<string> cryptids = [
-        "Thorny", "Bubbly", "Cakey", "Holy", "Finny", "Drippy", "Floofy", "Treey", "Looky"
-    ];
-
 
     private static readonly Dictionary<string, string> spritesFromTitleScreen = new()
     {
