@@ -1,6 +1,7 @@
 using GatorRando.Archipelago;
 using GatorRando.UIMods;
 using HarmonyLib;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GatorRando.Patches;
@@ -8,9 +9,10 @@ namespace GatorRando.Patches;
 [HarmonyPatch(typeof(BreakableObject))]
 internal static class BreakableObjectPatch
 {
+    internal static List<int> ignoreWallBreakables = [];
     [HarmonyPrefix]
     [HarmonyPatch(nameof(BreakableObject.CanBeDestroyed))]
-	private static bool PreCanBeDestroyed(BreakableObject __instance, ref bool __result)
+    private static bool PreCanBeDestroyed(BreakableObject __instance, ref bool __result)
     {
         Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(__instance);
         if (persistentObjectType == Util.PersistentObjectType.Pot)
@@ -32,10 +34,17 @@ internal static class BreakableObjectPatch
 
     [HarmonyPostfix]
     [HarmonyPatch(nameof(BreakableObject.Break), [typeof(bool), typeof(Vector3), typeof(bool), typeof(bool), typeof(bool)])]
-	private static void PostBreak(BreakableObject __instance)
+    private static void PostBreak(BreakableObject __instance)
     {
         if (__instance.IsBroken)
         {
+            if (NavigationUI.currentLevel == Data.Locations.Level.Underground)
+            {
+                if (ignoreWallBreakables.Contains(__instance.id))
+                {
+                    return;
+                }
+            }
             LocationHandling.CollectLocationByID(__instance.id);
         }
     }
