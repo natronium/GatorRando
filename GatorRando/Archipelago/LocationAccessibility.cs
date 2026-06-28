@@ -223,53 +223,53 @@ public static class LocationAccessibilty
         }
     }
 
+    
     public static bool IsLocationAccessible(PersistentObject gatorObject)
     {
         Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(gatorObject);
-
-        if (persistentObjectType == Util.PersistentObjectType.Pot || persistentObjectType == Util.PersistentObjectType.Chest || persistentObjectType == Util.PersistentObjectType.Race)
+        return persistentObjectType switch
         {
-            int gatorID = LocationHandling.ConvertTannerIds(gatorObject.id);
-            try
+            Util.PersistentObjectType.Pot or Util.PersistentObjectType.Chest or Util.PersistentObjectType.Race or Util.PersistentObjectType.Wall => CheckKnownItemTypeAccessibility(gatorObject.id),
+            Util.PersistentObjectType.Cardboard => false,
+            _ => ReportMysteryLocation(gatorObject.id),
+        };
+    }
+
+	private static bool CheckKnownItemTypeAccessibility(int id)
+	{
+		int gatorID = LocationHandling.ConvertTannerIds(id);
+        Locations.Level level = NavigationUI.currentLevel;
+        try
+        {
+            if (LocationHandling.IsLocationCollected(gatorID, level))
             {
-                if (LocationHandling.IsLocationCollected(gatorID))
-                {
-                    return false;
-                }
-                return AccessibleLocations.Contains(LocationHandling.GetLocationApId(gatorID));
-            }
-            catch (InvalidOperationException)
-            {
-                // Plugin.LogWarn($"Tried to check accessibility of location {gatorID}, which did not correspond to an AP location.");
                 return false;
             }
+            return AccessibleLocations.Contains(LocationHandling.GetLocationApId(gatorID, level));
         }
-        else if (persistentObjectType == Util.PersistentObjectType.Cardboard)
+        catch (InvalidOperationException)
         {
+            // Plugin.LogWarn($"Tried to check accessibility of location {gatorID}, which did not correspond to an AP location.");
             return false;
         }
-        else
-        {
-            Plugin.LogWarn($"Tried to check accessibility of location {gatorObject.id}, which is not a Pot, Race, Chest, or a BreakableObject.");
-            return false;
-        }
-    }
+	}
+
     public static bool IsLocationACheck(PersistentObject gatorObject)
     {
         Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(gatorObject);
-        if (persistentObjectType == Util.PersistentObjectType.Pot || persistentObjectType == Util.PersistentObjectType.Chest || persistentObjectType == Util.PersistentObjectType.Race)
+        return persistentObjectType switch
         {
-            return true;
-        }
-        else if (persistentObjectType == Util.PersistentObjectType.Cardboard)
-        {
-            return false;
-        }
-        else
-        {
-            Plugin.LogWarn($"Tried to check if location {gatorObject.id} is a check, which is not a Pot, Race, Chest, or a BreakableObject.");
-            return false;
-        }
+            Util.PersistentObjectType.Pot or Util.PersistentObjectType.Chest or Util.PersistentObjectType.Race or Util.PersistentObjectType.Wall => true,
+            Util.PersistentObjectType.Cardboard => false,
+            _ => ReportMysteryLocation(gatorObject.id),
+        };
+    }
+
+
+    private static bool ReportMysteryLocation(int id)
+    {
+        Plugin.LogWarn($"Tried to check or evaluation accessibility of location {id}, which is not a Pot, Race, Chest, Wall, or a BreakableObject.");
+        return false;
     }
 
     internal static bool IsApLocationIdAccessible(long apId)
@@ -312,9 +312,9 @@ public static class LocationAccessibilty
             "Prep Introduction Jill" => ["BEACH ROCK", "Sword_RockHammer", "HALF A CHEESE SANDWICH", "Shield_Platter", "Sword_Net", "NPC_Tut_Dog"],
             "Prep Pre-Finale Jill" => ["NPC_Tut_Dog"],
             "Prep Finale Jill" => ["NPC_Tut_Dog"],
-            "NPC_Susanne" => ["BEACH ROCK", "Sword_RockHammer","NPC_Tut_Dog"],
-            "NPC_Gene" => ["HALF A CHEESE SANDWICH", "Shield_Platter","NPC_Tut_Dog"],
-            "NPC_Antone" => ["Sword_Net","NPC_Tut_Dog"],
+            "NPC_Susanne" => ["BEACH ROCK", "Sword_RockHammer", "NPC_Tut_Dog"],
+            "NPC_Gene" => ["HALF A CHEESE SANDWICH", "Shield_Platter", "NPC_Tut_Dog"],
+            "NPC_Antone" => ["Sword_Net", "NPC_Tut_Dog"],
             "Tutorial Avery" => ["Hat_Basic", "Shirt"],
             "Theatre Introduction Avery" => ["NPC_Tut_Frog", "Item_SpaceGun", "Sword_Laser", "Hat_Western", "ICE CREAM", "Hat_Vampire", "NPC_Part-Timer"],
             "Theatre Finale Avery" => ["NPC_Tut_Frog"],
