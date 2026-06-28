@@ -2,7 +2,6 @@ using GatorRando.Archipelago;
 using GatorRando.Data;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Curl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,7 +10,7 @@ namespace GatorRando.UIMods;
 
 internal static class NavigationUI
 {
-    private static string currentSceneName;
+    internal static Locations.Level currentLevel;
     private static GameObject mapDisplay;
     private static Text gridCoordText;
 
@@ -78,20 +77,23 @@ internal static class NavigationUI
         map.transform.parent = mapContainer.transform;
         RawImage mapImage = map.AddComponent<RawImage>();
         mapImage.maskable = true;
-        currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName == "Island")
+        if (SceneManager.GetActiveScene().name == "Island")
         {
-        mapImage.texture = SpriteHandler.GetSpriteForItem("Map").texture;
+            currentLevel = Locations.Level.Surface;
+            mapImage.texture = SpriteHandler.GetSpriteForItem("Map").texture;
+            ConnectionManager.StoreMap("island");
         }
         else // Underground
         {
+            currentLevel = Locations.Level.Underground;
             mapImage.texture = SpriteHandler.GetSpriteForItem("UG Map").texture;
+            ConnectionManager.StoreMap("underground");
         }
         mapImage.texture.filterMode = FilterMode.Point;
         map.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 2048);
         map.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 2048);
 
-        mapDisplay.SetActive(RandoSettingsMenu.IsNavigationOn());
+        mapDisplay.SetActive(RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.Minimap));
 
         GameObject poster = new()
         {
@@ -154,7 +156,7 @@ internal static class NavigationUI
     {
         static float XPosToMap(float coord)
         {
-            if (currentSceneName == "Island")
+            if (currentLevel == Locations.Level.Surface)
             {
                 return (coord + 165) / 480;
             }
@@ -208,16 +210,7 @@ internal static class NavigationUI
     {
         Dictionary<long, List<List<int>>> locationCoords = Rules.GatorRules.LocationCoords;
         // Filter locationCoords to only ids that are on the relevant map
-        Locations.Level level;
-        if (currentSceneName == "Island")
-        {
-            level = Locations.Level.Surface;
-        }
-        else // Underground
-        {
-            level = Locations.Level.Underground;
-        }
-        locationCoords = locationCoords.Where(coordEntry => Locations.locationData.First(loc => loc.apLocationId == coordEntry.Key).level == level).ToDictionary(i => i.Key, i => i.Value);
+        locationCoords = locationCoords.Where(coordEntry => Locations.locationData.First(loc => loc.apLocationId == coordEntry.Key).level == currentLevel).ToDictionary(i => i.Key, i => i.Value);
 
         Dictionary<List<int>, List<long>> tempDict = new(new CoordComparator());
 

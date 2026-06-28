@@ -14,8 +14,8 @@ public static class MapManager
     private static PlayerCoords lastSentCoords;
     private static float lastSentTime;
 
-    private const float timeDelta = 5.0f;
-    private const float distanceDelta = 10.0f;
+    private const float timeDelta = 10.0f;
+    private const float distanceDelta = 5.0f;
 
     public static void UpdateCoordsIfNeeded()
     {
