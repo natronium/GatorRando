@@ -75,7 +75,6 @@ public static class StateManager
             TitleScreenMods.Edits();
         }
         TitleScreenMods.DisableStartButton();
-        
     }
 
     public static void Update()
@@ -218,7 +217,7 @@ public static class StateManager
         LocationHandling.SendLocallySavedLocations();
         ConnectionManager.ReceiveUnreceivedItems();
         LocationAccessibilty.UpdateAccessibleLocations();
-        if (RandoSettingsMenu.IsRagdollDeathLinkOn())
+        if (RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.DeathLink))
         {
             DeathLinkManager.EnableDeathLink();
         }
@@ -230,14 +229,21 @@ public static class StateManager
     {
         // Tasks that should happen everytime Island or Underground are loaded (transient changes to scene hierarchy)
         yield return new WaitForSeconds(Plugin.LoadDelay);
+        NavigationUI.Setup(); // Needs to happen first
+
+        // Clear out scene dependent state
+        ItemSearchNPCsPatch.ClearActorLists();
+        ItemSearchObjectsPatch.ClearList();
+        DialogueModifier.CleanUp();
+
+
         SkippingRockMods.EditRockLayer();
         Util.PopulatePotPrefabs();
         UIEditMod.ApplyUIEdits();
         QuestEditMod.ApplyQuestEdits();
         ItemHandling.TriggerItemListeners();
         LocationHandling.TriggerLocationListeners();
-        NavigationUI.Setup();
-        DialogueModifier.CleanUp();
+
         UIMenus.u.SetGameplayState(true, true);
         currentState = State.PlayingGameConnected;
     }
