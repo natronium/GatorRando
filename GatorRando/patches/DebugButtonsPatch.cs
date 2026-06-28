@@ -10,7 +10,7 @@ internal static class DebugButtonsPatch
     [HarmonyPatch(nameof(DebugButtons.IsSkipHeld), MethodType.Getter)]
     private static bool PreIsSkipHeld(ref bool __result)
     {
-        if (RandoSettingsMenu.PauseForItemGet() && DialogueModifier.inModifiedDialogue || DialogueModifier.inTrapDialogue)
+        if (RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.PauseItemGet) && DialogueModifier.inModifiedDialogue || DialogueModifier.inTrapDialogue)
         {
             __result = false;
             return false;

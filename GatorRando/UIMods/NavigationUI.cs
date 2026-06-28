@@ -139,9 +139,10 @@ internal static class NavigationUI
 
     internal static void UpdateNavigation()
     {
-        if (RandoSettingsMenu.IsNavigationOn() != mapDisplay.activeSelf)
+        bool displayMinimap = RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.Minimap);
+        if (displayMinimap != mapDisplay.activeSelf)
         {
-            mapDisplay.SetActive(RandoSettingsMenu.IsNavigationOn());
+            mapDisplay.SetActive(displayMinimap);
         }
         UpdateMapCoordinates();
         UpdateMapPosition();

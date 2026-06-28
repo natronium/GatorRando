@@ -167,11 +167,11 @@ public static class StateManager
     private static void QuitToTitleScreen()
     {
         SaveManager.ForceSave();
-        if (RandoSettingsMenu.IsRagdollDeathLinkOn() && !Plugin.Instance.quitting)
+        if (RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.DeathLink) && !Plugin.Instance.quitting)
         {
             DeathLinkManager.DisableDeathLink();
         }
-        if (RandoSettingsMenu.IsTrapLinkOn() && !Plugin.Instance.quitting)
+        if (RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.TrapLink) && !Plugin.Instance.quitting)
         {
             TrapManager.DisableTrapLink();
         }
@@ -182,7 +182,7 @@ public static class StateManager
 
     public static bool StartNewGame(int index)
     {
-        if (RandoSettingsMenu.IsPrologueToBeSkipped())
+        if (RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.Prologue))
         {
             //Skip the prologue by loading a built-in post prologue save file
             currentState = State.NewGameSkipPrologue;

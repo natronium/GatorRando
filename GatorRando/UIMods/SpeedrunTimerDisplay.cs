@@ -38,7 +38,7 @@ public static class SpeedrunTimerDisplay
     {
         if (SpeedrunTimer.instance)
         {
-            SpeedrunTimer.instance.gameObject.SetActive(RandoSettingsMenu.ShowSpeedrunTimer());
+            SpeedrunTimer.instance.gameObject.SetActive(RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.SpeedrunTimer));
         }
     }
 }

@@ -5,15 +5,15 @@ using HarmonyLib;
 namespace GatorRando.Patches;
 
 [HarmonyPatch(typeof(Game))]
-static class GamePatch
+internal static class GamePatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(Game.SetWorldState), [typeof(WorldState), typeof(bool), typeof(bool)])]
-    static void PreSetWorldState(WorldState newWorldState)
+	private static void PreSetWorldState(WorldState newWorldState)
     {
-        if (newWorldState == WorldState.Flashback & RandoSettingsMenu.IsGoalBeforeEpilogue())
+        if (newWorldState == WorldState.Flashback & RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.SkipFinalSequences))
         {
-            ConnectionManager.SendGoal();
+            ConnectionManager.SendGoal(); // TODO: Send player out of flashback and back to tutorial island
         }
     }
 }

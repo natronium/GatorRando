@@ -99,7 +99,7 @@ public static class TrapManager
         sneakTimer = 0f;
         pixelTimer = 0f;
 
-        if (RandoSettingsMenu.IsTrapLinkOn())
+        if (RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.TrapLink))
         {
             EnableTrapLink();
             ConnectionManager.Session.Socket.PacketReceived += ReceiveTrapLink;
@@ -276,7 +276,7 @@ public static class TrapManager
 
     public static void ReceiveTrapLink(ArchipelagoPacketBase packet)
     {
-        if (RandoSettingsMenu.IsTrapLinkOn() && packet is BouncedPacket bouncedPacket && bouncedPacket.Tags.Contains("TrapLink"))
+        if (RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.TrapLink) && packet is BouncedPacket bouncedPacket && bouncedPacket.Tags.Contains("TrapLink"))
         {
             // we don't want to receive own trap links, since the other slot will have already received a trap on its own
             // note: if two people are connected to the same slot, both players will likely send their own trap links

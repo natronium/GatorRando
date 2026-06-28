@@ -23,7 +23,7 @@ public static class LocationHandling
     public static void TriggerLocationListeners()
     {
         IEnumerable<long> locationsCollected;
-        if (RandoSettingsMenu.IsCollectCountedAsChecked())
+        if (RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.Collect))
         {
             locationsCollected = ConnectionManager.LocationsCollected();
         }
@@ -44,7 +44,7 @@ public static class LocationHandling
     private static readonly string LocationKeyPrefix = "AP ID: ";
     public static bool IsLocationCollected(string location)
     {
-        if (RandoSettingsMenu.IsCollectCountedAsChecked())
+        if (RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.Collect))
         {
             try
             {
@@ -70,7 +70,7 @@ public static class LocationHandling
 
     public static bool IsLocationCollected(int gatorID)
     {
-        if (RandoSettingsMenu.IsCollectCountedAsChecked())
+        if (RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.Collect))
         {
             try
             {
@@ -89,7 +89,7 @@ public static class LocationHandling
 
     public static bool IsApLocationCollected(long apId)
     {
-        if (RandoSettingsMenu.IsCollectCountedAsChecked())
+        if (RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.Collect))
         {
             try
             {

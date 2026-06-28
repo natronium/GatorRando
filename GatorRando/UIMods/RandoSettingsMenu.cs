@@ -1,5 +1,6 @@
 using GatorRando.Archipelago;
 using GatorRando.QuestMods;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -92,15 +93,15 @@ internal static class RandoSettingsMenu
             );
 
             // Add Toggle so that players can choose whether they want !collect-ed locations to count as checked or not
-            CreateSettingsToggle(viewportContent, 8, "!collect counts as Checked", "set before connecting to server. if checked, locations that are !collect-ed by other seeds count as checked for advancing quests." +
+            CreateSettingsToggle(viewportContent, 8, boolRandoSettings[BoolRandoSetting.Collect].SettingsKey, "set before connecting to server. if checked, locations that are !collect-ed by other seeds count as checked for advancing quests." +
             "if unchecked, uses what locations as saved in the save file.");
 
-            CreateSettingsToggle(viewportContent, 9, "Skip Prologue", "set before starting a new game. If true, will skip the prologue and set the player name to the slot name.");
-            CreateSettingsToggle(viewportContent, 10, "Goal Before Epilogue", "set before loading into a game. If true, goal will trigger on talking to your friends at the Playground when the flashback would start.");
+            CreateSettingsToggle(viewportContent, 9, boolRandoSettings[BoolRandoSetting.Prologue].SettingsKey, "set before starting a new game. If true, will skip the prologue and set the player name to the slot name.");
+            CreateSettingsToggle(viewportContent, 10, boolRandoSettings[BoolRandoSetting.SkipFinalSequences].SettingsKey, "set before loading into a game. If true, goal will trigger on talking to your friends at the Playground when the flashback would start."); // TODO: reword based on DLC
 
-            CreateSettingsToggle(viewportContent, 11, "Ragdoll on DeathLink", "When you receive a DeathLink from another game, your character will ragdoll. Note: you cannot send DeathLinks to other players. This option must be toggled on the main menu.");
+            CreateSettingsToggle(viewportContent, 11, boolRandoSettings[BoolRandoSetting.DeathLink].SettingsKey, "When you receive a DeathLink from another game, your character will ragdoll. Note: you cannot send DeathLinks to other players. This option must be toggled on the main menu.");
 
-            CreateSettingsToggle(viewportContent, 12, "TrapLink", "Send and receive linkable traps. This option must be toggled on the main menu.");
+            CreateSettingsToggle(viewportContent, 12, boolRandoSettings[BoolRandoSetting.TrapLink].SettingsKey, "Send and receive linkable traps. This option must be toggled on the main menu.");
 
             //Delete all saves button
             CreateSettingsButton(viewportContent,
@@ -124,11 +125,11 @@ internal static class RandoSettingsMenu
                 );
             }
         }
-        CreateSettingsToggle(viewportContent, 13, "Pause Speedrun Mode for Item Get Dialogues", "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
-        CreateSettingsToggle(viewportContent, 14, "Show Speedrun Timer", "Shows the speedrun timer (regardless of whether Speedrun Mode is on)");
+        CreateSettingsToggle(viewportContent, 13, boolRandoSettings[BoolRandoSetting.PauseItemGet].SettingsKey, "If speedrun mode is on, skips through dialogue normally except dialogues that show what item you found");
+        CreateSettingsToggle(viewportContent, 14, boolRandoSettings[BoolRandoSetting.SpeedrunTimer].SettingsKey, "Shows the speedrun timer (regardless of whether Speedrun Mode is on)");
         CreateSettingsOptions(viewportContent, 15, "Megaphone and Texting Logic?", "The megaphone helps you find friends' quests. Texting with Jill helps you find pots, chests, races, and cardboard." +
             "This setting changes how these tools work. \"logic\": use randomizer logic to show only valid checks, \"checks only\": show all possible checks, \"original\": original behavior", ["logic", "checks only", "original"]);
-        CreateSettingsToggle(viewportContent, 16, "Show Minimap", "Shows the minimap and related navigation tools");
+        CreateSettingsToggle(viewportContent, 16, boolRandoSettings[BoolRandoSetting.Minimap].SettingsKey, "Shows the minimap and related navigation tools");
 
         newSettingsMenu = newMenu.GetComponent<UISubMenu>();
         return newSettingsMenu;
@@ -248,13 +249,56 @@ internal static class RandoSettingsMenu
         selectOptions.options = options;
     }
 
-    internal static CheckfinderBehavior GetCheckfinderBehavior() => (CheckfinderBehavior)Settings.s.ReadInt("megaphone and texting logic?");
-    internal static bool IsPrologueToBeSkipped() => Settings.s.ReadBool("skip prologue", true);
-    internal static bool PauseForItemGet() => Settings.s.ReadBool("Pause Speedrun Mode for Item Get Dialogues".ToLower(), true);
-    internal static bool ShowSpeedrunTimer() => Settings.s.ReadBool("show speedrun timer", false);
-    internal static bool IsCollectCountedAsChecked() => Settings.s.ReadBool("!collect counts as checked", true);
-    internal static bool IsGoalBeforeEpilogue() => Settings.s.ReadBool("goal before epilogue", false);
-    internal static bool IsRagdollDeathLinkOn() => Settings.s.ReadBool("ragdoll on deathlink", false);
-    internal static bool IsTrapLinkOn() => Settings.s.ReadBool("traplink", false);
-    internal static bool IsNavigationOn() => Settings.s.ReadBool("show minimap", true);
+    internal enum BoolRandoSetting
+    {
+        Prologue,
+        PauseItemGet,
+        SpeedrunTimer,
+        Collect,
+        SkipFinalSequences,
+        DeathLink,
+        TrapLink,
+        Minimap
+    }
+
+    private class BoolRandoKeyDefault
+    {
+        public readonly string SettingsKey;
+        public readonly bool DefaultValue;
+
+        internal BoolRandoKeyDefault(string settingsKey, bool defaultValue)
+        {
+            SettingsKey = settingsKey;
+            DefaultValue = defaultValue;
+        }
+    }
+
+    private static readonly Dictionary<BoolRandoSetting, BoolRandoKeyDefault> boolRandoSettings = new () {
+        {BoolRandoSetting.Prologue, new("skip prologue", true)},
+        {BoolRandoSetting.PauseItemGet, new("Pause Speedrun Mode for Item Get Dialogues".ToLower(), true)},
+        {BoolRandoSetting.SpeedrunTimer, new("show speedrun timer",false)},
+        {BoolRandoSetting.Collect, new("!collect counts as checked",true)},
+        {BoolRandoSetting.SkipFinalSequences, new("skip final sequence(s)",false)},
+        {BoolRandoSetting.DeathLink, new("ragdoll on deathlink",false)},
+        {BoolRandoSetting.TrapLink, new("traplink",false)},
+        {BoolRandoSetting.Minimap, new("show minimap",true)},
+    };
+
+    internal static bool GetBoolRandoSetting(BoolRandoSetting randoSetting)
+    {
+        BoolRandoKeyDefault keyDefault = boolRandoSettings[randoSetting];
+        return Settings.s != null ? Settings.s.ReadBool(keyDefault.SettingsKey, keyDefault.DefaultValue) : keyDefault.DefaultValue;
+    }
+
+    internal static CheckfinderBehavior GetCheckfinderBehavior()
+    {
+        if (Settings.s != null)
+        {
+            return (CheckfinderBehavior)Settings.s.ReadInt("megaphone and texting logic?"); ;
+        }
+        else
+        {
+            return CheckfinderBehavior.Original;
+        }
+    }
 }
