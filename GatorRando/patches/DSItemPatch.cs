@@ -32,6 +32,14 @@ internal static class DSItemPatch
             // Make sure the first Craft Stuff and Litter are not caught by this alteration
             return;
         }
+        if (name.Contains("Greet"))
+        {
+            name = "Queen's Secret Letter";
+        }
+        if (name.Contains("Recieve")) // Typo is in vanilla game
+        {
+            name = "Other Queen's Secret Letter";
+        }
         if (LocationHandling.CollectLocationByName(name))
         {
             DialogueModifier.SetModifiedDialogue(true);

@@ -39,6 +39,20 @@ public static class QuestItems
             QuestItemObjects.Add(Util.GenerateItemObject("Socks", SpriteHandler.GetSpriteForItem("Socks"), "Giant Socks", "i can use my giant socks to become big and stomp around (and break some pots)"));
             QuestItemObjects.Add(Util.GenerateItemObject("Guitar", SpriteHandler.GetSpriteForItem("Guitar"), "Guitar of Space", "i can play my guitar of space to open the Sacred Place of Space (and break some pots)"));
             QuestItemObjects.Add(Util.GenerateItemObject("Oar", SpriteHandler.GetSpriteForItem("Oar"),"Oar","i can paddle through the fierce pond with my oar to calm the breeze (and break some pots)"));
+
+            QuestItemObjects.Add(Util.GenerateItemObject("First Queen Letter", SpriteHandler.GetSpriteForItem("First Queen Letter"),"Queen's Secret Letter","i should give this letter to either jane or lola"));
+            QuestItemObjects.Add(Util.GenerateItemObject("Second Queen Letter", SpriteHandler.GetSpriteForItem("Second Queen Letter"),"Other Queen's Secret Letter","i should give this letter to either jane or lola"));
+            QuestItemObjects.Add(Util.GenerateItemObject("Clam", SpriteHandler.GetSpriteForItem("Clam"),"Clam","i can now carry val to safety"));
+            QuestItemObjects.Add(Util.GenerateItemObject("Thorny", SpriteHandler.GetSpriteForItem("Thorny"),"Bramble Stalker","i found the bramble stalker and should bring it to nodd"));
+            QuestItemObjects.Add(Util.GenerateItemObject("Bubbly", SpriteHandler.GetSpriteForItem("Bubbly"),"Orbhound","i found the orbhound and should bring it to nodd"));
+            QuestItemObjects.Add(Util.GenerateItemObject("Cakey", SpriteHandler.GetSpriteForItem("Cakey"),"Iced Liar","i found the iced liar and should bring it to nodd"));
+            QuestItemObjects.Add(Util.GenerateItemObject("Holy", SpriteHandler.GetSpriteForItem("Holy"),"Bird of Big Island","i found the bird of big island and should bring it to nodd"));
+            QuestItemObjects.Add(Util.GenerateItemObject("Finny", SpriteHandler.GetSpriteForItem("Finny"),"Gulfcoaster","i found the gulfcoaster and should bring it to nodd"));
+            QuestItemObjects.Add(Util.GenerateItemObject("Drippy", SpriteHandler.GetSpriteForItem("Drippy"),"Wellerdropple","i found the wellerdropple and should bring it to nodd"));
+            QuestItemObjects.Add(Util.GenerateItemObject("Floofy", SpriteHandler.GetSpriteForItem("Floofy"),"Barber Worm","i found the barber worm and should bring it to nodd"));
+            QuestItemObjects.Add(Util.GenerateItemObject("Treey", SpriteHandler.GetSpriteForItem("Treey"),"Yarrowling","i found the yarrowling and should bring it to nodd"));
+            QuestItemObjects.Add(Util.GenerateItemObject("Looky", SpriteHandler.GetSpriteForItem("Looky"),"Peep Goblin","i found the peep goblin and should bring it to nodd"));
+
         }
     }
 }

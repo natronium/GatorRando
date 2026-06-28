@@ -5,6 +5,7 @@
         "rule_json": {
             "rule": "Or",
             "options": [],
+            "filtered_resolution": false,
             "children": [
                 {
                     "rule": "True_",
@@ -15,15 +16,18 @@
                             "operator": "eq"
                         }
                     ],
+                    "filtered_resolution": false,
                     "args": {}
                 },
                 {
                     "rule": "And",
                     "options": [],
+                    "filtered_resolution": false,
                     "children": [
                         {
                             "rule": "HasAll",
                             "options": [],
+                            "filtered_resolution": false,
                             "args": {
                                 "item_names": [
                                     "Pointy Floppy Thing",
@@ -34,6 +38,7 @@
                         {
                             "rule": "HasGroup",
                             "options": [],
+                            "filtered_resolution": false,
                             "args": {
                                 "item_name_group": "Cardboard Destroyer",
                                 "count": 1
@@ -50,6 +55,7 @@
         "rule_json": {
             "rule": "Or",
             "options": [],
+            "filtered_resolution": false,
             "children": [
                 {
                     "rule": "True_",
@@ -60,11 +66,13 @@
                             "operator": "eq"
                         }
                     ],
+                    "filtered_resolution": false,
                     "args": {}
                 },
                 {
                     "rule": "Has",
                     "options": [],
+                    "filtered_resolution": false,
                     "args": {
                         "item_name": "Finish Flag",
                         "count": 1
@@ -79,6 +87,7 @@
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
+            "filtered_resolution": false,
             "args": {
                 "item_name_group": "Cardboard Destroyer",
                 "count": 1
@@ -91,6 +100,7 @@
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
+            "filtered_resolution": false,
             "args": {
                 "item_name_group": "Ranged",
                 "count": 1
@@ -103,6 +113,7 @@
         "rule_json": {
             "rule": "Or",
             "options": [],
+            "filtered_resolution": false,
             "children": [
                 {
                     "rule": "True_",
@@ -113,11 +124,13 @@
                             "operator": "eq"
                         }
                     ],
+                    "filtered_resolution": false,
                     "args": {}
                 },
                 {
                     "rule": "Has",
                     "options": [],
+                    "filtered_resolution": false,
                     "args": {
                         "item_name": "Finish Flag",
                         "count": 1
@@ -132,6 +145,7 @@
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
+            "filtered_resolution": false,
             "args": {
                 "item_name_group": "Cardboard Destroyer",
                 "count": 1
@@ -144,10 +158,12 @@
         "rule_json": {
             "rule": "And",
             "options": [],
+            "filtered_resolution": false,
             "children": [
                 {
                     "rule": "HasGroup",
                     "options": [],
+                    "filtered_resolution": false,
                     "args": {
                         "item_name_group": "Cardboard Destroyer",
                         "count": 1
@@ -156,6 +172,7 @@
                 {
                     "rule": "Has",
                     "options": [],
+                    "filtered_resolution": false,
                     "args": {
                         "item_name": "Bracelet",
                         "count": 1
@@ -170,6 +187,7 @@
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
+            "filtered_resolution": false,
             "args": {
                 "item_name_group": "Cardboard Destroyer",
                 "count": 1
@@ -182,6 +200,7 @@
         "rule_json": {
             "rule": "True_",
             "options": [],
+            "filtered_resolution": false,
             "args": {}
         }
     },
@@ -191,6 +210,7 @@
         "rule_json": {
             "rule": "HasAny",
             "options": [],
+            "filtered_resolution": false,
             "args": {
                 "item_names": [
                     "Bracelet",
@@ -205,6 +225,7 @@
         "rule_json": {
             "rule": "HasGroup",
             "options": [],
+            "filtered_resolution": false,
             "args": {
                 "item_name_group": "Cardboard Destroyer",
                 "count": 1
@@ -217,7 +238,269 @@
         "rule_json": {
             "rule": "True_",
             "options": [],
+            "filtered_resolution": false,
             "args": {}
+        }
+    },
+    {
+        "starting_region": "Tutorial Island",
+        "ending_region": "Underground Entrance",
+        "rule_json": {
+            "rule": "Or",
+            "options": [],
+            "filtered_resolution": false,
+            "children": [
+                {
+                    "rule": "True_",
+                    "options": [
+                        {
+                            "option": "worlds.lil_gator_game.options.StartWithFreeplay",
+                            "value": 1,
+                            "operator": "eq"
+                        }
+                    ],
+                    "filtered_resolution": false,
+                    "args": {}
+                },
+                {
+                    "rule": "And",
+                    "options": [],
+                    "filtered_resolution": false,
+                    "children": [
+                        {
+                            "rule": "HasAll",
+                            "options": [],
+                            "filtered_resolution": false,
+                            "args": {
+                                "item_names": [
+                                    "Pointy Floppy Thing",
+                                    "Pot?"
+                                ]
+                            }
+                        },
+                        {
+                            "rule": "HasGroup",
+                            "options": [],
+                            "filtered_resolution": false,
+                            "args": {
+                                "item_name_group": "Cardboard Destroyer",
+                                "count": 1
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "starting_region": "Underground Entrance",
+        "ending_region": "Underground Entrance Breakables",
+        "rule_json": {
+            "rule": "HasGroup",
+            "options": [],
+            "filtered_resolution": false,
+            "args": {
+                "item_name_group": "Cardboard Destroyer",
+                "count": 1
+            }
+        }
+    },
+    {
+        "starting_region": "Underground Entrance",
+        "ending_region": "Underground",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "filtered_resolution": false,
+            "args": {}
+        }
+    },
+    {
+        "starting_region": "Underground Entrance",
+        "ending_region": "Lighthouse",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "filtered_resolution": false,
+            "args": {}
+        }
+    },
+    {
+        "starting_region": "Lighthouse",
+        "ending_region": "Lighthouse Breakables",
+        "rule_json": {
+            "rule": "HasGroup",
+            "options": [],
+            "filtered_resolution": false,
+            "args": {
+                "item_name_group": "Cardboard Destroyer",
+                "count": 1
+            }
+        }
+    },
+    {
+        "starting_region": "Underground Entrance",
+        "ending_region": "Mines",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "filtered_resolution": false,
+            "args": {}
+        }
+    },
+    {
+        "starting_region": "Mines",
+        "ending_region": "Mines Breakables",
+        "rule_json": {
+            "rule": "HasGroup",
+            "options": [],
+            "filtered_resolution": false,
+            "args": {
+                "item_name_group": "Cardboard Destroyer",
+                "count": 1
+            }
+        }
+    },
+    {
+        "starting_region": "Mines",
+        "ending_region": "Mines Races",
+        "rule_json": {
+            "rule": "Or",
+            "options": [],
+            "filtered_resolution": false,
+            "children": [
+                {
+                    "rule": "True_",
+                    "options": [
+                        {
+                            "option": "worlds.lil_gator_game.options.LockRacesBehindFlag",
+                            "value": 0,
+                            "operator": "eq"
+                        }
+                    ],
+                    "filtered_resolution": false,
+                    "args": {}
+                },
+                {
+                    "rule": "Has",
+                    "options": [],
+                    "filtered_resolution": false,
+                    "args": {
+                        "item_name": "Finish Flag",
+                        "count": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "starting_region": "Underground Entrance",
+        "ending_region": "Big Roots",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "filtered_resolution": false,
+            "args": {}
+        }
+    },
+    {
+        "starting_region": "Big Roots",
+        "ending_region": "Big Roots Breakables",
+        "rule_json": {
+            "rule": "HasGroup",
+            "options": [],
+            "filtered_resolution": false,
+            "args": {
+                "item_name_group": "Cardboard Destroyer",
+                "count": 1
+            }
+        }
+    },
+    {
+        "starting_region": "Big Roots",
+        "ending_region": "Big Roots Races",
+        "rule_json": {
+            "rule": "Or",
+            "options": [],
+            "filtered_resolution": false,
+            "children": [
+                {
+                    "rule": "True_",
+                    "options": [
+                        {
+                            "option": "worlds.lil_gator_game.options.LockRacesBehindFlag",
+                            "value": 0,
+                            "operator": "eq"
+                        }
+                    ],
+                    "filtered_resolution": false,
+                    "args": {}
+                },
+                {
+                    "rule": "Has",
+                    "options": [],
+                    "filtered_resolution": false,
+                    "args": {
+                        "item_name": "Finish Flag",
+                        "count": 1
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "starting_region": "Underground Entrance",
+        "ending_region": "Flowstone Caverns",
+        "rule_json": {
+            "rule": "True_",
+            "options": [],
+            "filtered_resolution": false,
+            "args": {}
+        }
+    },
+    {
+        "starting_region": "Flowstone Caverns",
+        "ending_region": "Flowstone Caverns Breakables",
+        "rule_json": {
+            "rule": "HasGroup",
+            "options": [],
+            "filtered_resolution": false,
+            "args": {
+                "item_name_group": "Cardboard Destroyer",
+                "count": 1
+            }
+        }
+    },
+    {
+        "starting_region": "Flowstone Caverns",
+        "ending_region": "Flowstone Caverns Races",
+        "rule_json": {
+            "rule": "Or",
+            "options": [],
+            "filtered_resolution": false,
+            "children": [
+                {
+                    "rule": "True_",
+                    "options": [
+                        {
+                            "option": "worlds.lil_gator_game.options.LockRacesBehindFlag",
+                            "value": 0,
+                            "operator": "eq"
+                        }
+                    ],
+                    "filtered_resolution": false,
+                    "args": {}
+                },
+                {
+                    "rule": "Has",
+                    "options": [],
+                    "filtered_resolution": false,
+                    "args": {
+                        "item_name": "Finish Flag",
+                        "count": 1
+                    }
+                }
+            ]
         }
     }
 ]
