@@ -1,4 +1,5 @@
 using GatorRando.Archipelago;
+using GatorRando.UIMods;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -15,7 +16,7 @@ internal static class JadaQuestMods
         boarQuestQS.states[2].onProgress.ObliteratePersistentListenerByIndex(0);
 
         ItemHandling.RegisterItemListener("CLIPPINGS", UnlockedGrassClippings);
-        
+
         // Jada: Water Bucket Section
         GameObject waterSeq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Sprout/Water Sequence");
         DSDialogue waterDia = waterSeq.GetComponents<DSDialogue>()[1];
@@ -29,49 +30,55 @@ internal static class JadaQuestMods
 
     private static void UnlockedGrassClippings()
     {
-        GameObject boarQuest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
-        QuestStates boarQuestQS = boarQuest.GetComponent<QuestStates>();
-        if (boarQuestQS.StateID == 1 && LocationHandling.IsLocationCollected("CLIPPINGS"))
+        if (NavigationUI.currentLevel == Data.Locations.Level.Surface)
         {
-            boarQuestQS.JustProgressState();
-        }
-        else
-        {
-            if (LocationHandling.IsLocationCollected("CLIPPINGS"))
+            GameObject boarQuest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
+            QuestStates boarQuestQS = boarQuest.GetComponent<QuestStates>();
+            if (boarQuestQS.StateID == 1 && LocationHandling.IsLocationCollected("CLIPPINGS"))
             {
-                boarQuestQS.states[1].onProgress.AddListener(boarQuestQS.JustProgressState); // If Grass collected, skip the get grass sequence
+                boarQuestQS.JustProgressState();
             }
             else
             {
-                GameObject grassSeq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Got Enough Grass Sequence");
-                DialogueSequencer grassSequencer = grassSeq.GetComponent<DialogueSequencer>();
-                grassSequencer.afterSequence.RemoveListener(boarQuestQS.JustProgressState);
-                grassSequencer.afterSequence.AddListener(boarQuestQS.JustProgressState);
+                if (LocationHandling.IsLocationCollected("CLIPPINGS"))
+                {
+                    boarQuestQS.states[1].onProgress.AddListener(boarQuestQS.JustProgressState); // If Grass collected, skip the get grass sequence
+                }
+                else
+                {
+                    GameObject grassSeq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Got Enough Grass Sequence");
+                    DialogueSequencer grassSequencer = grassSeq.GetComponent<DialogueSequencer>();
+                    grassSequencer.afterSequence.RemoveListener(boarQuestQS.JustProgressState);
+                    grassSequencer.afterSequence.AddListener(boarQuestQS.JustProgressState);
+                }
             }
         }
     }
 
     private static void UnlockedWater()
     {
-        GameObject boarQuest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
-        QuestStates boarQuestQS = boarQuest.GetComponent<QuestStates>();
-        if (boarQuestQS.StateID == 3 && LocationHandling.IsLocationCollected("WATER"))
+        if (NavigationUI.currentLevel == Data.Locations.Level.Surface)
         {
-            boarQuestQS.JustProgressState();
-        }
-        else
-        {
-            if (LocationHandling.IsLocationCollected("WATER"))
+            GameObject boarQuest = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest");
+            QuestStates boarQuestQS = boarQuest.GetComponent<QuestStates>();
+            if (boarQuestQS.StateID == 3 && LocationHandling.IsLocationCollected("WATER"))
             {
-                boarQuestQS.states[3].onProgress.AddListener(boarQuestQS.JustProgressState); // If Water collected, skip the get water sequence
+                boarQuestQS.JustProgressState();
             }
             else
             {
-                GameObject waterSeq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Got Enough Water Sequence");
-                DialogueSequencer waterSequencer = waterSeq.GetComponent<DialogueSequencer>();
-                waterSequencer.afterSequence.RemoveListener(boarQuestQS.JustProgressState);
-                waterSequencer.afterSequence.AddListener(boarQuestQS.JustProgressState);
+                if (LocationHandling.IsLocationCollected("WATER"))
+                {
+                    boarQuestQS.states[3].onProgress.AddListener(boarQuestQS.JustProgressState); // If Water collected, skip the get water sequence
+                }
+                else
+                {
+                    GameObject waterSeq = Util.GetByPath("East (Creeklands)/Cool Kids Quest/Subquests/Boar Quest/Got Enough Water Sequence");
+                    DialogueSequencer waterSequencer = waterSeq.GetComponent<DialogueSequencer>();
+                    waterSequencer.afterSequence.RemoveListener(boarQuestQS.JustProgressState);
+                    waterSequencer.afterSequence.AddListener(boarQuestQS.JustProgressState);
 
+                }
             }
         }
     }

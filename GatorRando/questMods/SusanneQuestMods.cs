@@ -1,4 +1,5 @@
 using GatorRando.Archipelago;
+using GatorRando.UIMods;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -20,32 +21,39 @@ internal static class SusanneQuestMods
 
     private static void CollectedMagicOre()
     {
-        GameObject engineerQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer");
-        GameObject specialRocks = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Special Rocks");
-        QuestStates engineerQuestQS = engineerQuest.GetComponent<QuestStates>();
-        engineerQuestQS.states[1].stateObjects = engineerQuestQS.states[1].stateObjects.Remove(specialRocks);
-        specialRocks.SetActive(false);
+        if (NavigationUI.currentLevel == Data.Locations.Level.Surface)
+        {
+            GameObject engineerQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer");
+            GameObject specialRocks = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Special Rocks");
+            QuestStates engineerQuestQS = engineerQuest.GetComponent<QuestStates>();
+            engineerQuestQS.states[1].stateObjects = engineerQuestQS.states[1].stateObjects.Remove(specialRocks);
+            specialRocks.SetActive(false);
+        }
     }
 
     private static void UnlockedMagicOre()
     {
-        GameObject engineerQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer");
-        QuestStates engineerQuestQS = engineerQuest.GetComponent<QuestStates>();
-        if (engineerQuestQS.StateID == 1 && LocationHandling.IsLocationCollected("BEACH ROCK"))
+        if (NavigationUI.currentLevel == Data.Locations.Level.Surface)
         {
-            engineerQuestQS.JustProgressState();
-        }
-        else
-        {
-            if (LocationHandling.IsLocationCollected("BEACH ROCK"))
+            GameObject engineerQuest = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer");
+            QuestStates engineerQuestQS = engineerQuest.GetComponent<QuestStates>();
+            if (engineerQuestQS.StateID == 1 && LocationHandling.IsLocationCollected("BEACH ROCK"))
             {
-                engineerQuestQS.states[1].onProgress.AddListener(engineerQuestQS.JustProgressState);
+                engineerQuestQS.JustProgressState();
             }
-            else {
-                GameObject rockSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Rock Get Sequence");
-                DialogueSequencer rockSequencer = rockSeq.GetComponent<DialogueSequencer>();
-                rockSequencer.beforeSequence.RemoveListener(engineerQuestQS.JustProgressState);
-                rockSequencer.beforeSequence.AddListener(engineerQuestQS.JustProgressState);
+            else
+            {
+                if (LocationHandling.IsLocationCollected("BEACH ROCK"))
+                {
+                    engineerQuestQS.states[1].onProgress.AddListener(engineerQuestQS.JustProgressState);
+                }
+                else
+                {
+                    GameObject rockSeq = Util.GetByPath("West (Forest)/Prep Quest/Subquests/Engineer/Rock Get Sequence");
+                    DialogueSequencer rockSequencer = rockSeq.GetComponent<DialogueSequencer>();
+                    rockSequencer.beforeSequence.RemoveListener(engineerQuestQS.JustProgressState);
+                    rockSequencer.beforeSequence.AddListener(engineerQuestQS.JustProgressState);
+                }
             }
         }
     }

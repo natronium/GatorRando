@@ -1,4 +1,5 @@
 using GatorRando.Archipelago;
+using GatorRando.UIMods;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -23,24 +24,30 @@ internal static class EsmeQuestMods
 
     private static void CollectedSorbet()
     {
-        GameObject iceCream = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/IceCream");
-        iceCream.SetActive(false);
+        if (NavigationUI.currentLevel == Data.Locations.Level.Surface)
+        {
+            GameObject iceCream = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/IceCream");
+            iceCream.SetActive(false);
+        }
     }
 
     private static void UnlockedSorbet()
     {
-        GameObject vampireQuest = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire");
-        QuestStates vampireQuestQS = vampireQuest.GetComponent<QuestStates>();
-        if (vampireQuestQS.StateID == 1 && LocationHandling.IsLocationCollected("ICE CREAM"))
+        if (NavigationUI.currentLevel == Data.Locations.Level.Surface)
         {
-            vampireQuestQS.JustProgressState();
-        }
-        else
-        {
-            GameObject getIceCream = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/Get Ice Cream");
-            DialogueSequencer getIceCreamSeq = getIceCream.GetComponent<DialogueSequencer>();
-            getIceCreamSeq.afterSequence.RemoveListener(vampireQuestQS.JustProgressState);
-            getIceCreamSeq.afterSequence.AddListener(vampireQuestQS.JustProgressState);
+            GameObject vampireQuest = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire");
+            QuestStates vampireQuestQS = vampireQuest.GetComponent<QuestStates>();
+            if (vampireQuestQS.StateID == 1 && LocationHandling.IsLocationCollected("ICE CREAM"))
+            {
+                vampireQuestQS.JustProgressState();
+            }
+            else
+            {
+                GameObject getIceCream = Util.GetByPath("North (Mountain)/Theatre Quest/Subquests/Vampire/Get Ice Cream");
+                DialogueSequencer getIceCreamSeq = getIceCream.GetComponent<DialogueSequencer>();
+                getIceCreamSeq.afterSequence.RemoveListener(vampireQuestQS.JustProgressState);
+                getIceCreamSeq.afterSequence.AddListener(vampireQuestQS.JustProgressState);
+            }
         }
     }
 }

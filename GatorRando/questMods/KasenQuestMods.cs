@@ -1,4 +1,5 @@
 using GatorRando.Archipelago;
+using GatorRando.UIMods;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -18,16 +19,29 @@ internal static class KasenQuestMods
         scooterPickup.SetActive(true);
 
         ItemHandling.RegisterItemListener("Shield_ScooterBoardGreen", UnlockedScooter);
-        LocationHandling.RegisterLocationListener("BROKEN WHEELIE THINGY", () => scooterPickup.SetActive(false));
+        LocationHandling.RegisterLocationListener("BROKEN WHEELIE THINGY", CollectedSorbet);
     }
 
     private static void UnlockedScooter()
     {
-        GameObject kasenQuest = Util.GetByPath("NorthEast (Canyoney)/SideQuests/FetchVulture");
-        QuestStates kasenQuestQS = kasenQuest.GetComponent<QuestStates>();
-        if (kasenQuestQS.StateID == 0)
+        if (NavigationUI.currentLevel == Data.Locations.Level.Surface)
         {
-            kasenQuestQS.JustProgressState();
+            GameObject kasenQuest = Util.GetByPath("NorthEast (Canyoney)/SideQuests/FetchVulture");
+            QuestStates kasenQuestQS = kasenQuest.GetComponent<QuestStates>();
+            if (kasenQuestQS.StateID == 0)
+            {
+                kasenQuestQS.JustProgressState();
+            }
+        }
+    }
+    private static void CollectedSorbet()
+    {
+        if (NavigationUI.currentLevel == Data.Locations.Level.Surface)
+        {
+            GameObject kasenQuest = Util.GetByPath("NorthEast (Canyoney)/SideQuests/FetchVulture");
+            QuestStates kasenQuestQS = kasenQuest.GetComponent<QuestStates>();
+            GameObject scooterPickup = kasenQuestQS.states[0].stateObjects[0];
+            scooterPickup.SetActive(false);
         }
     }
 }

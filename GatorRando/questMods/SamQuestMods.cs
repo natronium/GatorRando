@@ -1,5 +1,6 @@
 using System.Linq;
 using GatorRando.Archipelago;
+using GatorRando.UIMods;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -31,28 +32,31 @@ internal static class SamQuestMods
 
     private static void UpdateSamState()
     {
-        GameObject jackal = Util.GetByPath("SouthEast (Beach)/Side Quests/Clumsy Quest/Jackal");
-        ThrowObjectQuest quest = jackal.GetComponent<ThrowObjectQuest>();
+        if (NavigationUI.currentLevel == Data.Locations.Level.Surface)
+        {
+            GameObject jackal = Util.GetByPath("SouthEast (Beach)/Side Quests/Clumsy Quest/Jackal");
+            ThrowObjectQuest quest = jackal.GetComponent<ThrowObjectQuest>();
 
-        if (LocationHandling.IsLocationCollected("Thrown_Pencil_1") && LocationHandling.IsLocationCollected("Thrown_Pencil_2") &&
-            LocationHandling.IsLocationCollected("Thrown_Pencil_3") && ItemHandling.GetItemUnlockCount("Thrown_Pencil") == 3)
-        {
-            quest.State = 3;
-            quest.chunks[0].IsItemFetched = true;
-            quest.chunks[1].IsItemFetched = true;
-            quest.chunks[2].IsItemFetched = true;
-        }
-        else if (LocationHandling.IsLocationCollected("Thrown_Pencil_1") && LocationHandling.IsLocationCollected("Thrown_Pencil_2") &&
-             ItemHandling.GetItemUnlockCount("Thrown_Pencil") >=2)
-        {
-            quest.State = 2;
-            quest.chunks[0].IsItemFetched = true;
-            quest.chunks[1].IsItemFetched = true;
-        }
-        else if (LocationHandling.IsLocationCollected("Thrown_Pencil_1") && ItemHandling.IsItemUnlocked("Thrown_Pencil"))
-        {
-            quest.State = 1;
-            quest.chunks[0].IsItemFetched = true;
+            if (LocationHandling.IsLocationCollected("Thrown_Pencil_1") && LocationHandling.IsLocationCollected("Thrown_Pencil_2") &&
+                LocationHandling.IsLocationCollected("Thrown_Pencil_3") && ItemHandling.GetItemUnlockCount("Thrown_Pencil") == 3)
+            {
+                quest.State = 3;
+                quest.chunks[0].IsItemFetched = true;
+                quest.chunks[1].IsItemFetched = true;
+                quest.chunks[2].IsItemFetched = true;
+            }
+            else if (LocationHandling.IsLocationCollected("Thrown_Pencil_1") && LocationHandling.IsLocationCollected("Thrown_Pencil_2") &&
+                 ItemHandling.GetItemUnlockCount("Thrown_Pencil") >= 2)
+            {
+                quest.State = 2;
+                quest.chunks[0].IsItemFetched = true;
+                quest.chunks[1].IsItemFetched = true;
+            }
+            else if (LocationHandling.IsLocationCollected("Thrown_Pencil_1") && ItemHandling.IsItemUnlocked("Thrown_Pencil"))
+            {
+                quest.State = 1;
+                quest.chunks[0].IsItemFetched = true;
+            }
         }
     }
 
