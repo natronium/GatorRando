@@ -11,23 +11,44 @@ namespace GatorRando.Patches;
 [HarmonyPatch(typeof(ItemSearchNPCs))]
 internal static class ItemSearchNPCsPatch
 {
-    private static List<DialogueActor> additionalActors;
+    private static List<DialogueActor> additionalSurfaceActors = [];
+    private static List<DialogueActor> additionalUndergroundActors = [];
+
+    internal static void ClearActorLists()
+    {
+        additionalSurfaceActors.Clear();
+        additionalUndergroundActors.Clear();
+    }
+
     [HarmonyPostfix]
     [HarmonyPatch(nameof(ItemSearchNPCs.GetList))]
     private static void PostGetList(ref DialogueActor[] __result)
     {
-        if (additionalActors == null)
+        List<DialogueActor> additionalActors;
+        if (NavigationUI.currentLevel == Data.Locations.Level.Surface)
         {
-            GameObject act1Quests = Util.GetByPath("/NorthWest (Tutorial Island)/Act 1/Quests/");
-            additionalActors = [.. act1Quests.GetComponentsInChildren<DialogueActor>(true)];
-            GameObject coolKidsQuest = Util.GetByPath("/East (Creeklands)/Cool Kids Quest/");
-            additionalActors.AddRange(coolKidsQuest.GetComponentsInChildren<DialogueActor>(true));
-            GameObject prepQuest = Util.GetByPath("/West (Forest)/Prep Quest/");
-            additionalActors.AddRange(prepQuest.GetComponentsInChildren<DialogueActor>(true));
-            GameObject theatreQuest = Util.GetByPath("/North (Mountain)/Theatre Quest/");
-            additionalActors.AddRange(theatreQuest.GetComponentsInChildren<DialogueActor>(true));
-            additionalActors = additionalActors.FindAll(dialogueActor => dialogueActor.profile);
-            //TODO: remove extraneous additional actors like signs, and possibly main quest actors with finished (sub)quests? 
+            if (additionalSurfaceActors.Count() == 0)
+            {
+                GameObject act1Quests = Util.GetByPath("/NorthWest (Tutorial Island)/Act 1/Quests/");
+                additionalSurfaceActors.AddRange(act1Quests.GetComponentsInChildren<DialogueActor>(true));
+                GameObject coolKidsQuest = Util.GetByPath("/East (Creeklands)/Cool Kids Quest/");
+                additionalSurfaceActors.AddRange(coolKidsQuest.GetComponentsInChildren<DialogueActor>(true));
+                GameObject prepQuest = Util.GetByPath("/West (Forest)/Prep Quest/");
+                additionalSurfaceActors.AddRange(prepQuest.GetComponentsInChildren<DialogueActor>(true));
+                GameObject theatreQuest = Util.GetByPath("/North (Mountain)/Theatre Quest/");
+                additionalSurfaceActors.AddRange(theatreQuest.GetComponentsInChildren<DialogueActor>(true));
+                additionalSurfaceActors = additionalSurfaceActors.FindAll(dialogueActor => dialogueActor.profile);
+                //TODO: remove extraneous additional actors like signs, and possibly main quest actors with finished (sub)quests?
+            }
+            additionalActors = additionalSurfaceActors;
+        }
+        else // Underground
+        {
+            if (additionalUndergroundActors.Count() == 0)
+            {
+                //TODO: Underground main characters
+            }
+            additionalActors = additionalUndergroundActors;
         }
 
         List<DialogueActor> filteredMainActors = RandoSettingsMenu.GetCheckfinderBehavior() switch
@@ -179,4 +200,5 @@ internal static class ItemSearchNPCsPatch
             _ => false , // Should not happen
         };;
     }
+
 }

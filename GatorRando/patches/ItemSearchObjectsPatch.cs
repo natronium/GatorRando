@@ -11,11 +11,21 @@ namespace GatorRando.Patches;
 internal static class ItemSearchObjectsPatch
 {
     private static readonly List<PersistentObject> tannerPots = [];
+
+    internal static void ClearList()
+    {
+        tannerPots.Clear();
+    }
+
+
     [HarmonyPostfix]
     [HarmonyPatch(nameof(ItemSearchObjects.GetList))]
-	private static void PostGetList(ref PersistentObject[] __result)
+    private static void PostGetList(ref PersistentObject[] __result)
     {
-        __result = [.. __result, .. TannerPots()];
+        if (NavigationUI.currentLevel == Data.Locations.Level.Surface)
+        {
+            __result = [.. __result, .. TannerPots()];
+        }
         __result = RandoSettingsMenu.GetCheckfinderBehavior() switch
         {
             RandoSettingsMenu.CheckfinderBehavior.Logic => Array.FindAll(__result, LocationAccessibilty.IsLocationAccessible),
@@ -25,7 +35,7 @@ internal static class ItemSearchObjectsPatch
         };
     }
 
-	private static List<PersistentObject> TannerPots()
+    private static List<PersistentObject> TannerPots()
     {
         if (tannerPots.Count == 0) // cache Tanner Pots list
         {
