@@ -8,11 +8,12 @@ internal static class CryptidPickupPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(CryptidPickup.Interact))]
-	private static bool PreInteract(CryptidPickup __instance)
+    private static bool PreInteract(CryptidPickup __instance)
     {
         __instance.gameObject.SetActive(false);
         __instance.dsItem.itemName = __instance.name;
-       __instance.dsItem.Run();
+        __instance.dsItem.itemName_ID = "Get_Cryptid_Name";
+        __instance.dsItem.Run();
         return false;
     }
 
@@ -28,7 +29,7 @@ internal static class CryptidPickupPatch
     [HarmonyPatch(nameof(CryptidPickup.Start))]
     private static bool PreStart(CryptidPickup __instance)
     {
-       __instance.gameObject.SetActive(!LocationHandling.IsLocationCollected(__instance.name));
+        __instance.gameObject.SetActive(!LocationHandling.IsLocationCollected(__instance.name));
         return false;
     }
 
