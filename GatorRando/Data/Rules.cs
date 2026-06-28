@@ -17,7 +17,6 @@ public class Rules
 
     public class RulesJsonConverter : JsonConverter
     {
-
         // inspired by https://stackoverflow.com/a/30176798
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
@@ -36,7 +35,9 @@ public class Rules
                 "HasAny" => typeof(HasAny),
                 "HasAll" => typeof(HasAll),
                 "HasGroup" => typeof(HasGroup),
+                "HasGroupUnique" => typeof(HasGroupUnique),
                 "HasEnoughFriends" => typeof(HasEnoughFriends),
+                "CanReachLocation" => typeof(CanReachLocation),
                 _ => throw new Exception($"Don't know how to parse rule type: {ruleString}"),
             };
 
@@ -107,42 +108,42 @@ public class Rules
     public class Has : Rule
     {
         [JsonObject(MemberSerialization = MemberSerialization.Fields)]
-        readonly struct Args
+		private readonly struct Args
         {
             public readonly string ItemName;
             public readonly int Count;
         }
 
-        readonly Args args;
+		private readonly Args args;
 
         public override bool Evaluate() => ItemHandling.GetItemUnlockCount(args.ItemName, true) >= args.Count;
     }
     public class HasAny : Rule
     {
         [JsonObject(MemberSerialization = MemberSerialization.Fields)]
-        readonly struct Args
+		private readonly struct Args
         {
             public readonly List<string> ItemNames;
         }
-        readonly Args args;
+		private readonly Args args;
 
         public override bool Evaluate() => args.ItemNames.Any(item => ItemHandling.IsItemUnlocked(item, true));
     }
     public class HasAll : Rule
     {
         [JsonObject(MemberSerialization = MemberSerialization.Fields)]
-        readonly struct Args
+		private readonly struct Args
         {
             public readonly List<string> ItemNames;
         }
-        readonly Args args;
+		private readonly Args args;
 
         public override bool Evaluate() => args.ItemNames.All(item => ItemHandling.IsItemUnlocked(item, true));
     }
     public class HasGroup : Rule
     {
         [JsonObject(MemberSerialization = MemberSerialization.Fields)]
-        readonly struct Args
+		private readonly struct Args
         {
             public readonly Items.ItemGroup ItemNameGroup;
             public readonly int Count;
@@ -162,8 +163,54 @@ public class Rules
             }
             else
             {
-                return ItemsInItemGroup(args.ItemNameGroup).Where(item => ItemHandling.IsItemUnlocked(item, true)).Count() >= args.Count;
+                return ItemsInItemGroup(args.ItemNameGroup).Count(item => ItemHandling.IsItemUnlocked(item, true)) >= args.Count;
+            } ///TODO: This is technically wrong (is doing HasGroupUnique)--> not fixing right now since we don't use HasGroup with a count in Gator
+        } 
+    }
+
+    public class HasGroupUnique : Rule
+    {
+        [JsonObject(MemberSerialization = MemberSerialization.Fields)]
+		private readonly struct Args
+        {
+            public readonly Items.ItemGroup ItemNameGroup;
+            public readonly int Count;
+        }
+		private readonly Args args;
+
+		private static List<string> ItemsInItemGroup(Items.ItemGroup itemGroup) =>
+            [.. Items.itemData
+                .Where(item => item.itemGroups.Contains(itemGroup))
+                .Select(item => item.name)];
+
+        public override bool Evaluate()
+        {
+            if (args.Count == 1)
+            {
+                return ItemsInItemGroup(args.ItemNameGroup).Any(item => ItemHandling.IsItemUnlocked(item, true));
             }
+            else
+            {
+                return ItemsInItemGroup(args.ItemNameGroup).Count(item => ItemHandling.IsItemUnlocked(item, true)) >= args.Count;
+            }
+        } 
+    }
+
+    public class CanReachLocation : Rule
+    {
+        [JsonObject(MemberSerialization = MemberSerialization.Fields)]
+		private readonly struct Args
+        {
+            public readonly string LocationName;
+            // public readonly string ParentRegionName;
+            // public readonly bool SkipIndirectConnection;
+        }
+		private readonly Args args;
+
+        public override bool Evaluate()
+        {
+            long id = Locations.locationData.First(data => data.name == args.LocationName).apLocationId;
+            return GatorRules.Rules[id].Evaluate(); // TODO figure out if this works correctly!
         } 
     }
 
