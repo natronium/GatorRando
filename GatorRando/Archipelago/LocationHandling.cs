@@ -151,7 +151,7 @@ public static class LocationHandling
         }
         catch (KeyNotFoundException)
         {
-            return new ItemAtLocation("Location not in the multiworld", 0, "","");
+            return new ItemAtLocation("Location not in thi slot", 0, "","");
         }
     }
 
@@ -166,7 +166,7 @@ public static class LocationHandling
         }
         catch (KeyNotFoundException)
         {
-            return new ItemAtLocation("Location not in the multiworld", 0, "","");
+            return new ItemAtLocation("Location not in thi slot", 0, "","");
         }
     }
 

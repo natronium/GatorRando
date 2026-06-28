@@ -179,7 +179,11 @@ public static class DialogueModifier
     public static string GetDialogueStringForItemAtLocation(LocationHandling.ItemAtLocation itemAtLocation)
     {
         string dialogueString;
-        if (itemAtLocation.itemPlayer == ConnectionManager.SlotName())
+        if (itemAtLocation.itemName == "Location not in this slot")
+        {
+            dialogueString = "This location is not in this slot. Please check your options for which parts of the game are in play.";
+        }
+        else if (itemAtLocation.itemPlayer == ConnectionManager.SlotName())
         {
             dialogueString = $"I found my {itemAtLocation.itemName}. why was that here??";
         }
