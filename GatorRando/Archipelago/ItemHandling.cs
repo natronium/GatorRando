@@ -69,6 +69,10 @@ public static class ItemHandling
 
     public static void ProcessItemQueue()
     {
+        while (Player.movement.isModified)
+        {
+            return; // Don't give items while mounted, ragdolled, etc.
+        }
         while (ItemQueue.TryDequeue(out QueuedItem queuedItem))
         {
             ReceiveItem(queuedItem.item, queuedItem.sendingPlayerName);
