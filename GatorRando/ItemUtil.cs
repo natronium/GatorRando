@@ -87,6 +87,8 @@ public static class ItemUtil
         {
             GameData.g.Write("UG_Cryptid_" + cryptidName, (int)CryptidProfile.State.Found);
         }
+        ItemObject itemObject = Util.FindItemObjectByName(cryptidName);
+        UIMenus.craftNotification.LoadItems([itemObject]);
         // TODO: test this code
     }
 
