@@ -170,6 +170,7 @@ public static class SpriteHandler
         {"Treey","Cryptids_Sketch_CB_7"},
         {"Looky","Cryptids_Sketch_CB_8"},
         {"Clam","Itemsprite_clam"},
+        {"CHARM KEYCHAIN", "Itemsprite_special"},
     };
 
     private static readonly Dictionary<string, string> spritesFromTitleScreen = new()
@@ -357,7 +358,7 @@ public static class SpriteHandler
 			byte[] cachefileBytes = File.ReadAllBytes(filePath);
 
             //Not actually sure what mipchain does here, but it's mandatory, so...
-            Texture2D texture2D = new(width, height, TextureFormat.ARGB32, mipChain: true);
+            Texture2D texture2D = new(width, height, TextureFormat.ARGB32, mipChain: false);
             texture2D.LoadRawTextureData(cachefileBytes);
             // "you must call Apply after LoadRawTextureData to upload the changed pixels to the GPU."
             texture2D.Apply(false, false); 
@@ -411,13 +412,13 @@ public static class SpriteHandler
 
         yield return new WaitForEndOfFrame(); // Must wait for frame to render before calling ReadPixels
 
-        Texture2D copiedTexture = new(spriteWidth, spriteHeight);
+        Texture2D copiedTexture = new(spriteWidth, spriteHeight, TextureFormat.ARGB32, mipChain: false);
         
         //ReadPixels reads *from RenderTexture.active*
         RenderTexture originalActiveRT = RenderTexture.active;
         RenderTexture.active = renderTexture;
         copiedTexture.ReadPixels(new Rect(0,0,spriteWidth, spriteHeight), 0, 0);
-        copiedTexture.Apply(false, false);
+        copiedTexture.Apply(false, false); // maybe unnecessary
         RenderTexture.active = originalActiveRT;
 
         using FileStream cacheFileStream = File.OpenWrite(Path.Combine(cachedSpritesPath, constructedFilename + ".gatorcache"));
