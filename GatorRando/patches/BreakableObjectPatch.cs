@@ -17,6 +17,7 @@ internal static class BreakableObjectPatch
         Util.PersistentObjectType persistentObjectType = Util.GetPersistentObjectType(__instance);
         if (persistentObjectType == Util.PersistentObjectType.Pot)
         {
+            Plugin.LogDebug($"breaking prefab name: {__instance.breakingPrefab.name} id: {__instance.id}");
             if (!PotManager.CheckIfPotBreakable(__instance.id))
             {
                 BubbleManager.QueueBubble(PotManager.GetPotString(__instance.id), BubbleManager.BubbleType.Alert);

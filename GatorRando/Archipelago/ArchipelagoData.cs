@@ -21,7 +21,7 @@ public class ArchipelagoData
 
     public readonly Dictionary<string, string> slotData = [];
 
-    public bool NeedSlotData => true; //TODO: Fix slotdata saving
+    public bool NeedSlotData => slotData.Count == 0; //TODO: Fix slotdata saving
 
     public ArchipelagoData()
     {

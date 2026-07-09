@@ -83,7 +83,7 @@ public class Rules
     [JsonObject(NamingStrategyType = typeof(SnakeCaseNamingStrategy), MemberSerialization = MemberSerialization.Fields)]
     public abstract class Rule
     {
-        readonly List<OptionFilter> Options;
+		private readonly List<OptionFilter> Options;
 
         public abstract bool Evaluate();
 
@@ -116,7 +116,7 @@ public class Rules
 
 		private readonly Args args;
 
-        public override bool Evaluate() => ItemHandling.GetItemUnlockCount(args.ItemName, true) >= args.Count;
+        public override bool Evaluate() => ItemHandling.GetItemUnlockCount(args.ItemName, true) >= args.Count && EvaluateOptions();
     }
     public class HasAny : Rule
     {
@@ -127,7 +127,7 @@ public class Rules
         }
 		private readonly Args args;
 
-        public override bool Evaluate() => args.ItemNames.Any(item => ItemHandling.IsItemUnlocked(item, true));
+        public override bool Evaluate() => args.ItemNames.Any(item => ItemHandling.IsItemUnlocked(item, true))  && EvaluateOptions();
     }
     public class HasAll : Rule
     {
@@ -138,7 +138,7 @@ public class Rules
         }
 		private readonly Args args;
 
-        public override bool Evaluate() => args.ItemNames.All(item => ItemHandling.IsItemUnlocked(item, true));
+        public override bool Evaluate() => args.ItemNames.All(item => ItemHandling.IsItemUnlocked(item, true)) && EvaluateOptions();
     }
     public class HasGroup : Rule
     {
@@ -159,11 +159,11 @@ public class Rules
         {
             if (args.Count == 1)
             {
-                return ItemsInItemGroup(args.ItemNameGroup).Any(item => ItemHandling.IsItemUnlocked(item, true));
+                return ItemsInItemGroup(args.ItemNameGroup).Any(item => ItemHandling.IsItemUnlocked(item, true)) && EvaluateOptions();
             }
             else
             {
-                return ItemsInItemGroup(args.ItemNameGroup).Count(item => ItemHandling.IsItemUnlocked(item, true)) >= args.Count;
+                return ItemsInItemGroup(args.ItemNameGroup).Count(item => ItemHandling.IsItemUnlocked(item, true)) >= args.Count  && EvaluateOptions();
             } ///TODO: This is technically wrong (is doing HasGroupUnique)--> not fixing right now since we don't use HasGroup with a count in Gator
         } 
     }
@@ -187,11 +187,11 @@ public class Rules
         {
             if (args.Count == 1)
             {
-                return ItemsInItemGroup(args.ItemNameGroup).Any(item => ItemHandling.IsItemUnlocked(item, true));
+                return ItemsInItemGroup(args.ItemNameGroup).Any(item => ItemHandling.IsItemUnlocked(item, true)) && EvaluateOptions();
             }
             else
             {
-                return ItemsInItemGroup(args.ItemNameGroup).Count(item => ItemHandling.IsItemUnlocked(item, true)) >= args.Count;
+                return ItemsInItemGroup(args.ItemNameGroup).Count(item => ItemHandling.IsItemUnlocked(item, true)) >= args.Count  && EvaluateOptions();
             }
         } 
     }
@@ -210,7 +210,7 @@ public class Rules
         public override bool Evaluate()
         {
             long id = Locations.locationData.First(data => data.name == args.LocationName).apLocationId;
-            return GatorRules.Rules[id].Evaluate(); // TODO figure out if this works correctly!
+            return GatorRules.Rules[id].Evaluate() && EvaluateOptions(); // TODO figure out if this works correctly!
         } 
     }
 
@@ -247,11 +247,14 @@ public class Rules
         [JsonProperty(propertyName: "operator")]
         public readonly Operator Oper;
 
+        [JsonProperty(propertyName: "filtered_resolution")]
+        public readonly bool filtered_resolution;
+
         public bool Evaluate()
         {
             return Oper switch
             {
-                Operator.EQ => Options.GetOptionBool(Option) == Convert.ToBoolean(Value),
+                Operator.EQ => Options.GetOptionBool(Option) == Convert.ToBoolean(Value) || filtered_resolution, // filtered_resolution defaults to False
                 _ => throw new NotImplementedException(),
             };
         }

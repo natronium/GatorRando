@@ -14,6 +14,7 @@ public static class QuestItems
         if (QuestItemObjects.Count == 0)
         {
             ItemObject glider = Util.GenerateItemObject("Glider", SpriteHandler.GetSpriteForItem("Shirt"), "Glider", "jump twice to glide");
+            QuestItemObjects.Add(Util.GenerateItemObject("CHARM KEYCHAIN", SpriteHandler.GetSpriteForItem("CHARM KEYCHAIN"),"Charm Keychain","now i can use charm points"));
             glider.IsUnlocked = ItemHandling.IsItemUnlocked("Shirt");
             QuestItemObjects.Add(glider);
             PlayerItemManager.p.gliderItem = glider; 

@@ -156,6 +156,7 @@ public static class SaveManager
         }
         GameSaveData postPrologue = JsonUtility.FromJson<GameSaveData>(postPrologueSave);
         postPrologue.playerName = ConnectionManager.SlotName();
+        File.Delete(apServerDataPaths[index]); // Clear out corresponding AP data and reload it
         yield return FileUtil.WriteSaveDataCoroutine(postPrologue, index, null);
         yield return FileUtil.ReadGameSaveDataInfo(index);
         SaveFileScreen saveFileScreen = Util.GetByPath("Main Menu/Main Menu Canvas/Load File Screen").GetComponent<SaveFileScreen>();

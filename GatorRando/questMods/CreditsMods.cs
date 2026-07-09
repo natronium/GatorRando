@@ -9,7 +9,7 @@ internal static class CreditsMods
     {
         GameObject sisFlashbacks = Util.GetByPath("Center (Playground)/Story Sequences/Act3 Sis/Sis Flashbacks");
         DialogueSequencer dialogueSeq = sisFlashbacks.GetComponent<DialogueSequencer>();
-        dialogueSeq.beforeSequence.RemoveListener(ConnectionManager.SendGoal);
-        dialogueSeq.beforeSequence.AddListener(ConnectionManager.SendGoal);
+        dialogueSeq.beforeSequence.RemoveListener(() => ConnectionManager.SetStoryComplete(false));
+        dialogueSeq.beforeSequence.AddListener(() => ConnectionManager.SetStoryComplete(false));
     }
 }

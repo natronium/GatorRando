@@ -309,20 +309,38 @@
         "starting_region": "Underground Entrance",
         "ending_region": "Underground",
         "rule_json": {
-            "rule": "True_",
-            "options": [],
-            "filtered_resolution": false,
-            "args": {}
+            "rule": "Has",
+            "options": [
+                {
+                    "option": "worlds.lil_gator_game.options.RequireBraceletForITD",
+                    "value": 1,
+                    "operator": "eq"
+                }
+            ],
+            "filtered_resolution": true,
+            "args": {
+                "item_name": "Bracelet",
+                "count": 1
+            }
         }
     },
     {
         "starting_region": "Underground Entrance",
         "ending_region": "Lighthouse",
         "rule_json": {
-            "rule": "True_",
-            "options": [],
-            "filtered_resolution": false,
-            "args": {}
+            "rule": "Has",
+            "options": [
+                {
+                    "option": "worlds.lil_gator_game.options.RequireBraceletForITD",
+                    "value": 1,
+                    "operator": "eq"
+                }
+            ],
+            "filtered_resolution": true,
+            "args": {
+                "item_name": "Bracelet",
+                "count": 1
+            }
         }
     },
     {
@@ -342,10 +360,19 @@
         "starting_region": "Underground Entrance",
         "ending_region": "Mines",
         "rule_json": {
-            "rule": "True_",
-            "options": [],
-            "filtered_resolution": false,
-            "args": {}
+            "rule": "Has",
+            "options": [
+                {
+                    "option": "worlds.lil_gator_game.options.RequireBraceletForITD",
+                    "value": 1,
+                    "operator": "eq"
+                }
+            ],
+            "filtered_resolution": true,
+            "args": {
+                "item_name": "Bracelet",
+                "count": 1
+            }
         }
     },
     {
@@ -397,10 +424,19 @@
         "starting_region": "Underground Entrance",
         "ending_region": "Big Roots",
         "rule_json": {
-            "rule": "True_",
-            "options": [],
-            "filtered_resolution": false,
-            "args": {}
+            "rule": "Has",
+            "options": [
+                {
+                    "option": "worlds.lil_gator_game.options.RequireBraceletForITD",
+                    "value": 1,
+                    "operator": "eq"
+                }
+            ],
+            "filtered_resolution": true,
+            "args": {
+                "item_name": "Bracelet",
+                "count": 1
+            }
         }
     },
     {
@@ -452,10 +488,19 @@
         "starting_region": "Underground Entrance",
         "ending_region": "Flowstone Caverns",
         "rule_json": {
-            "rule": "True_",
-            "options": [],
-            "filtered_resolution": false,
-            "args": {}
+            "rule": "Has",
+            "options": [
+                {
+                    "option": "worlds.lil_gator_game.options.RequireBraceletForITD",
+                    "value": 1,
+                    "operator": "eq"
+                }
+            ],
+            "filtered_resolution": true,
+            "args": {
+                "item_name": "Bracelet",
+                "count": 1
+            }
         }
     },
     {

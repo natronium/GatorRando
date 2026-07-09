@@ -1,6 +1,7 @@
 using GatorRando.Archipelago;
 using GatorRando.UIMods;
 using HarmonyLib;
+using System.Collections;
 
 namespace GatorRando.Patches;
 
@@ -9,7 +10,7 @@ internal static class DSItemPatch
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(DSItem.RunItemSequence))]
-	private static void PreRunItemSequence(DSItem __instance)
+	private static bool PreRunItemSequence(DSItem __instance, ref IEnumerator __result)
     {
         string name;
         if (__instance.item == null || __instance.itemName == "POT?" || __instance.itemName == "POT LID?")
@@ -27,10 +28,10 @@ internal static class DSItemPatch
         {
             name = __instance.item.name;
         }
-        if (name == "" || name == "LITTER")
+        if (name == "" || name == "LITTER" || name == "CraftingMaterial_Name")
         {
             // Make sure the first Craft Stuff and Litter are not caught by this alteration
-            return;
+            return true;
         }
         if (name.Contains("Greet"))
         {
@@ -39,6 +40,11 @@ internal static class DSItemPatch
         if (name.Contains("Recieve")) // Typo is in vanilla game
         {
             name = "Other Queen's Secret Letter";
+        }
+        if (name.Contains("SpecialStamina_Name"))
+        {
+            __result = DoNothing();
+            return false;
         }
         if (LocationHandling.CollectLocationByName(name))
         {
@@ -53,6 +59,12 @@ internal static class DSItemPatch
 
             DialogueModifier.AddNewDialogueChunk(dialogueString, __instance.document);
         }
+        return true;
+    }
+
+    private static IEnumerator DoNothing()
+    {
+        yield break;
     }
 
 }

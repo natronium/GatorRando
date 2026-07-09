@@ -15,7 +15,7 @@ namespace GatorRando.Archipelago;
 
 public static class ConnectionManager
 {
-    public const string APVersion = "0.6.7";
+    public const string APVersion = "0.6.8";
     private const string Game = "Lil Gator Game";
 
     public static bool Authenticated;
@@ -49,7 +49,6 @@ public static class ConnectionManager
         return ServerData.GetSlotDataOption(optionName);
     }
 
-    //TODO: Save and Load existing server data
 
     public static void InitiateNewAPSession()
     {
@@ -118,6 +117,10 @@ public static class ConnectionManager
     private static void TryConnect() //TODO: Reject connection if connecting to DLC slot without DLC installed
     {
         attemptingConnection = true;
+        if (!ServerData.NeedSlotData)
+        {
+
+        }
         try
         {
             // it's safe to thread this function call but unity notoriously hates threading so do not use excessively
@@ -130,10 +133,9 @@ public static class ConnectionManager
                         ItemsHandlingFlags.AllItems,
                         version: new Version(APVersion),
                         password: ServerData.Password,
-                        requestSlotData: true
+                        requestSlotData: ServerData.NeedSlotData
                     )));
         }
-        //TODO: Figure out how to cache slotdata
         catch (Exception e)
         {
             Plugin.LogError(e.ToString());
@@ -155,6 +157,17 @@ public static class ConnectionManager
 
             ServerData.SetupSession(success.SlotData, session.RoomState.Seed);
             Authenticated = true;
+
+            if (GetSlotDataOption("DLCIncluded") == "1" && DLC.inTheDark != true)
+            {
+                string DLCNotInstalled = "DLC option(s) were included during generation, but the DLC is not installed. Please install the DLC before connecting to this slot";
+                Plugin.LogError(DLCNotInstalled);
+                StateManager.FailedConnection(DLCNotInstalled);
+                Authenticated = false;
+                Disconnect();
+                attemptingConnection = false;
+                return;
+            }
 
             outText = $"Successfully connected to {ServerData.Uri} as {ServerData.SlotName}!";
             StateManager.SucceededConnection();
@@ -268,6 +281,44 @@ public static class ConnectionManager
         }
     }
 
+    internal static void SetStoryComplete(bool DLC)
+    {
+        if (DLC)
+        {
+            switch (Options.GetGoalChoice())
+            {
+                case Options.GoalChoice.ITD: SendGoal(); break;
+                default:
+                    if (session.DataStorage[$"{session.ConnectionInfo.Slot}_{session.ConnectionInfo.Team}_gator_main_complete"])
+                    {
+                        SendGoal();
+                    }
+                    else
+                    {
+                        session.DataStorage[$"{session.ConnectionInfo.Slot}_{session.ConnectionInfo.Team}_gator_dlc_complete"] = true;
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            switch (Options.GetGoalChoice())
+            {
+                case Options.GoalChoice.Main: SendGoal(); break;
+                default:
+                    if (session.DataStorage[$"{session.ConnectionInfo.Slot}_{session.ConnectionInfo.Team}_gator_dlc_complete"])
+                    {
+                        SendGoal();
+                    }
+                    else
+                    {
+                        session.DataStorage[$"{session.ConnectionInfo.Slot}_{session.ConnectionInfo.Team}_gator_main_complete"] = true;
+                    }
+                    break;
+            }
+        }
+    }
+
     public static void SendGoal()
     {
         session.SetGoalAchieved();
@@ -295,6 +346,10 @@ public static class ConnectionManager
 
     public static ReadOnlyCollection<ItemInfo> ItemsReceived()
     {
+        if (!Authenticated)
+        {
+            return new([]); // So that trying to access this method prior to connection doesn't null reference
+        }
         return session.Items.AllItemsReceived;
     }
 

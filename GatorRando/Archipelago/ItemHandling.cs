@@ -101,6 +101,11 @@ public static class ItemHandling
     private static void ReceiveItem(Items.Item item, string playerName)
     {
         Plugin.LogDebug($"ReceiveItem for {item.name}. ClientId:{item.clientNameId}, Type:{item.clientItemType}, AP:{item.apItemId}");
+        if (item.itemGroups.Contains(Items.ItemGroup.Underground) && DLC.inTheDark != true)
+        {
+            BubbleManager.QueueBubble($"{item.name} is a DLC-only item, please purchase and install the DLC before receiving this item.", BubbleManager.BubbleType.Alert);
+            return;
+        }
         switch (item.clientItemType)
         {
             case Items.ClientItemType.Item: ItemUtil.GiveItem(item.clientNameId); break;

@@ -24,11 +24,12 @@ public static class PotManager
         {PotType.TP, "Tiger"},
     };
 
-    static readonly Dictionary<int, PotType> pot_mapping = [];
+    private static readonly Dictionary<int, PotType> surface_pot_mapping = [];
+    private static readonly Dictionary<int, PotType> ug_pot_mapping = [];
 
     private static void PopulateMapping()
     {
-        if (pot_mapping.Keys.Count == 0)
+        if (surface_pot_mapping.Keys.Count == 0)
         {
             List<int> MC_pots = [88, 190, 233, 372, 407, 426, 1127, 1521, 1543, 1584, 1594, 1595, 2072, 2073]; //14
             List<int> WW_pots = [26, 63, 95, 102, 116, 118, 168, 176, 203, 235, 238, 243, 427, 1157, 1167, 1364, 1382, 1533, 1541, 1597, 1625, 2071]; //22
@@ -38,23 +39,51 @@ public static class PotManager
 
             foreach (int id in MC_pots)
             {
-                pot_mapping.Add(id, PotType.MC);
+                surface_pot_mapping.Add(id, PotType.MC);
             }
             foreach (int id in WW_pots)
             {
-                pot_mapping.Add(id, PotType.WW);
+                surface_pot_mapping.Add(id, PotType.WW);
             }
             foreach (int id in LA_pots)
             {
-                pot_mapping.Add(id, PotType.LA);
+                surface_pot_mapping.Add(id, PotType.LA);
             }
             foreach (int id in OoT_pots)
             {
-                pot_mapping.Add(id, PotType.OoT);
+                surface_pot_mapping.Add(id, PotType.OoT);
             }
             foreach (int id in TP_pots)
             {
-                pot_mapping.Add(id, PotType.TP);
+                surface_pot_mapping.Add(id, PotType.TP);
+            }
+        }
+        if (ug_pot_mapping.Keys.Count == 0)
+        {
+            List<int> UG_WW_pots = [576, 792, 801, 894, 907, 1148, 1153, 1167];
+            List<int> UG_LA_pots = [578, 597, 760, 876, 890, 906, 1161, 1334];
+            List<int> UG_OoT_pots = [577, 579, 598, 840, 875, 908, 910, 931, 945, 1168, 1170, 1171];
+            List<int> UG_TP_pots = [580, 595, 602, 873, 874, 981, 1166, 1180, 1213];
+
+            // foreach (int id in MC_pots)
+            // {
+            //     surface_pot_mapping.Add(id, PotType.MC);
+            // }
+            foreach (int id in UG_WW_pots)
+            {
+                ug_pot_mapping.Add(id, PotType.WW);
+            }
+            foreach (int id in UG_LA_pots)
+            {
+                ug_pot_mapping.Add(id, PotType.LA);
+            }
+            foreach (int id in UG_OoT_pots)
+            {
+                ug_pot_mapping.Add(id, PotType.OoT);
+            }
+            foreach (int id in UG_TP_pots)
+            {
+                ug_pot_mapping.Add(id, PotType.TP);
             }
         }
     }
@@ -63,7 +92,14 @@ public static class PotManager
         PotType? potType;
         try
         {
-            potType = pot_mapping[id];
+            if (NavigationUI.currentLevel == Data.Locations.Level.Surface)
+            {
+                potType = surface_pot_mapping[id];
+            }
+            else
+            {
+                potType = ug_pot_mapping[id];
+            }
         }
         catch (KeyNotFoundException)
         {

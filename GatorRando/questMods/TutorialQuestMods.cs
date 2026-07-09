@@ -1,3 +1,4 @@
+using GatorRando.Archipelago;
 using UnityEngine;
 
 namespace GatorRando.QuestMods;
@@ -24,7 +25,7 @@ internal static class TutorialQuestMods
 	private static void ActivateUnderground()
 	{
         // Guard activating the underground by the player owning the DLC
-        if (DLC.inTheDark == true) //TODO: Guard by option as well
+        if (DLC.inTheDark == true && ConnectionManager.GetSlotDataOption("DLCIncluded") == "1")
         {
             GameObject act3 = Util.GetByPath("In The Dark DLC Content/In the dark quest");
             QuestStates act3QuestStates = act3.GetComponent<QuestStates>();

@@ -13,7 +13,18 @@ internal static class GamePatch
     {
         if (newWorldState == WorldState.Flashback & RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.SkipFinalSequences))
         {
-            ConnectionManager.SendGoal(); // TODO: Send player out of flashback and back to tutorial island
+            ConnectionManager.SetStoryComplete(false);
+        }
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(Game.SetWorldState), [typeof(WorldState), typeof(bool), typeof(bool)])]
+	private static void PostSetWorldState(WorldState newWorldState)
+    {
+        if (newWorldState == WorldState.Flashback & RandoSettingsMenu.GetBoolRandoSetting(RandoSettingsMenu.BoolRandoSetting.SkipFinalSequences))
+        {
+            Game.g.SetWorldState(WorldState.Postgame);
+            RandoSettingsMenu.GetUISettings().ResetPlayerPosition();
         }
     }
 }

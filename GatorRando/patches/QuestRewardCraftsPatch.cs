@@ -10,7 +10,10 @@ internal static class QuestRewardCraftsPatch
     [HarmonyPatch(nameof(QuestRewardCrafts.GiveReward))]
 	private static bool PreGiveReward(QuestRewardCrafts __instance)
     {
-        LocationHandling.CollectLocationByName(__instance.rewards[0].name);
+        foreach (ItemObject reward in __instance.rewards)
+        {
+            LocationHandling.CollectLocationByName(reward.name); //TODO: see if this breaks anything in base game
+        }
         return false;
         // TODO: UI for what item you picked up
     }

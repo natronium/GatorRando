@@ -18,12 +18,41 @@ public static class Options
             return false;
         }
     }
+
+    public enum GoalChoice
+    {
+        Main,
+        ITD,
+        Both,
+    }
+
+    public static GoalChoice GetGoalChoice()
+    {
+        try
+        {
+            return ConnectionManager.GetSlotDataOption("goal") switch
+			{
+				"0" => GoalChoice.Main,
+                "1" => GoalChoice.ITD,
+                "2" => GoalChoice.Both,
+                _ => GoalChoice.Main,
+			};
+        }
+        catch (KeyNotFoundException)
+        {
+            // if game was not generated with an option, assume it is old default
+            return GoalChoice.Main;
+        }
+    }
+    
     public static bool GetOptionBool(Option option) => TryGetOptionBool(option);
 
     public enum Option
     {
         StartWithFreeplay,
-        RequireShieldJump,
+        AwkwardProgression,
+        RequireVerticalForITD,
+        RequireShieldFlip,
         HarderRangedQuests,
         LockPotsBehindItems,
         LockChestsBehindKey,
@@ -33,7 +62,9 @@ public static class Options
     public static string OptionName(Option option) => option switch
     {
         Option.StartWithFreeplay => "start_with_freeplay",
-        Option.RequireShieldJump => "require_shield_jump",
+        Option.AwkwardProgression => "awkward_progression",
+        Option.RequireVerticalForITD => "require_vertical_for_itd",
+        Option.RequireShieldFlip => "require_shield_flip",
         Option.HarderRangedQuests => "harder_ranged_quests",
         Option.LockPotsBehindItems => "lock_pots_behind_items",
         Option.LockChestsBehindKey => "lock_chests_behind_key",

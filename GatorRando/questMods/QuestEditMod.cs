@@ -59,5 +59,6 @@ internal static class QuestEditMod
         Util.GetByPath("Tutorial Region/Act 1 UG/Intro Sequence/Enemies").SetActive(false);
         QueenQuestMods.SetupQueenDialogue();
         Util.GetByPath("Tutorial Region/Act 1 UG/").GetComponent<QuestStates>().ProgressToEnd(); // Drop stone, except the one blocking the entrance
+        ITDEndQuestMods.SetUpDLCGoal();
     }
 }
